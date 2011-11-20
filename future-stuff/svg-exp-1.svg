@@ -1,0 +1,20 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" 
+"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="500px" height="500px" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <g id="grid">
+    <path d="M 0,0     0,500" stroke="orange" stroke-width="1" />
+    <path d="M 100,0 100,500" stroke="orange" stroke-width="1" />
+    <path d="M 200,0 200,500" stroke="orange" stroke-width="1" />
+    <path d="M 300,0 300,500" stroke="orange" stroke-width="1" />
+    <path d="M 400,0 400,500" stroke="orange" stroke-width="1" />
+    <path d="M 500,0 500,500" stroke="orange" stroke-width="1" />
+    <path d="M 0,0   500,0"   stroke="orange" stroke-width="1" />
+    <path d="M 0,100 500,100" stroke="orange" stroke-width="1" />
+    <path d="M 0,200 500,200" stroke="orange" stroke-width="1" />
+    <path d="M 0,300 500,300" stroke="orange" stroke-width="1" />
+    <path d="M 0,400 500,400" stroke="orange" stroke-width="1" />
+    <path d="M 0,500 500,500" stroke="orange" stroke-width="1" />
+  </g>
+  <path d="M 100,100 C 200,0 500,100 100,300 L 300,300" stroke="black" fill="none" stroke-width="5" />
+</svg>
