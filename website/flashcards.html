@@ -15,7 +15,7 @@
         -moz-transition: 1.5s linear;
         -moz-transform: rotateY(0deg);
     }
-    dl:hover, div:focus dl {
+    dl.flipped {
         -moz-transform: rotateY(180deg);
     }
     dd, dt {
@@ -31,12 +31,10 @@
     dt {
         z-index: 10;
         background-color: rgba(0, 90, 90, 0.2);
-        -moz-backface-visibility: hidden;
-        -moz-transform: translateZ(0pt); /* needed? */
-        /* -moz-transform: translateZ(0) scale(1.2,1.2); */
+        -moz-transform: translateZ(0pt); /* Hides backface of dt during transition */
     }
     /* Todo: Trigger with JS */
-    dl:hover dt, div:focus dt {
+    dl.flipped dt {
         z-index: 1;
     }
     dd {
@@ -51,11 +49,16 @@
 </head>
 <body>
   <h1>Flashcards</h1>
-  <div tabindex="0">
-    <dl>
+  <div>
+    <dl tabindex="0">
       <dt>CPU</dt>
       <dd>Central Processing Unit</dd>
     </dl>
   </div>
+  <script>
+    document.getElementsByTagName("dl")[0].onclick = function () {
+        this.classList.toggle("flipped");
+    }
+  </script>
 </body>
 </html>
