@@ -17,16 +17,22 @@
            -moz-transform-style: preserve-3d;
         -webkit-transform-style: preserve-3d;
            -moz-perspective: 800px;
-        -webkit-perspective: 800px;
+        -webkit-perspective: 800px; /* TODO: Investigate why this has no effect */
            -moz-transform: rotateY(0deg);
         -webkit-transform: rotateY(0deg);
     }
     .flashcards.flipped {
+        /* Currently unused */
     }
     .flashcards > dt, .flashcards > dd  {
         display: none;
         font-size: x-large;
         box-shadow: 5px 5px 5px silver;
+    }
+    .flashcards > dt  {
+        font-size: xx-large;
+        text-align: center;
+        line-height: 2;
     }
     .flashcards > .activecard {
         display: block;
@@ -38,19 +44,23 @@
         border: 1px solid #333;
         border-radius: 5px;
            -moz-backface-visibility: hidden;
-        -webkit-backface-visibility: hidden;
+        -webkit-backface-visibility: hidden; /* TODO: Investigate why this has no effect */
            -moz-transform-style: preserve-3d;
         -webkit-transform-style: preserve-3d;
            -moz-transition: 1.5s linear;
         -webkit-transition: 1.5s linear;
+        /* TODO: No delay for z-index when 3D transform is not supported */
            -moz-transform: rotateY(0deg);
         -webkit-transform: rotateY(0deg);
     }
     .flashcards > dt.activecard {
         z-index: 10;
-        background-color: rgba(0, 90, 90, 0.2);
-        -moz-transform: translateZ(0pt); /* Hides backface of dt during transition */
-        -moz-transform: translateZ(0) rotateY(0deg);
+        background-color: #FFDF00;
+        /* translateZ hides backface of dt during transition */
+           -moz-transform: translateZ(0) rotateY(0deg);
+        -webkit-transform: translateZ(0) rotateY(0deg);
+        /* TODO: Investigate why translateZ no hiding effect in Webkit
+           I'm using a non transparent background so it does not matter now */
     }
     /* Todo: Trigger with JS */
     .flashcards.flipped > dt.activecard {
@@ -60,7 +70,7 @@
     }
     .flashcards > dd.activecard {
         z-index: 1;
-        background-color: rgba(90, 90, 0, 0.2);
+        background-color: #DFFA00;
            -moz-transform: translateZ(0) rotateY(180deg);
         -webkit-transform: translateZ(0) rotateY(180deg);
     }
@@ -78,7 +88,7 @@
 <body>
   <h1>Flashcards using CSS 3D transformations and a definition list</h1>
   <p>Click the card to flip it. View source to check out how it's done and plans for the future.</p>
-  <p>Requires Firefox 10 or later. <del>Should work but is untested in Chrome or Safari.</del></p> 
+  <p>Requires Firefox 10 or later. Tested in Chromium but it gets no perspective.</p> 
   <dl class="flashcards" tabindex="0">
     <dt>GPU</dt>
     <dd>Graphics Processing Unit</dd>
