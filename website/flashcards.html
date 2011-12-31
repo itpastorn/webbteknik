@@ -1,22 +1,35 @@
 <!DOCTYPE html>
-<html lang="sv">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Flashcards</title>
   <style>
-    div {
+    body {
+        width: 600px;
+        margin: auto;
+        font-family: sans-serif;
     }
-    dl {
+    .flashcards {
         position: relative;
         height: 212px;
         width: 312px;
-        -moz-transform-style: preserve-3d;
-        -moz-perspective: 800px; 
-        -moz-transform: rotateY(0deg);
+        margin: 30px 0;
+           -moz-transform-style: preserve-3d;
+        -webkit-transform-style: preserve-3d;
+           -moz-perspective: 800px;
+        -webkit-perspective: 800px;
+           -moz-transform: rotateY(0deg);
+        -webkit-transform: rotateY(0deg);
     }
-    dl.flipped {
+    .flashcards.flipped {
     }
-    dd, dt {
+    .flashcards > dt, .flashcards > dd  {
+        display: none;
+        font-size: x-large;
+        box-shadow: 5px 5px 5px silver;
+    }
+    .flashcards > .activecard {
+        display: block;
         position: absolute;
         height: 200px;
         width: 300px;
@@ -24,43 +37,174 @@
         padding: 10px;
         border: 1px solid #333;
         border-radius: 5px;
-        -moz-backface-visibility: hidden;
-        -moz-transform-style: preserve-3d;
-        -moz-transition: 1.5s linear;
-        -moz-transform: rotateY(0deg);
+           -moz-backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+           -moz-transform-style: preserve-3d;
+        -webkit-transform-style: preserve-3d;
+           -moz-transition: 1.5s linear;
+        -webkit-transition: 1.5s linear;
+           -moz-transform: rotateY(0deg);
+        -webkit-transform: rotateY(0deg);
     }
-    dt {
+    .flashcards > dt.activecard {
         z-index: 10;
         background-color: rgba(0, 90, 90, 0.2);
         -moz-transform: translateZ(0pt); /* Hides backface of dt during transition */
         -moz-transform: translateZ(0) rotateY(0deg);
     }
     /* Todo: Trigger with JS */
-    dl.flipped dt {
+    .flashcards.flipped > dt.activecard {
         -moz-transform: translateZ(0) rotateY(180deg);
         z-index: 1;
     }
-    dd {
+    .flashcards > dd.activecard {
         z-index: 1;
         background-color: rgba(90, 90, 0, 0.2);
         -moz-transform: translateZ(0) rotateY(180deg);
     }
-    dl.flipped dd {
+    .flashcards.flipped > dd.activecard {
         z-index: 10;
         -moz-transform: translateZ(0) rotateY(360deg);
+    }
+    /* TODO: Add some style that makes for a nice transition sideways */
+    .flashcards > .prevcard, .flashcards > .nextcard {
+        display:none;
     }
   </style>
 </head>
 <body>
-  <h1>Flashcards</h1>
-  <dl tabindex="0">
-    <dt>CPU</dt>
-    <dd>Central Processing Unit</dd>
+  <h1>Flashcards using CSS 3D transformations and a definition list</h1>
+  <p>Click the card to flip it. View source to check out how it's done and plans for the future.</p>
+  <p>Requires Firefox 10 or later. Should work but is untested in Chrome or Safari.</p> 
+  <dl class="flashcards" tabindex="0">
+    <dt>GPU</dt>
+    <dd>Graphics Processing Unit</dd>
+    <dt class="prevcard">RAM</dt>
+    <dd class="prevcard">Random Access Memory</dd>
+    <dt class="activecard">CPU</dt>
+    <dd class="activecard">Central Processing Unit</dd>
+    <dt class="nextcard">USB</dt>
+    <dd class="nextcard">Universal Serial Bus</dd>
+    <dt>SSD</dt>
+    <dd>Solid State Drive</dd>
   </dl>
+  <p>
+    <button id="moveto_prevcard">Previous</button>
+    <button id="moveto_nextcard">Next</button>
+  </p>
   <script>
-    document.getElementsByTagName("dl")[0].onclick = function () {
-        this.classList.toggle("flipped");
+    /*
+      What to capability detect?
+        - classList
+        - querySelectorAll
+        - previousElementSibling & nextElementSibling
+        - Perhaps 3D-transforms...
+    */
+    var the_list = document.getElementsByTagName("dl")[0];
+
+    the_list.onclick = function () {
+        the_list.classList.toggle("flipped"); // temp solution with global var
     }
+    var move_forward_or_backward = function (direction) {
+      // Always flip back first
+        the_list.classList.remove("flipped"); // temp solution with global var
+
+        // Avoid live DOM Collections by using querySelector
+        var active_cards = the_list.querySelectorAll(".activecard");
+        var prev_cards   = the_list.querySelectorAll(".prevcard");
+        var next_cards   = the_list.querySelectorAll(".nextcard");
+
+        // Are there any more cards in the list?
+        var cards_before_prev = prev_cards.length && prev_cards[0].previousElementSibling;
+        var cards_after_next  = next_cards.length && next_cards[1].nextElementSibling;
+
+        if ( direction === "next" && next_cards.length ) {
+            if ( cards_after_next ) {
+              next_cards[1].nextElementSibling.classList.add("nextcard");
+              next_cards[1].nextElementSibling.nextElementSibling.classList.add("nextcard");
+            } else {
+                // TODO: Disable button
+                // And find a way to-re-enable when moving the other way
+            }
+            next_cards[0].classList.remove("nextcard");
+            next_cards[1].classList.remove("nextcard");
+            next_cards[0].classList.add("activecard");
+            next_cards[1].classList.add("activecard");
+
+            active_cards[0].classList.remove("activecard");
+            active_cards[1].classList.remove("activecard");
+            active_cards[0].classList.add("prevcard");
+            active_cards[1].classList.add("prevcard");
+
+            if ( prev_cards.length ) {
+                prev_cards[0].classList.remove("prevcard");
+                prev_cards[1].classList.remove("prevcard");
+            }
+
+        } else if ( direction === "prev" && prev_cards.length ) {
+
+          if ( cards_before_prev ) {
+                 prev_cards[0].previousElementSibling.classList.add("prevcard");
+                 prev_cards[0].previousElementSibling.previousElementSibling.classList.add("prevcard");
+            } else {
+                // TODO: Disable button
+                // And find a way to-re-enable when moving the other way
+            }
+            prev_cards[0].classList.remove("prevcard");
+            prev_cards[1].classList.remove("prevcard");
+            prev_cards[0].classList.add("activecard");
+            prev_cards[1].classList.add("activecard");
+
+            active_cards[0].classList.remove("activecard");
+            active_cards[1].classList.remove("activecard");
+            active_cards[0].classList.add("nextcard");
+            active_cards[1].classList.add("nextcard");
+
+            if ( next_cards.length ) {
+              next_cards[0].classList.remove("nextcard");
+              next_cards[1].classList.remove("nextcard");
+            }
+
+        } else {
+            // TODO: Round robin
+            alert("Already at the start or end of the list");
+        }
+    };
+
+    document.getElementById("moveto_nextcard").onclick = function () {
+        move_forward_or_backward("next");
+    }
+
+    document.getElementById("moveto_prevcard").onclick = function () {
+      move_forward_or_backward("prev");
+    }
+
   </script>
+  <!-- 
+  TODO major items:
+  * Support MS and Opera
+  * Keyboard support
+    - Flip using space
+    - Previous/next using arrows
+  * A nice design...
+    - Have the dt text expand and fill the whole Flash-card - adapting the size dependong on length of content
+    - Color 
+    - Font
+    - Images
+  * Numbering items
+    - Show number in lower right corner
+    - Toggle URL hash (or push state)
+    - Go to specific item depending on URL hash
+  * Show full list and goto specific item
+  * Mobile design:
+    - Fullscreen
+    - Gestures for forward and back
+    - Offline storage
+    - Portrait toggle = View header and full list (only DT) + kinetic scroll
+    - Landscape toggle = View individual Flash card
+  * Presentation mode for classrooms
+  * PHP backend
+  * Admin interface to add/edit items and complete lists
+   -->
 </body>
 </html>
