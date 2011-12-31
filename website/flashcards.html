@@ -102,8 +102,17 @@
 <body>
   <h1>Flashcards using CSS 3D transformations and a definition list</h1>
   <p>Click the card to flip it. View source to check out how it's done and plans for the future.</p>
-  <p>Requires Firefox 10 or later. Tested in Chromium but it gets no perspective.</p> 
-  <dl class="flashcards" tabindex="0">
+  <p>Requires Firefox 10 or later. Also tested in Chromium. It should work in Safari (untested).</p>
+  <p>Keyboard support:</p>
+  <dl>
+    <dt>Space</dt>
+    <dd>Flip card</dd>
+    <dt>Key left</dt>
+    <dd>Previous card</dd>
+    <dt>Key right</dt>
+    <dd>Next card</dd>
+  </dl>
+  <dl class="flashcards" id="flashcards" tabindex="0">
     <dt>GPU</dt>
     <dd>Graphics Processing Unit</dd>
     <dt class="prevcard">RAM</dt>
@@ -122,9 +131,9 @@
     <dd>Command Line Interface</dd>
   </dl>
   <p>
-    <button id="moveto_prevcard">Previous</button>
+    <button id="goto_prevcard">Previous</button>
     <span id="curnum">3</span>/<span id="totnum">8</span><!-- Todo: Calculate these -->
-    <button id="moveto_nextcard">Next</button>
+    <button id="goto_nextcard">Next</button>
   </p>
   <script>
     /*
@@ -135,21 +144,22 @@
         - 3D-transforms...
         - transitionend
     */
-    var the_list = document.getElementsByTagName("dl")[0];
-    var cur_num = 1 * document.getElementById("curnum").innerHTML;
-    var tot_num = 1 * document.getElementById("totnum").innerHTML;
+    var the_list = document.getElementById("flashcards");
+    var cur_num  = 1 * document.getElementById("curnum").innerHTML;
+    var tot_num  = 1 * document.getElementById("totnum").innerHTML;
+    
     if ( cur_num === tot_num ) {
-    	document.getElementById("moveto_nextcard").disabled = "disabled";
+    	document.getElementById("goto_nextcard").disabled = "disabled";
     } else {
-    	document.getElementById("moveto_nextcard").removeAttribute("disabled");
+    	document.getElementById("goto_nextcard").removeAttribute("disabled");
     }
     if ( cur_num === 1 ) {
-    	document.getElementById("moveto_prevcard").disabled = "disabled";
+    	document.getElementById("goto_prevcard").disabled = "disabled";
     } else {
-    	document.getElementById("moveto_prevcard").removeAttribute("disabled");
+    	document.getElementById("goto_prevcard").removeAttribute("disabled");
     }
 
-    the_list.onclick = function () {
+    var flipcard = function () {
         the_list.classList.toggle("flipped"); // temp solution with global var
     	if ( !the_list.classList.contains("flipped") ) {
     		setTimeout( function () {
@@ -159,7 +169,6 @@
     	}
     }
     var move_forward_or_backward = function (direction) {
-
         // Avoid live DOM Collections by using querySelector
         var active_cards = the_list.querySelectorAll(".activecard");
         var prev_cards   = the_list.querySelectorAll(".prevcard");
@@ -176,9 +185,9 @@
             } else {
                 // TODO: Disable button
                 // And find a way to-re-enable when moving the other way
-                document.getElementById("moveto_nextcard").disabled = "disabled";
+                document.getElementById("goto_nextcard").disabled = "disabled";
             }
-            document.getElementById("moveto_prevcard").removeAttribute("disabled");
+            document.getElementById("goto_prevcard").removeAttribute("disabled");
             
             next_cards[0].classList.remove("nextcard");
             next_cards[1].classList.remove("nextcard");
@@ -204,9 +213,9 @@
             } else {
                 // TODO: Disable button
                 // And find a way to-re-enable when moving the other way
-                document.getElementById("moveto_prevcard").disabled = "disabled";
+                document.getElementById("goto_prevcard").disabled = "disabled";
             }
-          document.getElementById("moveto_nextcard").removeAttribute("disabled");
+          document.getElementById("goto_nextcard").removeAttribute("disabled");
           
             prev_cards[0].classList.remove("prevcard");
             prev_cards[1].classList.remove("prevcard");
@@ -229,7 +238,7 @@
         }
     };
 
-    document.getElementById("moveto_nextcard").onclick = function () {
+    var goto_next = function () {
     	if ( the_list.classList.contains("flipped") ) {
     		the_list.classList.remove ("flipped");
     		setTimeout( function () {
@@ -240,8 +249,7 @@
             move_forward_or_backward("next");
     	}
     }
-
-    document.getElementById("moveto_prevcard").onclick = function () {
+    var goto_prev = function () {
     	if ( the_list.classList.contains("flipped") ) {
     		the_list.classList.remove ("flipped");
     		setTimeout( function () {
@@ -251,6 +259,23 @@
     	} else {
             move_forward_or_backward("prev");
     	}
+    }
+    the_list.onclick = flipcard;
+    document.getElementById("goto_nextcard").onclick = goto_next;
+    document.getElementById("goto_prevcard").onclick = goto_prev;
+    window.onkeydown = function (e) {
+        switch (e.keyCode) {
+		case 32:
+			flipcard();
+			return false;
+		case 37:
+			goto_prev();
+			return false;
+		case 39:
+			goto_next();
+			return false;
+        }
+        return true;
     }
 
   </script>
