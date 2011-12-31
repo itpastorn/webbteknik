@@ -54,17 +54,20 @@
     }
     /* Todo: Trigger with JS */
     .flashcards.flipped > dt.activecard {
-        -moz-transform: translateZ(0) rotateY(180deg);
+           -moz-transform: translateZ(0) rotateY(180deg);
+        -webkit-transform: translateZ(0) rotateY(180deg);
         z-index: 1;
     }
     .flashcards > dd.activecard {
         z-index: 1;
         background-color: rgba(90, 90, 0, 0.2);
-        -moz-transform: translateZ(0) rotateY(180deg);
+           -moz-transform: translateZ(0) rotateY(180deg);
+        -webkit-transform: translateZ(0) rotateY(180deg);
     }
     .flashcards.flipped > dd.activecard {
         z-index: 10;
-        -moz-transform: translateZ(0) rotateY(360deg);
+           -moz-transform: translateZ(0) rotateY(360deg);
+        -webkit-transform: translateZ(0) rotateY(360deg);
     }
     /* TODO: Add some style that makes for a nice transition sideways */
     .flashcards > .prevcard, .flashcards > .nextcard {
@@ -75,7 +78,7 @@
 <body>
   <h1>Flashcards using CSS 3D transformations and a definition list</h1>
   <p>Click the card to flip it. View source to check out how it's done and plans for the future.</p>
-  <p>Requires Firefox 10 or later. Should work but is untested in Chrome or Safari.</p> 
+  <p>Requires Firefox 10 or later. <del>Should work but is untested in Chrome or Safari.</del></p> 
   <dl class="flashcards" tabindex="0">
     <dt>GPU</dt>
     <dd>Graphics Processing Unit</dd>
