@@ -11,32 +11,23 @@
     }
     .flashcards {
         position: relative;
-        height: 212px;
-        width: 312px;
+        height: 224px;
+        width: 324px;
         margin: 30px 0;
+        overflow-x: hidden; /* Destroys perspective */
            -moz-transform-style: preserve-3d;
         -webkit-transform-style: preserve-3d;
            -moz-perspective: 800px;
         -webkit-perspective: 800px; /* TODO: Investigate why this has no effect */
-           -moz-transform: rotateY(0deg);
-        -webkit-transform: rotateY(0deg);
     }
     .flashcards.flipped {
         /* Currently unused */
     }
     .flashcards > dt, .flashcards > dd  {
         display: none;
-        font-size: x-large;
-        box-shadow: 5px 5px 5px silver;
-    }
-    .flashcards > dt  {
-        font-size: xx-large;
-        text-align: center;
-        line-height: 2;
-    }
-    .flashcards > .activecard {
-        display: block;
         position: absolute;
+        left: 0;
+        top: 0;
         height: 200px;
         width: 300px;
         margin: 0;
@@ -47,15 +38,31 @@
         -webkit-backface-visibility: hidden; /* TODO: Investigate why this has no effect */
            -moz-transform-style: preserve-3d;
         -webkit-transform-style: preserve-3d;
-           -moz-transition: 1.5s linear;
-        -webkit-transition: 1.5s linear;
+           -moz-transition: 0.7s linear;
+        -webkit-transition: 0.7s linear;
+        /* Would lie the following not to override the above... CSS animation ? */
+        /*
+           -moz-transition: left 0.5s linear;
+        -webkit-transition: left 0.5s linear;
+        */
         /* TODO: No delay for z-index when 3D transform is not supported */
+        font-size: x-large;
+        background-color: #DFFA00;
+        box-shadow: 5px 5px 5px silver;
+    }
+    .flashcards > dt  {
+        font-size: xx-large;
+        text-align: center;
+        line-height: 2;
+        background-color: #FFDF00;
+    }
+    .flashcards > .activecard {
+        display: block;
            -moz-transform: rotateY(0deg);
         -webkit-transform: rotateY(0deg);
     }
     .flashcards > dt.activecard {
         z-index: 10;
-        background-color: #FFDF00;
         /* translateZ hides backface of dt during transition */
            -moz-transform: translateZ(0) rotateY(0deg);
         -webkit-transform: translateZ(0) rotateY(0deg);
@@ -70,7 +77,6 @@
     }
     .flashcards > dd.activecard {
         z-index: 1;
-        background-color: #DFFA00;
            -moz-transform: translateZ(0) rotateY(180deg);
         -webkit-transform: translateZ(0) rotateY(180deg);
     }
@@ -79,9 +85,17 @@
            -moz-transform: translateZ(0) rotateY(360deg);
         -webkit-transform: translateZ(0) rotateY(360deg);
     }
-    /* TODO: Add some style that makes for a nice transition sideways */
-    .flashcards > .prevcard, .flashcards > .nextcard {
-        display:none;
+    /* Sideay slide */
+    /* TODO: (Fix) This animation gives away the answer when 3D is not supported */
+    /* It also looks bad when clicking the button while flipped */
+    /* TODO: Tilt 45 deg + transform-origin */
+    .flashcards > dt.nextcard {
+        display: block;
+        left: 324px;
+    }
+    .flashcards > dt.prevcard {
+        display: block;
+        left: -324px;
     }
   </style>
 </head>
@@ -100,9 +114,16 @@
     <dd class="nextcard">Universal Serial Bus</dd>
     <dt>SSD</dt>
     <dd>Solid State Drive</dd>
+    <dt>GUI</dt>
+    <dd>Graphical User Interface</dd>
+    <dt>TUI</dt>
+    <dd>Text User Interface</dd>
+    <dt>CLI</dt>
+    <dd>Command Line Interface</dd>
   </dl>
   <p>
     <button id="moveto_prevcard">Previous</button>
+    <span id="curnum">3</span>/<span id="totnum">8</span><!-- Todo: Calculate these -->
     <button id="moveto_nextcard">Next</button>
   </p>
   <script>
@@ -111,16 +132,33 @@
         - classList
         - querySelectorAll
         - previousElementSibling & nextElementSibling
-        - Perhaps 3D-transforms...
+        - 3D-transforms...
+        - transitionend
     */
     var the_list = document.getElementsByTagName("dl")[0];
+    var cur_num = 1 * document.getElementById("curnum").innerHTML;
+    var tot_num = 1 * document.getElementById("totnum").innerHTML;
+    if ( cur_num === tot_num ) {
+    	document.getElementById("moveto_nextcard").disabled = "disabled";
+    } else {
+    	document.getElementById("moveto_nextcard").removeAttribute("disabled");
+    }
+    if ( cur_num === 1 ) {
+    	document.getElementById("moveto_prevcard").disabled = "disabled";
+    } else {
+    	document.getElementById("moveto_prevcard").removeAttribute("disabled");
+    }
 
     the_list.onclick = function () {
         the_list.classList.toggle("flipped"); // temp solution with global var
+    	if ( !the_list.classList.contains("flipped") ) {
+    		setTimeout( function () {
+    			move_forward_or_backward("next");
+    		}, 700);
+    		/* TODO: Set with transition-end instead of timeOut */
+    	}
     }
     var move_forward_or_backward = function (direction) {
-      // Always flip back first
-        the_list.classList.remove("flipped"); // temp solution with global var
 
         // Avoid live DOM Collections by using querySelector
         var active_cards = the_list.querySelectorAll(".activecard");
@@ -138,7 +176,10 @@
             } else {
                 // TODO: Disable button
                 // And find a way to-re-enable when moving the other way
+                document.getElementById("moveto_nextcard").disabled = "disabled";
             }
+            document.getElementById("moveto_prevcard").removeAttribute("disabled");
+            
             next_cards[0].classList.remove("nextcard");
             next_cards[1].classList.remove("nextcard");
             next_cards[0].classList.add("activecard");
@@ -153,6 +194,7 @@
                 prev_cards[0].classList.remove("prevcard");
                 prev_cards[1].classList.remove("prevcard");
             }
+            document.getElementById("curnum").innerHTML = ++cur_num;
 
         } else if ( direction === "prev" && prev_cards.length ) {
 
@@ -162,7 +204,10 @@
             } else {
                 // TODO: Disable button
                 // And find a way to-re-enable when moving the other way
+                document.getElementById("moveto_prevcard").disabled = "disabled";
             }
+          document.getElementById("moveto_nextcard").removeAttribute("disabled");
+          
             prev_cards[0].classList.remove("prevcard");
             prev_cards[1].classList.remove("prevcard");
             prev_cards[0].classList.add("activecard");
@@ -177,19 +222,35 @@
               next_cards[0].classList.remove("nextcard");
               next_cards[1].classList.remove("nextcard");
             }
+            document.getElementById("curnum").innerHTML = --cur_num;
 
         } else {
-            // TODO: Round robin
-            alert("Already at the start or end of the list");
+            // TODO: Round robin ?
         }
     };
 
     document.getElementById("moveto_nextcard").onclick = function () {
-        move_forward_or_backward("next");
+    	if ( the_list.classList.contains("flipped") ) {
+    		the_list.classList.remove ("flipped");
+    		setTimeout( function () {
+    			move_forward_or_backward("next");
+    		}, 700);
+    		/* TODO: Set with transition-end instead of timeOut */
+    	} else {
+            move_forward_or_backward("next");
+    	}
     }
 
     document.getElementById("moveto_prevcard").onclick = function () {
-      move_forward_or_backward("prev");
+    	if ( the_list.classList.contains("flipped") ) {
+    		the_list.classList.remove ("flipped");
+    		setTimeout( function () {
+    			move_forward_or_backward("prev");
+    		}, 700);
+    		/* TODO: Set with transition-end instead of timeOut */
+    	} else {
+            move_forward_or_backward("prev");
+    	}
     }
 
   </script>
