@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <title>Klocka i SVG</title>
+  <style>
+    body {
+        margin: auto;
+        width: 800px;
+        font-family: sans-serif;
+    }
+    svg {
+    }
+    circle#outer {
+        fill: none;
+        stroke: black;
+        stroke-width: 2;
+    }
+    line#hours {
+    }
+    line#minutes {
+    }
+    line#seconds {
+        stroke: #333;
+        stroke-width: 4;
+    }
+    line#showcos, line#showsin {
+        stroke: #999;
+        stroke-width: 2;
+    }
+    text {
+        text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <h1>Klocka i SVG med radie=400</h1>
+  <svg width="800" height="800">
+    <g id="theclock" transform="translate(400, 400)">
+    <circle id="outer" cx="0" cy="0" r="400" />
+    <line id="seconds" x1="0" y1="0" x2="200" y2="-200"/>
+    <line id="showcos" />
+    <line id="showsin" />
+    <text id="cosval"></text>
+    <text id="sinval"></text>
+  </g>
+  </svg>
+  <p id="analog">xx</p>
+  <script>
+    var secs    = { dom : document.getElementById("seconds") },
+        analog  = { dom : document.getElementById("analog")  },
+        showsin = { dom : document.getElementById("showsin") },
+        showcos = { dom : document.getElementById("showcos") },
+        sinval  = { dom : document.getElementById("sinval")  },
+        cosval  = { dom : document.getElementById("cosval")  };
+
+    function clock() {
+        var now = new Date();
+        var clock = {
+            secs : now.getSeconds(),
+            mins : now.getMinutes(),
+            hour : now.getHours()
+        }
+        // Klockan börjar uppåt men grafiken i datorn börjar horisontellt
+        // Därför drar vi av 15 sekunder
+        var sec_angle = Math.PI * (clock.secs - 15) / 30;
+
+        var radie = 400;
+
+        // X-placeringen bestäms av cosinus
+        secs.x2 = Math.cos(sec_angle) * radie;
+        // Y-placeringen bestäms av sinus
+        secs.y2 = Math.sin(sec_angle) * radie;
+
+        secs.dom.setAttribute("x2", secs.x2);
+        secs.dom.setAttribute("y2", secs.y2);
+        
+        // Rita en linje som förklarar cosinus
+        showcos.dom.setAttribute("x1", 0);
+        showcos.dom.setAttribute("x2", secs.x2);
+        showcos.dom.setAttribute("y1", secs.y2);
+        showcos.dom.setAttribute("y2", secs.y2);
+
+        cosval.dom.setAttribute("x", secs.x2 / 2 - 40);
+        cosval.dom.setAttribute("y", secs.y2 - ( secs.y2 < 0 ? -15: 5));
+        cosval.dom.textContent = "Cosinus: " + Math.round(secs.x2);
+
+        // Rita en linje som förklarar sinus
+        showsin.dom.setAttribute("x1", 0);
+        showsin.dom.setAttribute("x2", 0);
+        showsin.dom.setAttribute("y1", 0);
+        showsin.dom.setAttribute("y2", secs.y2);
+        
+        sinval.dom.setAttribute("x", 2);
+        sinval.dom.setAttribute("y", secs.y2 / 2);
+        sinval.dom.textContent = "Sinus: " + Math.round(secs.y2);
+
+        analog.dom.innerHTML = "Sekunder: " +clock.secs + "<br>Vinkel: " + sec_angle;
+    }
+    clock();
+    window.setInterval(clock, 1000);
+  </script>
+</body>
+</html>

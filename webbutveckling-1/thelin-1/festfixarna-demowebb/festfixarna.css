@@ -1,0 +1,48 @@
+@CHARSET "UTF-8";
+body {
+    margin: auto;
+    width: 860px;
+    font-family: sans-serif;
+    font-size: 100%;
+}
+.startpage > header {
+    text-align: center;
+}
+.imagefiller {
+    font-size: 800%;
+    float: left;
+       -moz-transform: translate(0, -30px) rotate(90deg) scale(2);
+    -webkit-transform: translate(0, 40px) rotate(90deg) scale(2);
+}
+.startpage > header > h1 {
+    font-size: 500%;
+    font-family: 'Merienda One', cursive;
+}
+.startpage > header > h1:first-letter {
+    font-size: 16n0%;
+    color: red;
+}
+.startpage > header > p.tagline {
+    font-size: 120%;
+    padding: 0.5em;
+    text-align: center;
+    border-top: 3px double grey;
+    border-bottom: 3px double grey;
+    margin: 4em 0;
+}
+section {
+    display: inline-block;
+    outline: 1px solid silver;
+    width: 20%;
+    margin-right: 6%;
+    vertical-align: top;
+}
+section:last-of-type {
+    margin-right: 0%;
+}
+footer {
+    display: block;
+    margin-top: 3em;
+    text-align: center;
+    color: #999;
+}
