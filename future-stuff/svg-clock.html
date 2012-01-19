@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=400, initial-scale=1">
   <title>Klocka i SVG</title>
   <style>
     body {
@@ -46,7 +47,7 @@
 </head>
 <body>
   <h1>Princip för klocka i SVG med radie=100</h1>
-  <svg width="802" height="802" viewbox="0,0,202,202">
+  <svg width="802" height="802" viewbox="0,0,202,202" id="urtavla">
     <g id="theclock" transform="translate(101, 101)">
     <circle id="outer" cx="0" cy="0" r="100" />
     <line id="seconds" x1="0" y1="0" x2="200" y2="-200"/>
@@ -59,6 +60,12 @@
   </svg>
   <p id="analog">xx</p>
   <script>
+    var urtavla = document.getElementById("urtavla");
+    if ( window.innerHeight < 800 || window.innerWidth < 800 ) {
+        var available = Math.min(window.innerHeight, window.innerWidth) - 60;
+        urtavla.width = urtavla.setAttribute("height", available); 
+        urtavla.width = urtavla.setAttribute("width", available); 
+    } 
     var secs    = { dom : document.getElementById("seconds") },
         analog  = { dom : document.getElementById("analog")  },
         showsin = { dom : document.getElementById("showsin") },
@@ -117,7 +124,7 @@
         arc.dom.setAttribute("d", "M 0,0 L 10,0 A 10,10 0 " + short_long + "," + wise + " " + cos_on_arc + "," + sin_on_arc + " z");
     }
     clock();
-    window.setInterval(clock, 25);
+    window.setInterval(clock, 40);
   </script>
 </body>
 </html>

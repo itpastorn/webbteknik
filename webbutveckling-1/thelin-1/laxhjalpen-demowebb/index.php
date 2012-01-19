@@ -9,16 +9,16 @@
 <html lang="sv">
 <head>
   <meta charset="utf-8" />
-  <title>Startsida | Festfixarna</title>
+  <title>Startsida | Läxhjälpen</title>
   <link href='http://fonts.googleapis.com/css?family=Merienda+One' rel='stylesheet' />
-  <link href="festfixarna.css" rel="stylesheet" />
+  <link href="laxhjalpen.css" rel="stylesheet" />
 </head>
 <body class="startpage">
   <header>
     <img id="logo" alt="" src="" />
     <span class="imagefiller">&#x2619;</span>
     <h1>Festfixarna</h1>
-    <p class="tagline">Fester och events utöver det vanliga</p>
+    <p class="tagline">Vi hjälper dig fatta!</p>
   </header>
   <section>
     <h2>Vilka vi är &#x3020;</h2>
@@ -26,7 +26,7 @@
   </section>
   <section>
     <h2>Vad vi gör &#x2318;</h2>
-    <p>En fest ska inte bara vara rolig, utan minnesvärd! Lorem ipsum dolor sit amet.</p>
+    <p>Lorem ipsum dolor sit amet.</p>
   </section>
   <section>
     <h2>Blogg &#x272A;</h2>
