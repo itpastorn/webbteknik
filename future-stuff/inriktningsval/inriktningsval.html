@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="sv">
  <head>
+  <meta charset="utf-8" />
   <title>Inriktnings- och kursval, NE inför åk 2 (gäller 2012)</title>
   <style>
     body {
@@ -8,17 +9,142 @@
         width: 800px;
         font-family: sans-serif;
     }
+    section {
+        clear: both;
+        padding: 3em 1em 1em 1em;
+        border: 1px solid;
+        border-radius: 10px;
+        position: relative;
+        float: left; /* contain floats */
+        width: 100%;
+        margin: 1em 0;
+    }
+    h2 {
+        position: absolute;
+        top: -1.4em;
+        left: 2em;
+        background-color: #FFF;
+        padding: 0 0.4em;
+    }
+    table, table td {
+        border: 1px solid;
+        border-collapse: collapse;
+        padding: 3px;
+    }
+    table {
+        margin-right: 3em;
+        float: left;
+    }
+    td {
+        width: 14em;
+    }
+    td[rowspan] {
+        width: 3em;
+        text-align: center;
+    }
+    .inriktning {
+        margin-top: 1em;
+    }
+    .design {
+        background-color: lime;
+    }
     .it {
         background-color: navajowhite;
+    }
+    p {
+        text-align: center;
+    }
+    .jaknapp {
+        background-color: lightgreen;
+        border-radius: 5%;
+        padding: 2px 4px;
+        margin-right: 10px;
+    }
+    .nejknapp {
+        background-color: pink;
+        border-radius: 5%;
+        padding: 2px 4px;
     }
   </style>
  </head>
  <body>
    <h1>Inriktnings- och kursval, NE inför åk 2 (gäller 2012)</h1>
+   <section>
    <h2>Välj inriktning</h2>
-   <table class="inriktning it">
-     <caption>IT och Media</caption>
-     <
+   <table class="inriktning design" tabindex="0">
+     <caption>Design och produktutveckling</caption>
+     <tr>
+       <td rowspan="4"><input type="radio" name="inr" value="it" /></td>
+       <td>Datorteknik 1a</td>
+     </tr>
+     <tr>
+       <td>Webbutveckling 1</td>
+     </tr>
+     <tr>
+       <td>Programmering 1</td>
+     </tr>
+     <tr>
+       <td>Bild och form 1a</td>
+     </tr>
    </table>
- </body>
+   <table class="inriktning it" tabindex="0">
+     <caption>IT och Media</caption>
+     <tr>
+       <td rowspan="3"><input type="radio" name="inr" value="it" /></td>
+       <td>Datorteknik 1a</td>
+     </tr>
+     <tr>
+       <td>Webbutveckling 1</td>
+     </tr>
+     <tr>
+       <td>Programmering 1</td>
+     </tr>
+   </table>
+  </section>
+  <section>
+    <h2>Vill du läsa Matematik 4 och Fysik 2? (Civilingenjör)</h2>
+    <p>
+      <button id="mafyja" class="jaknapp">Ja</button>
+      <button id="mafynej" class="nejknapp">Nej</button>
+    </p>
+  </section>
+  <section>
+    <h2>Vill du ha möjlighet att bli gymnasieingenjör?</h2>
+     <p>
+       <button id="te4ja" class="jaknapp">Ja</button>
+       <button id="te4nej" class="nejknapp">Nej</button>
+    </p>
+  </section>
+  <section>
+    <h2>Välj ett av dessa paket (block 1)</h2>
+    <table class="block1 it" tabindex="0">
+      <tr>
+        <td rowspan="2"><input type="radio" name="block1" value="it4" /></td>
+        <td>Gränssnittsdesign</td>
+      </tr>
+      <tr>
+        <td>Webbserverprogrammering</td>
+      </tr>
+    </table>
+  </section>
+  <section>
+    <h2>Välj ett av dessa paket (block 2)</h2>
+    <table class="block2 it" tabindex="0">
+      <tr>
+        <td rowspan="2"><input type="radio" name="block2" value="it4" /></td>
+        <td>Webbutveckling 2</td>
+      </tr>
+      <tr>
+        <td>Programmering 2</td>
+      </tr>
+    </table>
+  </section>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script>
+    $("table").click(function () {
+        alert("click");
+        $(this).find("input[type="radio"]).attr("selected", "selected");
+    });
+  </script>
+</body>
 </html>
