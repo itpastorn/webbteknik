@@ -17,22 +17,27 @@
   <header>
     <img id="logo" alt="" src="" />
     <span class="imagefiller">&#x2619;</span>
-    <h1>Festfixarna</h1>
+    <h1>Läxhjälpen</h1>
     <p class="tagline">Vi hjälper dig fatta!</p>
   </header>
   <section>
-    <h2>Vilka vi är &#x3020;</h2>
+    <div class="startpagebullet">
+      <h2>Vilka vi är &#x3020;</h2>
+    </div>
     <p>Varför anlita oss? Lorem ipsum dolor sit amet.</p>
   </section>
   <section>
+    <div class="startpagebullet"></div>
     <h2>Vad vi gör &#x2318;</h2>
     <p>Lorem ipsum dolor sit amet.</p>
   </section>
   <section>
+    <div class="startpagebullet"></div>
     <h2>Blogg &#x272A;</h2>
     <p>Möt våra nöjda kunder och se exempel på vad vi gjort åt dem.</p>
   </section>
   <section>
+    <div class="startpagebullet"></div>
     <h2>Kontakt &#x260E;</h2>
     <p>Varför anlita oss? Lorem ipsum dolor sit amet.</p>
   </section>
