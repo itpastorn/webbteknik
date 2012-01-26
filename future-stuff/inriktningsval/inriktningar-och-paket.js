@@ -15,7 +15,8 @@ var kurser = {
     "matmat04" : "Matematik 4",
     "mekmek01" : "Mekatronik 1",
     "prdpro01" : "Produktionskunskap 1",
-    "pruprd01" : "Produktionsutrustning 1",
+    "pruprd01s" : "Produktionsutrustning 1",
+    "pruprd02s" : "Produktionsutrustning 2",
     "prrprr01" : "Programmering 1",
     "prrprr02" : "Programmering 2",
     "webweu01" : "Webbutveckling 1",
@@ -23,32 +24,32 @@ var kurser = {
     "webweb01" : "Webbserverprogrammering 1"
 };
 
-var inriktingar = {
+var inriktningar = {
     "design" : {
-        "name" : "Design och produktutveckling",
+        "name"    : "Design och produktutveckling",
         "blockar" : ["des1"],
-        "passar" : "",
-        "typ" : "design",
-        "kurser" : ["bilbil01a1", "cadcad01", "desdes01", "kotkos01"]
+        "passar4" : "prod1",
+        "typ"     : "design",
+        "kurser"  : ["bilbil01a1", "cadcad01", "desdes01", "kotkos01"]
     },
     "produktion" : {
-        "name" : "Produktionsteknik",
+        "name"    : "Produktionsteknik",
         "blockar" : ["prod1"],
-        "passar" : "",
-        "typ" : "produktion",
-        "kurser" : ["mekmek01", "prdpro01", "pruprd01"]
+        "passar4" : "des1",
+        "typ"     : "produktion",
+        "kurser"  : ["mekmek01", "prdpro01", "pruprd01s"]
     },
     "it" : {
-        "name" : "IT och media",
+        "name"    : "IT och media",
         "blockar" : [],
-        "passar" : "",
-        "typ" : "it",
-        "kurser" : ["webweu01", "prrprr01", "daodat01a"]
+        "passar4" : "it1",
+        "typ"     : "it",
+        "kurser"  : ["webweu01", "prrprr01", "daodat01a"]
     },
     "samhall" : {
         "name" : "Samhällsbyggande och miljö",
-        "blockar" : ["ark1"],
-        "passar" : "",
+        "blockar" : ["ark1", "sam2"],
+        "passar4" : null,
         "typ" : "samhall",
         "kurser" : ["arkark0", "hålhåb0", "hålmij0"]
     }
@@ -89,13 +90,13 @@ var paket2 = {
             "typ"    : "it"
         },
         "prod2" : {
-            "kurser" : ["prrprr02", "webweu02"],
-            "req"    : "it",
+            "kurser" : ["pruprd02s", "dardat01"],
+            "req"    : "produktion",
             "typ"    : "produktion"
         },
         "sam2" : {
-            "kurser" : ["dardat01", "pruprd01"],
-            "req"    : "it",
+            "kurser" : ["hålhåb0", "hålmij0"],
+            "req"    : null,
             "typ"    : "samhall"
         }
 };

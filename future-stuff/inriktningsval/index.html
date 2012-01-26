@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="sv">
+ <head>
+  <meta charset="utf-8" />
+  <title>Inriktnings- och kursval, NE inför åk 2 (gäller 2012)</title>
+  <style>
+    body {
+        margin: auto;
+        width: 800px;
+        font-family: sans-serif;
+    }
+    fieldset {
+        clear: both;
+        padding: 1em 2em;
+        border: 1px solid;
+        border-radius: 10px;
+        float: left; /* contain floats */
+        width: 100%;
+        margin: 1em 0;
+    }
+    legend {
+        font-size: 150%;
+        padding: 0 0.4em;
+    }
+    table, table td {
+        border: 1px solid #BBB;
+        border-collapse: collapse;
+        padding: 3px;
+        margin-bottom: 1em;
+    }
+    table {
+        float: left;
+        box-shadow: 3px 3px 3px #BBB;
+    }
+    table:nth-of-type(even) {
+        float: right;
+        margin-right: 0;
+    }
+    table:nth-of-type(odd) {
+        clear: both;
+    }
+    td {
+        width: 18em;
+    }
+    td[rowspan] {
+        width: 4em;
+        text-align: center;
+    }
+    .inriktning {
+        margin-top: 1em;
+    }
+    .civing {
+        background-color: lightblue;
+    }
+    .design {
+        background-color: lightgreen;
+    }
+    .samhall {
+        background-color: pink;
+    }
+    .it {
+        background-color: navajowhite;
+    }
+    .produktion {
+        background-color: silver;
+    }
+    p {
+        text-align: center;
+    }
+    .jaknapp {
+        background-color: lightgreen;
+        border-radius: 5%;
+        padding: 2px 4px;
+        margin-right: 10px;
+    }
+    .nejknapp {
+        background-color: pink;
+        border-radius: 5%;
+        padding: 2px 4px;
+    }
+    .chosen {
+        border: 1px solid darkgreen;
+    }
+    .disabled {
+        opacity: 0.4;
+    }
+    textarea {
+        margin: auto;
+        width: 100%;
+        height: 6em;
+    }
+    #pinfo p {
+        text-align: left;
+    }
+  </style>
+ </head>
+ <body>
+   <h1>Inriktnings- och kursval, NE inför åk 2 (gäller 2012)</h1>
+   <fieldset id="inriktningar">
+   <legend>Välj inriktning</legend>
+   <p>Ändrar du detta val nollställs allt och du börjar om från början.</p>
+  </fieldset>
+  <fieldset>
+    <legend>Vill du läsa Matematik 4 och Fysik 2? (Högskole- och civilingenjör)</legend>
+    <p><small>(Högskoleingenjör kräver Fy2, men inte Ma4.)</small></p>
+    <p>
+      <button id="mafyja" class="jaknapp">Ja</button>
+      <button id="mafynej" class="nejknapp">Nej</button>
+    </p>
+  </fieldset>
+  <fieldset>
+    <legend>Vill du ha möjlighet att bli gymnasieingenjör?</legend>
+     <p>
+       <button id="te4ja" class="jaknapp">Ja</button>
+       <button id="te4nej" class="nejknapp">Nej</button>
+    </p>
+  </fieldset>
+  <fieldset id="block1">
+    <legend>Välj ett av dessa paket (block 1)</legend>
+    <!-- Stuff inserted by JS here -->
+  </fieldset>
+  <fieldset id="block2">
+    <legend>Välj ett av dessa paket (block 2)</legend>
+    <!-- Stuff inserted by JS here -->
+  </fieldset>
+  <fieldset id="pinfo">
+    <legend>Namn, klass och kommentarer</legend>
+    <p>
+      <label for="namn">Förnamn och efternamn</label>
+      <input type="text" id="namn" name="namn" placeholder="Skriv ditt namn här" />
+    </p>
+    <p>
+      <input type="radio" name="klass" id="te1a" value="te1a">
+      <label for="te1a">Te1A</label>
+    </p>
+    <p>
+      <input type="radio" name="klass" id="te1b" value="te1b">
+      <label for="te1b">Te1B</label>
+    </p>
+    <p>
+      <label for="kommentar">Skriv eventuell kommentar här</label>
+      <textarea id="kommentar" name="kommentar"></textarea>
+    </p>
+  </fieldset>
+  <fieldset>
+    <legend>Klar att skicka</legend>
+    <p>
+      <input id="klar" name="klar" type="checkbox"> <label for="klar">Jag har tänkt igenom och är klar att skicka in mitt val.</label>
+    </p>
+    <p>
+      <input type="submit" id="skicka" value="Systemet ej i drift ännu" disabled>
+    </p>
+  </fieldset>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script src="inriktningar-och-paket.js"></script>
+  <script src="setup.js"></script>
+</body>
+</html>
