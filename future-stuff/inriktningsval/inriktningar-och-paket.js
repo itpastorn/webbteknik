@@ -1,52 +1,105 @@
-var inriktingar = [
-    {
-        id : "design",
-        name: "Design och produktutveckling",
-        blockar : [],
-        passar : "",
-        typ : "design",
-        kurser : []
-    },
-    {
-        id : "produktion",
-        name: "xxxx",
-        blockar : [],
-        passar : "extra_it",
-        typ : "produktion",
-        kurser : ["webbutv1", "prog1", "dao"]
-    },
-    {
-        id : "it",
-        name: "IT och media",
-        blockar : [],
-        passar : "it4",
-        typ : "it",
-        kurser : ["dao", "wu1", "prog1"]
-    },
-    {
-        id : "samhall",
-        name: "Samhällsbyggande och miljö",
-        blockar : [],
-        passar : "",
-        typ : "samhall",
-        kurser : []
-    }
-];
-
 var kurser = {
-    "webweu01" : { // Full kod sedan
-    "url" : "http://www.skolverket.se/forskola-och-skola/gymnasieutbildning/amnes-och-laroplaner/amnesplaner-och-kurser-for-gymnasieskolan-2011/subject.htm?subjectCode=WEB&courseCode=WEBWEU01#anchor_WEBWEU01", // Kan den skapas från koden?
-        
+    "arkark0"  : "Arkitektur hus",
+    "bilbil01a1" : "Bild och form 1a1",
+    "bilbil01a2" : "Bild och form 1a2",
+    "cadcad01" : "CAD 1",
+    "cadcad02" : "CAD 2",
+    "daodat01a" : "Datorteknik 1a",
+    "dardat01" : "Datorstyrd produktion 1",
+    "desdes01" : "Design 1",
+    "fysfys02" : "Fysik 2",
+    "grägrä0" : "Gränssnittsdesign",
+    "hålhåb0" : "Hållbart samhällsbyggande",
+    "hålmij0"  : "Miljö och energikunskap",
+    "kotkos01" : "Konstruktion 1",
+    "matmat04" : "Matematik 4",
+    "mekmek01" : "Mekatronik 1",
+    "prdpro01" : "Produktionskunskap 1",
+    "pruprd01" : "Produktionsutrustning 1",
+    "prrprr01" : "Programmering 1",
+    "prrprr02" : "Programmering 2",
+    "webweu01" : "Webbutveckling 1",
+    "webweu02" : "Webbutveckling 2",
+    "webweb01" : "Webbserverprogrammering 1"
+};
+
+var inriktingar = {
+    "design" : {
+        "name" : "Design och produktutveckling",
+        "blockar" : ["des1"],
+        "passar" : "",
+        "typ" : "design",
+        "kurser" : ["bilbil01a1", "cadcad01", "desdes01", "kotkos01"]
     },
+    "produktion" : {
+        "name" : "Produktionsteknik",
+        "blockar" : ["prod1"],
+        "passar" : "",
+        "typ" : "produktion",
+        "kurser" : ["mekmek01", "prdpro01", "pruprd01"]
+    },
+    "it" : {
+        "name" : "IT och media",
+        "blockar" : [],
+        "passar" : "",
+        "typ" : "it",
+        "kurser" : ["webweu01", "prrprr01", "daodat01a"]
+    },
+    "samhall" : {
+        "name" : "Samhällsbyggande och miljö",
+        "blockar" : ["ark1"],
+        "passar" : "",
+        "typ" : "samhall",
+        "kurser" : ["arkark0", "hålhåb0", "hålmij0"]
+    }
 };
 
 // Byggs utifrån "paket" tabellen
-var paket1 = [
-    "civing" : ["ma4", "fy2"],
-    "it4"    : ["gdesign", "ws1"]
-];
-var paket2 = [
-    "civing" : ["ma4", "fy2"],
-    "it4"    : ["gdesign", "ws1"]
-];
+var paket1 = {
+    "prod1"  : {
+        "kurser" : ["prdpro01", "mekmek01"],
+        "req"    : null,
+        "typ"  : "produktion"
+    },
+    "it1"    : {
+        "kurser" : ["grägrä0", "webweb01"],
+        "req"    : "it",
+        "typ"    : "it"
+    },
+    "ark1"   : {
+        "kurser" : ["arkark0", "cadcad02", "bilbil01a2"],
+        "req"    : "design",
+        "typ"    : "design"
+    },
+    "des1"   : {
+        "kurser" : ["kotkos01", "cadcad01", "bilbil01a1"],
+        "req"    : null,
+        "typ"    : "design"
+    }
+};
+var paket2 = {
+	    "civing" : {
+	        "kurser" : ["matmat04", "fysfys02"],
+	        "req"    : null,
+	        "typ"    : "civing"
+	    },
+        "it2" : {
+            "kurser" : ["prrprr02", "webweu02"],
+            "req"    : "it",
+            "typ"    : "it"
+        },
+        "prod2" : {
+            "kurser" : ["prrprr02", "webweu02"],
+            "req"    : "it",
+            "typ"    : "produktion"
+        },
+        "sam2" : {
+            "kurser" : ["dardat01", "pruprd01"],
+            "req"    : "it",
+            "typ"    : "samhall"
+        }
+};
 
+// http://www.skolverket.se/
+// forskola-och-skola/gymnasieutbildning/amnes-och-laroplaner/amnesplaner-och-kurser-for-gymnasieskolan-2011/
+// subject.htm?subjectCode={AMNE}&courseCode={KURSKOD}#anchor_{KURSKOD}", // Platshållare för regexp

@@ -9,34 +9,35 @@
         width: 800px;
         font-family: sans-serif;
     }
-    section {
+    fieldset {
         clear: both;
-        padding: 3em 1em 1em 1em;
+        padding: 1em;
         border: 1px solid;
         border-radius: 10px;
-        position: relative;
         float: left; /* contain floats */
         width: 100%;
         margin: 1em 0;
     }
-    h2 {
-        position: absolute;
-        top: -1.4em;
-        left: 2em;
-        background-color: #FFF;
+    legend {
+        font-size: 150%;
         padding: 0 0.4em;
     }
     table, table td {
-        border: 1px solid;
+        border: 1px solid #BBB;
         border-collapse: collapse;
         padding: 3px;
+        margin-bottom: 1em;
     }
     table {
         margin-right: 3em;
         float: left;
+        box-shadow: 3px 3px 3px #BBB;
+    }
+    table:nth-child(even) {
+        clear: both;
     }
     td {
-        width: 14em;
+        width: 16em;
     }
     td[rowspan] {
         width: 3em;
@@ -45,11 +46,20 @@
     .inriktning {
         margin-top: 1em;
     }
+    .civing {
+        background-color: lightblue;
+    }
     .design {
         background-color: lime;
     }
+    .samhall {
+        background-color: pink;
+    }
     .it {
         background-color: navajowhite;
+    }
+    .produktion {
+        background-color: silver;
     }
     p {
         text-align: center;
@@ -65,86 +75,57 @@
         border-radius: 5%;
         padding: 2px 4px;
     }
+    .chosen {
+        border: 1px solid darkgreen;
+    }
+    .unavailable {
+        opacity: 0.2;
+    }
   </style>
  </head>
  <body>
    <h1>Inriktnings- och kursval, NE inför åk 2 (gäller 2012)</h1>
-   <section>
-   <h2>Välj inriktning</h2>
-   <table class="inriktning design" tabindex="0">
-     <caption>Design och produktutveckling</caption>
-     <tr>
-       <td rowspan="4"><input type="radio" name="inr" value="it" /></td>
-       <td>Datorteknik 1a</td>
-     </tr>
-     <tr>
-       <td>Webbutveckling 1</td>
-     </tr>
-     <tr>
-       <td>Programmering 1</td>
-     </tr>
-     <tr>
-       <td>Bild och form 1a</td>
-     </tr>
-   </table>
-   <table class="inriktning it" tabindex="0">
-     <caption>IT och Media</caption>
-     <tr>
-       <td rowspan="3"><input type="radio" name="inr" value="it" /></td>
-       <td>Datorteknik 1a</td>
-     </tr>
-     <tr>
-       <td>Webbutveckling 1</td>
-     </tr>
-     <tr>
-       <td>Programmering 1</td>
-     </tr>
-   </table>
-  </section>
-  <section>
-    <h2>Vill du läsa Matematik 4 och Fysik 2? (Civilingenjör)</h2>
+   <fieldset id="inriktningar">
+   <legend>Välj inriktning</legend>
+  </fieldset>
+  <fieldset>
+    <legend>Vill du läsa Matematik 4 och Fysik 2? (Civilingenjör)</legend>
     <p>
       <button id="mafyja" class="jaknapp">Ja</button>
       <button id="mafynej" class="nejknapp">Nej</button>
     </p>
-  </section>
-  <section>
-    <h2>Vill du ha möjlighet att bli gymnasieingenjör?</h2>
+  </fieldset>
+  <fieldset>
+    <legend>Vill du ha möjlighet att bli gymnasieingenjör?</legend>
      <p>
        <button id="te4ja" class="jaknapp">Ja</button>
        <button id="te4nej" class="nejknapp">Nej</button>
     </p>
-  </section>
-  <section>
-    <h2>Välj ett av dessa paket (block 1)</h2>
-    <table class="block1 it" tabindex="0">
-      <tr>
-        <td rowspan="2"><input type="radio" name="block1" value="it4" /></td>
-        <td>Gränssnittsdesign</td>
-      </tr>
-      <tr>
-        <td>Webbserverprogrammering</td>
-      </tr>
-    </table>
-  </section>
-  <section>
-    <h2>Välj ett av dessa paket (block 2)</h2>
-    <table class="block2 it" tabindex="0">
-      <tr>
-        <td rowspan="2"><input type="radio" name="block2" value="it4" /></td>
-        <td>Webbutveckling 2</td>
-      </tr>
-      <tr>
-        <td>Programmering 2</td>
-      </tr>
-    </table>
-  </section>
+  </fieldset>
+  <fieldset id="block1">
+    <legend>Välj ett av dessa paket (block 1)</legend>
+    <!-- Stuff inserted by JS here -->
+  </fieldset>
+  <fieldset id="block2">
+    <legend>Välj ett av dessa paket (block 2)</legend>
+    <!-- Stuff inserted by JS here -->
+  </fieldset>
+  <fieldset>
+    <legend>Namn, klass och kommentarer</legend>
+    <p>
+      <label for="namn">Förnamn och efternamn</label>
+      <input type="text" name="namn" placeholder="Skriv ditt namn här" />
+    </p>
+    <textarea id="kommentar" name="kommentar">
+    </textarea>
+  </fieldset>
+  <fieldset>
+    <legend>Klar att skicka</legend>
+    <input id="klar" name="klar" type="checkbox">
+    <input id="skicka" disabled>
+  </fieldset>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-  <script>
-    $("table").click(function () {
-        alert("click");
-        $(this).find("input[type="radio"]).attr("selected", "selected");
-    });
-  </script>
+  <script src="inriktningar-och-paket.js"></script>
+  <script src="setup.js"></script>
 </body>
 </html>
