@@ -56,6 +56,7 @@ var inriktningar = {
 };
 
 // Byggs utifrån "paket" tabellen
+// paket1 får INTE innehålla Ma/Fy då det annars inte kan kombineras med T4
 var paket1 = {
     "prod1"  : {
         "kurser" : ["prdpro01", "mekmek01"],

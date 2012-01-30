@@ -95,6 +95,7 @@ $("#inriktningar table").click(function () {
 	// Nollställer
 	$("#block1 table, #block2 table").removeClass("disabled");
 	$("#block1 table input, #block2 table input").removeAttr("disabled");
+	$("button").removeClass("chosen").removeClass("notchosen");
 	// Tag bort blockerade val
     var id = this.id;
     for ( var i = 0; i < inriktningar[id].blockar.length; i += 1 ) {
@@ -119,21 +120,30 @@ $("#inriktningar table").click(function () {
 });
 
 $("#mafyja").click( function () {
-    $("#block2 table").addClass("disabled");
-    $("#block2 input").attr("disabled", "disabled");
-    $("#civing").removeClass("disabled").addClass("chosen");
-    $("#r_civing").removeAttr("disabled").attr("checked", "checked");
-});
-$("#mafynej").click( function () {
-    $("#block2 table").removeClass("disabled");
-    $("#block2 input").removeAttr("disabled");
-    // simulera att klick på inriktningen man valt för att nollställa rätt
     var inr_val = $("input[name='inriktningar']:checked").val();
     if ( ! inr_val ) {
         alert("Du måste välja inriktning först");
         return false;
     }
+    $("#block2 table").addClass("disabled");
+    $("#block2 input").attr("disabled", "disabled");
+    $("#civing").removeClass("disabled").addClass("chosen");
+    $("#r_civing").removeAttr("disabled").attr("checked", "checked");
+    $(this).addClass("chosen").removeClass("notchosen");
+    $("#mafynej").addClass("notchosen");
+});
+$("#mafynej").click( function () {
+    var inr_val = $("input[name='inriktningar']:checked").val();
+    if ( ! inr_val ) {
+        alert("Du måste välja inriktning först");
+        return false;
+    }
+    $("#block2 table").removeClass("disabled");
+    $("#block2 input").removeAttr("disabled");
+    // simulera att klick på inriktningen man valt för att nollställa rätt
     $("#" + inr_val).click();
+    $(this).addClass("chosen").removeClass("notchosen");
+    $("#mafyja").addClass("notchosen");
 });
 
 $("#te4ja").click( function () {
@@ -143,16 +153,19 @@ $("#te4ja").click( function () {
         alert("Du måste välja inriktning först");
         return false;
     }
-    // Hitt paketet som passar - ligger i block1
+    // Hitt paketet som passar
     var passar4 = inriktningar[inr_val].passar4;
     if ( ! passar4 ) {
         alert("Vi erbjuder inte detta. Skriv din önskan i kommentaren.");
         return false;
     }
+    // T4 alternativen ligger i block1
     $("#block1 table").removeClass("chosen").addClass("disabled");
     $("#block1 input").attr("disabled", "disabled").removeAttr("checked");
     $("#" + passar4).addClass("chosen").removeClass("disabled");
     $("#" + passar4 + " input").removeAttr("disabled").attr("checked", "checked");
+    $(this).addClass("chosen").removeClass("notchosen");
+    $("#te4nej").addClass("notchosen");
 });
 $("#te4nej").click( function () {
     // simulera att klick på inriktningen man valt för att nollställa rätt
@@ -161,6 +174,25 @@ $("#te4nej").click( function () {
         alert("Du måste välja inriktning först");
         return false;
     }
+    if ( $("#mafyja").hasClass("chosen") ) {
+        var mafy = "ja";
+    } else if ( $("#mafynej").hasClass("chosen") ) {
+        mafy = "nej";
+    } else {
+        alert("Du måste svara på frågorna i ordning.");
+        return false;
+    }
+    // Simulera (återställ) inriktningsvalet
     $("#" + inr_val).click();
+    // Simulera knappvalet från Ma/Fy
+    if ( mafy === "ja" ) {
+        $("#mafyja").click();
+    } else {
+    	$("#mafynej").click();
+    }
+    $(this).addClass("chosen").removeClass("notchosen");
+    $("#te4ja").addClass("notchosen");
 });
+
+
 
