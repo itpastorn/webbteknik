@@ -194,5 +194,61 @@ $("#te4nej").click( function () {
     $("#te4ja").addClass("notchosen");
 });
 
+// När kod anges
+// 1. Ajax som hämtar namn och klass så det "känns bra"
+function checkPkod(evt) {
+    // 4 tecken i koden
+    var pkod = $(this).val(); // Läses innan ändringen godkänts
+    if ( evt.type === "keydown" && pkod.length === 3 ) {
+        pkod += String.fromCharCode(evt.which).toLowerCase();
+    }
+    console.log(evt.type + " " + evt.which + " - " + pkod);
+    if ( pkod.length === 4 ) {
+	    // Simulera Ajax
+	    switch ( pkod ) {
+	    case "aaaa":
+	        $("#show_name_ajax").html("Allan Andersson, Te1A");
+	        $("#verified_pkod").val(pkod);
+	        break;
+	    case "bbbb":
+	        $("#show_name_ajax").html("Beda Bengtsson, Te1B");
+	        $("#verified_pkod").val(pkod);
+	        break;
+	    default:
+	        $("#show_name_ajax").html('<strong class="error">Felaktig kod</strong>');
+            $("#verified_pkod").val("");
+	    }
+    }
+}
+$("#pkod").bind("paste keydown blur", checkPkod);
 
+$("#klar").click(function () {
+    // Kontrollera att alla värden fyllts i
+    var inriktning = $("[name='inriktningar']:checked").val();
+    var block1 = $("[name='block1']:checked").val();
+    var block2 = $("[name='block2']:checked").val();
+    if ( !block1 || !block2 || !inriktning ) {
+        alert("Du måste välja inriktning och ett paket i båda blocken.");
+        return false;
+    }
+    // TODO Kontrollera att riktiga värde fyllts i (dubbelkoll)
+    // Kolla att kod fyllts i korrekt
+    var verified_pkod = $("#verified_pkod").val();
+    if ( verified_pkod.length < 4 ) {
+        alert("Du har inte fyllt i din kod korrekt");
+        return false;
+    }
+    // Aktivera submitknapp
+    $("#skicka").removeAttr("disabled");
+    // Förhindra re-submit
+    
+    // Server side:
+    // Lagra svaret
+    // Generera ett dokument anpassat för utskrift med unik URL
+    // Mejla URL:en (eller anteckna den)
+    // Kom åt detta dokument genom att uppge länken
+    
+    // Ångra sig? Lärare ska kunna se lista där detta kan göras + statistik
+    
+});
 

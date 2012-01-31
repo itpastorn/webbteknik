@@ -3,113 +3,11 @@
  <head>
   <meta charset="utf-8" />
   <title>Inriktnings- och kursval, NE inför åk 2 (gäller 2012)</title>
-  <style>
-    body {
-        margin: auto;
-        width: 800px;
-        font-family: sans-serif;
-    }
-    fieldset {
-        clear: both;
-        padding: 1em 2em;
-        border: 1px solid;
-        border-radius: 10px;
-        float: left; /* contain floats */
-        width: 100%;
-        margin: 1em 0;
-    }
-    legend {
-        font-size: 150%;
-        padding: 0 0.4em;
-    }
-    table, table td {
-        border: 1px solid #BBB;
-        border-collapse: collapse;
-        padding: 3px;
-        margin-bottom: 1em;
-    }
-    table {
-        float: left;
-        box-shadow: 3px 3px 3px #BBB;
-    }
-    table:nth-of-type(even) {
-        float: right;
-        margin-right: 0;
-    }
-    table:nth-of-type(odd) {
-        clear: both;
-    }
-    td {
-        width: 18em;
-    }
-    td[rowspan] {
-        width: 4em;
-        text-align: center;
-    }
-    .inriktning {
-        margin-top: 1em;
-    }
-    .civing {
-        background-color: lightblue;
-    }
-    .design {
-        background-color: lightgreen;
-    }
-    .samhall {
-        background-color: pink;
-    }
-    .it {
-        background-color: navajowhite;
-    }
-    .produktion {
-        background-color: silver;
-    }
-    p {
-        text-align: center;
-    }
-    button.chosen {
-        border-style: inset;
-        font-weight: bolder;
-    }
-    button.notchosen {
-        border-style: outset;
-        opacity: 0.7;
-    }
-    .jaknapp {
-        background-color: rgba(180,220,220,1);
-        border-radius: 5%;
-        padding: 2px 4px;
-        margin-right: 10px;
-    }
-    .nejknapp {
-        background-color: rgba(220,180,180,1);
-        border-radius: 5%;
-        padding: 2px 4px;
-    }
-    .jaknap.notchosen {
-        background-color: rgba(180,220,220,0.6);
-    }
-    .nejknap.notchosen {
-        background-color: rgba(220,180,180,0.6);
-    }
-    .chosen {
-        border: 1px solid darkgreen;
-    }
-    .disabled {
-        opacity: 0.4;
-    }
-    textarea {
-        margin: auto;
-        width: 100%;
-        height: 6em;
-    }
-    #pinfo p {
-        text-align: left;
-    }
-  </style>
+  <link href="inr-val.css" rel="stylesheet" />
  </head>
- <body>
+ <body class="valsida">
    <h1>Inriktnings- och kursval, NE inför åk 2 (gäller 2012)</h1>
+   <form action="val.php" method="post">
    <fieldset id="inriktningar">
    <legend>Välj inriktning</legend>
    <p>Ändrar du detta val nollställs allt och du börjar om från början.</p>
@@ -138,19 +36,13 @@
     <!-- Stuff inserted by JS here -->
   </fieldset>
   <fieldset id="pinfo">
-    <legend>Namn, klass och kommentarer</legend>
+    <legend>Identifikation och kommentarer</legend>
     <p>
-      <label for="namn">Förnamn och efternamn</label>
-      <input type="text" id="namn" name="namn" placeholder="Skriv ditt namn här" />
+      <label for="pkod">Personlig kod</label>
+      <input type="text" id="pkod" name="pkod" placeholder="Skriv din kod här" maxlength="4" />
+      <input type="hidden" name="verified_pkod" id="verified_pkod" value="" />
     </p>
-    <p>
-      <input type="radio" name="klass" id="te1a" value="te1a">
-      <label for="te1a">Te1A</label>
-    </p>
-    <p>
-      <input type="radio" name="klass" id="te1b" value="te1b">
-      <label for="te1b">Te1B</label>
-    </p>
+    <p id="show_name_ajax">&hellip;</p>
     <p>
       <label for="kommentar">Skriv eventuell kommentar här</label>
       <textarea id="kommentar" name="kommentar"></textarea>
@@ -165,6 +57,7 @@
       <input type="submit" id="skicka" value="Systemet ej i drift ännu" disabled>
     </p>
   </fieldset>
+  </form>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
   <script src="inriktningar-och-paket.js"></script>
   <script src="setup.js"></script>

@@ -1,0 +1,143 @@
+@CHARSET "UTF-8";
+body {
+    margin: auto;
+    width: 800px;
+    font-family: sans-serif;
+}
+@media print {
+    body {
+        width: 90%;
+        margin: 0cm 0 0 1cm;
+        font-size: 12pt;
+    }
+    h1 {
+        margin: 0 0 1cm 0;
+        font-size: 18pt;
+    }
+    h2 {
+        font-size: 14pt;
+    }
+    .printlayout th {
+        font-size: 13pt;
+    }
+}
+.printlayout tr:nth-child(even) td:nth-child(odd) {
+    border-bottom: 1px solid black;
+    width: 30%;
+}
+th.spacer {
+    width: 5%;
+}
+.printlayout {
+    width: 100%;
+}
+.printlayout, .printlayout th, .printlayout td {
+     border: none;
+     box-shadow: none;
+}
+.printlayout th, .printlayout td {
+     padding: 1em 2em 1em 0;
+}
+table, table td, table th {
+    border: 1px solid #BBB;
+    border-collapse: collapse;
+    padding: 3px;
+    margin-bottom: 1em;
+}
+.valsida table {
+    float: left;
+    box-shadow: 3px 3px 3px #BBB;
+}
+.valsida table:nth-of-type(even) {
+    float: right;
+    margin-right: 0;
+}
+table:nth-of-type(odd) {
+    clear: both;
+}
+.valsida td {
+    width: 18em;
+}
+.admin td:nth-child(4), .admin td:nth-child(5), .admin td:nth-child(6)  {
+    text-align: center;
+}
+th {
+    text-align:left;
+}
+td[rowspan] {
+    width: 4em;
+    text-align: center;
+}
+.inriktning {
+    margin-top: 1em;
+}
+fieldset {
+    clear: both;
+    padding: 1em 2em;
+    border: 1px solid;
+    border-radius: 10px;
+    float: left; /* contain floats */
+    width: 100%;
+    margin: 1em 0;
+}
+legend {
+    font-size: 150%;
+    padding: 0 0.4em;
+}
+.civing {
+    background-color: lightblue;
+}
+.design {
+    background-color: lightgreen;
+}
+.samhall {
+    background-color: pink;
+}
+.it {
+    background-color: navajowhite;
+}
+.produktion {
+    background-color: silver;
+}
+.valsida p {
+    text-align: center;
+}
+button.chosen {
+    border-style: inset;
+    font-weight: bolder;
+}
+button.notchosen {
+    border-style: outset;
+    opacity: 0.7;
+}
+.jaknapp {
+    background-color: rgba(180,220,220,1);
+    border-radius: 5%;
+    padding: 2px 4px;
+    margin-right: 10px;
+}
+.nejknapp {
+    background-color: rgba(220,180,180,1);
+    border-radius: 5%;
+    padding: 2px 4px;
+}
+.jaknap.notchosen {
+    background-color: rgba(180,220,220,0.6);
+}
+.nejknap.notchosen {
+    background-color: rgba(220,180,180,0.6);
+}
+.chosen {
+    border: 1px solid darkgreen;
+}
+.disabled {
+    opacity: 0.4;
+}
+textarea {
+    margin: auto;
+    width: 100%;
+    height: 6em;
+}
+#pinfo p {
+    text-align: left;
+}
