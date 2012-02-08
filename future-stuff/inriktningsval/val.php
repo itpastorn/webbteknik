@@ -26,7 +26,7 @@ $felfri = $felfri && in_array($_POST['inriktningar'], $ok_inriktningar);
 $felfri = $felfri && in_array($_POST['block1'], $ok_block1);
 $felfri = $felfri && in_array($_POST['block2'], $ok_block2);
 $felfri = $felfri && preg_match($ok_verified_pkod, $_POST['verified_pkod']);
-$felfri = $felfri && mb_strlen($_POST['kommentar']);
+// $felfri = $felfri && mb_strlen($_POST['kommentar'], "utf-8");
 
 // Kolla att koden matchar en användare som faktiskt finns
 // Emulera DB
@@ -36,6 +36,7 @@ if ( $_POST['verified_pkod'] !== "aaaa" ) {
 } else {
     $elev = "Allan Andersson, Te1A (personnumer?)";
 }
+
 // TODO: Snygg felhantering
 if ( !$felfri ) {
     echo "<pre>";

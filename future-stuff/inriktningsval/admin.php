@@ -14,7 +14,7 @@ $inriktningsnamn   = "Design-IT-produktion";
 $inriktningskurser = "<li>Kul kurs ett (kurskod)</li><li>Kul kurs två (kurskod)</li><li>Tråkig kurs tre (kurskod)</li>";
 $block1_kurser     = "<li>B1 Kurs ett (kurskod)</li><li>B1 Kurs två (kurskod)</li>";
 $block2_kurser     = "<li>B2 Kurs ett (kurskod)</li><li>B2 Kurs två (kurskod)</li>";
-$kommentar         = nl2br(htmlspecialchars($_POST['kommentar']));
+//$kommentar         = nl2br(htmlspecialchars($_POST['kommentar']));
 
 // Sidmall
 ?>

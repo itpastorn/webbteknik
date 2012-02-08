@@ -131,6 +131,7 @@ $("#mafyja").click( function () {
     $("#r_civing").removeAttr("disabled").attr("checked", "checked");
     $(this).addClass("chosen").removeClass("notchosen");
     $("#mafynej").addClass("notchosen");
+    return false;
 });
 $("#mafynej").click( function () {
     var inr_val = $("input[name='inriktningar']:checked").val();
@@ -144,6 +145,7 @@ $("#mafynej").click( function () {
     $("#" + inr_val).click();
     $(this).addClass("chosen").removeClass("notchosen");
     $("#mafyja").addClass("notchosen");
+    return false;
 });
 
 $("#te4ja").click( function () {
@@ -166,6 +168,7 @@ $("#te4ja").click( function () {
     $("#" + passar4 + " input").removeAttr("disabled").attr("checked", "checked");
     $(this).addClass("chosen").removeClass("notchosen");
     $("#te4nej").addClass("notchosen");
+    return false;
 });
 $("#te4nej").click( function () {
     // simulera att klick på inriktningen man valt för att nollställa rätt
@@ -192,6 +195,7 @@ $("#te4nej").click( function () {
     }
     $(this).addClass("chosen").removeClass("notchosen");
     $("#te4ja").addClass("notchosen");
+    return false;
 });
 
 // När kod anges
