@@ -34,15 +34,18 @@ date_default_timezone_set("Europe/Stockholm");
 $year = date("Y");
 
 // 2012 sa alla koder börja med a, 2013 med b, o.s.v.
-$varv = $year - 2012;
-$kod = "a";
+$varv     = $year - 2012;
+$kodstart = "a";
 for ($i = 0; $i < $varv; $i++) {
-    $kod++;
+    $kodstart++;
 }
+$chars = "abcdefghijkmnpqrstvxyz"; // Urval gjort med användbarhet i åtanke (nolla förväxlas med o, etc)
+$charlen = strlen($chars) - 1; // Bara ASCII så strlen OK
 
 foreach ( $elever as $e ) {
     // skapa resten av koden med slump
-    
-    // skapa variabler me list()
+    $kod = $kodstart . $chars[rand(0, $charlen)] . $chars[rand(0, $charlen)] . $chars[rand(0, $charlen)];
+    echo "<p>$kod</p>"; // debug
+    // skapa variabler med list()
     
 }
