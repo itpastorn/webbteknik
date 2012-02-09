@@ -18,23 +18,24 @@
 function get_setting($sname)
 {
     static $settings;
-    if ( !empty($settings) ) {
-        if ( array_key_exists($sname, $settings) ) {
-            return $settings[$sname];
-        } else {
-            return null;
-        }
+    if ( empty($settings) ) {
+
+        // Fingera läsa settings från källa (XML, parse_ini, JSON, etc)
+        
+        $settings['dsn'] = array(
+            'phptype'  => 'mysql',
+            'hostspec' => 'localhost',
+            'database' => 'kursval',
+            'username' => 'valarbetare',
+            'password' => 'eratebralav'
+        );
+        $settings['dbtime'] = 'Europe/Stockholm';
     }
-    // Fingera läsa settings från källa (XML, parse_ini, JSON, etc)
     
-    $settings['dsn'] = array(
-        'phptype'  => 'mysql',
-        'hostspec' => 'localhost',
-        'database' => 'kursval',
-        'username' => 'valarbetare',
-        'username' => 'eratebralav'
-    );
-    $settings['dbtime'] = 'Europe/Stockholm';
-    
+    if ( array_key_exists($sname, $settings) ) {
+        return $settings[$sname];
+    } else {
+        return null;
+    }
     
 }
