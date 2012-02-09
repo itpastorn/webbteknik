@@ -20,8 +20,9 @@ $elever = array_merge(file("te1a-2012.cvs"), $elever);
 // klass,efternamn, fornamn,personnummer
 
 
-$sql  = "INSERT INTO elever (personnummer, fornamn, efternamn, klass, kod, year) ";
+$sql  = "INSERT IGNORE INTO elever (personnummer, fornamn, efternamn, klass, kod, year) ";
 $sql .= "VALUES (:personnummer, :fornamn, :efternamn, :klass, :kod, :year)";
+// $sql .= "ON DUPLICATE KEY UPDATE year = :year";
 $stmt = $dbh->prepare($sql);
 $stmt->bindParam(":personnummer", $personnummer);
 $stmt->bindParam(":fornamn", $fornamn);
@@ -58,5 +59,7 @@ foreach ( $elever as $e ) {
     $kod = gkod();
     // skapa variabler med list()
     list($klass, $efternamn, $fornamn, $personnummer) = explode(",", $e);
-    echo "<p>{$fornamn} {$efternamn} {$klass} {$personnummer}</p>";
+    $stmt->execute();
 }
+
+echo "Uppgifter lagrade!";

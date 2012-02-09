@@ -145,3 +145,12 @@ footer {
     margin-top: 2em;
     font-size: small;
 }
+.inactive {
+    background-image: url(inactive.svg);
+}
+.inactive::before, .inactive::after {
+    content: "Test - inget lagrat - skriv inte ut ännu!";
+    text-align: center;
+    font-size: 250%;
+    color: red;
+}

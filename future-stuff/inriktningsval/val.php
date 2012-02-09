@@ -8,6 +8,9 @@
 error_reporting(E_ALL);
 ini_set("display_errors", "on");
 
+// Till dess att systemet är utprovat så kan inga uppgifter lagras
+$activated = false;
+
 /**
  * Databasanslutning
  */
@@ -132,7 +135,7 @@ HTML;
         $stmt->bindParam(":paket2", $userdata['paket2']);
         $stmt->bindParam(":kod", $userdata['kod']);
         $stmt->bindParam(":kommentar", $userdata['kommentar']);
-        if ( $testcode !== "test" ) {
+        if ( $activated && $testcode !== "test" ) {
             $stmt->execute();
             // Annars "dry run"
         }
@@ -204,6 +207,11 @@ $kommentar         = nl2br(htmlspecialchars($userdata['kommentar']));
 // Om lapp med underskrift lämnats så bör denna vara true
 $verified = false;
 
+if ( !$activated ) {
+    $activeClass = "inactive";
+} else {
+    $activeClass = "";
+}
 // Sidmall
 ?>
 <!DOCTYPE html>
@@ -213,7 +221,7 @@ $verified = false;
   <title>För utskrift: Inriktnings- och fördjupningskursval på Teknikprogrammet, NE, 2012</title>
   <link href="inr-val.css" rel="stylesheet" />
  </head>
- <body class="utskrift">
+ <body class="utskrift <?php echo $activeClass; ?>">
    <h1>Inriktnings- och fördjupningskursval på Teknikprogrammet, NE, 2012</h1>
    <p>Elev: <strong><?php echo $elev; ?></strong> (<?php echo $pnum; ?>)</p>
    <h2>Inriktning: <i><?php echo $inriktningsnamn; ?></i></h2>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Värd: localhost
--- Skapad: 09 feb 2012 kl 17:33
+-- Skapad: 09 feb 2012 kl 23:58
 -- Serverversion: 5.5.19
 -- PHP-version: 5.3.9
 
@@ -81,11 +81,12 @@ CREATE TABLE IF NOT EXISTS `elever` (
   `personnummer` varchar(11) COLLATE utf8_swedish_ci NOT NULL,
   `fornamn` varchar(50) COLLATE utf8_swedish_ci NOT NULL,
   `efternamn` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `klass` varchar(5) COLLATE utf8_swedish_ci NOT NULL,
   `kod` varchar(4) COLLATE utf8_swedish_ci NOT NULL,
   `inriktning` varchar(15) COLLATE utf8_swedish_ci DEFAULT NULL,
   `paket1` varchar(15) COLLATE utf8_swedish_ci DEFAULT NULL,
   `paket2` varchar(15) COLLATE utf8_swedish_ci DEFAULT NULL,
-  `kommentar` varchar(500) COLLATE utf8_swedish_ci NOT NULL,
+  `kommentar` varchar(500) COLLATE utf8_swedish_ci DEFAULT NULL,
   `email` varchar(150) COLLATE utf8_swedish_ci DEFAULT NULL,
   `confirmed` enum('ja') COLLATE utf8_swedish_ci DEFAULT NULL,
   `year` year(4) NOT NULL COMMENT 'Vilket år valet görs',
@@ -96,9 +97,10 @@ CREATE TABLE IF NOT EXISTS `elever` (
 -- Dumpning av Data i tabell `elever`
 --
 
-INSERT INTO `elever` (`personnummer`, `fornamn`, `efternamn`, `kod`, `inriktning`, `paket1`, `paket2`, `kommentar`, `email`, `confirmed`, `year`) VALUES
-('950101-1234', 'Allan', 'Andersson', 'aaaa', 'it', 'it1', 'civing', '', NULL, NULL, 2012),
-('950102-9876', 'Beda', 'Bengtsson', 'bbbb', 'design', 'prod1', 'sam2', 'Jag vill bli polis.', NULL, NULL, 2012);
+INSERT INTO `elever` (`personnummer`, `fornamn`, `efternamn`, `klass`, `kod`, `inriktning`, `paket1`, `paket2`, `kommentar`, `email`, `confirmed`, `year`) VALUES
+('950101-1234', 'Allan', 'Andersson', 'Te1A', 'aaaa', 'it', 'it1', 'civing', '', NULL, NULL, 2012),
+('950102-9876', 'Beda', 'Bengtsson', 'Te1B', 'bbbb', 'design', 'prod1', 'sam2', 'Jag vill bli polis.', NULL, NULL, 2012),
+('950909-1133', 'Tage', 'Testare', 'Te0F', 'test', NULL, NULL, NULL, '', NULL, NULL, 2012);
 
 -- --------------------------------------------------------
 
