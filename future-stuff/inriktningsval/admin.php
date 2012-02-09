@@ -5,11 +5,20 @@
  * @author Lars Gunther <gunther@keryx.se>
  */
 
+error_reporting(E_ALL);
+ini_set("display_errors", "on");
+
 // Inloggad?
 
+/**
+ * Databasanslutning
+ */
+require_once("dbcx.php");
+$dbh = dbcx();
 
 
-// Hämta underlag i DB
+
+// TODO: Hämta underlag i DB
 $inriktningsnamn   = "Design-IT-produktion";
 $inriktningskurser = "<li>Kul kurs ett (kurskod)</li><li>Kul kurs två (kurskod)</li><li>Tråkig kurs tre (kurskod)</li>";
 $block1_kurser     = "<li>B1 Kurs ett (kurskod)</li><li>B1 Kurs två (kurskod)</li>";
