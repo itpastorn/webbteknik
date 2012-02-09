@@ -41,7 +41,7 @@ if ( !empty($_POST) ) {
 // Rätt möänster för koder
 $ok_verified_pkod = "/^[a-z]{4}/";
 if ( !preg_match($ok_verified_pkod, $testcode) ) {
-    $vald['kod'] = "Ogiltigt kodmönster";
+    $userdata['kod'] = "Ogiltigt kodmönster";
 } else {
     // Kolla att koden matchar en användare som faktiskt finns
     $stmt = $dbh->prepare("SELECT * FROM elever WHERE kod = :kod");
@@ -50,9 +50,9 @@ if ( !preg_match($ok_verified_pkod, $testcode) ) {
     $userdata = $stmt->fetch(PDO::FETCH_ASSOC);
     if ( empty($userdata) ) {
         $felfri = false;
-        $vald['kod'] = "Felaktig kod, matchar ingen person i databasen";
+        $userdata['kod'] = "Felaktig kod, matchar ingen person i databasen";
     } else {
-        $vald['kod'] = $testcode;
+        $userdata['kod'] = $testcode;
     }
 }
 
@@ -75,26 +75,26 @@ if ( !empty($_POST) ) {
     $felfri = true;
     if ( !in_array($_POST['inriktningar'], $ok_inriktningar) ) {
         $felfri = false;
-        $vald['inriktning'] = "Ogiltigt val";
+        $userdata['inriktning'] = "Ogiltigt val";
     } else {
-        $vald['inriktning'] = $_POST['inriktningar'];
+        $userdata['inriktning'] = $_POST['inriktningar'];
     }
     
     if ( !in_array($_POST['paket1'], $ok_paket1) ) {
         $felfri = false;
-        $vald['paket1'] = "Ogiltigt val";
+        $userdata['paket1'] = "Ogiltigt val";
     } else {
-        $vald['paket1'] = $_POST['paket1'];
+        $userdata['paket1'] = $_POST['paket1'];
     }
     
     if ( !in_array($_POST['paket2'], $ok_paket2) ) {
         $felfri = false;
-        $vald['paket2'] = "Ogiltigt val";
+        $userdata['paket2'] = "Ogiltigt val";
     } else {
-        $vald['paket2'] = $_POST['paket2'];
+        $userdata['paket2'] = $_POST['paket2'];
     }
 
-    if ( $vald['kod'] !== $testcode) {
+    if ( $userdata['kod'] !== $testcode) {
         $felfri = false;
     } else {
         // Kolla att man inte redan valt
@@ -116,30 +116,71 @@ HTML;
     if ( !$felfri ) {
         echo "<pre>";
         var_dump($_POST);
-        var_dump($vald);
+        var_dump($userdata);
         exit("<h1 style='font: 3em sans-serif'>Du har fyllt i felaktiga uppgifter. Backa och försök igen.</h1>\n");
     } else {
         $sql = "UPDATE elever SET inriktning=:inriktning, paket1=:paket1, paket2=:paket2 WHERE kod = :kod";
         $stmt = $dbh->prepare($sql);
-        $stmt->bindParam(":inriktning", $vald['inriktning']);
-        $stmt->bindParam(":paket1", $vald['paket1']);
-        $stmt->bindParam(":paket2", $vald['paket2']);
-        $stmt->bindParam(":kod", $vald['kod']);
+        $stmt->bindParam(":inriktning", $userdata['inriktning']);
+        $stmt->bindParam(":paket1", $userdata['paket1']);
+        $stmt->bindParam(":paket2", $userdata['paket2']);
+        $stmt->bindParam(":kod", $userdata['kod']);
         $stmt->execute();
     }
     
 }
 // Skapa sida för utskrift
-$sql = "SELECT name FROM inriktning_paket WHERE inr_pak_id = :inriktning";
+$sql = "SELECT name FROM inriktning_paket WHERE inr_pak_ID = :inriktning";
 $stmt = $dbh->prepare($sql);
 $stmt->bindParam(":inriktning", $userdata['inriktning']);
+$stmt->execute();
+$userdata['inriktningsnamn'] = $stmt->fetchColumn();
+
+$sql = <<<SQL
+    SELECT k.kurskod, k.kursnamn, k.poang FROM kurser AS k 
+    INNER JOIN block_kurser AS bk
+    ON bk.kurskod = k.kurskod
+    WHERE bk.inr_pak_ID = :inriktning
+SQL;
+$stmt = $dbh->prepare($sql);
+$stmt->bindParam(":inriktning", $userdata['inriktning']);
+$stmt->execute();
+$userdata['inriktningskurser'] = '';
+foreach ( $stmt->fetchAll() as $row) {
+    $userdata['inriktningskurser'] .= "<li><strong>{$row['kursnamn']}</strong>";
+    $userdata['inriktningskurser'] .= " ({$row['kurskod']}) om {$row['poang']} poäng.</li>";
+}
+
+$sql = <<<SQL
+    SELECT k.kurskod, k.kursnamn, k.poang FROM kurser AS k 
+    INNER JOIN block_kurser AS bk
+    ON bk.kurskod = k.kurskod
+    WHERE bk.inr_pak_ID = :paket
+SQL;
+$stmt = $dbh->prepare($sql);
+$stmt->bindParam(":paket", $userdata['paket1']);
+$stmt->execute();
+$userdata['paket1_kurser'] = '';
+foreach ( $stmt->fetchAll() as $row) {
+    $userdata['paket1_kurser'] .= "<li><strong>{$row['kursnamn']}</strong>";
+    $userdata['paket1_kurser'] .= " ({$row['kurskod']}) om {$row['poang']} poäng.</li>";
+}
+
+$stmt->bindParam(":paket", $userdata['paket2']);
+$stmt->execute();
+$userdata['paket2_kurser'] = '';
+foreach ( $stmt->fetchAll() as $row) {
+    $userdata['paket2_kurser'] .= "<li><strong>{$row['kursnamn']}</strong>";
+    $userdata['paket2_kurser'] .= " ({$row['kurskod']}) om {$row['poang']} poäng.</li>";
+}
 // TODO: Hämta underlag i DB
 $elev              = "{$userdata['fornamn']} {$userdata['efternamn']}";
 $pnum              = $userdata['personnummer'];
-$inriktningsnamn   = "Design-IT-produktion";
-$inriktningskurser = "<li>Kul kurs ett (kurskod)</li><li>Kul kurs två (kurskod)</li><li>Tråkig kurs tre (kurskod)</li>";
-$paket1_kurser     = "<li>B1 Kurs ett (kurskod)</li><li>B1 Kurs två (kurskod)</li>";
-$paket2_kurser     = "<li>B2 Kurs ett (kurskod)</li><li>B2 Kurs två (kurskod)</li>";
+$inriktningsnamn   = $userdata['inriktningsnamn'];
+$inriktningskurser = $userdata['inriktningskurser'];
+$paket1_kurser     = $userdata['paket1_kurser'];
+$paket2_kurser     = $userdata['paket2_kurser'];
+
 $kommentar         = nl2br(htmlspecialchars("Jag vill ha blommig falukorv till lunch."));
 
 // Om lapp med underskrift lämnats så bör denna vara true
