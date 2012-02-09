@@ -45,6 +45,13 @@ function gkod() {
     $chars = "abcdefghijkmnpqrstvxyz"; // Urval gjort med användbarhet i åtanke (nolla förväxlas med o, etc)
     $charlen = strlen($chars) - 1; // Bara ASCII så strlen OK
     $kod = $kodstart . $chars[rand(0, $charlen)] . $chars[rand(0, $charlen)] . $chars[rand(0, $charlen)];
+    // Mycket liten chans för dubletter...
+    static $alla_koder;
+    if ( in_array($kod, $alla_koder) ) {
+        $kod = gkod();
+        echo "rekursion";
+    }
+    $alla_koder[] = $kod;
     return $kod;
 }
 
