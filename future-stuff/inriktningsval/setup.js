@@ -77,8 +77,8 @@ function createBlock(blockid, paket) {
 }
 
 createBlock("inriktningar", inriktningar);
-createBlock("block1", paket1);
-createBlock("block2", paket2);
+createBlock("paket1", paket1);
+createBlock("paket2", paket2);
 
 // TODO: Inte om man klickar på en länk...
 $("table").click(function () {
@@ -93,8 +93,8 @@ $("table").click(function () {
 // När man väljer inriktning
 $("#inriktningar table").click(function () {
 	// Nollställer
-	$("#block1 table, #block2 table").removeClass("disabled");
-	$("#block1 table input, #block2 table input").removeAttr("disabled");
+	$("#paket1 table, #paket2 table").removeClass("disabled");
+	$("#paket1 table input, #paket2 table input").removeAttr("disabled");
 	$("button").removeClass("chosen").removeClass("notchosen");
 	// Tag bort blockerade val
     var id = this.id;
@@ -125,8 +125,8 @@ $("#mafyja").click( function () {
         alert("Du måste välja inriktning först");
         return false;
     }
-    $("#block2 table").addClass("disabled");
-    $("#block2 input").attr("disabled", "disabled");
+    $("#paket2 table").addClass("disabled");
+    $("#paket2 input").attr("disabled", "disabled");
     $("#civing").removeClass("disabled").addClass("chosen");
     $("#r_civing").removeAttr("disabled").attr("checked", "checked");
     $(this).addClass("chosen").removeClass("notchosen");
@@ -139,8 +139,8 @@ $("#mafynej").click( function () {
         alert("Du måste välja inriktning först");
         return false;
     }
-    $("#block2 table").removeClass("disabled");
-    $("#block2 input").removeAttr("disabled");
+    $("#paket2 table").removeClass("disabled");
+    $("#paket2 input").removeAttr("disabled");
     // simulera att klick på inriktningen man valt för att nollställa rätt
     $("#" + inr_val).click();
     $(this).addClass("chosen").removeClass("notchosen");
@@ -161,9 +161,9 @@ $("#te4ja").click( function () {
         alert("Vi erbjuder inte detta. Skriv din önskan i kommentaren.");
         return false;
     }
-    // T4 alternativen ligger i block1
-    $("#block1 table").removeClass("chosen").addClass("disabled");
-    $("#block1 input").attr("disabled", "disabled").removeAttr("checked");
+    // T4 alternativen ligger i paket1
+    $("#paket1 table").removeClass("chosen").addClass("disabled");
+    $("#paket1 input").attr("disabled", "disabled").removeAttr("checked");
     $("#" + passar4).addClass("chosen").removeClass("disabled");
     $("#" + passar4 + " input").removeAttr("disabled").attr("checked", "checked");
     $(this).addClass("chosen").removeClass("notchosen");
@@ -229,10 +229,10 @@ $("#pkod").bind("paste keydown blur", checkPkod);
 $("#klar").click(function () {
     // Kontrollera att alla värden fyllts i
     var inriktning = $("[name='inriktningar']:checked").val();
-    var block1 = $("[name='block1']:checked").val();
-    var block2 = $("[name='block2']:checked").val();
-    if ( !block1 || !block2 || !inriktning ) {
-        alert("Du måste välja inriktning och ett paket i båda blocken.");
+    var paket1 = $("[name='paket1']:checked").val();
+    var paket2 = $("[name='paket2']:checked").val();
+    if ( !paket1 || !paket2 || !inriktning ) {
+        alert("Du måste välja inriktning och ett paket i båda paketen.");
         return false;
     }
     // TODO Kontrollera att riktiga värde fyllts i (dubbelkoll)
