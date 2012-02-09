@@ -206,9 +206,20 @@ function checkPkod(evt) {
     if ( evt.type === "keydown" && pkod.length === 3 ) {
         pkod += String.fromCharCode(evt.which).toLowerCase();
     }
-    console.log(evt.type + " " + evt.which + " - " + pkod);
     if ( pkod.length === 4 ) {
+    	$.ajax({
+    		url: "name-class-from-code.php?kod=" + pkod,
+    		success: function (data) {
+    	        $("#show_name_ajax").html(data);
+    	        $("#verified_pkod").val(pkod);
+    		},
+    		error: function (data) {
+    	        $("#show_name_ajax").html("Felaktig kod");
+    	        $("#verified_pkod").val("");
+    		}
+    	});
 	    // Simulera Ajax
+    	/*
 	    switch ( pkod ) {
 	    case "aaaa":
 	        $("#show_name_ajax").html("Allan Andersson, Te1A");
@@ -226,11 +237,18 @@ function checkPkod(evt) {
 	        $("#show_name_ajax").html('<strong class="error">Felaktig kod</strong>');
             $("#verified_pkod").val("");
 	    }
+	    */
+    }
+    if ( evt.type === "blur" ) {
+    	if ( pkod.length !== 4 ) {
+	        $("#show_name_ajax").html("...");
+	        $("#verified_pkod").val("");
+    	}
     }
 }
 $("#pkod").bind("paste keydown blur", checkPkod);
 
-$("#klar").click(function () {
+function validate_form() {
     // Kontrollera att alla värden fyllts i
     var inriktning = $("[name='inriktningar']:checked").val();
     var paket1 = $("[name='paket1']:checked").val();
@@ -246,17 +264,23 @@ $("#klar").click(function () {
         alert("Du har inte fyllt i din kod korrekt");
         return false;
     }
+    return true;
+}
+
+$("#klar").change(function () {
     // Aktivera submitknapp
-    $("#skicka").removeAttr("disabled");
-    // Förhindra re-submit
-    
-    // Server side:
-    // Lagra svaret
-    // Generera ett dokument anpassat för utskrift med unik URL
-    // Mejla URL:en (eller anteckna den)
-    // Kom åt detta dokument genom att uppge länken
-    
-    // Ångra sig? Lärare ska kunna se lista där detta kan göras + statistik
-    
+    if ( validate_form() && $(this).attr("checked") === "checked"  ) {
+        $("#skicka").removeAttr("disabled");
+    } else {
+        $("#skicka").attr("disabled", "disabled");
+        $(this).removeAttr("checked");
+    }
 });
 
+// Server side:
+// Lagra svaret
+// Generera ett dokument anpassat för utskrift med unik URL
+// Mejla URL:en (eller anteckna den)
+// Kom åt detta dokument genom att uppge länken
+
+// Ångra sig? Lärare ska kunna se lista där detta kan göras + statistik

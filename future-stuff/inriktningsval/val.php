@@ -270,6 +270,7 @@ $verified = false;
        <td></td>
      </tr>
    </table>
+   <footer>Blanketten lämnas till klassföreståndaren.</footer>
    <?php endif; ?>
    
   </body>

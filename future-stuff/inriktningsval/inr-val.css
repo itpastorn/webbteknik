@@ -141,3 +141,7 @@ textarea {
 #pinfo p {
     text-align: left;
 }
+footer {
+    margin-top: 2em;
+    font-size: small;
+}
