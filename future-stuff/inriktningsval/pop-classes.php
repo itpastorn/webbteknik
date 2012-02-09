@@ -33,19 +33,24 @@ $stmt->bindParam(":year", $year);
 date_default_timezone_set("Europe/Stockholm");
 $year = date("Y");
 
-// 2012 sa alla koder börja med a, 2013 med b, o.s.v.
-$varv     = $year - 2012;
-$kodstart = "a";
-for ($i = 0; $i < $varv; $i++) {
-    $kodstart++;
+// Skapa slumpmässig kod
+function gkod() {
+    // Ineffektivt med upprepning varje gång med eftersom max 100 elever läggs in gör det inget
+    // 2012 sa alla koder börja med a, 2013 med b, o.s.v.
+    $varv     = date("Y") - 2012;
+    $kodstart = "a";
+    for ($i = 0; $i < $varv; $i++) {
+        $kodstart++;
+    }
+    $chars = "abcdefghijkmnpqrstvxyz"; // Urval gjort med användbarhet i åtanke (nolla förväxlas med o, etc)
+    $charlen = strlen($chars) - 1; // Bara ASCII så strlen OK
+    $kod = $kodstart . $chars[rand(0, $charlen)] . $chars[rand(0, $charlen)] . $chars[rand(0, $charlen)];
+    return $kod;
 }
-$chars = "abcdefghijkmnpqrstvxyz"; // Urval gjort med användbarhet i åtanke (nolla förväxlas med o, etc)
-$charlen = strlen($chars) - 1; // Bara ASCII så strlen OK
 
 foreach ( $elever as $e ) {
     // skapa resten av koden med slump
-    $kod = $kodstart . $chars[rand(0, $charlen)] . $chars[rand(0, $charlen)] . $chars[rand(0, $charlen)];
-    echo "<p>$kod</p>"; // debug
+    echo "<p>" . gkod() . "</p>"; // debug
     // skapa variabler med list()
     
 }
