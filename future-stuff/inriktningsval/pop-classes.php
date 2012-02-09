@@ -28,4 +28,14 @@ $stmt->bindParam(":fornamn", $fornamn);
 $stmt->bindParam(":efternamn", $efternamn);
 $stmt->bindParam(":klass", $klass);
 $stmt->bindParam(":kod", $kod);
+$stmt->bindParam(":year", $year);
 
+date_default_timezone_set("Europe/Stockholm");
+$year = date("Y");
+
+foreach ( $elever as $e ) {
+    // skapa kod
+    
+    // skapa variabler me list()
+    
+}
