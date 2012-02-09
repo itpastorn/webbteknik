@@ -53,6 +53,7 @@ if ( !preg_match($ok_verified_pkod, $testcode) ) {
         $userdata['kod'] = "Felaktig kod, matchar ingen person i databasen";
     } else {
         $userdata['kod'] = $testcode;
+        $elev            = "{$userdata['fornamn']} {$userdata['efternamn']}, {$userdata['klass']}";
     }
 }
 
@@ -131,16 +132,30 @@ HTML;
         $stmt->bindParam(":paket2", $userdata['paket2']);
         $stmt->bindParam(":kod", $userdata['kod']);
         $stmt->bindParam(":kommentar", $userdata['kommentar']);
-        $stmt->execute();
+        if ( $testcode !== "test" ) {
+            $stmt->execute();
+            // Annars "dry run"
+        }
     }
-    
 }
+
+if ( $userdata['kod'] !== $testcode) {
+    echo "<h1>{$userdata['kod']}</h1>";
+    exit;
+}
+
 // Skapa sida för utskrift
 $sql = "SELECT name FROM inriktning_paket WHERE inr_pak_ID = :inriktning";
 $stmt = $dbh->prepare($sql);
 $stmt->bindParam(":inriktning", $userdata['inriktning']);
 $stmt->execute();
 $userdata['inriktningsnamn'] = $stmt->fetchColumn();
+
+if ( empty($userdata['inriktningsnamn']) ) {
+    echo "<h1>Inga val gjorda ännu</h1>";
+    echo "<p>Inga val gjorda ännu för <strong>{$elev}</strong></p>";
+    exit;
+}
 
 $sql = <<<SQL
     SELECT k.kurskod, k.kursnamn, k.poang FROM kurser AS k 
@@ -179,8 +194,6 @@ foreach ( $stmt->fetchAll() as $row) {
     $userdata['paket2_kurser'] .= "<li><strong>{$row['kursnamn']}</strong>";
     $userdata['paket2_kurser'] .= " ({$row['kurskod']}) om {$row['poang']} poäng.</li>";
 }
-// TODO: Hämta underlag i DB
-$elev              = "{$userdata['fornamn']} {$userdata['efternamn']}";
 $pnum              = $userdata['personnummer'];
 $inriktningsnamn   = $userdata['inriktningsnamn'];
 $inriktningskurser = $userdata['inriktningskurser'];

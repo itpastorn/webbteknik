@@ -218,6 +218,10 @@ function checkPkod(evt) {
 	        $("#show_name_ajax").html("Beda Bengtsson, Te1B");
 	        $("#verified_pkod").val(pkod);
 	        break;
+	    case "test":
+	        $("#show_name_ajax").html("Tage Testare, Te1D");
+	        $("#verified_pkod").val(pkod);
+	        break;
 	    default:
 	        $("#show_name_ajax").html('<strong class="error">Felaktig kod</strong>');
             $("#verified_pkod").val("");
