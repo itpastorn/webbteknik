@@ -80,8 +80,15 @@ createBlock("inriktningar", inriktningar);
 createBlock("paket1", paket1);
 createBlock("paket2", paket2);
 
+//När något ändrats ska formuläret vara obekräftat
+function disable_form() {
+	$("#skicka").attr("disabled", "disabled");
+	$("#klar").removeAttr("checked");
+}
+
 // TODO: Inte om man klickar på en länk...
 $("table").click(function () {
+	disable_form();
 	if ( $(this).hasClass("disabled") ) {
 	    return false;
 	}
@@ -92,6 +99,7 @@ $("table").click(function () {
 
 // När man väljer inriktning
 $("#inriktningar table").click(function () {
+	disable_form();
 	// Nollställer
 	$("#paket1 table, #paket2 table").removeClass("disabled");
 	$("#paket1 table input, #paket2 table input").removeAttr("disabled");
@@ -120,6 +128,7 @@ $("#inriktningar table").click(function () {
 });
 
 $("#mafyja").click( function () {
+	disable_form();
     var inr_val = $("input[name='inriktningar']:checked").val();
     if ( ! inr_val ) {
         alert("Du måste välja inriktning först");
@@ -134,6 +143,7 @@ $("#mafyja").click( function () {
     return false;
 });
 $("#mafynej").click( function () {
+	disable_form();
     var inr_val = $("input[name='inriktningar']:checked").val();
     if ( ! inr_val ) {
         alert("Du måste välja inriktning först");
@@ -149,6 +159,7 @@ $("#mafynej").click( function () {
 });
 
 $("#te4ja").click( function () {
+	disable_form();
     // Kolla att man valt inriktning först
     var inr_val = $("input[name='inriktningar']:checked").val();
     if ( ! inr_val ) {
@@ -171,6 +182,7 @@ $("#te4ja").click( function () {
     return false;
 });
 $("#te4nej").click( function () {
+	disable_form();
     // simulera att klick på inriktningen man valt för att nollställa rätt
     var inr_val = $("input[name='inriktningar']:checked").val();
     if ( ! inr_val ) {
@@ -201,6 +213,7 @@ $("#te4nej").click( function () {
 // När kod anges
 // 1. Ajax som hämtar namn och klass så det "känns bra"
 function checkPkod(evt) {
+	disable_form();
     // 4 tecken i koden
     var pkod = $(this).val(); // Läses innan ändringen godkänts
     if ( evt.type === "keydown" && pkod.length === 3 ) {
@@ -254,7 +267,7 @@ function validate_form() {
     var paket1 = $("[name='paket1']:checked").val();
     var paket2 = $("[name='paket2']:checked").val();
     if ( !paket1 || !paket2 || !inriktning ) {
-        alert("Du måste välja inriktning och ett paket i båda paketen.");
+        alert("Du måste välja inriktning och ett alternativ i båda paketen.");
         return false;
     }
     // TODO Kontrollera att riktiga värde fyllts i (dubbelkoll)
@@ -272,10 +285,10 @@ $("#klar").change(function () {
     if ( validate_form() && $(this).attr("checked") === "checked"  ) {
         $("#skicka").removeAttr("disabled");
     } else {
-        $("#skicka").attr("disabled", "disabled");
-        $(this).removeAttr("checked");
+    	disable_form();
     }
 });
+$("form:first").submit(validate_form);
 
 // Server side:
 // Lagra svaret
