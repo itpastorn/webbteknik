@@ -38,7 +38,7 @@ if ( !empty($_POST) ) {
  */
 // $_POST['verified_pkod'] = "bbbb";
 
-// Rätt möänster för koder
+// Rätt mönster för koder
 $ok_verified_pkod = "/^[a-z]{4}/";
 if ( !preg_match($ok_verified_pkod, $testcode) ) {
     $userdata['kod'] = "Ogiltigt kodmönster";
@@ -65,10 +65,25 @@ if ( !empty($_POST) ) {
     $ok_paket2       = array("civing", "it2", "prod2", "sam2");
     
     // Ändra provisoriskt för testning
-    $ok_paket2       = array("civing", "it2", "prod2", "sam3");
+    // $ok_paket2       = array("civing", "it2", "prod2", "sam3");
     
     $ok_kommentar_max = 500;
     
+    if ( $userdata['kod'] !== $testcode) {
+        $felfri = false;
+    } else {
+        // Kolla att man inte redan valt - här är värdet hämtat ur DB
+        if ( $userdata['inriktning'] ) {
+            // Val redan gjort
+            echo "<h1>Du har redan gjort ditt val!</h1>";
+            echo <<<HTML
+              <p><a href="val.php?kod={$testcode}">Se ditt val</a></p>
+              <p>Ångrar du ditt val? Kontakta din klassföreståndare.</p>
+HTML;
+            exit;
+        }
+    }
+
     // TODO: Filtrera kommentar bättre
     $_POST['kommentar'] = strip_tags($_POST['kommentar']);
     
@@ -93,24 +108,14 @@ if ( !empty($_POST) ) {
     } else {
         $userdata['paket2'] = $_POST['paket2'];
     }
-
-    if ( $userdata['kod'] !== $testcode) {
-        $felfri = false;
-    } else {
-        // Kolla att man inte redan valt
-        if ( $userdata['inriktning'] ) {
-            // Val redan gjort
-            echo "<h1>Du har redan gjort ditt val!</h1>";
-            echo <<<HTML
-              <p><a href="val.php?kod={$testcode}">Se ditt val</a></p>          
-HTML;
-            exit;
-        }
-    }
     
-    // TODO Kolla kommentar
-    // Max 500 tecken
-    // $felfri = $felfri && mb_strlen($_POST['kommentar'], "utf-8");
+    // TODO Kolla kommentar noggrannare
+    if ( mb_strlen($_POST['kommentar'], "utf-8") > $ok_kommentar_max ) {
+        $felfri = false;
+        $userdata['kommentar'] = "För lång kommentar. Max {$ok_kommentar_max} tecken.";
+    } else {
+        $userdata['kommentar'] = $_POST['kommentar'];
+    }
     
     // TODO: Snygg felhantering
     if ( !$felfri ) {
@@ -119,12 +124,13 @@ HTML;
         var_dump($userdata);
         exit("<h1 style='font: 3em sans-serif'>Du har fyllt i felaktiga uppgifter. Backa och försök igen.</h1>\n");
     } else {
-        $sql = "UPDATE elever SET inriktning=:inriktning, paket1=:paket1, paket2=:paket2 WHERE kod = :kod";
+        $sql = "UPDATE elever SET inriktning=:inriktning, paket1=:paket1, paket2=:paket2, kommentar=:kommentar WHERE kod = :kod";
         $stmt = $dbh->prepare($sql);
         $stmt->bindParam(":inriktning", $userdata['inriktning']);
         $stmt->bindParam(":paket1", $userdata['paket1']);
         $stmt->bindParam(":paket2", $userdata['paket2']);
         $stmt->bindParam(":kod", $userdata['kod']);
+        $stmt->bindParam(":kommentar", $userdata['kommentar']);
         $stmt->execute();
     }
     
@@ -180,8 +186,7 @@ $inriktningsnamn   = $userdata['inriktningsnamn'];
 $inriktningskurser = $userdata['inriktningskurser'];
 $paket1_kurser     = $userdata['paket1_kurser'];
 $paket2_kurser     = $userdata['paket2_kurser'];
-
-$kommentar         = nl2br(htmlspecialchars("Jag vill ha blommig falukorv till lunch."));
+$kommentar         = nl2br(htmlspecialchars($userdata['kommentar']));
 
 // Om lapp med underskrift lämnats så bör denna vara true
 $verified = false;
