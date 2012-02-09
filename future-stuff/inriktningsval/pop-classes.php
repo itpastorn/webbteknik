@@ -33,8 +33,15 @@ $stmt->bindParam(":year", $year);
 date_default_timezone_set("Europe/Stockholm");
 $year = date("Y");
 
+// 2012 sa alla koder börja med a, 2013 med b, o.s.v.
+$varv = $year - 2012;
+$kod = "a";
+for ($i = 0; $i < $varv; $i++) {
+    $kod++;
+}
+
 foreach ( $elever as $e ) {
-    // skapa kod
+    // skapa resten av koden med slump
     
     // skapa variabler me list()
     
