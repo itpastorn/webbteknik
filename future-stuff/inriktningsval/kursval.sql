@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Värd: localhost
--- Skapad: 09 feb 2012 kl 23:58
+-- Skapad: 10 feb 2012 kl 01:01
 -- Serverversion: 5.5.19
 -- PHP-version: 5.3.9
 
@@ -98,9 +98,76 @@ CREATE TABLE IF NOT EXISTS `elever` (
 --
 
 INSERT INTO `elever` (`personnummer`, `fornamn`, `efternamn`, `klass`, `kod`, `inriktning`, `paket1`, `paket2`, `kommentar`, `email`, `confirmed`, `year`) VALUES
-('950101-1234', 'Allan', 'Andersson', 'Te1A', 'aaaa', 'it', 'it1', 'civing', '', NULL, NULL, 2012),
-('950102-9876', 'Beda', 'Bengtsson', 'Te1B', 'bbbb', 'design', 'prod1', 'sam2', 'Jag vill bli polis.', NULL, NULL, 2012),
-('950909-1133', 'Tage', 'Testare', 'Te0F', 'test', NULL, NULL, NULL, '', NULL, NULL, 2012);
+('930303-6454', ' Vandio', 'Villanueva Quizon', 'Te1A', 'apae', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('940724-3451', ' Sahin', 'Duman', 'Te1B', 'agqs', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('941130-0552', ' Oskar', 'Erkmar', 'Te1A', 'axzv', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950101-1234', 'Allan', 'Andersson', 'Te0F', 'aaaa', 'it', 'it1', 'civing', '', NULL, NULL, 2012),
+('950102-9876', 'Beda', 'Bengtsson', 'Te0F', 'bbbb', 'design', 'prod1', 'sam2', 'Jag vill bli polis.', NULL, NULL, 2012),
+('950104-1637', ' Oscar', 'Korshavn', 'Te1B', 'acgc', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950106-7426', ' Madeleine', 'Bolk', 'Te1A', 'anxr', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950116-0536', ' Joseph', 'Haddad', 'Te1B', 'atzk', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950121-3012', ' Igor', 'Velemir', 'Te1B', 'ajbj', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950121-8581', ' Emelie', 'Johansson', 'Te1B', 'agmd', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950123-3895', ' Markus', 'Olsson', 'Te1B', 'aiyz', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950125-0584', ' Matilda', 'Klang', 'Te1A', 'akqa', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950131-2400', ' Fanny', 'Liesén Gullmander', 'Te1B', 'aaip', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950206-1535', ' Alexander', 'Kelman', 'Te1A', 'azaq', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950206-4810', ' Jonas', 'Linell', 'Te1A', 'arrg', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950216-4818', ' Piotr', 'Ostrowski', 'Te1A', 'aehq', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950220-5058', ' Toni', 'Karam', 'Te1A', 'aqcd', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950222-1758', ' Casper', 'Johansson', 'Te1A', 'aqan', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950222-5395', ' Erik', 'Lexberg', 'Te1B', 'ambb', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950223-0338', ' Alemayehu', 'Wakjira', 'Te1B', 'asnf', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950301-6058', ' Saif', 'Abdalhe', 'Te1B', 'afhd', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950304-3953', ' Jesper', 'Isbrand', 'Te1B', 'akft', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950318-1779', ' Marcus', 'Rydell', 'Te1A', 'axjg', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950318-5234', ' Mikael', 'Pochwat', 'Te1A', 'axxv', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950320-7178', ' Isak', 'Johansson', 'Te1A', 'azjt', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950323-6854', ' Marcus', 'Hagström', 'Te1A', 'aype', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950410-8672', ' Anton', 'Vinnerholt', 'Te1A', 'argv', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950411-0199', ' Filip', 'Kalmertun', 'Te1B', 'azye', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950502-2930', ' Daniel', 'Hallberg', 'Te1A', 'acff', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950515-6613', ' Jimmy', 'Hamdoun', 'Te1B', 'agnm', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950517-6827', ' Linnea', 'Stjärnborg', 'Te1A', 'aarc', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950519-1966', ' Andrea', 'Andersson', 'Te1A', 'azqi', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950521-3679', ' Anton', 'Lundqvist', 'Te1B', 'ahci', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950530-4569', ' Linnea', 'Olsson', 'Te1A', 'abhq', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950530-5376', ' Jim', 'Lien', 'Te1A', 'ancb', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950608-2255', ' Simon', 'Svederberg', 'Te1B', 'aqbd', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950616-2974', ' Lucas', 'Lyxell', 'Te1B', 'akps', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950625-3203', ' Agnes', 'Karlsson', 'Te1B', 'ahga', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950702-5477', ' Ludvig', 'Ånnhagen', 'Te1B', 'ahin', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950703-6151', ' Patrik', 'Johansson', 'Te1B', 'akir', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950704-1722', ' Sara', 'Berglund', 'Te1B', 'aasr', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950712-5566', ' Johanna', 'Olsson', 'Te1A', 'afqm', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950714-3056', ' Christoffer', 'Johansson', 'Te1A', 'ahtg', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950715-8914', ' Anthony', 'Khalil', 'Te1B', 'aipj', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950721-6993', ' Daniel', 'Sano', 'Te1A', 'ayai', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950722-7032', ' Sabrija', 'Jasarevic', 'Te1A', 'avmc', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950725-4994', ' Shkölqim', 'Fejzi', 'Te1B', 'arqj', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950726-4175', ' Filip', 'Olsson', 'Te1B', 'aenr', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950727-0693', ' Eric', 'Kjellberg', 'Te1A', 'abtk', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950803-3892', ' Adam', 'Bohlin', 'Te1A', 'ahnq', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950813-9343', ' Hanna', 'Marke', 'Te1A', 'azrc', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950821-6091', ' Alexander', 'Karlsson', 'Te1B', 'aqgt', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950824-7013', ' Samir', 'Ljajic', 'Te1B', 'amvx', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950826-3036', ' Tim', 'Skogsberg', 'Te1B', 'aeyx', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950905-5845', ' Emma', 'Jernstig', 'Te1A', 'ajac', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950909-1133', 'Tage', 'Testare', 'Te0F', 'test', NULL, NULL, NULL, '', NULL, NULL, 2012),
+('950912-9038', ' Robert Rafael', 'Romi', 'Te1A', 'aiyp', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950913-TF22', ' Rola', 'Seeman', 'Te1B', 'ajng', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950922-7154', ' Antonio', 'Kendes', 'Te1A', 'andk', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('950930-6214', ' Rasmus', 'Abrahamsson', 'Te1B', 'amki', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('951004-0018', ' Simon', 'Sörensen', 'Te1A', 'agbk', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('951005-4282', ' Beatrice', 'Asplund', 'Te1B', 'aivg', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('951007-6186', ' Cecilia', 'Lundbladh', 'Te1A', 'aiig', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('951015-7952', ' Björn', 'Isaksson', 'Te1A', 'ahym', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('951101-5423', ' Agnes', 'Johansson', 'Te1A', 'aper', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('951201-9036', ' Christoffer', 'Colliander', 'Te1A', 'agny', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('951214-7357', ' Niklas', 'Vallebrant', 'Te1B', 'atnp', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('951215-6416', ' Fredrick', 'Frendin', 'Te1A', 'arbb', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('951218-0648', ' Johanna', 'Andersson', 'Te1A', 'asiz', NULL, NULL, NULL, NULL, NULL, NULL, 2012),
+('961119-3179', ' Ali', 'Abdallah', 'Te1B', 'axnk', NULL, NULL, NULL, NULL, NULL, NULL, 2012);
 
 -- --------------------------------------------------------
 
