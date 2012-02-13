@@ -9,7 +9,7 @@ error_reporting(E_ALL);
 ini_set("display_errors", "on");
 
 // Till dess att systemet är utprovat så kan inga uppgifter lagras
-$activated = false;
+$activated = true;
 
 /**
  * Databasanslutning
