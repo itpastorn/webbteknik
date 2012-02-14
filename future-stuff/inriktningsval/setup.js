@@ -7,7 +7,7 @@
  * @param object paket Vilket JSON objekt med kursurval som används
  * @param number num Vilken kurs i paketet som åsyftas
  * @return HtmlTdElement (heter det så?)
- * 
+ *
  * @todo label saknar "for"
  */
 function createTableDataLabel(id, paket, num) {
@@ -82,16 +82,16 @@ createBlock("paket2", paket2);
 
 //När något ändrats ska formuläret vara obekräftat
 function disable_form() {
-	$("#skicka").attr("disabled", "disabled");
-	$("#klar").removeAttr("checked");
+    $("#skicka").attr("disabled", "disabled");
+    $("#klar").removeAttr("checked");
 }
 
 // TODO: Inte om man klickar på en länk...
 $("table").click(function () {
-	disable_form();
-	if ( $(this).hasClass("disabled") ) {
-	    return false;
-	}
+    disable_form();
+    if ( $(this).hasClass("disabled") ) {
+        return false;
+    }
     $(this).find("input[type='radio']").attr("checked", "checked");
     $(this).parent().find("table").removeClass("chosen");
     $(this).addClass("chosen");
@@ -99,12 +99,12 @@ $("table").click(function () {
 
 // När man väljer inriktning
 $("#inriktningar table").click(function () {
-	disable_form();
-	// Nollställer
-	$("#paket1 table, #paket2 table").removeClass("disabled");
-	$("#paket1 table input, #paket2 table input").removeAttr("disabled");
-	$("button").removeClass("chosen").removeClass("notchosen");
-	// Tag bort blockerade val
+    disable_form();
+    // Nollställer
+    $("#paket1 table, #paket2 table").removeClass("disabled");
+    $("#paket1 table input, #paket2 table input").removeAttr("disabled");
+    $("button").removeClass("chosen").removeClass("notchosen");
+    // Tag bort blockerade val
     var id = this.id;
     for ( var i = 0; i < inriktningar[id].blockar.length; i += 1 ) {
         $("#" + inriktningar[id].blockar[i]).addClass("disabled").removeClass("chosen");
@@ -114,21 +114,21 @@ $("#inriktningar table").click(function () {
     // Stäng alla val som kräver förkunskaper
     thepacks = [paket1, paket2];
     for ( var pnum = 0; pnum < 2; pnum += 1) {
-    	pt = thepacks[pnum];
-	    for ( i in pt ) {
-	        if ( pt[i].req === id ) {
-	            $("#" + i).removeClass("disabled");
-	            $("#" + i + " input").removeAttr("disabled");
-	        } else if ( pt[i].req ) {
-	            $("#" + i).addClass("disabled");
-	            $("#" + i + " input").attr("disabled", "disabled");
-	        }
-	    }
+        pt = thepacks[pnum];
+        for ( i in pt ) {
+            if ( pt[i].req === id ) {
+                $("#" + i).removeClass("disabled");
+                $("#" + i + " input").removeAttr("disabled");
+            } else if ( pt[i].req ) {
+                $("#" + i).addClass("disabled");
+                $("#" + i + " input").attr("disabled", "disabled");
+            }
+        }
     }
 });
 
 $("#mafyja").click( function () {
-	disable_form();
+    disable_form();
     var inr_val = $("input[name='inriktningar']:checked").val();
     if ( ! inr_val ) {
         alert("Du måste välja inriktning först");
@@ -143,7 +143,7 @@ $("#mafyja").click( function () {
     return false;
 });
 $("#mafynej").click( function () {
-	disable_form();
+    disable_form();
     var inr_val = $("input[name='inriktningar']:checked").val();
     if ( ! inr_val ) {
         alert("Du måste välja inriktning först");
@@ -159,7 +159,7 @@ $("#mafynej").click( function () {
 });
 
 $("#te4ja").click( function () {
-	disable_form();
+    disable_form();
     // Kolla att man valt inriktning först
     var inr_val = $("input[name='inriktningar']:checked").val();
     if ( ! inr_val ) {
@@ -182,7 +182,7 @@ $("#te4ja").click( function () {
     return false;
 });
 $("#te4nej").click( function () {
-	disable_form();
+    disable_form();
     // simulera att klick på inriktningen man valt för att nollställa rätt
     var inr_val = $("input[name='inriktningar']:checked").val();
     if ( ! inr_val ) {
@@ -203,7 +203,7 @@ $("#te4nej").click( function () {
     if ( mafy === "ja" ) {
         $("#mafyja").click();
     } else {
-    	$("#mafynej").click();
+        $("#mafynej").click();
     }
     $(this).addClass("chosen").removeClass("notchosen");
     $("#te4ja").addClass("notchosen");
@@ -213,50 +213,30 @@ $("#te4nej").click( function () {
 // När kod anges
 // 1. Ajax som hämtar namn och klass så det "känns bra"
 function checkPkod(evt) {
-	disable_form();
+    disable_form();
     // 4 tecken i koden
     var pkod = $(this).val(); // Läses innan ändringen godkänts
     if ( evt.type === "keydown" && pkod.length === 3 ) {
         pkod += String.fromCharCode(evt.which).toLowerCase();
     }
     if ( pkod.length === 4 ) {
-    	$.ajax({
-    		url: "name-class-from-code.php?kod=" + pkod,
-    		success: function (data) {
-    	        $("#show_name_ajax").html(data);
-    	        $("#verified_pkod").val(pkod);
-    		},
-    		error: function (data) {
-    	        $("#show_name_ajax").html("Felaktig kod");
-    	        $("#verified_pkod").val("");
-    		}
-    	});
-	    // Simulera Ajax
-    	/*
-	    switch ( pkod ) {
-	    case "aaaa":
-	        $("#show_name_ajax").html("Allan Andersson, Te1A");
-	        $("#verified_pkod").val(pkod);
-	        break;
-	    case "bbbb":
-	        $("#show_name_ajax").html("Beda Bengtsson, Te1B");
-	        $("#verified_pkod").val(pkod);
-	        break;
-	    case "test":
-	        $("#show_name_ajax").html("Tage Testare, Te1D");
-	        $("#verified_pkod").val(pkod);
-	        break;
-	    default:
-	        $("#show_name_ajax").html('<strong class="error">Felaktig kod</strong>');
-            $("#verified_pkod").val("");
-	    }
-	    */
+        $.ajax({
+            url: "name-class-from-code.php?kod=" + pkod,
+            success: function (data) {
+                $("#show_name_ajax").html(data);
+                $("#verified_pkod").val(pkod);
+            },
+            error: function (data) {
+                $("#show_name_ajax").html("Felaktig kod");
+                $("#verified_pkod").val("");
+            }
+        });
     }
     if ( evt.type === "blur" ) {
-    	if ( pkod.length !== 4 ) {
-	        $("#show_name_ajax").html("...");
-	        $("#verified_pkod").val("");
-    	}
+        if ( pkod.length !== 4 ) {
+            $("#show_name_ajax").html("...");
+            $("#verified_pkod").val("");
+        }
     }
 }
 $("#pkod").bind("paste keydown blur", checkPkod);
@@ -285,7 +265,7 @@ $("#klar").change(function () {
     if ( validate_form() && $(this).attr("checked") === "checked"  ) {
         $("#skicka").removeAttr("disabled");
     } else {
-    	disable_form();
+        disable_form();
     }
 });
 $("form:first").submit(validate_form);

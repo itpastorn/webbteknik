@@ -59,7 +59,12 @@ foreach ( $elever as $e ) {
     $kod = gkod();
     // skapa variabler med list()
     list($klass, $efternamn, $fornamn, $personnummer) = explode(",", $e);
+    $klass        = trim($klass);
+    $efternamn    = trim($personnummer);
+    $fornamn      = trim($personnummer);
+    $personnummer = trim($personnummer);
     $stmt->execute();
+    // UPDATE elever SET fornamn=TRIM(fornamn) WHERE fornamn <> TRIM(fornamn)
 }
 
 echo "Uppgifter lagrade!";

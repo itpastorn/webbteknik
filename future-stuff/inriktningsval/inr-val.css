@@ -58,6 +58,9 @@ table:nth-of-type(odd) {
 .valsida td {
     width: 18em;
 }
+.admin td:nth-child(3) {
+    min-width: 22ch;
+}
 .admin td:nth-child(4), .admin td:nth-child(5), .admin td:nth-child(6)  {
     text-align: center;
 }
@@ -153,4 +156,37 @@ footer {
     text-align: center;
     font-size: 250%;
     color: red;
+}
+@-moz-keyframes yellowfade {
+    from {
+        background-color: transparent;
+    }
+    15% {
+        background-color: yellow;
+    }
+    30% {
+        background-color: transparent;
+    }
+    50% {
+        background-color: yellow;
+    }
+    to {
+        background-color: transparent;
+    }
+}
+h1 {
+    -moz-animation-duration: 4s;
+}
+:target {
+    -moz-animation: yellowfade 2s;
+}
+.admin label {
+    display: inline-block;
+    width: 18ex;
+}
+.error {
+    font-size: large;
+    color: maroon;
+    -moz-animation-duration: 4s;
+    -moz-animation-name: yellowfade;
 }

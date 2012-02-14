@@ -8,6 +8,8 @@
 error_reporting(E_ALL);
 ini_set("display_errors", "on");
 
+session_start();
+
 // Till dess att systemet är utprovat så kan inga uppgifter lagras
 $activated = true;
 
@@ -29,8 +31,9 @@ if ( !empty($_POST) ) {
     $testcode = $_GET['kod'];
 } else {
     // Felaktigt anrop
-    echo("<h1 style='font: 3em sans-serif'>Du har kommit hit på fel sätt</h1>\n");
-    echo("<p style='font: 2em sans-serif'>Du måste antingen ange kod eller komma från formuläret</p>\n");
+    $testcode = "";
+    echo "<h1 style='font: 3em sans-serif'>Du har kommit hit på fel sätt</h1>\n";
+    echo "<p style='font: 2em sans-serif'>Du måste antingen ange kod eller komma från formuläret</p>\n";
 }
 
 /*
@@ -128,7 +131,7 @@ HTML;
         var_dump($userdata);
         exit("<h1 style='font: 3em sans-serif'>Du har fyllt i felaktiga uppgifter. Backa och försök igen.</h1>\n");
     } else {
-        $sql = "UPDATE elever SET inriktning=:inriktning, paket1=:paket1, paket2=:paket2, kommentar=:kommentar WHERE kod = :kod";
+        $sql = "UPDATE elever SET inriktning=:inriktning, paket1=:paket1, paket2=:paket2, kommentar=:kommentar, time_for_choice = NOW() WHERE kod = :kod";
         $stmt = $dbh->prepare($sql);
         $stmt->bindParam(":inriktning", $userdata['inriktning']);
         $stmt->bindParam(":paket1", $userdata['paket1']);
@@ -157,6 +160,10 @@ $userdata['inriktningsnamn'] = $stmt->fetchColumn();
 if ( empty($userdata['inriktningsnamn']) ) {
     echo "<h1>Inga val gjorda ännu</h1>";
     echo "<p>Inga val gjorda ännu för <strong>{$elev}</strong></p>";
+    echo "<p><a href=\"./\">Gå till formuläret</p>\n";
+    if ( isset($_SESSION['privilegier']) ) {
+        echo "<p><a href=\"admin.php\">Gå till adminsidan</p>\n";
+    }
     exit;
 }
 
@@ -204,9 +211,6 @@ $paket1_kurser     = $userdata['paket1_kurser'];
 $paket2_kurser     = $userdata['paket2_kurser'];
 $kommentar         = nl2br(htmlspecialchars($userdata['kommentar']));
 
-// Om lapp med underskrift lämnats så bör denna vara true
-$verified = false;
-
 if ( !$activated ) {
     $activeClass = "inactive";
 } else {
@@ -243,10 +247,7 @@ if ( !$activated ) {
    <div id="kommentar">
    <?php echo $kommentar; ?>
    </div>
-   <?php if ( $verified ): ?>
-   <h2>Detta är dina lämnade uppgifter</h2>
-   <p>Har något blivit fel, kontakta din klassföreståndare.</p>
-   <?php else: ?>
+   <?php if ( empty($userdata['confirmed']) ): ?>
    <h2>Underskrifter</h2>
    <table class="printlayout">
      <tr>
@@ -279,7 +280,13 @@ if ( !$activated ) {
      </tr>
    </table>
    <footer>Blanketten lämnas till klassföreståndaren.</footer>
-   <?php endif; ?>
-   
+   <?php else: ?>
+   <h2>Detta är dina lämnade uppgifter</h2>
+   <p>Har något blivit fel, kontakta din klassföreståndare.</p>
+   <?php endif;
+    if ( isset($_SESSION['privilegier']) ) {
+        echo "<p><a href=\"admin.php\">Gå till adminsidan</p>\n";
+    }
+    ?>   
   </body>
 </html>

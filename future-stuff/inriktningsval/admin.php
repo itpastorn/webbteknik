@@ -9,6 +9,17 @@ error_reporting(E_ALL);
 ini_set("display_errors", "on");
 
 // Inloggad?
+session_start();
+
+// "read" = kan se sidan
+// "write" = kan bekräfta och ta bort elevers val
+// "admin" = kan skapa och ändra privilegier
+
+if ( empty($_SESSION['privilegier']) ) {
+    header("Location: admin-loginform.php");
+    exit;
+    
+}
 
 // Datumfunktioner
 date_default_timezone_set("Europe/Stockholm");
@@ -43,7 +54,7 @@ SQL;
 // personnummer, fornamn, efternamn, klass, kod, inriktning, paket1, paket2, kommentar, email, confirmed, year, inr_pak_id, name, kinfo
 
 $sql = <<<SQL
-    SELECT e.personnummer, e.fornamn, e.efternamn, e.klass, e.kod, e.inriktning, ip.name AS inr_name FROM elever AS e
+    SELECT e.personnummer, e.fornamn, e.efternamn, e.klass, e.kod, e.inriktning, e.confirmed, ip.name AS inr_name FROM elever AS e
     LEFT JOIN inriktning_paket AS ip ON e.inriktning = ip.inr_pak_id
     WHERE e.year = :year
     ORDER BY e.klass ASC, e.efternamn ASC, e.fornamn ASC
@@ -56,22 +67,33 @@ $stmt->bindParam(":year", $year);
 $stmt->execute();
 
 // TODO: På lång sikt ska denna lista hämtas ur DB också - eller?
+// TODO: Statistik per klass
 $statistik = array(
     "design"     => 0,
     "it"         => 0,
     "produktion" => 0,
     "samhall"    => 0,
-    "null"       => 0
+    "inget"      => 0
 );
 $html = $cur_class = "";
 $first_run = true;
+$disabled = "";
+if ( $_SESSION['privilegier'] == "read" ) {
+    $disabled = 'disabled title="Kräver privilegier"';
+}
 while ( $dbrow = $stmt->fetch() ) {
+    if ( empty($_GET['testing']) ) {
+        if ( $dbrow['klass'] == "Te0F" ) {
+            continue;
+        }
+    }
     if ( $dbrow['klass'] !== $cur_class ) {
         if ( !$first_run ) {
             $html .= "</table>\n";
         }
+        $klasser[] = $dbrow['klass'];
         $first_run = false;
-        $html .= "<h2>{$dbrow['klass']}</h2>\n";
+        $html .= "<h2 id='{$dbrow['klass']}'>{$dbrow['klass']}</h2>\n";
         $html .= "<table>\n";
         $html .= <<<HTML
      <tr>
@@ -79,29 +101,49 @@ while ( $dbrow = $stmt->fetch() ) {
        <th>Personnummmer</th>
        <th>Inriktning</th>
        <th>Skriv ut</th>
-       <th>Tag bort val</th>
+       <th>Ångra val</th>
        <th>Bekräfta</th><!-- kan ej längre ångra -->
      </tr>
+
 HTML;
     }
     $cur_class = $dbrow['klass'];
+    if ( $dbrow['inriktning'] && $dbrow['confirmed'] ) {
+        $confirm = "<span title=\"Bekräftad\">&#x2713;</span>"; // TODO Unicode
+    } elseif ( $dbrow['inriktning'] ) {
+        $confirm = "<input type='checkbox' name='confirm_{$dbrow['kod']}' value='{$dbrow['kod']}' $disabled />";
+    } else {
+        $confirm = "";
+    }
+    if ( !$dbrow['inriktning'] ) {
+        $regret = "";
+    } else {
+        $regret = "<input type=\"checkbox\" name=\"regret_{$dbrow['kod']}\" value=\"{$dbrow['kod']}\" $disabled />";
+    }
     $html .= <<<HTML
      <tr>
        <td>{$dbrow['fornamn']} {$dbrow['efternamn']}</th>
        <td>{$dbrow['personnummer']}</td>
        <td>{$dbrow['inr_name']}</th>
        <td><a href="val.php?kod={$dbrow['kod']}">{$dbrow['kod']}</a></td>
-       <td><input type="checkbox" name="regret_{$dbrow['kod']}" value="{$dbrow['kod']}" /></td>
-       <td><input type="checkbox" name="confirm_{$dbrow['kod']}" value="{$dbrow['kod']}" /></td>
+       <td>{$regret}</td>
+       <td>{$confirm}</td>
      </tr>
 HTML;
     if ( $dbrow['inriktning'] ) {
         $statistik[$dbrow['inriktning']]++;
     } else {
-        $statistik['null']++;
+        $statistik['inget']++;
     }
 }
 $html .= "</table>\n";
+
+$nav = "";
+foreach ( $klasser as $k ) {
+    $nav .= "<li><a href='#{$k}'>{$k}</a></li>\n";
+}
+$nav .= "<li><a href='#stat'>Statistik</a></li>\n";
+
 
 // Sidmall
 ?>
@@ -114,13 +156,22 @@ $html .= "</table>\n";
  </head>
  <body class="admin">
    <h1>Administrera inriktnings- och fördjupningskursval på Teknikprogrammet, NE, <?php echo $year; ?></h1>
+   <ul class="sidnav">
+     <?php echo $nav; ?>
+   </ul>
    <form action="" method="post">
 <?php echo $html; ?>
    </form>
 
-   <h2>Statistik</h2>
-   <p>TODO</p>
-
+   <h2 id="stat">Statistik</h2>
+   <p>TODO &ndash; här kommer snart fina diagram dyka upp&hellip;</p>
+   <pre>
+   <?php var_dump($statistik); ?>
+   </pre>
+   <?php if ( $_SESSION['privilegier'] != "read" ): ?>
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+   <script src="admin.js"></script>
+   <?php endif; ?>
   </body>
 </html>
 
