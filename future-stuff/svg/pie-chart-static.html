@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Cirkeldiagram i SVG</title>
+<link href="pie-chart.css" rel="stylesheet" />
+</head>
+<body>
+  <h1>Cirkeldiagram i SVG</h1>
+  <svg viewbox="-100 -100 200 200" width="400px" height="400px">
+    <circle r="100" cx="0" cy="0" />
+    <path class="one"   d="M 0,0 L 0,-100     A 100 100 0 0 1 70.7 -70.7 Z" />
+    <path class="two"   d="M 0,0 L 70.7,-70.7 A 100 100 0 0 1 70.7  70.7 Z" />
+    <path class="three" d="M 0,0 L 70.7,70.7  A 100 100 0 0 1 -100   0   Z" />
+    <path class="four"  d="M 0,0 L -100,0     A 100 100 0 0 1    0 -100  Z" />
+  </svg>
+</body>
+</html>

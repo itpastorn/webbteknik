@@ -144,6 +144,15 @@ foreach ( $klasser as $k ) {
 }
 $nav .= "<li><a href='#stat'>Statistik</a></li>\n";
 
+// Skapa underlag för SVG-skapande JavaScript
+
+$antal_som_inte_valt = array_pop($statistik);
+$jsclasses = array_keys($statistik);
+// Lambda nytt i PHP 5.3 - felaktigt error i Eclipse
+// TODO: Kolla om jag kan använda inbyggda JSON-funktioner i PHP?
+$jsclasses = array_map(function($s) {return '"' . $s . '"'; }, $jsclasses);
+$jsclasses = "var classes = [" . join(",", $jsclasses) . "];\n";
+$jsantalin = "var antalin = [" . join(",", $statistik) . "];\n";
 
 // Sidmall
 ?>
@@ -164,10 +173,17 @@ $nav .= "<li><a href='#stat'>Statistik</a></li>\n";
    </form>
 
    <h2 id="stat">Statistik</h2>
-   <p>TODO &ndash; här kommer snart fina diagram dyka upp&hellip;</p>
-   <pre>
-   <?php var_dump($statistik); ?>
-   </pre>
+   <svg id="diagram1" viewbox="-150 -150 300 300" width="500px" height="500px">
+   </svg>
+   <p>Antal som ännu inte valt: <?php echo $antal_som_inte_valt; ?></p>
+   <script src="piecharts.js"></script>
+   <script>
+   <?php
+     echo $jsantalin;
+     echo $jsclasses;
+   ?>
+   drawPieChart("diagram1", antalin, classes);
+   </script>
    <?php if ( $_SESSION['privilegier'] != "read" ): ?>
    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
    <script src="admin.js"></script>
@@ -175,4 +191,20 @@ $nav .= "<li><a href='#stat'>Statistik</a></li>\n";
   </body>
 </html>
 
-<!-- Se annat år -->
+<!-- 
+Idéer:
+Bakgrund till texten med getBBBox samt koll att den inte sticker utanför SVG-elementet
+
+Mer statistik:
+Per klass
+Per kön - Utnyttja näst sista siffran
+Paket
+
++ Framtid
+Se annat år 
+Jämföra mellan år
+
++ Specialkul
+Sortera tabellerna med JS
+
+-->

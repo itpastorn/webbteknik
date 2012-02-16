@@ -20,6 +20,12 @@ body {
     .printlayout th {
         font-size: 13pt;
     }
+    .sidnav, a {
+        display: none;
+    }
+    .admin td:nth-child(4), .admin td:nth-child(5), .admin th:nth-child(4), .admin th:nth-child(5) {
+        display: none;
+    }
 }
 .printlayout tr:nth-child(even) td:nth-child(odd) {
     border-bottom: 1px solid black;
@@ -92,15 +98,19 @@ legend {
 }
 .design {
     background-color: lightgreen;
+    fill: lightgreen;
 }
 .samhall {
     background-color: pink;
+    fill: pink;
 }
 .it {
     background-color: navajowhite;
+    fill: navajowhite;
 }
 .produktion {
     background-color: silver;
+   fill: silver;
 }
 .valsida p {
     text-align: center;
@@ -184,9 +194,25 @@ h1 {
     display: inline-block;
     width: 18ex;
 }
+.admin tr:nth-child(odd) {
+    background-color: rgba(255, 222, 173, 0.1);
+}
+.admin tr:hover {
+    background-color: rgba(255, 222, 173, 1);
+}
 .error {
     font-size: large;
     color: maroon;
     -moz-animation-duration: 4s;
     -moz-animation-name: yellowfade;
+}
+path {
+    stroke: #777;
+}
+.inget {
+    fill: #EEE;
+}
+text {
+    text-anchor: middle;
+    font-size: small;
 }
