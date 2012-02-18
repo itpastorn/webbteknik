@@ -15,6 +15,17 @@ function drawPieChart(svgid, data, classes) {
     for ( var i = 0; i < len; i += 1 ) {
         sum += data[i];
     }
+    if ( sum === 0 ) {
+        console.log("Summan av all data är noll i drawPieChart.");
+        return false;
+    }
+    var title = document.createElementNS(ns, "text");
+    title.textContent = svgid;
+    title.setAttribute("x", 0);
+    title.setAttribute("y", -152);
+    title.setAttribute("class", "diatitle")
+	svgelem.appendChild(title);
+
     for ( i = 0; i < len; i += 1 ) {
         angle = 360 * data[i] / sum;
         totangle += angle;
@@ -34,8 +45,8 @@ function drawPieChart(svgid, data, classes) {
 
         txt[i] = document.createElementNS(ns, "text");
         // Re-use x1 and x2
-        x1 = cx + r * 0.9 * Math.sin(totrad - radians / 2);
-        y1 = - (cy + r * 0.9 * Math.cos(totrad - radians / 2));
+        x1 = cx + r * 0.87 * Math.sin(totrad - radians / 2);
+        y1 = - (cy + r * 0.87 * Math.cos(totrad - radians / 2));
         diff = Math.abs(y1 - lastytext);
         if ( diff < 12 ) {
             y1 -= (12 - diff) * diff/Math.abs(diff);

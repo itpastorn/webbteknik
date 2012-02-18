@@ -21,6 +21,7 @@ $("input").click( function (e) {
     $.ajax({
         url: "ajax-regret-confirm.php?vad=" + this.name,
         success: function (data) {
+            console.log(data);
             data = data.split(":");
             // alert(data[0] + data[1] + data[2]);
             if ( +data[2] === 0 ) {
@@ -40,7 +41,7 @@ $("input").click( function (e) {
             }
         },
         error: function (data) {
-            // TODO felhantera Ajax
+            console.log("Ajax sket sig. Gunther fixa!");
         }
     });
 });

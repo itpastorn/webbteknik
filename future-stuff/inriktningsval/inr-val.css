@@ -64,18 +64,37 @@ table:nth-of-type(odd) {
 .valsida td {
     width: 18em;
 }
-.admin td:nth-child(3) {
-    min-width: 22ch;
-}
-.admin td:nth-child(4), .admin td:nth-child(5), .admin td:nth-child(6)  {
-    text-align: center;
-}
 th {
     text-align:left;
 }
 td[rowspan] {
     width: 4em;
     text-align: center;
+}
+.admin tr:nth-child(odd) {
+    background-color: rgba(255, 222, 173, 0.1);
+}
+.admin tr:hover {
+    background-color: rgba(255, 222, 173, 1);
+}
+.classtab td:nth-child(3) {
+    min-width: 22ch;
+}
+.classtab td:nth-child(4), .classtab td:nth-child(5), .classtab td:nth-child(6)  {
+    text-align: center;
+}
+.statistik {
+    margin: 2em auto;
+}
+.statistik th {
+    text-align: center;
+}
+.statistik th:first-child {
+    width: 12em;
+}
+.statistik td {
+    width: 8ch;
+    text-align: right;
 }
 .inriktning {
     margin-top: 1em;
@@ -194,12 +213,6 @@ h1 {
     display: inline-block;
     width: 18ex;
 }
-.admin tr:nth-child(odd) {
-    background-color: rgba(255, 222, 173, 0.1);
-}
-.admin tr:hover {
-    background-color: rgba(255, 222, 173, 1);
-}
 .error {
     font-size: large;
     color: maroon;
@@ -212,7 +225,19 @@ path {
 .inget {
     fill: #EEE;
 }
+svg {
+    float:left;
+    width: 200px;
+    height: 210px;
+}
+#Total {
+    width: 400px;
+    height: 420px;
+}
 text {
     text-anchor: middle;
     font-size: small;
+}
+.diatitle {
+    font-size: medium;
 }

@@ -66,18 +66,18 @@ $stmt = $dbh->prepare($sql);
 $stmt->bindParam(":year", $year);
 $stmt->execute();
 
-// TODO: På lång sikt ska denna lista hämtas ur DB också - eller?
-// TODO: Statistik per klass
-$statistik = array(
+// Total -a/b klass - flickor/pojkar
+$statistik = $stat['a'] = $stat['b'] = $stat['f'] = $stat['p'] = array(
     "design"     => 0,
     "it"         => 0,
     "produktion" => 0,
-    "samhall"    => 0,
-    "inget"      => 0
+    "samhall"    => 0
 );
-$html = $cur_class = "";
-$first_run = true;
-$disabled = "";
+$statistik["inget"] = 0;
+
+$classtable = $cur_class = "";
+$first_run  = true;
+$disabled   = "";
 if ( $_SESSION['privilegier'] == "read" ) {
     $disabled = 'disabled title="Kräver privilegier"';
 }
@@ -89,13 +89,13 @@ while ( $dbrow = $stmt->fetch() ) {
     }
     if ( $dbrow['klass'] !== $cur_class ) {
         if ( !$first_run ) {
-            $html .= "</table>\n";
+            $classtable .= "</table>\n";
         }
         $klasser[] = $dbrow['klass'];
         $first_run = false;
-        $html .= "<h2 id='{$dbrow['klass']}'>{$dbrow['klass']}</h2>\n";
-        $html .= "<table>\n";
-        $html .= <<<HTML
+        $classtable .= "<h2 id='{$dbrow['klass']}'>{$dbrow['klass']}</h2>\n";
+        $classtable .= "<table class=\"classtab\">\n";
+        $classtable .= <<<HTML
      <tr>
        <th>Namn</th>
        <th>Personnummmer</th>
@@ -120,7 +120,7 @@ HTML;
     } else {
         $regret = "<input type=\"checkbox\" name=\"regret_{$dbrow['kod']}\" value=\"{$dbrow['kod']}\" $disabled />";
     }
-    $html .= <<<HTML
+    $classtable .= <<<HTML
      <tr>
        <td>{$dbrow['fornamn']} {$dbrow['efternamn']}</th>
        <td>{$dbrow['personnummer']}</td>
@@ -131,28 +131,60 @@ HTML;
      </tr>
 HTML;
     if ( $dbrow['inriktning'] ) {
-        $statistik[$dbrow['inriktning']]++;
+        $inr = $dbrow['inriktning'];
+        $statistik[$inr]++;
+        $ki = strtolower(substr($dbrow['klass'], -1));
+        $stat[$ki][$inr]++;
+        $gender = substr($dbrow['personnummer'], -2, 1) % 2 ? "p" : "f";
+        $stat[$gender][$inr]++;
     } else {
         $statistik['inget']++;
     }
 }
-$html .= "</table>\n";
-
+$classtable .= "</table>\n";
+// var_dump($stat);
 $nav = "";
 foreach ( $klasser as $k ) {
     $nav .= "<li><a href='#{$k}'>{$k}</a></li>\n";
 }
 $nav .= "<li><a href='#stat'>Statistik</a></li>\n";
 
-// Skapa underlag för SVG-skapande JavaScript
+$stmt = $dbh->query("SELECT inr_pak_ID, name FROM inriktning_paket WHERE name IS NOT NULL");
+while ( $dbrow = $stmt->fetch() ) {
+    $inr_names[$dbrow['inr_pak_ID']] = $dbrow['name'];
+}
 
-$antal_som_inte_valt = array_pop($statistik);
+$stattab = "";
 $jsclasses = array_keys($statistik);
+array_pop($jsclasses);
+foreach ( $jsclasses as $c ) {
+    $stattab .= "<tr>\n";
+    $stattab .= "<th scope=\"row\">{$inr_names[$c]}</th>\n";
+    foreach ( array("a", "b", "f", "p") as $k ) {
+        $stattab .= "<td>{$stat[$k][$c]}</td>\n";
+    }
+    $stattab .= "<td>{$statistik[$c]}</td>\n";
+    $stattab .= "</tr>\n";
+}
+/*
+SELECT inriktning, paket1 AS paket, COUNT(*) AS antal FROM elever
+WHERE `klass` <> 'Te0F' AND paket1 IS NOT NULL GROUP BY inriktning, paket1
+UNION
+SELECT inriktning, paket2 AS paket, COUNT(*) AS antal FROM elever
+WHERE `klass` <> 'Te0F' AND paket2 IS NOT NULL GROUP BY inriktning, paket2
+
+*/
+// Skapa underlag för SVG-skapande JavaScript
+$antal_som_inte_valt = array_pop($statistik);
 // Lambda nytt i PHP 5.3 - felaktigt error i Eclipse
 // TODO: Kolla om jag kan använda inbyggda JSON-funktioner i PHP?
-$jsclasses = array_map(function($s) {return '"' . $s . '"'; }, $jsclasses);
-$jsclasses = "var classes = [" . join(",", $jsclasses) . "];\n";
-$jsantalin = "var antalin = [" . join(",", $statistik) . "];\n";
+$jsclasses    = array_map(function($s) {return '"' . $s . '"'; }, $jsclasses);
+$jsclasses    = "var classes = [" . join(",", $jsclasses) . "];\n";
+$jsantalin    = "var antalin = [" . join(",", $statistik) . "];\n";
+$jsantal['a'] = "var antal_a = [" . join(",", $stat['a']) . "];\n";
+$jsantal['b'] = "var antal_b = [" . join(",", $stat['b']) . "];\n";
+$jsantal['f'] = "var antal_f = [" . join(",", $stat['f']) . "];\n";
+$jsantal['p'] = "var antal_p = [" . join(",", $stat['p']) . "];\n";
 
 // Sidmall
 ?>
@@ -169,25 +201,40 @@ $jsantalin = "var antalin = [" . join(",", $statistik) . "];\n";
      <?php echo $nav; ?>
    </ul>
    <form action="" method="post">
-<?php echo $html; ?>
+<?php echo $classtable; ?>
    </form>
 
    <h2 id="stat">Statistik</h2>
-   <svg id="diagram1" viewbox="-150 -150 300 300" width="500px" height="500px">
-   </svg>
+   <svg id="Total"   viewbox="-150 -165 300 315"></svg>
+   <svg id="Te3A"    viewbox="-150 -165 300 315"></svg>
+   <svg id="Te3B"    viewbox="-150 -165 300 315"></svg>
+   <svg id="Flickor" viewbox="-150 -165 300 315"></svg>
+   <svg id="Pojkar"  viewbox="-150 -165 300 315"></svg>
    <p>Antal som ännu inte valt: <?php echo $antal_som_inte_valt; ?></p>
+   <table class="statistik">
+     <tr><th>Inriktning</th><th>Te3A</th><th>Te3B</th><th>Flickor</th><th>Pojkar</th><th>Total</th></tr>
+     <?php echo $stattab; ?>
+   </table>
    <script src="piecharts.js"></script>
    <script>
    <?php
      echo $jsantalin;
+     echo $jsantal['a'];
+     echo $jsantal['b'];
+     echo $jsantal['f'];
+     echo $jsantal['p'];
      echo $jsclasses;
    ?>
-   drawPieChart("diagram1", antalin, classes);
+   drawPieChart("Total", antalin, classes);
+   drawPieChart("Te3A", antal_a, classes);
+   drawPieChart("Te3B", antal_b, classes);
+   drawPieChart("Flickor", antal_f, classes);
+   drawPieChart("Pojkar", antal_p, classes);
    </script>
    <?php if ( $_SESSION['privilegier'] != "read" ): ?>
    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
    <script src="admin.js"></script>
-   <?php endif; ?>
+   <?php endif; // var_dump($stat); ?>
   </body>
 </html>
 
