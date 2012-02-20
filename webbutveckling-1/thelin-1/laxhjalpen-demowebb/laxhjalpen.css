@@ -19,14 +19,14 @@ body {
     font-family: 'Merienda One', cursive;
 }
 .startpage > header > h1:first-letter {
-    color: red;
+    color: #00af64;
 }
 .startpage > header > p.tagline {
     font-size: 120%;
     padding: 0.5em;
     text-align: center;
-    border-top: 3px double grey;
-    border-bottom: 3px double grey;
+    border-top: 3px double #00af64;
+    border-bottom: 3px double #00af64;
     margin: 4em 0;
 }
 section {
@@ -39,21 +39,17 @@ section {
 section:last-of-type {
     margin-right: 0%;
 }
-.startpagebullet {
+section h2 {
     width: 100%;
     margin: auto 0 1em;
-    height: 100px;
+    height: 3.5em;
     border-radius: 50%;
-    border: 1px solid #444;
-    box-shadow: inset 0 0 10px #444;
-    background-color: #F5F5F5;
-}
-section h2 {
+    box-shadow: inset 0 0 20px #007241;
+    background-color: #F5F5F5; /* mkt ljus grå */ 
     font: large 'Merienda One', cursive;
-    padding-top: 1em;
+    padding-top: 2em;
     text-align: center;
-    width: 100%;
-  }
+}
 footer {
     display: block;
     margin-top: 3em;
