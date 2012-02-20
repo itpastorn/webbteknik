@@ -1,8 +1,9 @@
 <?php
 /* Detta är en startsidan till demo-webbplatsen för läroboken Webbutveckling 1
  *
- * Det tänkta företaget 
- * Window - Preferences - PHPeclipse - PHP - Code Templates
+ * Det tänkta UF-företaget Läxhjälpen
+ * @version pre-alpha
+ * @author Lars Gunther <gunther@keryx.se>
  */
 ?>
 <!DOCTYPE html>
@@ -15,7 +16,8 @@
 </head>
 <body class="startpage">
   <header>
-    <img id="logo" alt="" src="" />
+    <!--img id="logo" alt="Startsidan" src="laxlogo.png" / -->
+    <!-- imagefiller är bara temporär utfyllnad -->
     <span class="imagefiller">&#x2619;</span>
     <h1>Läxhjälpen</h1>
     <p class="tagline">Vi hjälper dig fatta!</p>
@@ -24,22 +26,25 @@
     <div class="startpagebullet">
       <h2>Vilka vi är &#x3020;</h2>
     </div>
-    <p>Varför anlita oss? Lorem ipsum dolor sit amet.</p>
+    <p>Varför anlita oss? Vi förklarar så du förstår!</p>
   </section>
   <section>
-    <div class="startpagebullet"></div>
-    <h2>Vad vi gör &#x2318;</h2>
-    <p>Lorem ipsum dolor sit amet.</p>
+    <div class="startpagebullet">
+      <h2>Vad vi gör &#x2318;</h2>
+    </div>
+    <p>Vi hjälper dig plugga alla ämnen. Vi förklarar, visar dig vad du ska läsa och förbereder dig för prov.</p>
   </section>
   <section>
-    <div class="startpagebullet"></div>
-    <h2>Blogg &#x272A;</h2>
+    <div class="startpagebullet">
+      <h2>Blogg &#x272A;</h2>
+    </div>
     <p>Möt våra nöjda kunder och se exempel på vad vi gjort åt dem.</p>
   </section>
   <section>
-    <div class="startpagebullet"></div>
-    <h2>Kontakt &#x260E;</h2>
-    <p>Varför anlita oss? Lorem ipsum dolor sit amet.</p>
+    <div class="startpagebullet">
+      <h2>Kontakt &#x260E;</h2>
+    </div>
+    <p>Hur du hittar och anlitar oss.</p>
   </section>
   <footer>
     <small>&copy; Lars Gunther och Thelin AB</small>

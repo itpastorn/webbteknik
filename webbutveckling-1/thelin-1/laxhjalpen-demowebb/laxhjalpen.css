@@ -19,7 +19,6 @@ body {
     font-family: 'Merienda One', cursive;
 }
 .startpage > header > h1:first-letter {
-    font-size: 16n0%;
     color: red;
 }
 .startpage > header > p.tagline {
