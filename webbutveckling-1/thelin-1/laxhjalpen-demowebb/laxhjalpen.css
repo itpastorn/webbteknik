@@ -39,36 +39,31 @@ section, header, footer {
     vertical-align: top;
 }
 .startpage > section:last-of-type {
-    margin-right: 0%;
+    margin-right: 0;
 }
 .startpage > section > h2 {
     margin: 0 0 1em;
-    width: 100%;
-    height: 3.5em;
-    padding-top: 2em;
-    border-radius: 50%;
+    padding: 2em 0;
     background-color: #F5F5F5; /* mkt ljus grå */ 
     box-shadow: inset 0 0 20px #007241;
+    border-radius: 50%;
     font: large 'Merienda One', cursive;
     text-align: center;
 }
-.startpage > section > h2 > a:link {
-    text-decoration: none;
+.startpage > section > h2 > a:link,
+.startpage > section > h2 > a:visited {
+  text-decoration: none;
     color: #000;
 }
-section > h2 > a:visited {
-    text-decoration: none;
-    color: #000; /* Ingen skillnad eftersom det är en slags meny */
-}
-section > h2 > a:focus, section > h2 > a:hover {
+.startpage > section > h2 > a:focus, section > h2 > a:hover {
     text-decoration: underline;
     color: #A62F00;
 }
-section > h2 > a:active {
+.startpage > section > h2 > a:active {
     text-decoration: underline;
     color: #FF4900;
 }
-section p {
+.startpage > section p {
      padding: 1ch; /* Just för att inte alla stödjer ch */
     -moz-hyphen: auto;
 }

@@ -1,0 +1,48 @@
+@CHARSET "UTF-8";
+body {
+    margin: auto;             /* Centrera sidan */
+    width: 860px;
+    font-family: sans-serif;
+    font-size: 100%;              /* Startvärde */
+}
+section, header, footer {
+    outline: 1px solid red;      /* Provisorisk */
+}
+.startpage > header {
+    text-align: center;
+}
+.imagefiller {
+    display: none;
+}
+.startpage > header > h1 {
+    font-size: 500%;           /* Massiv rubrik */
+}
+.startpage > header > p.tagline {
+    font-size: 120%;
+    padding: 0.5em;   /* Avstånd till kantlinje */
+    border-top: 3px double #00af64;
+    border-bottom: 3px double #00af64;
+    margin: 4em 0;             /* Avstånd nedåt */
+}
+.startpage > section {
+    display: inline-block;
+            /* Fast bredd vid sidan av varandra */
+    width: 20%;
+    margin-right: 6%;
+    vertical-align: top;
+}
+.startpage > section:last-of-type {
+    margin-right: 0;
+}
+.startpage > section > h2 {
+    margin: 0 0 1em;
+    padding: 2em 0;
+    background-color: #F5F5F5; /* Mkt ljus grå */ 
+    text-align: center;
+}
+footer {
+    display: block;
+    margin-top: 3em;
+    text-align: center;
+    color: #999;
+}
