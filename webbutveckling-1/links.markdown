@@ -1,22 +1,18 @@
-<?php
-/*
- * Länkar, filmer och resurser för Webbutveckling 1
- *
- * Olika slags länkar
- * - Noter - styrker ett påstående och fördjupning
- * - Referenslänkar - främst för att svara på frågan "Vad är det" (överkurs)
- * - Boklänkar - står i bokens löpande text (slipp skriva, skall läsas)
- * - Övningslänk - står i övningsboken (slipp skriva)
- * - Fördjupningslänk - Överkurs
- *
- * Andra resurser på webbteknik.nu:
- * - Filmer
- * - Fördjupningsartiklar (sånt som inte fick plats i boken)
- *
- * Window - Preferences - PHPeclipse - PHP - Code Templates
- */
-?>
-------------- Förord ------------------------
+# Länkar, filmer och resurser för Webbutveckling 1 #
+Olika slags länkar
+
+ * Noter - styrker ett påstående och fördjupning
+ * Referenslänkar - främst för att svara på frågan "Vad är det" (överkurs)
+ * Boklänkar - står i bokens löpande text (slipp skriva, skall läsas)
+ * Övningslänk - står i övningsboken (slipp skriva)
+ * Fördjupningslänk - Överkurs
+
+Andra resurser på webbteknik.nu:
+
+ * Filmer
+ * Fördjupningsartiklar (sånt som inte fick plats i boken)
+
+# Förord #
 
 Noter:
 1. http://www.webstandards.org/action/edutf/
@@ -27,22 +23,24 @@ Noter:
 http://webbutveckling.nu
 
 
-------------- Vad är webbteknik? ------------
+# Vad är webbteknik?
 
 Webbteknik: kap1-a-enkel
 
-h2: Några snabba kommentarer om koden
+## Några snabba kommentarer om koden
 Film: Ditt första dokument
 
-h3:JavaScript för beteende
+### JavaScript för beteende
 Noter: http://stackoverflow.com/questions/245062/whats-the-difference-between-javascript-and-java
 
-h2:Standarder
+### Standarder
 
-h2:Validering
+## Validering
+
 Boklänk: http://validator.nu/
 
-h2:Standardiseringsorgan och fler standarder
+## Standardiseringsorgan och fler standarder
+
 Referenslänkar: TODO
 - W3C
 - ECMAScript hos ECMA
@@ -52,7 +50,7 @@ Referenslänkar: TODO
 
 Fördjupningslänk: TCP/IP - TODO
 
-h3:DNS och URL:er
+## DNS och URL:er
 http://en.wikipedia.org/wiki/URI_scheme
 Fördjupningslänk: URL - todo
 Fördjupningslänk: DNS - todo
@@ -60,13 +58,13 @@ Boklänk: http://google.com/search?q=itpastorn&lang=sv
 Boklänk: TODO skrollande sida (HTML5 designtrend)
 Boklänk: about:about
 
-h3:Bra URL design
+### Bra URL design
 Fördjupningslänk: URL-design - todo
 
-h3:http och https
+### http och https
 Noter: http://paulirish.com/2010/the-protocol-relative-url/
 
-h3:HTTP huvuden, metoder och statuskoder
+### HTTP huvuden, metoder och statuskoder
 Film: Emulera http med Netcat
 Fördjupningslänk: http metoder TODO
 Fördjupningslänk: http huvuden TODO
@@ -75,11 +73,11 @@ Fördjupningslänk: cookies beskrivning TODO
 Fördjupningslänk: cookies lag och etik TODO
 Fördjupningslänk: Do not Track TODO
 
-h2:Vattenfallsdiagram, cachning och sidornas fart
+## Vattenfallsdiagram, cachning och sidornas fart
 Film: Vattenfallsdiagram
 Fördjupningslänk: Cachning TODO
 
-h2:Statiska kontra dynamiska sidor
+## Statiska kontra dynamiska sidor
 Referenslänk: Wordpress
 Referenslänk: Mediawiki
 Referenslänk: Drupal
@@ -115,7 +113,7 @@ http://www.webforum.nu/
 http://www.webforum.nu/forumdisplay.php?f=12
 http://w3fools.com/
 
---------- Kap 2 Processen ------------
+# Kap 2 Processen
 
 Specialprogram för Wireframes
 
@@ -131,7 +129,7 @@ http://en.wikipedia.org/wiki/Website_wireframe
 http://www.flickr.com/groups/ilovewireframes/
 
 
---------- Grundläggande HTML och CSS ------------------
+# Grundläggande HTML och CSS
 
 HTML terminologi
 Referenslänk: http://en.wikipedia.org/wiki/Whitespace_%28programming_language%29
@@ -162,8 +160,7 @@ https://developer.mozilla.org/en/CSS/border-width
 https://developer.mozilla.org/en/CSS/border-radius
 
 
-
---------- Kap ? Tecken kodning ---------
+# Kap ? Tecken kodning
 
 
 http://en.wikipedia.org/wiki/ASCII
@@ -196,6 +193,9 @@ http://www.youtube.com/watch?v=0-zrRixNw_A&NR=1 // Jättebra demo av lang-attrib
 
 Not: http://www.w3.org/TR/html-polyglot/#character-encoding
 
+
+-------------------------------------------------------------------------------
+
 Osorterat
 http://en.wikipedia.org/wiki/Percent-encoding
 http://sv.wikipedia.org/wiki/Base64
@@ -211,12 +211,14 @@ http://en.wikipedia.org/wiki/OpenType
 http://en.wikipedia.org/wiki/Core_fonts_for_the_Web
 
 
+-------------------------------------------------------------------------------
+
 --------- Kap ? HTML historik och teori ---------
 
 Fördjupningslänk: http://en.wikipedia.org/wiki/WorldWideWeb
 Fördjupningslänk: http://en.wikipedia.org/wiki/History_of_the_World_Wide_Web
 
-h3: HTML under pionjärtiden
+###  HTML under pionjärtiden
 Referenslänk: HTML 1.0
 http://www.w3.org/History/19921103-hypertext/hypertext/WWW/MarkUp/MarkUp.html
 
@@ -235,7 +237,7 @@ TODO
 Övningslänk: lynx
 TODO
 
-h3: Utveckling under browserkriget
+###  Utveckling under browserkriget
 Fördjupningslänk: Webbläsarkriget
 http://en.wikipedia.org/wiki/Browser_wars
 
@@ -263,7 +265,7 @@ TODO
 Referenslänk: HTML 3.2
 TODO
 
-h3:CSS föds och HTML 4 skapas
+### CSS föds och HTML 4 skapas
 Referenslänk: spacer gif
 TODO
 
@@ -276,7 +278,7 @@ http://www.w3.org/TR/html401/
 Fördjupningslänk: Strikt, transitional och frameset
 http://reference.sitepoint.com/html/doctypes (också vad en doctype består av och switchningen)
 
-h3: XML
+###  XML
 Referenslänk: XML
 TODO
 
@@ -286,7 +288,7 @@ TODO
 Fördjupningslänk: Drakoniska felhanteringen
 TODO
 
-h3: XHTML
+###  XHTML
 Referenslänk: XHTML 1.0
 TODO
 
@@ -299,11 +301,11 @@ TODO
 Referenslänk: XHTML 2.0
 TODO
 
-h3: Standardiseringsprocessen
+###  Standardiseringsprocessen
 Fördjupningslänk: W3C Recommendation track
 http://www.w3.org/2010/Talks/0119-next-web-plh/w3c_track.xhtml
 
-h3: Äkta XHTML
+###  Äkta XHTML
 
 Boklänk: HTML kontra XHTML
 http://wiki.whatwg.org/wiki/HTML_vs._XHTML
@@ -323,7 +325,7 @@ TODO
 Referenslänk: XForms
 TODO
 
-h3: HTML5
+###  HTML5
 Fördjupningslänk: WhatWG
 http://en.wikipedia.org/wiki/Whatwg
 
@@ -339,7 +341,7 @@ TODO
 Boklänk: Alla webbtekniker
 http://platform.html5.org/
 
-h3: Versionslös HTML
+###  Versionslös HTML
 
 https://developer.mozilla.org/en/HTML/Element/center
 https://developer.mozilla.org/en/HTML/Element/iframe
@@ -434,3 +436,85 @@ http://openbadges.org/
 https://mozillademos.org/demos/dashboard/demo.html
 http://lifehacker.com/5841787/what-does-hue-saturation-and-luminosity-in-your-image-editor
 
+
+
+Har jag med denna i kapitel 1?
+http://css-tricks.com/video-screencasts/58-html-css-the-very-basics/
+
+Vad är en bra webbplats?
+http://standardice.com/seybold/ (Några år på nacken)
+
+Font stacks
+http://www.maxdesign.com.au/articles/font-stacks/comment-page-1/
+
+http://en.wikipedia.org/wiki/Core_fonts_for_the_Web
+
+
+HTML-kapitlet
+Tips: http://wiki.whatwg.org/wiki/HTML_vs._XHTML
+Tips: http://www.w3.org/TR/html5/text-level-semantics.html
+
+Fotnot Henti S: SVG kräver space i tomma element???
+
+
+Enkla länkar till spec:
+http://meiert.com/en/indices/css-properties/
+
+Referens:
+https://developer.mozilla.org/en/CSS/CSS_Reference
+
+http://www.csszengarden.com/tr/svenska/
+http://www.456bereastreet.com/lab/developing_with_web_standards/
+
+Bra att använda när jag gör videos
+http://css3generator.com/
+http://css3.me/
+http://css3clickchart.com/
+http://css3please.com/
+
+Runda hörn
+https://developer.mozilla.org/en/CSS/border-radius
+
+Gradienter
+https://developer.mozilla.org/en/Using_gradients
+
+Fördjupning om radiella gradienter - mycket pedagogisk
+http://www.webdirections.org/blog/css3-radial-gradients/
+
+CSS mått
+https://developer.mozilla.org/en/CSS/length
+http://www.quirksmode.org/blog/archives/2010/04/a_pixel_is_not.html 
+http://www.webkit.org/blog/57/css-units/
+http://snook.ca/archives/html_and_css/vm-vh-units 
+https://developer.mozilla.org/en/CSS/angle
+
+Selektorer
+https://developer.mozilla.org/en/CSS/Getting_Started/Selectors
+Opera WSC...?
+http://net.tutsplus.com/tutorials/html-css-techniques/the-30-css-selectors-you-must-memorize/
+http://css-tricks.com/useful-nth-child-recipies/
+
+Important
+http://stackoverflow.com/questions/3706819/what-are-the-implications-of-using-important-in-css 
+
+Reset
+http://www.maxdesign.com.au/articles/css-reset/
+
+
+
+
+
+https://developer.mozilla.org/en/CSS/Media_queries
+
+Snygg CSS kod
+http://dropshado.ws/post/2054719546/css-formatting
+
+Font stack
+
+Nästa kapitel
+https://developer.mozilla.org/en/CSS/color_value
+http://hslpicker.com/
+
+
+Allmänt:
+http://scrunchup.com/

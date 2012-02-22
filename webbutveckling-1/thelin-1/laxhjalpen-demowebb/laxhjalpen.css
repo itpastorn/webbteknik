@@ -3,7 +3,7 @@
 body {
     margin: auto;
     width: 860px;
-    font-family: sans-serif;
+    font-family: "Helvetica Neue", "Liberation Sans", Calibri, Arial, sans-serif;
     font-size: 100%;
 }
 section, header, footer {
