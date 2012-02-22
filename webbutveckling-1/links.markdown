@@ -1,214 +1,665 @@
-# Länkar, filmer och resurser för Webbutveckling 1 #
-Olika slags länkar
+# Länkar, Videoer och resurser för Webbutveckling 1 #
+
+HUr **rapportera** errata och ge tips under våren 2012?
+
+Genom Githubs Issue-tracker!
+
+## Olika slags länkar
+
+TODO: Ge dem klasser och symboler/färger i CSS...
+TODO: Tagga länkarna också
+TODO: OM samma länk ska va på flera platser....?
+
+TODO: BIG: Lärarna ska kunna se när eleverna tittat på en film (Khan Academy style)
+
+Filtera länkar av en viss sort...
 
  * Noter - styrker ett påstående och fördjupning
  * Referenslänkar - främst för att svara på frågan "Vad är det" (överkurs)
- * Boklänkar - står i bokens löpande text (slipp skriva, skall läsas)
+ * Boklänkar - nämns i bokens löpande text eller i faktarutor (slipp skriva, skall läsas)
+ * Tipslänk - bra komplement till bokens text
  * Övningslänk - står i övningsboken (slipp skriva)
  * Fördjupningslänk - Överkurs
 
-Andra resurser på webbteknik.nu:
+## Andra resurser på webbplatsen för elever
 
- * Filmer
+ * Videofilmer
+ * Underlag för övningar
  * Fördjupningsartiklar (sånt som inte fick plats i boken)
+ * Föredragsunderlag (slides)
+ * Errata + (submit errata och tips)
+
+## Andra resurser på webbplatsen för lärare
+
+ * Ev. support för lärare om materialet, inte undervisningen i sig!
 
 # Förord #
 
-Noter:
-1. http://www.webstandards.org/action/edutf/
-   http://interactwithwebstandards.com/
-   http://interact.webstandards.org/
-2. http://www.gawds.org/
+ * Fotnot: [Web Standards Project Education Task Force](http://www.webstandards.org/action/edutf/)
+ * Fotnot: [Boken InterACT with Web Standards](http://interactwithwebstandards.com/)
+ * Fotnot: [InterACT: Kurser för högskolestudier i webbteknik](http://interact.webstandards.org/)
+ * Fotnot: [Web Education Communit Group](http://www.w3.org/community/webed/)
+ * Fotnot: [The Guild of Accessible Web Designers)[http://www.gawds.org/]
 
-http://webbutveckling.nu
+## Resurser ##
+
+Bokens webbplats = Där du är just nu!
+
+# Att använda detta läromedel
+
+Video: Välkommen och presentation
+
+## Typografiska konventioner
+
+ * Referens: [BLACK RIGHT-POINTING DOUBLE TRIANGLE](http://www.fileformat.info/info/unicode/char/23e9/index.htm)
+
+## Webbplats
+
+Bokens webbplats = Där du är just nu!
+
+# Ämnes- och kursplan
+TODO: Länk till Skolverkets sida för ämnet
+## Ämne - Webbteknik
+### Ämnets syfte
+### Undervisningen i ämnet webbteknik ska ge eleverna förutsättningar att utveckla följande
+## Kursplan för Webbutveckling 1
+### Centralt innehåll
+### Kunskapskrav
+#### Betyget E
+#### Betyget D
+#### Betyget C
+#### Betyget B
+#### Betyget A
+## Kommentarer
 
 
-# Vad är webbteknik?
+# Kapitel 1: Vad är webbteknik?
 
-Webbteknik: kap1-a-enkel
-
+ * Video: Skapa kap1-a-enkel
+   * Inkl. spara i UTF-8 i Gedit
+ 
 ## Några snabba kommentarer om koden
-Film: Ditt första dokument
 
+ * Video: Undersök kap1-a-enkel med utvecklingsverktygen i Firefox
+   * Inspect
+   * Style inkl. slå på/av
+   * Tilt
+ 
 ### JavaScript för beteende
-Noter: http://stackoverflow.com/questions/245062/whats-the-difference-between-javascript-and-java
+
+ * Fotnot: http://stackoverflow.com/questions/245062/whats-the-difference-between-javascript-and-java
 
 ### Standarder
 
 ## Validering
 
-Boklänk: http://validator.nu/
+ * Video: Validering av HTML5 med validator.nu
+ * Video: Andra validatorer, snabb intro
+   * HTML på W3C
+   * CSS på W3C (välj profil CSS 3)
+ * Boklänk: [validator.nu](http://validator.nu/)
 
 ## Standardiseringsorgan och fler standarder
 
-Referenslänkar: TODO
-- W3C
-- ECMAScript hos ECMA
-- WhatWG http://www.whatwg.org/
-- Khronos Group http://www.khronos.org/webgl/
-- The WebM Project http://www.webmproject.org/
+ * Referens: [W3C](http://w3.org)
+ * Referens: [ECMAScript hos ECMA](http://www.ecma-international.org/publications/standards/Stnindex.htm#Software)
+ * Referens: [WhatWG](http://www.whatwg.org/)
+ * Referens: [Khronos Group](http://www.khronos.org/webgl/)
+ * Referens: [The WebM Project](http://www.webmproject.org/)
+ * Fotnot: [WebCL](http://www.khronos.org/webcl/wiki/Main_Page)
 
 Fördjupningslänk: TCP/IP - TODO
 
-## DNS och URL:er
-http://en.wikipedia.org/wiki/URI_scheme
-Fördjupningslänk: URL - todo
-Fördjupningslänk: DNS - todo
-Boklänk: http://google.com/search?q=itpastorn&lang=sv
-Boklänk: TODO skrollande sida (HTML5 designtrend)
-Boklänk: about:about
+### DNS och URL:er
 
-### Bra URL design
+ * Tipslänk: [URI scheme på Wikipeda](http://en.wikipedia.org/wiki/URI_scheme)
+
+ * Fördjupningslänk: URL - todo
+ * Fördjupningslänk: DNS - todo
+
+ * Boklänk: http://google.com/search?q=itpastorn&lang=sv
+ * Boklänk: about:about
+
+### Schema (fördjupning)
+
+Fördjupningstext
+
+### Auktoritet (fördjupning)
+
+Fördjupningstext
+
+### Sökväg och resursnamn
+
+### Query strings
+
+ * Fotnot: [Et-tecknet](http://sv.wikipedia.org/wiki/Et-tecken)
+ * Fotnot: [Nummertecknet #](http://sv.wikipedia.org/wiki/Nummertecken)
+
+### Bra URL-design
 Fördjupningslänk: URL-design - todo
 
+### Relativa och absoluta sökvägar
+
+* Fotnot: http://paulirish.com/2010/the-protocol-relative-url/
+
 ### http och https
-Noter: http://paulirish.com/2010/the-protocol-relative-url/
 
 ### HTTP huvuden, metoder och statuskoder
-Film: Emulera http med Netcat
-Fördjupningslänk: http metoder TODO
-Fördjupningslänk: http huvuden TODO
-Fördjupningslänk: http statuskoder TODO
-Fördjupningslänk: cookies beskrivning TODO
-Fördjupningslänk: cookies lag och etik TODO
-Fördjupningslänk: Do not Track TODO
 
-## Vattenfallsdiagram, cachning och sidornas fart
-Film: Vattenfallsdiagram
-Fördjupningslänk: Cachning TODO
+ * Video: Emulera http med Netcat
+
+ * Fördjupningslänk: http metoder TODO
+ * Fördjupningslänk: http huvuden TODO
+ * Fördjupningslänk: http statuskoder TODO
+ * Fördjupningslänk: cookies beskrivning TODO
+ * Fördjupningslänk: cookies lag och etik TODO
+ * Fördjupningslänk: Do not Track TODO
+
+## Vattenfallsdiagram, cachning och sidornas fart (fördjupning)
+
+ * Video: Vattenfallsdiagram
+ * Fördjupningslänk: Cachning TODO
 
 ## Statiska kontra dynamiska sidor
-Referenslänk: Wordpress
-Referenslänk: Mediawiki
-Referenslänk: Drupal
-Referenslänk: Joomla
-Referenslänk: Plone
-Referenslänk: Episerver
-Referenslänk: Sitecore.
-Referenslänk: Wiki Markup
-Referenslänk: Markdown
-Referenslänk: BBCode
 
-Enkla sidor kontra fullfjädrade applikationer (Ajax)
-Referenslänk:
+ * Referenslänk: Wordpress TODO
+ * Referenslänk: Mediawiki TODO
+ * Referenslänk: Drupal TODO
+ * Referenslänk: Joomla TODO
+ * Referenslänk: Plone TODO
+ * Referenslänk: Episerver TODO
+ * Referenslänk: Sitecore TODO
+ * Referenslänk: Wiki Markup TODO
+ * Referenslänk: Markdown TODO
+ * Referenslänk: BBCode TODO
 
-http://sv.wikipedia.org/wiki/Nummertecken
-http://sv.wikipedia.org/wiki/Et-tecken
+## Enkla sidor kontra fullfjädrade applikationer (Ajax)
 
-http://en.wikipedia.org/wiki/About:_URI_scheme
+ * Fotnot: JJ Garrets artikel TODO
+ * Referenslänk: TODO
 
+## Proprietära tekniker
+### Insticksprogram (plug-ins)
+### Ljud- och videoformat
+### Öppen källkod och öppna standarder
+### Webbläsarkrig
 
-http://www.khronos.org/webcl/wiki/Main_Page
+## Läs mer här
 
-http://kaxigt.com/2009/11/max-rackvidd-med-html-css-tommy-olsson-berattar-om-sin-bok/
-
-http://www.w3.org/wiki/Web_Standards_Curriculum
-http://htmldog.com/guides/htmlbeginner/
-https://developer.mozilla.org/
-https://developer.mozilla.org/en-US/learn
-http://www.sitepoint.com/
-http://www.sitepoint.com/books/html3/
-http://reference.sitepoint.com/html/page-structure
-http://www.webforum.nu/
-http://www.webforum.nu/forumdisplay.php?f=12
-http://w3fools.com/
-
-# Kap 2 Processen
-
-Specialprogram för Wireframes
-
-Block för Wireframes
-
-LiveScribe för att skissa
-
-Samla på dig en portfolia av designidéer
+ * Video: Använd denna webbplats - olika slags länkar, etc.
+ * Video: Bra resurser
+   * Inkl. lägg till "MDN" när du googlar
+ * Boklänk (dubblering): [Boken InterACT with Web Standards](http://interactwithwebstandards.com/)
+ * Boklänk: http://www.w3.org/wiki/Web_Standards_Curriculum   TODO Kolla perma-URL
+ * Boklänk: http://htmldog.com/guides/htmlbeginner/
+ * Boklänk: https://developer.mozilla.org/
+ * Boklänk: https://developer.mozilla.org/en-US/learn
+ * Boklänk: http://www.sitepoint.com/
+ * Boklänk: http://reference.sitepoint.com/html/page-structure
+ * Boklänk: http://www.webforum.nu/
+ * Boklänk: http://www.webforum.nu/forumdisplay.php?f=12
+ * Boklänk: http://stackoverflow.com/
+ * Boklänk: [Om boken Max Räckvidd med HTML och CSS](http://kaxigt.com/2009/11/max-rackvidd-med-html-css-tommy-olsson-berattar-om-sin-bok/)
+ * Boklänk: http://w3fools.com/
 
 
-http://en.wikipedia.org/wiki/Website_wireframe
+# Kapitel 2: Utvecklingsprocessen
 
-http://www.flickr.com/groups/ilovewireframes/
+Lärartips:
+
+Ämnet Gränssnittsdesign TODO skriv något
+
+Boktips:
+
+ * InterACT sid xx-yy TODO
+ * The Elements of User Exerience TODO
+
+ * Video: Reportage från en webbyrå
+   * Process
+   * Roller
+   * Verktyg
+
+## Baby steps, speciellt i början
+
+## Roller
+
+## Processen
+
+### Idé, mål, och analys av förutsättningar
+### Skisser och beställning
+
+ * Tipslänk: Specialprogram för Wireframes TODO
+ * Tipslänk: Block för Wireframes
+ * Tipslänk: http://en.wikipedia.org/wiki/Website_wireframe
+ * Tipslänk: http://www.flickr.com/groups/ilovewireframes/
+ * Video: LiveScribe för att skissa
+ * Video: Samla på dig en portfolia av designidéer
+
+### Färger och typsnitt
+### Stilguide
+
+ * Tipslänk: Stilguide exempel 1 TODO
+ * Tipslänk: Stilguide exempel 1 TODO
+
+### Prototyp
+### Första omgång tester
+### Alfa, beta, RC
+### Lansering
+### Uppföljning och utvärdering
+### Justeringar
+
+## Verktyg
+
+### En bra editor
+
+ * Video: Editorer
+   * Syntax highlight
+   * Radnumrering
+   * Indrag
+   * UTF-8
+
+### Webbläsare
+
+### Utvecklingsverktygen
+
+ * Videos om utvecklarverktyg
+   * Inbyggda i Firefox
+   * Web Developer
+   * Firebug
+   * Dragonfly
+   * Chrome Tools
+   * IE 
+     * Aktivera lägen för äldre versioner
+   * Safari
+   * Mobil Firefox på Desktop
+   * Mobil Opera på Desktop
+   * "Remote debugging"
+
+### Andra tillägg till Firefox (Video)
+
+ * Video: Web Developer i detalj
+ * Video: FireFTP och FileZilla
+ * Video: Inline Code Finder och andra tilläg till Firebug
+ 
+### En lokal server
+
+### FTP-program
+### Versionskontroll
+### Ärendehantering (issue management)
+### Projekthantering
+### Dela kod, få svar på frågor, bolla idéer
+## Läs mer om processen och verktyg
+
+# Kapitel 3: Vad är en bra webbplats?
+
+## En lättunderhållen webbplats
+### Skriv luftig kod
+### Använd konsekventa indrag
+### Använd konsekventa namn
+### Skriv kommentarer
+
+## Vill du ha hjälp av andra? Chanserna ökar om din kod är lättläst!
+
+## Progressiv förbättring
+### Börja med semantisk HTML-kod
+### Använd CSS för gradvis förbättring
+### Skapa allt med JavaScript som kräver JavaScript
+### Kapacitetsdetektering
+
+## Varningssignaler - Vad utmärker (tekniskt) dåliga webbplatser
+
+## Arbetsboken
+### Fler tips
+ 
+ * Tipslänk: Vägledningen Att bara läsa rubrikerna gör dig bättre!
+
+# Kapitel 4: Grundläggande HTML och CSS
+
+## HTML-terminologi
+
+ * Referenslänk: TODO Tommys terminologi-genomgång på Sitepoint
+ * Fotnot: http://en.wikipedia.org/wiki/Whitespace_%28programming_language%29
+ * Fotnot: http://www.w3.org/TR/html-markup/spec.html#void-element
+
+## CSS-terminologi
+
+ * Referenslänk: http://reference.sitepoint.com/css/syntax
+
+## Block- och inline-element
+
+ * Referenslänk: TODO
+
+## <!-- kommentarer i HTML -->
+
+ * Referenslänk: https://developer.mozilla.org/en/HTML/???  TODO 
+
+## Några HTML element och attribut
+
+### <html>
+
+ * Referenslänk: https://developer.mozilla.org/en/HTML/Element/html
+
+TODO för alla dessa: Sitepoints länk också
+
+### <head>
+
+ * Referenslänk: https://developer.mozilla.org/en/HTML/Element/head
+
+### <body>
+
+ * Referenslänk: https://developer.mozilla.org/en/HTML/Element/body
+
+### <meta charset=”utf-8” />
+
+ * Referenslänk: https://developer.mozilla.org/en/HTML/Element/meta TODO Fixa mer precis
+ * Referenslänk: http://reference.sitepoint.com/html/meta/http-equiv
+
+### <title>
+
+ * Referenslänk: https://developer.mozilla.org/en/HTML/Element/title
+
+### Rubriker (blockelement)
+
+ * Referenslänk: https://developer.mozilla.org/en/HTML/Element/h1
+
+### <p> (blockelement)
+
+ * Referenslänk: https://developer.mozilla.org/en/HTML/Element/p
+
+### <a href="url"> (inline-element)
+
+ * Referenslänk: https://developer.mozilla.org/en/HTML/Element/a
+
+### <img src=".." alt="" /> (inline-element)
+
+ * Referenslänk: https://developer.mozilla.org/en/HTML/Element/img
+
+### <div> (blockelement)
+
+ * Referenslänk: https://developer.mozilla.org/en/HTML/Element/div
+
+### <span> (inline-element)
+
+ * Referenslänk: https://developer.mozilla.org/en/HTML/Element/span
+
+## Vanliga HTML-attribut
+
+ * Referenslänk: http://reference.sitepoint.com/html/core-attributes
+
+### Attributet lang
+
+ * Tipslänk: [Jättebra demo av lang-attributets betydelse med JAWS](http://www.youtube.com/watch?v=0-zrRixNw_A&NR=1)
+
+### Attributet class
+### Attributet id
+### Attributet title
+### Attributet style
+### Attributet dir
+
+## Några CSS-selektorer
+### Typselektorn
+### Id-selektorn
+### Klasselektorn
+### Barn- och angränsande syskon- och avkomlingsselektorerna
+
+## Några CSS-egenskaper
+
+ * Video: (Hur göra? Tänd och släck eller ändra i utvecklingsverktyget)
+ * Video: (Hur göra? JSFiddle)
+
+### color
+### Färgvärden
+### Background-color
+
+### Font-family
+
+### Font-size
+
+ * Referenslänk: https://developer.mozilla.org/en/CSS/font-size
+
+### Font-weight
+
+ * Referenslänk: https://developer.mozilla.org/en/CSS/font-weight
+
+### Text-align
+
+ * Referenslänk: https://developer.mozilla.org/en/CSS/text-align
+
+### Text-decoration
+
+ * Referenslänk: https://developer.mozilla.org/en/CSS/text-decoration
+ * Referenslänk: https://developer.mozilla.org/en/CSS/text-decoration-line
+ * Referenslänk: https://developer.mozilla.org/en/CSS/text-decoration-color
+ * Referenslänk: https://developer.mozilla.org/en/CSS/text-decoration-style
+
+### Border
+
+ * Referenslänk: https://developer.mozilla.org/en/CSS/border
+ * Referenslänk: https://developer.mozilla.org/en/CSS/border-style
+ * Referenslänk: https://developer.mozilla.org/en/CSS/border-color
+ * Referenslänk: https://developer.mozilla.org/en/CSS/border-width
+
+### Border-radius
+
+ * Referenslänk: https://developer.mozilla.org/en/CSS/border-radius
+
+## Extern CSS
+
+ * Video
+
+## DOM
+
+ * Video
+
+## Mer om värdet av validering
+### HTML validatorer
+### Validering av CSS
+### Felkonsollen
+### Lintning av HTML
+### Lintning av JavaScript
+### Lintning av CSS (fördjupning)
+### Kontroll av tillgänglighet
+### Netrelations Inspector (fördjupning)
+## Inget kan ersätta manuella kontroller och tester med riktiga användare
+
+## Sammanfattning
 
 
-# Grundläggande HTML och CSS
+# En första sida
 
-HTML terminologi
-Referenslänk: http://en.wikipedia.org/wiki/Whitespace_%28programming_language%29
-Referenslänk: http://www.w3.org/TR/html-markup/spec.html#void-element
+## HTML-kod för sidans struktur
 
-CSS-terminologi
-http://reference.sitepoint.com/css/syntax
+ * Video
 
-https://developer.mozilla.org/en/HTML/Element/a
+## CSS-kod för sidans struktur
 
-http://reference.sitepoint.com/html/meta/http-equiv
+ * Video
 
-https://developer.mozilla.org/en/HTML/Element/div
+## CSS för länkarna
 
-https://developer.mozilla.org/en/CSS/font-size
-https://developer.mozilla.org/en/CSS/font-weight
-https://developer.mozilla.org/en/CSS/text-align
+ * Video
 
-https://developer.mozilla.org/en/CSS/text-decoration
-https://developer.mozilla.org/en/CSS/text-decoration-line
-https://developer.mozilla.org/en/CSS/text-decoration-color
-https://developer.mozilla.org/en/CSS/text-decoration-style
+## CSS för att skapa ellipser
 
-https://developer.mozilla.org/en/CSS/border
-https://developer.mozilla.org/en/CSS/border-style
-https://developer.mozilla.org/en/CSS/border-color
-https://developer.mozilla.org/en/CSS/border-width
-https://developer.mozilla.org/en/CSS/border-radius
+ * Video
 
+## Tyspnitt
 
-# Kap ? Tecken kodning
+ * Video
 
+## Webbfonter (fördjupning)
 
-http://en.wikipedia.org/wiki/ASCII
+ * Länkar TODO
 
-http://en.wikipedia.org/wiki/Unicode_input
+## Första bokstaven i en annan färg
 
-http://en.wikipedia.org/wiki/ISO/IEC_8859
-http://en.wikipedia.org/wiki/ISO/IEC_8859-1
-http://en.wikipedia.org/wiki/Windows-1252
-http://en.wikipedia.org/wiki/Windows_code_page
+ * Video
+ * Referenslänk first-child TODO
 
-http://www.fileformat.info/info/unicode/block/miscellaneous_symbols/images.htm
+## Bilden
 
-http://www.fileformat.info/info/unicode/
+ * Video
+ 
+## Läs mer
 
-http://www.joelonsoftware.com/articles/Unicode.html
+ * Länkar, etc
 
-http://unicode.org/back
+# Teckenkodning och fonter
 
-http://en.wikipedia.org/wiki/UTF-16/UCS-2
-http://en.wikipedia.org/wiki/Comparison_of_Unicode_encodings
-http://en.wikipedia.org/wiki/UTF-8
+ * Fördjupningslänk: http://en.wikipedia.org/wiki/ASCII
+ * Fördjupningslänk: http://www.w3.org/International/getting-started/characters
 
-http://en.wikipedia.org/wiki/Quotation_mark
-http://en.wikipedia.org/wiki/Quotation_mark#Typing_quotation_marks_on_a_computer_keyboard
+## Nyrad som problem
+## Äldre teckenkodningar
 
-http://www.whatwg.org/specs/web-apps/current-work/complete/parsing.html#determining-the-character-encoding
+ * Fotnot: http://en.wikipedia.org/wiki/ISO/IEC_8859
+ * Fotnot: http://en.wikipedia.org/wiki/ISO/IEC_8859-1
+ * Fotnot: http://en.wikipedia.org/wiki/Windows-1252
+ * Fotnot: http://en.wikipedia.org/wiki/Windows_code_page
 
-http://www.youtube.com/watch?v=0-zrRixNw_A&NR=1 // Jättebra demo av lang-attributets betydelse med JAWS
+# Entiteter
 
-Not: http://www.w3.org/TR/html-polyglot/#character-encoding
+ * Tipslänk: http://en.wikipedia.org/wiki/Unicode_input
+ * Tipslänk: http://www.fileformat.info/info/unicode/block/miscellaneous_symbols/images.htm
 
+## Unicode
 
--------------------------------------------------------------------------------
+ * Fördjupningslänk: [The Absolute Minimum Every Software Developer Absolutely, Positively Must Know About Unicode and Character Sets (No Excuses!)](http://www.joelonsoftware.com/articles/Unicode.html) av Joel Spolsky
 
-Osorterat
-http://en.wikipedia.org/wiki/Percent-encoding
-http://sv.wikipedia.org/wiki/Base64
-http://sv.wikipedia.org/wiki/MIME
-http://en.wikipedia.org/wiki/Computer_font
-http://en.wikipedia.org/wiki/Typeface
-http://hacks.mozilla.org/2010/11/firefox-4-font-feature-support/
+ * Fotnot: http://en.wikipedia.org/wiki/Quotation_mark
+ * Fotnot: http://en.wikipedia.org/wiki/Quotation_mark#Typing_quotation_marks_on_a_computer_keyboard
+
+### Glyfer
+### Tecken och teckentabeller
+### Teckenkodning
+
+ * Fotnot: http://en.wikipedia.org/wiki/UTF-16/UCS-2
+ * Fotnot: http://en.wikipedia.org/wiki/Comparison_of_Unicode_encodings
+
+### UTF-8
+
+ * Referenslänk: http://en.wikipedia.org/wiki/UTF-8
+
+## URL-kodade tecken
+
+ * Referenslänk: http://en.wikipedia.org/wiki/Percent-encoding
+
+## Base64-kodning (fördjupning)
+
+ * Referenslänk: http://sv.wikipedia.org/wiki/Base64
+
+## Språkförbistring mellan Unicode och http/html
+
+## Hur ange teckenkodning?
+
+ * [Officell guide om att ange teckenkodningar på Svenska från W3C](http://www.w3c.se/resources/office/translations/articles/i18n/O-charset_100805.sv.utf8.html)
+ * Referenslänk: [Handling character encodings in HTML and CSS](http://www.w3.org/International/tutorials/tutorial-char-enc/)
+ * Fotnot: http://www.whatwg.org/specs/web-apps/current-work/complete/parsing.html#determining-the-character-encoding
+ * Fotnot: http://www.w3.org/TR/html-polyglot/#character-encoding
+
+### Teckenkodning kan anges med ett http-huvud
+### Teckenkodning kan anges med elementet <meta>
+### Teckenkodning kan – men bör inte – anges med BOM
+### Teckenkodning kan anges i XML-deklarationen
+### Lita (inte) på att webbläsarna gissar rätt
+
+## Mer om MIME
+
+ * Referenslänk: http://sv.wikipedia.org/wiki/MIME
+
+## Fonter
+
+ * Fotnot: http://en.wikipedia.org/wiki/Computer_font
+ * Fotnot: http://en.wikipedia.org/wiki/Typeface
+ * Referenslänk: http://www.w3.org/Fonts/
+ * Referenslänk: http://en.wikipedia.org/wiki/Web_typography
+ * Fotnot: PostScript TODO
+ * Fotnot: PostScript fonter TODO
+ * Fotnot: http://en.wikipedia.org/wiki/TrueType
+ * Fotnot: http://en.wikipedia.org/wiki/OpenType
+ * Fotnot: http://en.wikipedia.org/wiki/Apple_Advanced_Typography
+ * Fotnot: http://www.w3.org/TR/SVG/fonts.html
+ * Fotnot: http://en.wikipedia.org/wiki/Embedded_OpenType
+ * Fotnot: http://hacks.mozilla.org/2010/11/firefox-4-font-feature-support/
+
+### Nedladdningsbara typsnitt
+
+ * Referenslänk: http://www.w3.org/TR/WOFF/
+ * Referenslänk: [CSS @ Ten: The Next Big Thing](http://www.alistapart.com/articles/cssatten) av Håkon Wium Lie på A List Apart!
+
+### Font-stackar
+
+### Stil (CSS)
+
+## Summa
+
 http://www.w3.org/TR/WOFF/
-http://www.w3.org/Fonts/
 
-http://en.wikipedia.org/wiki/TrueType
-http://en.wikipedia.org/wiki/OpenType
-http://en.wikipedia.org/wiki/Core_fonts_for_the_Web
+
+ * Fotnot: http://en.wikipedia.org/wiki/Core_fonts_for_the_Web
+
+# HTML historik och teori
+HTML under pionjärtiden
+Utveckling under browserkriget
+CSS föds och HTML 4 skapas
+XML
+XHTML
+Standardiseringsprocessen
+Äkta XHTML
+HTML5
+Versionslös HTML
+Kompatibilitetslägen
+Doctype-switchning
+CSS-hack
+Internet Explorers olika lägen
+HTML-element
+Element i huvudet
+Element i body
+Dålig HTML
+HTML5 content model
+Något mer om doctypes (överkurs på webbplatsen)
+Sammanfattning
+
+# CSS historik och teori
+Bakgrund och versioner
+Hur infoga (snabb repetition för att förstå kaskaden)
+Med attributet style
+Elementet style
+Externt via link-elementet
+Kaskaden
+Måttenheter
+Att resetta eller inte resetta – det är frågan?
+Mer om selektorer
+Gruppselektorer
+Pseudoklasser och pseudoelement
+Selektorer för länkar
+Specificitivitet
+(Not so) ! important
+Kortformer Shorthands
+@media
+
+# Bilder och färger
+Färgkoder
+Bildformat
+
+# Boxar och sektioner
+## Boxmodellen
+## Sektiioner i HTML 4 och HTML5
+## Float
+
+# Listor
+# Tvåspaltslayout
+# Formulär
+# JavaScript
+# Mobil webb
+# Tillgänglighet
+# Säkerhet
+Lite teori om säkerhet på webben
+Lösenord
+Cross Site Scripting (XSS)
+Iframe i sandlåda (fördjupning)
+# Jazz
+Favicon
 
 
 -------------------------------------------------------------------------------
@@ -307,11 +758,8 @@ http://www.w3.org/2010/Talks/0119-next-web-plh/w3c_track.xhtml
 
 ###  Äkta XHTML
 
-Boklänk: HTML kontra XHTML
-http://wiki.whatwg.org/wiki/HTML_vs._XHTML
-
-Referenslänk: HTML and XHTML Frequently Answered Questions
-http://www.w3.org/MarkUp/2004/xhtml-faq#advantages
+ * Boklänk: [HTML kontra XHTML](http://wiki.whatwg.org/wiki/HTML_vs._XHTML)
+ * Referenslänk: [HTML and XHTML Frequently Answered Questions](http://www.w3.org/MarkUp/2004/xhtml-faq#advantages)
 
 Referenslänk: SVG
 TODO
@@ -329,13 +777,13 @@ TODO
 Fördjupningslänk: WhatWG
 http://en.wikipedia.org/wiki/Whatwg
 
-Referenslänk: Web Forms 2.0
+Fotnot: Web Forms 2.0
 TODO
 
-Referenslänk: Web Applications 1.0
+Fotnot: Web Applications 1.0
 TODO
 
-Referenslänk: HTML5 WG
+Fotnot: HTML5 WG
 TODO
 
 Boklänk: Alla webbtekniker
