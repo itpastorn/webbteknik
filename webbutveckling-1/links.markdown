@@ -1,13 +1,13 @@
 # Länkar, Videoer och resurser för Webbutveckling 1 #
 
-HUr **rapportera** errata och ge tips under våren 2012?
+Hur **rapportera** errata och ge tips under våren 2012?
 
 Genom Githubs Issue-tracker!
 
 ## Olika slags länkar
 
 TODO: Ge dem klasser och symboler/färger i CSS...
-TODO: Tagga länkarna också
+TODO: Tagga länkarna också - samt ge dem en liten logga broende påom det är SitePoint, WSC, MDN, Wikipedia eller...
 TODO: OM samma länk ska va på flera platser....?
 
 TODO: BIG: Lärarna ska kunna se när eleverna tittat på en film (Khan Academy style)
@@ -51,14 +51,16 @@ Video: Välkommen och presentation
 
 ## Typografiska konventioner
 
- * Referens: [BLACK RIGHT-POINTING DOUBLE TRIANGLE](http://www.fileformat.info/info/unicode/char/23e9/index.htm)
+ * Fotnot: [BLACK RIGHT-POINTING DOUBLE TRIANGLE](http://www.fileformat.info/info/unicode/char/23e9/index.htm)
 
 ## Webbplats
 
 Bokens webbplats = Där du är just nu!
 
 # Ämnes- och kursplan
+
 TODO: Länk till Skolverkets sida för ämnet
+
 ## Ämne - Webbteknik
 ### Ämnets syfte
 ### Undervisningen i ämnet webbteknik ska ge eleverna förutsättningar att utveckla följande
@@ -162,6 +164,8 @@ Fördjupningslänk: URL-design - todo
 
 ## Statiska kontra dynamiska sidor
 
+ * Referenslänk: PHP TODO
+
  * Referenslänk: Wordpress TODO
  * Referenslänk: Mediawiki TODO
  * Referenslänk: Drupal TODO
@@ -169,13 +173,14 @@ Fördjupningslänk: URL-design - todo
  * Referenslänk: Plone TODO
  * Referenslänk: Episerver TODO
  * Referenslänk: Sitecore TODO
+
  * Referenslänk: Wiki Markup TODO
  * Referenslänk: Markdown TODO
  * Referenslänk: BBCode TODO
 
 ## Enkla sidor kontra fullfjädrade applikationer (Ajax)
 
- * Fotnot: JJ Garrets artikel TODO
+ * Fotnot: [Ajax: A New Approach to Web Applications](http://www.adaptivepath.com/ideas/ajax-new-approach-web-applications) av Jesse James Garrett
  * Referenslänk: TODO
 
 ## Proprietära tekniker
@@ -230,7 +235,7 @@ Boktips:
 
  * Tipslänk: Specialprogram för Wireframes TODO
  * Tipslänk: Block för Wireframes
- * Tipslänk: http://en.wikipedia.org/wiki/Website_wireframe
+ * Tipslänk: http://en.wikipedia.org/wiki/Website_wireframe 
  * Tipslänk: http://www.flickr.com/groups/ilovewireframes/
  * Video: LiveScribe för att skissa
  * Video: Samla på dig en portfolia av designidéer
@@ -335,50 +340,50 @@ Boktips:
 
 ## Några HTML element och attribut
 
-### <html>
+### \<html>
 
  * Referenslänk: https://developer.mozilla.org/en/HTML/Element/html
 
 TODO för alla dessa: Sitepoints länk också
 
-### <head>
+### \<head>
 
  * Referenslänk: https://developer.mozilla.org/en/HTML/Element/head
 
-### <body>
+### \<body>
 
  * Referenslänk: https://developer.mozilla.org/en/HTML/Element/body
 
-### <meta charset=”utf-8” />
+### \<meta charset=”utf-8” />
 
  * Referenslänk: https://developer.mozilla.org/en/HTML/Element/meta TODO Fixa mer precis
  * Referenslänk: http://reference.sitepoint.com/html/meta/http-equiv
 
-### <title>
+### \<title>
 
  * Referenslänk: https://developer.mozilla.org/en/HTML/Element/title
 
 ### Rubriker (blockelement)
 
- * Referenslänk: https://developer.mozilla.org/en/HTML/Element/h1
+ * Referenslänk: [Rubriker](https://developer.mozilla.org/en/HTML/Element/Heading_Elements)
 
-### <p> (blockelement)
+### \<p> (blockelement)
 
  * Referenslänk: https://developer.mozilla.org/en/HTML/Element/p
 
-### <a href="url"> (inline-element)
+### \<a href="url"> (inline-element)
 
  * Referenslänk: https://developer.mozilla.org/en/HTML/Element/a
 
-### <img src=".." alt="" /> (inline-element)
+### \<img src=".." alt="" /> (inline-element)
 
  * Referenslänk: https://developer.mozilla.org/en/HTML/Element/img
 
-### <div> (blockelement)
+### \<div> (blockelement)
 
  * Referenslänk: https://developer.mozilla.org/en/HTML/Element/div
 
-### <span> (inline-element)
+### \<span> (inline-element)
 
  * Referenslänk: https://developer.mozilla.org/en/HTML/Element/span
 
@@ -397,6 +402,9 @@ TODO för alla dessa: Sitepoints länk också
 ### Attributet dir
 
 ## Några CSS-selektorer
+
+ * Referenslänk: [Selektorer](https://developer.mozilla.org/en/CSS/Getting_Started/Selectors)
+
 ### Typselektorn
 ### Id-selektorn
 ### Klasselektorn
@@ -552,7 +560,7 @@ TODO för alla dessa: Sitepoints länk också
 
 ## Hur ange teckenkodning?
 
- * [Officell guide om att ange teckenkodningar på Svenska från W3C](http://www.w3c.se/resources/office/translations/articles/i18n/O-charset_100805.sv.utf8.html)
+ * Referenslänk: [Officell guide om att ange teckenkodningar på Svenska från W3C](http://www.w3c.se/resources/office/translations/articles/i18n/O-charset_100805.sv.utf8.html)
  * Referenslänk: [Handling character encodings in HTML and CSS](http://www.w3.org/International/tutorials/tutorial-char-enc/)
  * Fotnot: http://www.whatwg.org/specs/web-apps/current-work/complete/parsing.html#determining-the-character-encoding
  * Fotnot: http://www.w3.org/TR/html-polyglot/#character-encoding
@@ -571,7 +579,7 @@ TODO för alla dessa: Sitepoints länk också
 
  * Fotnot: http://en.wikipedia.org/wiki/Computer_font
  * Fotnot: http://en.wikipedia.org/wiki/Typeface
- * Referenslänk: http://www.w3.org/Fonts/
+ * Fördjupningslänk:: http://www.w3.org/Fonts/
  * Referenslänk: http://en.wikipedia.org/wiki/Web_typography
  * Fotnot: PostScript TODO
  * Fotnot: PostScript fonter TODO
@@ -589,35 +597,117 @@ TODO för alla dessa: Sitepoints länk också
 
 ### Font-stackar
 
+ * Fotnot: http://en.wikipedia.org/wiki/Core_fonts_for_the_Web
+
 ### Stil (CSS)
 
 ## Summa
 
-http://www.w3.org/TR/WOFF/
 
-
- * Fotnot: http://en.wikipedia.org/wiki/Core_fonts_for_the_Web
 
 # HTML historik och teori
-HTML under pionjärtiden
-Utveckling under browserkriget
-CSS föds och HTML 4 skapas
-XML
-XHTML
-Standardiseringsprocessen
-Äkta XHTML
-HTML5
-Versionslös HTML
+
+ * Fotnot: http://en.wikipedia.org/wiki/WorldWideWeb
+ * Fotnot: http://en.wikipedia.org/wiki/History_of_the_World_Wide_Web
+
+###  HTML under pionjärtiden
+
+ * Fotnot: [HTML 1.0](http://www.w3.org/History/19921103-hypertext/hypertext/WWW/MarkUp/MarkUp.html)
+ * Fotnot: [Mosaic](http://en.wikipedia.org/wiki/Mosaic_%28web_browser%29)
+ * Fotnot: TUI TODO
+ * Fotnot: GUI TODO
+
+Övning: elinks  och Lynx TODO
+
+###  Utveckling under browserkriget
+
+ * Fördjupningslänk: [Webbläsarkriget](http://en.wikipedia.org/wiki/Browser_wars)
+ * Fotnot: Netscape TODO
+ * Fördjupningslänk: Applets TODO + någon som förklarar varför de är dåliga
+ * Fotnot: MSIE TODO
+ * Fotnot: ActiveX TODO
+ * Fotnot: Common Language Runtime TODO
+ * Fotnot: [HTML 2.0](http://www.w3.org/MarkUp/html-spec/html-spec_toc.html)
+ * Fotnot: [Referenslänk: HTML 3.0]   TODO
+ * Fotnot: [HTML 3.2]    TODO
+
+
+### CSS föds och HTML 4 skapas
+
+ * Fotnot: [spacer gif TODO
+ * Fotnot: [Creating Killer Web Sites TODO
+ * Fotnot: [HTML 4.01 http://www.w3.org/TR/html401/
+ * Referenslänk: [Strikt, transitional och frameset](http://reference.sitepoint.com/html/doctypes) Förklarar också vad en doctype består av och switchningen.
+
+###  XML
+
+ * Referenslänk: XML TODO
+ * Fördjupningslänk: XML på Wikipedia TODO
+ * Fördjupningslänk: Drakoniska felhanteringen TODO
+
+###  XHTML
+
+ * Referenslänk: XHTML 1.0 TODO
+ * Referenslänk: XHTML 1.1 TODO
+ * Fotnot: Ruby annoteringar TODO
+ * Fotnot: Referenslänk: XHTML 2.0 TODO
+
+###  Standardiseringsprocessen
+
+Fördjupningslänk: W3C Recommendation track
+http://www.w3.org/2010/Talks/0119-next-web-plh/w3c_track.xhtml
+
+###  Äkta XHTML
+
+ * Boklänk: [HTML kontra XHTML](http://wiki.whatwg.org/wiki/HTML_vs._XHTML)
+ * Referenslänk: [HTML and XHTML Frequently Answered Questions](http://www.w3.org/MarkUp/2004/xhtml-faq#advantages)
+ * Referenslänk: SVG TODO
+ * Referenslänk: MathML TODO
+ * Referenslänk: Semantiska webben TODO
+ * Fotnot: XForms TODO
+
+###  HTML5
+
+ * Fördjupningslänk: [WhatWG](http://en.wikipedia.org/wiki/Whatwg)
+ * Fotnot: Web Forms 2.0 TODO
+ * Fotnot: Web Applications 1.0 TODO
+ * Fotnot: HTML5 WG TODO
+ * Boklänk: [Alla webbtekniker](http://platform.html5.org/)
+ * Referenslänk: [HTML5: Edition for Web Authors](http://www.w3.org/TR/2011/WD-html5-author-20110809/Overview.html)
+ * Referenslänk: [Meet NEWT: New Exciting Web Technologies](http://www.brucelawson.co.uk/2010/meet-newt-new-exciting-web-technologies/)
+ * Referenslänk: http://html5.org/
+
+###  Versionslös HTML
+
+ * Fotnot: https://developer.mozilla.org/en/HTML/Element/center
+ * Fotnot: https://developer.mozilla.org/en/HTML/Element/iframe
+ * Fotnot: https://developer.mozilla.org/en/HTML/Element/embed
+ * Fotnot: https://developer.mozilla.org/en/HTML/Element/marquee
+ * Fotnot: [On SGML and HTML (föråldrat)](http://www.w3.org/TR/html401/intro/sgmltut.html)
+ * Fotnot: [Position Paper for the W3C Workshop on Web Applications and Compound Documents (nedröstades av W3C)](http://www.w3.org/2004/04/webapps-cdf-ws/papers/opera.html)
+
+
+
 Kompatibilitetslägen
+
 Doctype-switchning
+
 CSS-hack
+
 Internet Explorers olika lägen
+
 HTML-element
+
 Element i huvudet
+
 Element i body
+
 Dålig HTML
+
 HTML5 content model
+
 Något mer om doctypes (överkurs på webbplatsen)
+
 Sammanfattning
 
 # CSS historik och teori
@@ -664,155 +754,6 @@ Favicon
 
 -------------------------------------------------------------------------------
 
---------- Kap ? HTML historik och teori ---------
-
-Fördjupningslänk: http://en.wikipedia.org/wiki/WorldWideWeb
-Fördjupningslänk: http://en.wikipedia.org/wiki/History_of_the_World_Wide_Web
-
-###  HTML under pionjärtiden
-Referenslänk: HTML 1.0
-http://www.w3.org/History/19921103-hypertext/hypertext/WWW/MarkUp/MarkUp.html
-
-Referenslänk: Mosaic
-http://en.wikipedia.org/wiki/Mosaic_%28web_browser%29
-
-Referenslänk: TUI
-TODO
-
-Referenslänk: GUI
-TODO
-
-Övningslänk: elinks
-TODO
-
-Övningslänk: lynx
-TODO
-
-###  Utveckling under browserkriget
-Fördjupningslänk: Webbläsarkriget
-http://en.wikipedia.org/wiki/Browser_wars
-
-Referenslänk: Netscape
-TODO
-
-Fördjupningslänk: Applets
-TODO - någon som förklarar varför de är dåliga
-
-Referenslänk: MSIE
-TODO
-
-Referenslänk: ActiveX
-TODO
-
-Referenslänk: Common Language Runtime
-TODO
-
-Referenslänk: HTML 2.0
-http://www.w3.org/MarkUp/html-spec/html-spec_toc.html
-
-Referenslänk: HTML 3.0
-TODO
-
-Referenslänk: HTML 3.2
-TODO
-
-### CSS föds och HTML 4 skapas
-Referenslänk: spacer gif
-TODO
-
-Referenslänk: Creating Killer Web Sites
-TODO
-
-Referenslänk: HTML 4.01
-http://www.w3.org/TR/html401/
-
-Fördjupningslänk: Strikt, transitional och frameset
-http://reference.sitepoint.com/html/doctypes (också vad en doctype består av och switchningen)
-
-###  XML
-Referenslänk: XML
-TODO
-
-Fördjupningslänk: XML på Wikipedia
-TODO
-
-Fördjupningslänk: Drakoniska felhanteringen
-TODO
-
-###  XHTML
-Referenslänk: XHTML 1.0
-TODO
-
-Referenslänk: XHTML 1.1
-TODO
-
-Referenslänk: Ruby annoteringar
-TODO
-
-Referenslänk: XHTML 2.0
-TODO
-
-###  Standardiseringsprocessen
-Fördjupningslänk: W3C Recommendation track
-http://www.w3.org/2010/Talks/0119-next-web-plh/w3c_track.xhtml
-
-###  Äkta XHTML
-
- * Boklänk: [HTML kontra XHTML](http://wiki.whatwg.org/wiki/HTML_vs._XHTML)
- * Referenslänk: [HTML and XHTML Frequently Answered Questions](http://www.w3.org/MarkUp/2004/xhtml-faq#advantages)
-
-Referenslänk: SVG
-TODO
-
-Referenslänk: MathML
-TODO
-
-Referenslänk: Semantiska webben
-TODO
-
-Referenslänk: XForms
-TODO
-
-###  HTML5
-Fördjupningslänk: WhatWG
-http://en.wikipedia.org/wiki/Whatwg
-
-Fotnot: Web Forms 2.0
-TODO
-
-Fotnot: Web Applications 1.0
-TODO
-
-Fotnot: HTML5 WG
-TODO
-
-Boklänk: Alla webbtekniker
-http://platform.html5.org/
-
-###  Versionslös HTML
-
-https://developer.mozilla.org/en/HTML/Element/center
-https://developer.mozilla.org/en/HTML/Element/iframe
-https://developer.mozilla.org/en/HTML/Element/embed
-https://developer.mozilla.org/en/HTML/Element/marquee
-
-Referenslänk: On SGML and HTML (föråldrat)
-http://www.w3.org/TR/html401/intro/sgmltut.html
-
-Referenslänk: Position Paper for the W3C Workshop on Web Applications and Compound Documents (nedröstades av W3C)
-http://www.w3.org/2004/04/webapps-cdf-ws/papers/opera.html
-
-HTML5: Edition for Web Authors
-http://www.w3.org/TR/2011/WD-html5-author-20110809/Overview.html
-
-http://simon.html5.org/html-elements
-
-
-Meet NEWT: New Exciting Web Technologies
-http://www.brucelawson.co.uk/2010/meet-newt-new-exciting-web-technologies/
-
-http://html5.org/
-http://platform.html5.org/
 
 Default styling in Firefox
 jar:file:///opt/aurora/omni.jar!/chrome/toolkit/res/html.css
