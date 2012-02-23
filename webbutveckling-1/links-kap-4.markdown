@@ -145,9 +145,20 @@ TODO för alla dessa: Sitepoints länk också
 ## Mer om värdet av validering
 ### HTML validatorer
 ### Validering av CSS
+
+ * Referenslänk: [CSS validatorn på W3C](http://jigsaw.w3.org/css-validator/)
+
 ### Felkonsollen
 ### Lintning av HTML
+
+ * Referenslänk: [HTML Lint tool](http://lint.brihten.com/html/help)
+
 ### Lintning av JavaScript
+
+ * Referenslänk: TODO Länk till "The Good Parts" boken
+ * Referenslänk: [JSHint](http://jshint.com/)
+ * Fotnot: [JSLint](http://jslint.com/)
+
 ### Lintning av CSS (fördjupning)
 ### Kontroll av tillgänglighet
 ### Netrelations Inspector (fördjupning)
@@ -155,4 +166,16 @@ TODO för alla dessa: Sitepoints länk också
 
 ## Sammanfattning
 
+
+ * Referenslänk: [HTML Lint tool](http://lint.brihten.com/html/help)
+
+
+ * Referenslänk: TODO Länk till "The Good Parts" boken
+ * Referenslänk: [JSHint](http://jshint.com/)
+ * Fotnot: [JSLint](http://jslint.com/)
+
+http://www.impressivewebs.com/css3-validation/
+http://csslint.net/
+http://inspector.netrelations.se/
+http://www.firefoxmastery.com/firefox/introducing-the-firefox-error-console/
 
