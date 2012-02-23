@@ -1,0 +1,158 @@
+# Kapitel 4: Grundläggande HTML och CSS
+
+## HTML-terminologi
+
+ * Referenslänk: TODO Tommys terminologi-genomgång på Sitepoint
+ * Fotnot: http://en.wikipedia.org/wiki/Whitespace_%28programming_language%29
+ * Fotnot: http://www.w3.org/TR/html-markup/spec.html#void-element
+
+## CSS-terminologi
+
+ * Referenslänk: http://reference.sitepoint.com/css/syntax
+
+## Block- och inline-element
+
+ * Referenslänk: https://developer.mozilla.org/en/HTML/Block-level_elements
+ * Referenslänk: https://developer.mozilla.org/en/HTML/Inline_elements
+
+## <!-- kommentarer i HTML -->
+
+ * Referenslänk: https://developer.mozilla.org/en/HTML/???  TODO 
+
+## Några HTML element och attribut
+
+### \<html>
+
+ * Referenslänk: https://developer.mozilla.org/en/HTML/Element/html
+
+TODO för alla dessa: Sitepoints länk också
+
+### \<head>
+
+ * Referenslänk: https://developer.mozilla.org/en/HTML/Element/head
+
+### \<body>
+
+ * Referenslänk: https://developer.mozilla.org/en/HTML/Element/body
+ 
+ * Övning: Testa följande kombination...
+
+### \<meta charset=”utf-8” />
+
+ * Referenslänk: https://developer.mozilla.org/en/HTML/Element/meta TODO Fixa mer precis
+ * Referenslänk: http://reference.sitepoint.com/html/meta/http-equiv
+
+### \<title>
+
+ * Referenslänk: https://developer.mozilla.org/en/HTML/Element/title
+
+### Rubriker (blockelement)
+
+ * Referenslänk: [Rubriker](https://developer.mozilla.org/en/HTML/Element/Heading_Elements)
+
+### \<p> (blockelement)
+
+ * Referenslänk: https://developer.mozilla.org/en/HTML/Element/p
+
+### \<a href="url"> (inline-element)
+
+ * Referenslänk: https://developer.mozilla.org/en/HTML/Element/a
+
+### \<img src=".." alt="" /> (inline-element)
+
+ * Referenslänk: https://developer.mozilla.org/en/HTML/Element/img
+
+### \<div> (blockelement)
+
+ * Referenslänk: https://developer.mozilla.org/en/HTML/Element/div
+
+### \<span> (inline-element)
+
+ * Referenslänk: https://developer.mozilla.org/en/HTML/Element/span
+
+## Vanliga HTML-attribut
+
+ * Referenslänk: http://reference.sitepoint.com/html/core-attributes
+
+### Attributet lang
+
+ * Tipslänk: [Jättebra demo av lang-attributets betydelse med JAWS](http://www.youtube.com/watch?v=0-zrRixNw_A&NR=1)
+
+### Attributet class
+### Attributet id
+### Attributet title
+### Attributet style
+### Attributet dir
+
+## Några CSS-selektorer
+
+ * Referenslänk: [Selektorer](https://developer.mozilla.org/en/CSS/Getting_Started/Selectors)
+
+### Typselektorn
+### Id-selektorn
+### Klasselektorn
+### Barn- och angränsande syskon- och avkomlingsselektorerna
+
+## Några CSS-egenskaper
+
+ * Video: (Hur göra? Tänd och släck eller ändra i utvecklingsverktyget)
+ * Video: (Hur göra? JSFiddle)
+
+### color
+### Färgvärden
+### Background-color
+
+### Font-family
+
+### Font-size
+
+ * Referenslänk: https://developer.mozilla.org/en/CSS/font-size
+
+### Font-weight
+
+ * Referenslänk: https://developer.mozilla.org/en/CSS/font-weight
+
+### Text-align
+
+ * Referenslänk: https://developer.mozilla.org/en/CSS/text-align
+
+### Text-decoration
+
+ * Referenslänk: https://developer.mozilla.org/en/CSS/text-decoration
+ * Referenslänk: https://developer.mozilla.org/en/CSS/text-decoration-line
+ * Referenslänk: https://developer.mozilla.org/en/CSS/text-decoration-color
+ * Referenslänk: https://developer.mozilla.org/en/CSS/text-decoration-style
+
+### Border
+
+ * Referenslänk: https://developer.mozilla.org/en/CSS/border
+ * Referenslänk: https://developer.mozilla.org/en/CSS/border-style
+ * Referenslänk: https://developer.mozilla.org/en/CSS/border-color
+ * Referenslänk: https://developer.mozilla.org/en/CSS/border-width
+
+### Border-radius
+
+ * Referenslänk: https://developer.mozilla.org/en/CSS/border-radius
+
+## Extern CSS
+
+ * Video
+
+## DOM
+
+ * Video
+
+## Mer om värdet av validering
+### HTML validatorer
+### Validering av CSS
+### Felkonsollen
+### Lintning av HTML
+### Lintning av JavaScript
+### Lintning av CSS (fördjupning)
+### Kontroll av tillgänglighet
+### Netrelations Inspector (fördjupning)
+## Inget kan ersätta manuella kontroller och tester med riktiga användare
+
+## Sammanfattning
+
+
