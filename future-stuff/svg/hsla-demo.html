@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Non circular HSL gradient</title>
+  <style>
+    rect {
+        fill: url(#grad1);
+    }
+    circle {
+        stroke: url("#grad1");
+        stroke-width: 10;
+        fill: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Non circular HSL gradient</h1>
+  <svg viewbox="-180 -180 360 360" width="720" height="720">
+    <defs>
+      <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" style="stop-color: hsl(0, 100%, 50%);" />
+        <stop offset="10%" style="stop-color: hsl(36, 100%, 50%);" />
+        <stop offset="20%" style="stop-color: hsl(72, 100%, 50%);" />
+        <stop offset="25%" style="stop-color: hsl(90, 100%, 50%);" />
+        <stop offset="30%" style="stop-color: hsl(108, 100%, 50%);" />
+        <stop offset="33.3%" style="stop-color: hsl(120, 100%, 50%);" />
+        <stop offset="40%" style="stop-color: hsl(144, 100%, 50%);" />
+        <stop offset="50%" style="stop-color: hsl(180, 100%, 50%);" />
+        <stop offset="60%" style="stop-color: hsl(216, 100%, 50%);" />
+        <stop offset="66.7%" style="stop-color: hsl(240, 100%, 50%);" />
+        <stop offset="70%" style="stop-color: hsl(252, 100%, 50%);" />
+        <stop offset="80%" style="stop-color: hsl(288, 100%, 50%);" />
+        <stop offset="90%" style="stop-color: hsl(324, 100%, 50%);" />
+        <stop offset="100%" style="stop-color: hsl(360, 100%, 50%);" />
+      </linearGradient>
+    </defs>
+    <rect width="360" height="100" x="-180" y="-180" />
+  </svg>
+</body>
+</html>
