@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=400, initial-scale=1">
+  <title>Klocka i SVG</title>
+  <style>
+    body {
+        margin: auto;
+        width: 810px;
+        font-family: sans-serif;
+        text-align: center;
+    }
+    svg {
+    }
+    circle#outer {
+        fill: none;
+        stroke: black;
+        stroke-width: 1;
+    }
+    line#hours {
+    }
+    line#minutes {
+    }
+    line#seconds {
+        stroke: #333;
+        stroke-width: 2;
+        stroke-linecap: round;
+    }
+    line#showcos, line#showsin {
+        stroke: #999;
+        stroke-width: 1;
+    }
+    text {
+        text-align: left;
+        font-size: 30%;
+    }
+    path {
+        stroke: #999;
+        stroke-width: 0.5;
+        fill: rgba(170,170,170,0.3);
+    }
+    #analog {
+        font: large monospace;
+    }
+  </style>
+</head>
+<body>
+  <h1>Princip för klocka i SVG med radie=100</h1>
+  <svg width="802" height="802" viewbox="0,0,202,202" id="urtavla">
+    <g id="theclock" transform="translate(101, 101)">
+    <circle id="outer" cx="0" cy="0" r="100" />
+    <line id="seconds" x1="0" y1="0" x2="200" y2="-200"/>
+    <line id="showcos" />
+    <line id="showsin" />
+    <text id="cosval"></text>
+    <text id="sinval"></text>
+    <path d="M 10,0 A 10,10 0 1,1 0,-10" id="arc" />
+  </g>
+  </svg>
+  <p id="analog">xx</p>
+  <script>
+    var urtavla = document.getElementById("urtavla");
+    if ( window.innerHeight < 800 || window.innerWidth < 800 ) {
+        var available = Math.min(window.innerHeight, window.innerWidth) - 60;
+        urtavla.width = urtavla.setAttribute("height", available); 
+        urtavla.width = urtavla.setAttribute("width", available); 
+    } 
+    var secs    = { dom : document.getElementById("seconds") },
+        analog  = { dom : document.getElementById("analog")  },
+        showsin = { dom : document.getElementById("showsin") },
+        showcos = { dom : document.getElementById("showcos") },
+        sinval  = { dom : document.getElementById("sinval")  },
+        cosval  = { dom : document.getElementById("cosval")  };
+        arc     = { dom : document.getElementById("arc")  };
+
+    function clock() {
+        var now = new Date();
+        var clock = {
+            secs : now.getSeconds() + now.getMilliseconds() / 1000,
+            hour : now.getHours()
+        }
+        // Klockan börjar uppåt men grafiken i datorn börjar horisontellt
+        // Därför drar vi av 15 sekunder
+        var sec_angle = Math.PI * (clock.secs - 15) / 30;
+
+        var radie = 100;
+
+        // X-placeringen bestäms av cosinus
+        secs.x2 = Math.cos(sec_angle) * radie;
+        // Y-placeringen bestäms av sinus
+        secs.y2 = Math.sin(sec_angle) * radie;
+
+        secs.dom.setAttribute("x2", secs.x2);
+        secs.dom.setAttribute("y2", secs.y2);
+        
+        // Rita en linje som förklarar cosinus
+        showcos.dom.setAttribute("x1", 0);
+        showcos.dom.setAttribute("x2", secs.x2);
+        showcos.dom.setAttribute("y1", secs.y2);
+        showcos.dom.setAttribute("y2", secs.y2);
+
+        cosval.dom.setAttribute("x", secs.x2 / 2 - 10);
+        cosval.dom.setAttribute("y", secs.y2 - ( secs.y2 < 0 ? -5: 2));
+        cosval.dom.textContent = "Cosinus: " + Math.round(secs.x2);
+
+        // Rita en linje som förklarar sinus
+        showsin.dom.setAttribute("x1", 0);
+        showsin.dom.setAttribute("x2", 0);
+        showsin.dom.setAttribute("y1", 0);
+        showsin.dom.setAttribute("y2", secs.y2);
+        
+        sinval.dom.setAttribute("x", 2);
+        sinval.dom.setAttribute("y", secs.y2 / 2);
+        sinval.dom.textContent = "Sinus: " + Math.round(secs.y2);
+
+        analog.dom.innerHTML = "Sekunder: " + clock.secs + "<br>Vinkel: " + Math.round(sec_angle * 10000)/10000;
+        
+        var sin_on_arc = secs.y2/10;
+        var cos_on_arc = secs.x2/10;
+        var short_long = ( secs.y2 < 0 && secs.x2 < 0 ) ? 1 : 0; // Långa vägen i tredje kvadranten
+        var wise       = ( secs.y2 < 0 && secs.x2 > 0 ) ? 0 : 1; // Motsols i första kvadranten
+        
+        arc.dom.setAttribute("d", "M 0,0 L 10,0 A 10,10 0 " + short_long + "," + wise + " " + cos_on_arc + "," + sin_on_arc + " z");
+    }
+    clock();
+    window.setInterval(clock, 40);
+  </script>
+</body>
+</html>
