@@ -104,10 +104,21 @@ Fördjupningslänk: URL-design - todo
 ## Enkla sidor kontra fullfjädrade applikationer (Ajax)
 
  * Fotnot: [Ajax: A New Approach to Web Applications](http://www.adaptivepath.com/ideas/ajax-new-approach-web-applications) av Jesse James Garrett
- * Referenslänk: TODO
+ * Referenslänk: TODO om Ajax
+ * Referenslänk: [Mozillas demosida för nya webbtekniker](https://developer.mozilla.org/en-US/demos/)
+ * Tipslänk: [Emberwind i HTML5 canvas](http://my.opera.com/chooseopera/blog/2011/07/07/emberwind-a-html5-masterpiece)
+ 
+ 
+ 
 
 ## Proprietära tekniker
 ### Insticksprogram (plug-ins)
+
+ * Fotnot: Quicktime (ursprungligen) TODO
+ * Fotnot: Real Audio/Media TODO
+ * Fotnot: Flash TODO
+ * Fotnot: Silverlight TODO
+
 ### Ljud- och videoformat
 ### Öppen källkod och öppna standarder
 ### Webbläsarkrig

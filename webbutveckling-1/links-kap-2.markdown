@@ -102,4 +102,9 @@ Boktips:
 
 ## Läs mer om processen och verktyg
 
+http://www.eutveckling.se/riktlinjer/webb/
+http://beta.webbriktlinjer.se/
+http://beta.webbriktlinjer.se/vl2011/principer
+
+
 

@@ -7,8 +7,17 @@ Genom Githubs Issue-tracker!
 ## Olika slags länkar
 
 TODO: Ge dem klasser och symboler/färger i CSS...
-TODO: Tagga länkarna också - samt ge dem en liten logga broende påom det är SitePoint, WSC, MDN, Wikipedia eller...
-TODO: OM samma länk ska va på flera platser....?
+TODO: Tagga länkarna också
+   samt ge dem en liten logga broende på om det är 
+ * SitePoint
+ * WSC
+ * MDN
+ * Wikipedia
+ * MSDN
+ * W3C
+ * Stackoverflow
+
+TODO: OM samma länk ska vara på flera platser....?
 
 TODO: BIG: Lärarna ska kunna se när eleverna tittat på en film (Khan Academy style)
 

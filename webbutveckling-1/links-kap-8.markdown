@@ -1,7 +1,10 @@
 # Kapitel 8: CSS historik och teori
 
- * Fördjupningslänk: http://en.wikipedia.org/wiki/Cascading_Style_Sheets
+
+ * Referenslänk: [Startsida om CSS på MDN](https://developer.mozilla.org/en/CSS/CSS_Reference)
+ * Fördjupningslänk: [Cascading_Style Sheets](http://en.wikipedia.org/wiki/Cascading_Style_Sheets)
  * Fördjupningslänk: www.w3.org/Style/CSS/current-work.en.html
+ * Tipslänk: [Smart navigering i de officiella rekommendationerna på W3C](http://meiert.com/en/indices/css-properties/) Jens Meiert bjuder på genvägar
  
 ## Bakgrund och versioner
 
@@ -10,6 +13,8 @@
 
 ### Genombrottet för CSS-layout
 
+ * Boklänk: [CSS Zen Garden](http://www.csszengarden.com/tr/svenska/)
+ * Referenslänk: [Developing With Web Standards](http://www.456bereastreet.com/lab/developing_with_web_standards/) av Roger Johansson
  * Referenslänk: [Varför inte använda tabeller för layout](http://standardice.com/seybold/) En klassisk illustration!
 
 ### Prefix och runda hörn
@@ -18,7 +23,7 @@
 
 ### Prefix och färgtoningar
 
- * Referenslänk: [Using Gradents](https://developer.mozilla.org/en/Using\_gradients)
+ * Referenslänk: [Using Gradents](https://developer.mozilla.org/en/Using_gradients)
  * Fördjupningslänk: [CSS 3 Radial Gradients](http://www.webdirections.org/blog/css3-radial-gradients/) Mycket pedagogisk genomgång av John Allsopp
 
 ### CSS 3
@@ -57,6 +62,10 @@
  https://developer.mozilla.org/en/CSS/angle
 
 ## Mer om selektorer
+
+ * Referenslänk: [30 tips på smarta selektorer](http://net.tutsplus.com/tutorials/html-css-techniques/the-30-css-selectors-you-must-memorize/)
+ * Tipslänk: [Useful nth-child Recipes](http://css-tricks.com/useful-nth-child-recipies/) av Chris Coyier
+ * Tipslänk: [What's Your CSS Style](http://webstandardssherpa.com/reviews/whats-your-css-style/) om att hitta rätt selektor för varje situation.
 
 ### Gruppselektorer
 
@@ -106,3 +115,8 @@ Specificitivitet
 
  * Referenslänk: [Media queries](https://developer.mozilla.org/en/CSS/Media_queries)
 
+
+
+
+Snygg CSS kod
+http://dropshado.ws/post/2054719546/css-formatting

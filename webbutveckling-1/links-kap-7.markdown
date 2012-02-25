@@ -103,6 +103,8 @@ Errata
 
 ## HTML-element
 
+ * Fördjupningslänk: [Text Level Semantics](http://www.w3.org/TR/html5/text-level-semantics.html) HTML5 specifikationens genomgång
+
 ### \<em>
 
  * Referenslänk: [Elementet em](https://developer.mozilla.org/en/HTML/Element/em)
@@ -150,6 +152,7 @@ Errata
 ## HTML5:s innehållsmodell (content model) (fördjupning)
 
  * Referenslänk: [HTML5 Content categories](https://developer.mozilla.org/en/HTML/Content_categories)
+ * Referenslänk: [HTML5 Content model](http://www.w3.org/TR/html5/content-models.html) W3C dokumentet
 
 ## Något mer om doctypes (överkurs på webbplatsen)
 
