@@ -6,6 +6,7 @@
  * Fotnot: [Color Systems](http://www.worqx.com/color/color_systems.htm) om RGB och CMYK.
  * Fotnot: [The Sad Story of PNG Gamma “Correction”](http://hsivonen.iki.fi/png-gamma/) av Henri Sivonen
  * Fotnot: [sRGB](http://en.wikipedia.org/wiki/SRGB)
+ * Fördjupningslänk: [EasyRGB](http://www.easyrgb.com/) Fullt med information och algoritmer för färgberäkningar.
 
 ## Färgkoder
 
@@ -42,6 +43,10 @@ Bildformat
 # Kapitel 10: Boxar och sektioner
 
 ## Boxmodellen
+
+http://paulirish.com/2012/box-sizing-border-box-ftw/
+
+Varningen för quirks: 1. Fullt av smågrejer. 2. Alla moderna böcker, artiklar, etc förutsätter standards mode. 3. Browser inconsistencies - quirks är (ännu) inte standardiserat (eller fixerat)
 
 ## Sektioner i HTML 4 och HTML5
 

@@ -90,7 +90,8 @@ Errata
  * Referenslänk: [Doctype Sniffing](http://reference.sitepoint.com/css/doctypesniffing)
  * Referenslänk: [Render Mode](http://www.ericmeyeroncss.com/bonus/render-mode.html) av CSS gurun Eric Meyer
  * Referenslänk: [Quirksmode](http://www.quirksmode.org/css/quirksmode.html) av browserexperten PPK
- * Referenslänk: TODO MDN om Quirks mode 
+ * Referenslänk: [Mozilla Quirks Mode Behavior](https://developer.mozilla.org/en/Mozilla_Quirks_Mode_Behavior) Vad som påverkas av quirksläget i Firefox (som andra sedan försökt härma)
+ * Fördjupningslänk: [Quirks Mode Living Draft](http://simon.html5.org/specs/quirks-mode#the-:active-and-:hover-quirk) Utkast för att standardisera quirks mode i alla webbläsare.
  * Fotnot: [What happens in Quirks Mode](http://www.cs.tut.fi/~jkorpela/quirks-mode.html) Grundforskning a Jukka Korpela
  * Fotnot: [Activating Browser Modes with Doctype](http://hsivonen.iki.fi/doctype/] Noggrann forskning av Henri Sivonen
  
