@@ -7,7 +7,7 @@ Lärartips:
 Boktips:
 
  * InterACT sid xx-yy TODO
- * The Elements of User Exerience TODO
+ * The Elements of User Exerience av Jesse James Garrett
 
  * Video: Reportage från en webbyrå
    * Process
@@ -18,9 +18,17 @@ Boktips:
 
 ## Roller
 
+ * Fördjupningslänk: [The 9 Pillars of Successful Web teams](http://www.adaptivepath.com/ideas/nine-pillars-of-successful-web-teams) av Jesse James Garrett, New Riders
+
 ## Processen
 
+
+ * Fotnotslänk: Dreamweaver TODO
+ * Fotnotslänk: Expression Studio TODO
+ * Fotnotslänk: Blue Griffon TODO
+
 ### Idé, mål, och analys av förutsättningar
+
 ### Skisser och beställning
 
  * Tipslänk: Specialprogram för Wireframes TODO
@@ -100,11 +108,25 @@ Boktips:
 
 ### Dela kod, få svar på frågor, bolla idéer
 
+ * Boklänk: pastebin TODO
+ * Boklänk: JSFiddle TODO
+ * Tipslänk: http://css-tricks.com/13414-seriously-just-make-a-jsfiddle/
+ * Boklänk: Gist
+ * Tipslänk: (http://bl.ocks.org/)
+
+Överkursövningar:
+
+ * Övning: Skapa en pastebin med kap-1-a.html
+ * Övning: Skapa en JSFiddle med kap-1-a.html
+ * Övning: Skapa en Gist med kap-1-a.html och länka till den från bl.ocks.org
+
 ## Läs mer om processen och verktyg
 
 http://www.eutveckling.se/riktlinjer/webb/
 http://beta.webbriktlinjer.se/
 http://beta.webbriktlinjer.se/vl2011/principer
 
+
+## Övningar
 
 

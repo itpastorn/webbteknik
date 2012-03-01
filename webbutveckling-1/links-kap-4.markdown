@@ -76,9 +76,13 @@ TODO för alla dessa: Sitepoints länk också
 
 ### Attributet lang
 
+ * Fotnot: [Avstavning](https://developer.mozilla.org/en/CSS/hyphens)
  * Tipslänk: [Jättebra demo av lang-attributets betydelse med JAWS](http://www.youtube.com/watch?v=0-zrRixNw_A&NR=1)
 
 ### Attributet class
+
+ * Fördjupningslänk: OOCSS (Nicole S) TODO
+
 ### Attributet id
 ### Attributet title
 ### Attributet style

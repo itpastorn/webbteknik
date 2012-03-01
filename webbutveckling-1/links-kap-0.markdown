@@ -47,7 +47,7 @@ Filtera länkar av en viss sort...
  * Fotnot: [Web Standards Project Education Task Force](http://www.webstandards.org/action/edutf/)
  * Fotnot: [Boken InterACT with Web Standards](http://interactwithwebstandards.com/)
  * Fotnot: [InterACT: Kurser för högskolestudier i webbteknik](http://interact.webstandards.org/)
- * Fotnot: [Web Education Communit Group](http://www.w3.org/community/webed/)
+ * Fotnot: [Web Education Community Group](http://www.w3.org/community/webed/)
  * Fotnot: [The Guild of Accessible Web Designers)[http://www.gawds.org/]
 
 ## Resurser ##

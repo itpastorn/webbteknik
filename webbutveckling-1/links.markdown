@@ -50,22 +50,28 @@ Varningen för quirks: 1. Fullt av smågrejer. 2. Alla moderna böcker, artiklar
 
 ## Sektioner i HTML 4 och HTML5
 
+
+# Kapitel 11: Listor
+
+
+# Kapitel 12: Tvåspaltslayout med float
+
 ## Float
 
 
-# Listor
+# Kapitel 13: Formulär
 
-# Tvåspaltslayout
 
-# Formulär
+# Kapitel 14: JavaScript
 
-# JavaScript
 
-# Mobil webb
+# Kapitel 15: Mobil webb
 
-# Tillgänglighet
 
-# Säkerhet
+# Kapitel 16: Tillgänglighet
+
+
+# Kapitel 17: Säkerhet
 
 Lite teori om säkerhet på webben
 
@@ -75,9 +81,10 @@ Cross Site Scripting (XSS)
 
 Iframe i sandlåda (fördjupning)
 
-# Jazz
+# Kapitel 18: Jazz
 
 Favicon
+
 
 -------------------------------------------------------------------------------
 
@@ -101,7 +108,3 @@ Allmänt:
 http://scrunchup.com/
 
 
-Kanske:
-http://www.adaptivepath.com/ideas/nine-pillars-of-successful-web-teams
-
-En ljusare färg för "fulkod"

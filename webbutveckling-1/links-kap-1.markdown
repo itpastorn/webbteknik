@@ -85,6 +85,8 @@ Fördjupningslänk: URL-design - todo
  * Video: Vattenfallsdiagram
  * Fördjupningslänk: Cachning TODO
 
+## Cachning
+
 ## Statiska kontra dynamiska sidor
 
  * Referenslänk: PHP TODO
@@ -109,7 +111,6 @@ Fördjupningslänk: URL-design - todo
  * Tipslänk: [Emberwind i HTML5 canvas](http://my.opera.com/chooseopera/blog/2011/07/07/emberwind-a-html5-masterpiece)
  
  
- 
 
 ## Proprietära tekniker
 ### Insticksprogram (plug-ins)
@@ -118,10 +119,22 @@ Fördjupningslänk: URL-design - todo
  * Fotnot: Real Audio/Media TODO
  * Fotnot: Flash TODO
  * Fotnot: Silverlight TODO
+ * Fotnot: Java applets TODO
 
 ### Ljud- och videoformat
+
+ * Fotnot: WebM TODO
+ * Fotnot: H.264 TODO
+
 ### Öppen källkod och öppna standarder
+
+ * Fotnot: Open Source TODO
+ * Fotnot: Apache TODO
+ * Fotnot: Sendmail TODO
+
 ### Webbläsarkrig
+
+ * Fotnot: Netscape TODO
 
 ## Läs mer här
 

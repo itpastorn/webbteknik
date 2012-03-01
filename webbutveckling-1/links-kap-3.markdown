@@ -10,6 +10,9 @@
 
 ## Progressiv förbättring
 ### Börja med semantisk HTML-kod
+
+ * Boklänk: CSS Naked Day TODO
+
 ### Använd CSS för gradvis förbättring
 ### Skapa allt med JavaScript som kräver JavaScript
 ### Kapacitetsdetektering
