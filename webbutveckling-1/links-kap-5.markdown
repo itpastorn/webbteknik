@@ -12,9 +12,10 @@
 
  * Video
 
-## CSS för att skapa ellipser
+## CSS för att skapa ellipser (runda hörn)
 
  * Video
+ * Referenslänk: [Box Shadow op MDN](https://developer.mozilla.org/en/CSS/box-shadow)
 
 ## Tyspnitt
 
@@ -36,4 +37,11 @@
 ## Läs mer
 
  * Länkar, etc
+
+
+Plus övningar med experimenterande runt desigen:
+ * Övning: Tänd/släck deklarationer i utvecklarverktygen.
+ * Övning: Byt färger – alternativt färgschema
+ * Övning: Variera box-shadow
+ * Övning: Etc
 

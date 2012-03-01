@@ -4,7 +4,11 @@
 
     >>  23E9 (ALT +X)
     >>| 23ED
+
+## Andra tecken
+
     "   0022
+    nbsp 00A0 - ska användas för att inte /> ska hamna på nästa rad i tomma element.
 
 ## Markerade ord
 
@@ -40,7 +44,8 @@ Att fundera på: Ska koden också vara 12pt?
     HTML tagg:       213 - 255 - 64   (bold)
     Attribut:         85 - 255 - 56
     Attributevalue:  170 - 255 - 100
-    HTML-kommentar:  0 - 255 - 40
+    HTML-kommentar:    0 - 255 - 40
+    Entitet:          42 - 255 - 50  
 
     CSS-typ-selektor:       0 - 255 - 80
     CSS-id-klass-selektor : 170 - 255 - 128
@@ -50,4 +55,6 @@ Att fundera på: Ska koden också vara 12pt?
 # Språk
 
 Använd "ska" inte "skall"
+font-stack med bindestreck
+
 

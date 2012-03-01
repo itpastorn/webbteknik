@@ -11,6 +11,8 @@
 ### CSS 1.0
 ### CSS 2.0 och 2.1
 
+ * Fotnot: [Eric Meyer förklarar CSS 2.0](CSS 2.0 http://meyerweb.com/eric/articles/webrev/199802a.html)
+
 ### Genombrottet för CSS-layout
 
  * Boklänk: [CSS Zen Garden](http://www.csszengarden.com/tr/svenska/)
@@ -111,12 +113,35 @@ Specificitivitet
 
 ## Kortformer Shorthands
 
+ * Referenslänk: [background]()
+ * Referenslänk: [border-top]()
+ * Referenslänk: [font]()
+ * Referenslänk: [list-style]()
+ * Referenslänk: [transition]()
+ * Referenslänk: [margin]()
+ * Referenslänk: [padding]()
+ * Referenslänk: [outline]()
+ * Referenslänk: [border]()
+ * Referenslänk: [border-radius]()
+
+TODO: Exempel med shorthand för background
+
 ## @media
 
  * Referenslänk: [Media queries](https://developer.mozilla.org/en/CSS/Media_queries)
 
+ * http://www.dustindiaz.com/css-shorthand/ 
+ * http://perishablepress.com/press/2010/05/04/top-5-css-shorthand-properties/ 
+ * http://www.cssdog.com/css_shortcuts.html 
 
+TODO: I övningsboken ska det finnas ”översättningsövningar” detaljerad form kontra shorthands för:
 
+ * font
+ * background
+ * border
+ * margin och padding
 
 Snygg CSS kod
-http://dropshado.ws/post/2054719546/css-formatting
+
+ * http://dropshado.ws/post/2054719546/css-formatting
+

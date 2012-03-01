@@ -51,12 +51,18 @@ Varningen för quirks: 1. Fullt av smågrejer. 2. Alla moderna böcker, artiklar
 ## Sektioner i HTML 4 och HTML5
 
 
-# Kapitel 11: Listor
-
-
-# Kapitel 12: Tvåspaltslayout med float
+# Kapitel 11: Tvåspaltslayout med float
 
 ## Float
+
+
+# Kapitel 12: Listor och tabeller
+
+## Vanliga listor
+
+## Menyer
+
+## Tabeller
 
 
 # Kapitel 13: Formulär
@@ -67,6 +73,8 @@ Varningen för quirks: 1. Fullt av smågrejer. 2. Alla moderna böcker, artiklar
 
 # Kapitel 15: Mobil webb
 
+
+Nämn på slutet: http://www.w3.org/TR/css-device-adapt/
 
 # Kapitel 16: Tillgänglighet
 

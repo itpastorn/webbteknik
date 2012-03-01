@@ -84,7 +84,8 @@
 ### Font-stackar
 
  * Referenslänk: [CSS Font Stacks](http://www.maxdesign.com.au/articles/font-stacks/) av Russ Weakley
- * Fotnot: http://en.wikipedia.org/wiki/Core_fonts_for_the_Web
+ * Boklänk: [Core Fonts for the Web](http://en.wikipedia.org/wiki/Core_fonts_for_the_Web)
+ * Tipslänk: [Färdiggjorda font-stackar](http://cssfontstack.com/)
 
 ### Stil (CSS)
 
