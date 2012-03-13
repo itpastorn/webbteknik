@@ -18,7 +18,6 @@ session_start();
 if ( empty($_SESSION['privilegier']) ) {
     header("Location: admin-loginform.php");
     exit;
-    
 }
 
 // Datumfunktioner
@@ -41,13 +40,30 @@ if ( empty($_GET['year']) ) {
     }
 }
 
+// Vilka kurser ingår i paketen?
+$sql = <<<SQL
+    SELECT  bk.inr_pak_ID, k.* FROM `kurser` AS k
+    INNER JOIN block_kurser AS bk
+    USING (kurskod)
+    ORDER BY bk.inr_pak_ID
+SQL;
+$index  = "";
+$kurser = array();
+$stmt   = $dbh->query($sql);
+foreach ( $stmt as $row ) {
+    if ( $row['inr_pak_ID'] != $index ) {
+        $index = $row['inr_pak_ID'];
+    }
+    $kurser[$index][] = array($row['kurskod'], $row['kursnamn'], $row['poang']);
+}
+
 $inr_names = array();
 $stmt = $dbh->query("SELECT inr_pak_ID, name FROM inriktning_paket WHERE name IS NOT NULL");
 while ( $dbrow = $stmt->fetch() ) {
     $inr_names[$dbrow['inr_pak_ID']] = $dbrow['name'];
 }
 
-$t1 = "";
+$t1  = "";
 $sql = <<<SQL
 SELECT paket1 AS paket, COUNT(*) AS antal FROM elever
 WHERE `klass` <> 'Te0F' AND paket1 IS NOT NULL GROUP BY paket1
@@ -64,8 +80,11 @@ foreach ( $stmt as $row ) {
       </tr>
 TR;
 }
+// rowspan x 2
 
-$t2 = "";
+
+
+$t2  = "";
 $sql = <<<SQL
 SELECT inriktning, paket1 AS paket, COUNT(*) AS antal FROM elever
 WHERE `klass` <> 'Te0F' AND paket1 IS NOT NULL GROUP BY inriktning, paket1
@@ -101,7 +120,7 @@ exit;
  <body class="admin">
    <h1>Statistik inriktnings- och fördjupningskursval på Teknikprogrammet, NE, <?php echo $year; ?></h1>
    <table>
-     <caption>Grupperad info per inriktning</caption>
+     <caption>Grupperad info per paketval oavsett inriktning</caption>
      <tr>
        <th>Paket</th>
        <th>Antal</th>
@@ -109,7 +128,7 @@ exit;
      <?php echo $t1; ?>
    </table>
    <table>
-     <caption>Grupperad info per paketval oavsett inriktning</caption>
+     <caption>Grupperad info per inriktning</caption>
      <tr>
        <th>Inriktning</th>
        <th>Paket</th>
