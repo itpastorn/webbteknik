@@ -1,0 +1,91 @@
+<!--
+/* Detta är en startsidan till demo-webbplatsen för läroboken Webbutveckling 1
+ *
+ * Det tänkta UF-företaget Läxhjälpen
+ * @version pre-alpha
+ * @author Lars Gunther <gunther@keryx.se>
+ */
+-->
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8" />
+  <title>Undersida - V&aring;ra tj&auml;nster</title>
+  <link href='http://fonts.googleapis.com/css?family=Merienda+One' rel='stylesheet' />
+  <link href="laxhjalpen.css" title="Finished" rel="stylesheet" />
+  <!--<link href="laxhjalpen-step-1.css" title="Step 1" rel="alternate stylesheet" />-->
+  <link rel="stylesheet" href="themes/default/default.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="themes/pascal/pascal.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="themes/orman/orman.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="nivo-slider.css" type="text/css" media="screen" />
+    
+</head>
+<body class="subpage">
+  <header>
+    <!--img id="logo" alt="Startsidan" src="laxlogo.png" / -->
+    <!-- imagefiller är bara temporär utfyllnad -->
+    <span class="imagefiller">&#x2619;</span>
+    <h1>Läxhjälpen</h1>
+   <hr>
+  </header>
+  <aside>
+  <h2><a href="om-oss.html">Vilka vi är &#x3020;</a></h2>
+  <h2><a href="">Vad vi gör &#x2318;</a></h2>
+  <h2><a href="">Blogg &#x272A;</a></h2>
+  <h2><a href="">Kontakt &#x260E;</a></h2>
+ </aside>
+   <section>
+   <article class="blockslider">
+    <div class="slider-wrapper theme-default">
+           
+            <div id="slider" class="nivoSlider">
+                <img src="img/1.png" alt="" />
+                <a href=""><img src="img/2.png" alt="" title="Pedagogiskt och innehållsrikt lärande" /></a>
+                <img src="img/3.png" alt="" data-transition="slideInLeft" />
+                <img src="img/4.png" alt="" title="#htmlcaption" />
+            </div>
+            <div id="htmlcaption" class="nivo-html-caption">
+                <strong>Visste Du</strong> att det även finns <em>videolektioner?</em> <a href="#">a link</a>.
+            </div>
+        </div>
+    </article>
+    <article class="block">
+    <table summary="">
+  <thead>
+    <tr>
+      <th>V&aring;ra tj&auml;nster</th>
+      <th>Pris</th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <td>Tj&auml;nst</td>
+      <td>500kr</td>
+    </tr>
+  </tfoot>
+  <tbody>
+    <tr>
+       <td>Tj&auml;nst</td>
+      <td>500kr</td>
+    </tr>
+    <tr>
+       <td>Tj&auml;nst</td>
+      <td>500kr</td>
+    </tr>
+  </tbody>
+</table>
+    </article>
+    
+  </section>
+  <footer>
+    <small>&copy; Lars Gunther och Thelin AB</small>
+  </footer>
+  <script type="text/javascript" src="scripts/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="scripts/jquery.nivo.slider.pack.js"></script>
+    <script type="text/javascript">
+    $(window).load(function() {
+        $('#slider').nivoSlider();
+    });
+    </script>
+</body>
+</html>
