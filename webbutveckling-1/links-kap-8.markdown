@@ -144,4 +144,7 @@ TODO: I övningsboken ska det finnas ”översättningsövningar” detaljerad f
 Snygg CSS kod
 
  * http://dropshado.ws/post/2054719546/css-formatting
+ 
+TODO: Arv
++ arv är knepigt med shorthands!
 
