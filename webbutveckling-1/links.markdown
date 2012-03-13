@@ -18,6 +18,10 @@
 # Kapitel 14: JavaScript
 
 
+ * Fotnot: [Dåligt råd om kommentarer](http://www.w3schools.com/js/js_howto.asp)
+ 
+
+
 # Kapitel 15: Mobil webb
 
 
