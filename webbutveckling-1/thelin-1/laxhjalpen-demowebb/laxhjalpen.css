@@ -9,6 +9,9 @@ body {
 section, header, footer {
     outline: none;
 }
+p {
+    -moz-hyphen: auto;
+}
 .startpage > header,
 .subpage > header {
     text-align: center;
@@ -26,11 +29,14 @@ section, header, footer {
     font-family: 'Merienda One', cursive;
 }
 .startpage > header > h1:first-letter,
-.subpage > header > h1:first-letter {
+.subpage   > header > h1:first-letter {
     color: #00af64;
 }
+.subpage   > header > h1 > span {
+    color: #a62f00;
+}
 .startpage > header > p.tagline,
-.subpage > header > p.tagline  {
+.subpage   > header > p.tagline  {
     font-size: 120%;
     padding: 0.5em;
     border-top: 3px double #00af64;
@@ -44,11 +50,11 @@ section, header, footer {
     vertical-align: top;
 }
 .startpage > section:last-of-type,
-.subpage > section:last-of-type {
+.subpage   > section:last-of-type {
     margin-right: 0;
 }
 .startpage > section > h2,
-.subpage > aside > h2  {
+.subpage   > nav > ul > li  {
     margin: 0 0 1em;
     padding: 2em 0;
     background-color: #F5F5F5; /* mkt ljus grå */ 
@@ -57,26 +63,37 @@ section, header, footer {
     font: large 'Merienda One', cursive;
     text-align: center;
 }
+.subpage > nav {
+    display: inline-block;
+    width: 20%;
+}
+.subpage > nav ul {
+    margin: 0;
+    padding: 0;
+}
+.subpage > nav li {
+    display: block;
+    list-style-type: none;
+}
 .startpage > section > h2 > a:link,
 .startpage > section > h2 > a:visited,
-.subpage > aside > h2 > a:link,
-.subpage > aside > h2 > a:visited  {
-  text-decoration: none;
+.subpage > nav  a:link,
+.subpage > nav  a:visited  {
+    text-decoration: none;
     color: #000;
 }
 .startpage > section > h2 > a:focus, section > h2 > a:hover,
-.subpage > aside > h2 > a:focus, aside > h2 > a:hover {
+.subpage > nav  a:focus, aside > h2 > a:hover {
     text-decoration: underline;
     color: #A62F00;
 }
 .startpage > section > h2 > a:active,
-.subpage > aside > h2 > a:active {
+.subpage > nav  a:active {
     text-decoration: underline;
     color: #FF4900;
 }
-.startpage > section p, .subpage > section p {
+.startpage > section p {
      padding: 1ch; /* Just för att inte alla stödjer ch */
-    -moz-hyphen: auto;
 }
 footer {
     display: block;
@@ -84,65 +101,113 @@ footer {
     text-align: center;
     color: #999;
 }
-/*==================================================================================
+/*
+=============================================================
+Class för positioneringar - block, bilder, captions med mera
+=============================================================
+*/
+.block {
+    overflow: auto;
+    margin-bottom: 20px;
+}
+.blockslider {
+    overflow: auto;
+    height: 300px;
+    margin-bottom: 20px;
+}
+.bildcaption {
+    clear: left;
+    font-weight: bold;
+    color:#666;
+    font-size:110%;
+    text-transform:uppercase;
+}
+.double {
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+.alignright {
+    float: right;
+    padding: 0px;
+    margin: 0px 0px 10px 10px;
+    display: inline; /* Fixes double margin bug in older IE */
+}
+.alignleft {
+    float: left;
+    padding: 0px;
+    margin: 0px 10px 15px 0px;
+    display: inline; /* Fixes double margin bug in older IE */
+}
+.aligncenter{
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    padding: 10px 0;
+}
+
+/*
+==================================================================================
 SUBPAGES
-==================================================================================*/
+==================================================================================
+*/
 .subpage .imagefiller {
     font-size: 600%;
 }
-
 .subpage > header > h1 {
     font-size: 300%;
     font-family: 'Merienda One', cursive;
 }
-
-.subpage > section {
-    display: inline-block;
-    width: 75%;
-    margin-left: 2%;
-    vertical-align: top;
-}
-
-.subpage > aside {
-    display: inline-block;
+.subpage > nav {
+    float: left;
     width: 20%;
-    margin-right:2%;
-    vertical-align: top;
+    margin-right: 2%;
+    display: inline; /* Old IE bugfix */
 }
-
-.subpage > article {
-    display:block;
-    vertical-align: top;
+.subpage > div {
+    width: 75%;
+    margin-left: 25%;
+}
+/* För sidan om-oss */
+.subpage > div > article {
+    display: block;
 	width: 100%; 
-	
+	float: right; /* Floated to contain other floated content */
+	border-bottom: 3px double #00af64;
+	padding-bottom: 1em; /* last p element contributes 1em */
+	margin-bottom: 2em;
 }
-
-hr {padding: 0.5em; /*för att snygga till undersidorna utan p.tag-line men ändå ha samma design*/
-	border-style:double;
-	border-width:3px;
-	border-color:#00af64 #fff;
-    margin: 2em 0;}
-
-figure {border:0px solid #E6E6E6;padding:4px;margin:1em; display:inline;}
-figcaption {font-style:italic;font-size:smaller;padding-left:1em;}
-
-
+.block > p:first-of-type {
+    margin-top: 0;
+}
+.block > p {
+    margin-left: 140px;
+}
+hr {
+    padding: 0.5em; /* För att snygga till undersidorna utan p.tag-line men ändå ha samma design */
+	border-style: double;
+	border-width: 3px;
+	border-color: #00af64 #fff;
+    margin: 2em 0;
+}
+figure {
+    border: 0px solid #E6E6E6;
+    padding: 4px;
+    margin: 1em; 
+    display: inline;
+}
+figcaption {
+    font-style: italic;
+    font-size: smaller;
+    text-align: center;
+}
+.subpage > footer {
+    clear: both;
+}
 /*
-=========================================================
-Class för positioneringar - block, bilder, captions med mer
-=========================================================
-*/
-.block {overflow:auto;margin-bottom:20px;}
-.blockslider {overflow:auto; height:300px;margin-bottom:20px;}
-.bildcaption {clear:left; font-weight:bold; color:#666; font-size:110%; text-transform:uppercase; }
-.double { border:1px solid #ccc; padding:5px;}
-.alignright {float: right;padding: 0px;margin: 0px 0px 10px 10px;display: inline;}
-.alignleft {float: left;padding: 0px;margin: 0px 10px 15px 0px;display: inline; }
-.aligncenter{display:block;margin:0 auto;text-align:center; padding:10px 0  ;}
-
-/*========================================================================
+========================================================================
 Tables
-========================================================================*/
+========================================================================
+*/
 
 table {
     *border-collapse: collapse; /* IE7 och lägre */
@@ -150,24 +215,43 @@ table {
 }
 
 table {
-		overflow:hidden;
-		border:1px solid #d3d3d3;
-		background:#fff;
-		width:96%;
-		margin:5% auto 0;
-		-moz-border-radius:5px; /* FF1+ */
-		-webkit-border-radius:5px; /* Saf3-4 */
-		border-radius:5px;
-		-moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
-		-webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
-		text-shadow:#fff 1px 1px 1px;}
-	
-	thead {font-size:150%;}
-	th, td {padding:18px 28px 18px; text-align:left; }
-	th {padding-top:22px;}
-	td {border-top:1px solid #e0e0e0; border-right:1px solid #e0e0e0;}
-	td {}
-	th {background:#ddd;}
+    overflow: hidden;
+    border:1px solid #d3d3d3;
+    background: #fff;
+    width: 96%;
+    margin: 5% auto 0;
+       -moz-border-radius: 5px; /* FF1+ */
+    -webkit-border-radius: 5px; /* Saf3-4 */
+            border-radius: 5px;
+       -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    text-shadow:#fff 1px 1px 1px;
+}
+thead {
+    font-size: 150%;
+}
+th, td {
+    padding:18px 28px 18px;
+    text-align:left;
+}
+th {
+    padding-top: 22px;
+}
+td {
+    border-top: 1px solid #e0e0e0; 
+    border-right: 1px solid #e0e0e0;
+}
+th {
+    background:#ddd;
+}
+tr:target {
+    background-color: #61d7a4;
+       -moz-transition: background-color 2s;
+    -webkit-transition: background-color 2s;
+         -o-transition: background-color 2s;
+        -ms-transition: background-color 2s;
+}
 		
 /*========================================================================
 Nivo Slider
@@ -182,6 +266,9 @@ Nivo Slider
 .theme-orman.slider-wrapper {
     margin-top:150px;
 }
+.nivo-caption {
+    text-align: center;
+}
 
 /*====================*/
 /*=== Other Styles ===*/
@@ -189,5 +276,4 @@ Nivo Slider
 .clear {
 	clear:both;
 }
-/* trigger commit in git */
 

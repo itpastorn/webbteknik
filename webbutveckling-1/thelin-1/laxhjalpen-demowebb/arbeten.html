@@ -1,82 +1,81 @@
 <!--
-/* Detta är en startsidan till demo-webbplatsen för läroboken Webbutveckling 1
+/* Detta är en sidan som presenterar de tjänster som erbjuds (demo-webbplatsen för läroboken Webbutveckling 1)
  *
  * Det tänkta UF-företaget Läxhjälpen
  * @version pre-alpha
- * @author Lars Gunther <gunther@keryx.se>
+ * @author Lars Gunther <gunther@keryx.se>, Lena Bäckstedt <lillan@kaxigt.com>
  */
 -->
 <!DOCTYPE html>
 <html lang="sv">
 <head>
   <meta charset="utf-8" />
-  <title>Undersida - V&aring;ra tj&auml;nster</title>
+  <title>Våra tjänster - Läxhjälpen</title>
   <link href='http://fonts.googleapis.com/css?family=Merienda+One' rel='stylesheet' />
   <link href="laxhjalpen.css" title="Finished" rel="stylesheet" />
-  <!--<link href="laxhjalpen-step-1.css" title="Step 1" rel="alternate stylesheet" />-->
   <link rel="stylesheet" href="themes/default/default.css" type="text/css" media="screen" />
-    <link rel="stylesheet" href="themes/pascal/pascal.css" type="text/css" media="screen" />
-    <link rel="stylesheet" href="themes/orman/orman.css" type="text/css" media="screen" />
-    <link rel="stylesheet" href="nivo-slider.css" type="text/css" media="screen" />
-    
+  <link rel="stylesheet" href="themes/pascal/pascal.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="themes/orman/orman.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="nivo-slider.css" type="text/css" media="screen" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
 </head>
 <body class="subpage">
   <header>
     <!--img id="logo" alt="Startsidan" src="laxlogo.png" / -->
     <!-- imagefiller är bara temporär utfyllnad -->
     <span class="imagefiller">&#x2619;</span>
-    <h1>Läxhjälpen</h1>
-   <hr>
+    <h1>Läxhjälpen: <span>Våra tjänster</span></h1>
+   <hr class="tagline">
   </header>
-  <aside>
-  <h2><a href="om-oss.html">Vilka vi är &#x3020;</a></h2>
-  <h2><a href="">Vad vi gör &#x2318;</a></h2>
-  <h2><a href="">Blogg &#x272A;</a></h2>
-  <h2><a href="">Kontakt &#x260E;</a></h2>
- </aside>
-   <section>
-   <article class="blockslider">
-    <div class="slider-wrapper theme-default">
-           
-            <div id="slider" class="nivoSlider">
-                <img src="img/1.png" alt="" />
-                <a href=""><img src="img/2.png" alt="" title="Pedagogiskt och innehållsrikt lärande" /></a>
-                <img src="img/3.png" alt="" data-transition="slideInLeft" />
-                <img src="img/4.png" alt="" title="#htmlcaption" />
-            </div>
-            <div id="htmlcaption" class="nivo-html-caption">
-                <strong>Visste Du</strong> att det även finns <em>videolektioner?</em> <a href="#">a link</a>.
-            </div>
+  <nav>
+    <ul>
+    <li><a href="om-oss.html">Vilka vi är &#x3020;</a></li>
+    <li><a href="">Vad vi gör &#x2318;</a></li>
+    <li><a href="">Blogg &#x272A;</a></li>
+    <li><a href="">Kontakt &#x260E;</a></li>
+    </ul>
+  </nav>
+  <div>
+    <div class="blockslider">
+      <div class="slider-wrapper theme-default">
+        <div id="slider" class="nivoSlider">
+          <a href="#lstuga"><img src="img/1.png" alt="" title="Läxstuga med dig och dina kompisar" /></a>
+          <a href="#skypeh"><img src="img/2.png" alt="" title="Hjälp via Skype" /></a>
+          <a href="#mailhp"><img src="img/3.png" alt="" title="Hjälp via email" data-transition="slideInLeft" />
+          <a href="#videos"><img src="img/4.png" alt="" title="Vi har också videolektioner" /></a>
         </div>
-    </article>
-    <article class="block">
-    <table summary="">
-  <thead>
-    <tr>
-      <th>V&aring;ra tj&auml;nster</th>
-      <th>Pris</th>
-    </tr>
-  </thead>
-  <tfoot>
-    <tr>
-      <td>Tj&auml;nst</td>
-      <td>500kr</td>
-    </tr>
-  </tfoot>
-  <tbody>
-    <tr>
-       <td>Tj&auml;nst</td>
-      <td>500kr</td>
-    </tr>
-    <tr>
-       <td>Tj&auml;nst</td>
-      <td>500kr</td>
-    </tr>
-  </tbody>
-</table>
-    </article>
+      </div>
+    </div>
+    <div class="block">
+      <table summary="">
+        <thead>
+          <tr>
+            <th>Våra tjänster</th>
+            <th>Pris</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="lstuga">
+            <td>Läxsstuga för 3-8 deltagare</td>
+            <td>500 kr/tim</td>
+          </tr>
+          <tr id="skypeh">
+            <td>Individuell hjälp via Skype</td>
+            <td>300 kr/tim</td>
+          </tr>
+          <tr id="mailhp">
+            <td>Hjälp via mejl</td>
+            <td>10 kr/mejl</td>
+          </tr>
+          <tr id="videos">
+            <td>Åtkomst till våra videos</td>
+            <td>20 kr/månad</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     
-  </section>
+  </div>
   <footer>
     <small>&copy; Lars Gunther och Thelin AB</small>
   </footer>
