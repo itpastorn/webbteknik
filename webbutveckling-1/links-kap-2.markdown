@@ -92,9 +92,10 @@ Boktips:
 ### Versionskontroll
 
  * Video: Git
- * Video: Github (nämn Assembla på slutet)
+ * Video: Github (nämn Assembla, Bitbucket och Sourceforge på slutet)
  * Referenslänk: Versionskontroll TODO
  * Referenslänk: Github hjälp TODO
+ * Referenslänk: [Comparison of open source software hosting facilities](http://en.wikipedia.org/wiki/Comparison_of_open_source_software_hosting_facilities)
 
 ### Ärendehantering (issue management)
 
