@@ -7,6 +7,30 @@
 
 ## Vanliga listor
 
+### Punktlistor ###
+
+ * Referenslänk: [ul](https://developer.mozilla.org/en/HTML/Element/ul)
+ 
+### Numrerade listor ###
+
+ * Referenslänk: [ol](https://developer.mozilla.org/en/HTML/Element/ol)
+
+
+### Definitionslistor ###
+
+ * Referenslänk: [dl](https://developer.mozilla.org/en/HTML/Element/dl)
+ * Referenslänk: [dt](https://developer.mozilla.org/en/HTML/Element/dt)
+ * Referenslänk: [dd](https://developer.mozilla.org/en/HTML/Element/dd)
+ 
+### CSS för listor ###
+
+ * Referenslänk: [List-style-position](https://developer.mozilla.org/en/CSS/list-style-position)
+ * Referenslänk: [List-style-image](https://developer.mozilla.org/en/CSS/list-style-image)
+ * Referenslänk: [List-style-type](https://developer.mozilla.org/en/CSS/list-style-type)
+ * Referenslänk: [List-style](https://developer.mozilla.org/en/CSS/list-style)
+ * Fotnot: [CSS 3 lists](http://www.w3.org/TR/css3-lists/)
+ * Referenslänk: [CSS Counters](https://developer.mozilla.org/en/CSS_Counters)
+
 ## Menyer
 
 ## Tabeller
@@ -14,6 +38,8 @@
 
 # Kapitel 13: Formulär
 
+
+ * Fördjupningslänk: [CSS3 Pseudo-Classes and HTML5 Forms ](http://html5doctor.com/css3-pseudo-classes-and-html5-forms/)
 
 # Kapitel 14: JavaScript
 
@@ -27,7 +53,13 @@
 
 Nämn på slutet: http://www.w3.org/TR/css-device-adapt/
 
-# Kapitel 16: Tillgänglighet
+# Kapitel 16: Ljud och video
+
+ * Fotnot: [Codec](http://en.wikipedia.org/wiki/Codec)
+
+ https://developer.mozilla.org/en/DOM/Using_full-screen_mode
+
+Tillgänglighet
 
 
 # Kapitel 17: Säkerhet
