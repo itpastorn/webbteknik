@@ -1,8 +1,3 @@
-# Kapitel 11: Tvåspaltslayout med float
-
-## Float
-
-
 # Kapitel 12: Listor och tabeller
 
 ## Vanliga listor
@@ -46,6 +41,7 @@
 
  * Fotnot: [Dåligt råd om kommentarer](http://www.w3schools.com/js/js_howto.asp)
  
+ * Referenslänk: [JavaScript Technologies Overview](https://developer.mozilla.org/en/JavaScript_technologies_overview)
 
 
 # Kapitel 15: Mobil webb
