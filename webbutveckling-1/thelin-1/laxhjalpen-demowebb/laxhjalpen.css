@@ -49,8 +49,7 @@ p {
     margin-right: 6%;
     vertical-align: top;
 }
-.startpage > section:last-of-type,
-.subpage   > section:last-of-type {
+.startpage > section:last-of-type {
     margin-right: 0;
 }
 .startpage > section > h2,
@@ -62,18 +61,6 @@ p {
     border-radius: 50%;
     font: large 'Merienda One', cursive;
     text-align: center;
-}
-.subpage > nav {
-    display: inline-block;
-    width: 20%;
-}
-.subpage > nav ul {
-    margin: 0;
-    padding: 0;
-}
-.subpage > nav li {
-    display: block;
-    list-style-type: none;
 }
 .startpage > section > h2 > a:link,
 .startpage > section > h2 > a:visited,
@@ -163,12 +150,19 @@ SUBPAGES
     margin-right: 2%;
     display: inline; /* Old IE bugfix */
 }
-.subpage > div {
-    width: 75%;
+.subpage > nav > ul {
+    margin: 0; /* local reset */
+    padding: 0;
+}
+.subpage > nav li {
+    display: block;
+    list-style-type: none;
+}
+div[role="main"] {
     margin-left: 25%;
 }
 /* För sidan om-oss */
-.subpage > div > article {
+div[role="main"] > article {
     display: block;
 	width: 100%; 
 	float: right; /* Floated to contain other floated content */
