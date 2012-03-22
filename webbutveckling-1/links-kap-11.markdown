@@ -7,6 +7,8 @@
 
 ### Layout med display: inline-box
 
+ * Fotnot: [CSS display: inline-block: why it rocks, and why it sucks](http://robertnyman.com/2010/02/24/css-display-inline-block-why-it-rocks-and-why-it-sucks/)
+
 ### Layout med float
 
 ### Layout med CSS-tabeller
@@ -32,19 +34,43 @@ http://a.deveria.com/?p=236
 
 ## Exempel (Läxhjälpen)
 
-## Float
+### Sidans hucudsakliga block (video)
+
+## Float (video)
+
+### Hur float fungerar
+
+ * Referenslänk: [Float](https://developer.mozilla.org/en/CSS/float)
+ * Fotnot: [Bug Fix: IE Double Margin Float Bug](http://www.cssnewbie.com/double-margin-float-bug/)
+ * Fotnot: [Floats, Margins and IE](http://www.positioniseverything.net/explorer/floatIndent.html)
+
+### Läxhjälpens 2 spalter
+
+### Högerspalten
 
 ### Contain float
+
+ * [Containing floats](http://www.complexspiral.com/publications/containing-floats/)
+ * [Clearfix](http://www.cs.hmc.edu/~mbrubeck/clear-after/)
+
+### De inre spalterna
+
 
 ### Clear float
 
 
- 
+## PS. Vad gör figure?
 
-## Exempel (Läxhälpen)
+ * Referenslänk: [The Figure Element](http://www.w3.org/TR/html5-author/the-figure-element.html)
+ * Referenslänk: [The Figure and Figcaption Elements](http://html5doctor.com/the-figure-figcaption-elements/)
+ * Referenslänk: [Figure](https://developer.mozilla.org/en/HTML/Element/figure)
 
+### CSS för figure och figcaption på webbplatsen för Läxhjälpen
 
-## Float
+ * Referenslänk: [Text transform](https://developer.mozilla.org/en/CSS/text-transform)
 
+## Resterande design på sidan
+
+ * Referenslänk: [hr](https://developer.mozilla.org/en/HTML/Element/hr)
 
 

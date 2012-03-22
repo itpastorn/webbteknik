@@ -30,6 +30,16 @@
 
 ## Tabeller
 
+https://developer.mozilla.org/en/HTML/Element/table
+
+ * [Purpose of the summary Attribute](http://juicystudio.com/article/purpose-of-the-summary-attribute.php)
+ * [WCAG: Using the summary attribute of the table element to give an overview of data tables](http://www.w3.org/TR/2008/NOTE-WCAG20-TECHS-20081211/H73)
+ * [Diskussionen om summary i HTML5](http://wiki.whatwg.org/wiki/Table_Summary)
+ * [Roger Johansson: HTML 5 and the summary attribute](http://www.456bereastreet.com/archive/200909/html_5_and_the_summary_attribute/)
+
+https://developer.mozilla.org/en/HTML/Element/th
+https://developer.mozilla.org/en/HTML/Element/td
+http://www.w3.org/TR/html5-author/the-th-element.html
 
 # Kapitel 13: Formulär
 
