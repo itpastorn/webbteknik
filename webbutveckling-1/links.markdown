@@ -41,6 +41,8 @@ https://developer.mozilla.org/en/HTML/Element/th
 https://developer.mozilla.org/en/HTML/Element/td
 http://www.w3.org/TR/html5-author/the-th-element.html
 
+Zebra striping
+
 # Kapitel 13: Formulär
 
 
@@ -52,6 +54,11 @@ http://www.w3.org/TR/html5-author/the-th-element.html
  * Fotnot: [Dåligt råd om kommentarer](http://www.w3schools.com/js/js_howto.asp)
  
  * Referenslänk: [JavaScript Technologies Overview](https://developer.mozilla.org/en/JavaScript_technologies_overview)
+
+http://lokeshdhakar.com/projects/lightbox2/
+
+http://nivo.dev7studios.com/
+http://nivo.dev7studios.com/support/jquery-plugin-usage/
 
 
 # Kapitel 15: Mobil webb

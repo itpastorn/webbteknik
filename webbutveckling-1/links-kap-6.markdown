@@ -1,9 +1,11 @@
 # Kapitel 6: Teckenkodning och fonter
 
- * Fördjupningslänk: http://en.wikipedia.org/wiki/ASCII
- * Fördjupningslänk: http://www.w3.org/International/getting-started/characters
+ * Fördjupningslänk: [Teckenkodning för nybörjare](http://www.w3.org/International/questions/qa-what-is-encoding)
+ * Fördjupningslänk: [Introduktion till teckenuppsättningar och kodningar](http://www.w3.org/International/getting-started/characters.sv.php)
+ * Fördjupningslänk: [ASCII](http://en.wikipedia.org/wiki/ASCII)
 
 ## Nyrad som problem
+
 ## Äldre teckenkodningar
 
  * Fotnot: http://en.wikipedia.org/wiki/ISO/IEC_8859

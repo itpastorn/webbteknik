@@ -107,7 +107,7 @@ Class för positioneringar - block, bilder, captions med mera
     margin-bottom: 20px;
 }
 .blockslider {
-    overflow: auto;
+    /* overflow: auto; */
     height: 300px;
     margin-bottom: 20px;
 }
@@ -209,12 +209,18 @@ div[role="main"] figure > img {
 Tables
 ========================================================================
 */
+/*
+Fråga Lena:
+Här finns några grå nyanser #ddd, #e0e0e0 och #d3d3d3 – kan du förklara variationen?
+Varför overflow: hidden?
+
+*/
 .borderless {
     *border-collapse: collapse; /* Fulhack för IE7 och lägre */
     border-spacing: 0;
 }
 .services {
-    overflow: hidden;
+    /*overflow: hidden;*//* Varför satte du denna Lena? */
     border:1px solid #d3d3d3;
     background: #fff;
     width: 96%;
@@ -235,30 +241,38 @@ th {
     background:#ddd;
 }
 td {
-    border-top: 1px solid #e0e0e0; 
+    border-top: 1px solid #e0e0e0;
     border-right: 1px solid #e0e0e0;
 }
 tr:target {
     background-color: #61d7a4;
-       -moz-transition: background-color 2s;
-    -webkit-transition: background-color 2s;
-         -o-transition: background-color 2s;
-        -ms-transition: background-color 2s;
+}
+tr:hover {
+    background-color: #ff9b73;
+}
+tr {
+    -webkit-transition: background-color 0.3s;
+       -moz-transition: background-color 0.3s;
+        -ms-transition: background-color 0.3s;
+         -o-transition: background-color 0.3s;
 }
         
 /*========================================================================
 Nivo Slider
 ========================================================================*/
 
-.theme-default #slider {
-    margin:0 auto;
-    width:618px; /* Make sure your images are the same size */
-    height:246px; /* Make sure your images are the same size */
+.nivoSlider {
+    margin: 0 auto;
+    width:  618px; /* Make sure your images are the same size */
+    height: 246px; /* Make sure your images are the same size */
 }
+/* Oanvända väl? */
+/*
 .theme-pascal.slider-wrapper,
 .theme-orman.slider-wrapper {
     margin-top:150px;
 }
+*/
 .nivo-caption {
     text-align: center;
 }

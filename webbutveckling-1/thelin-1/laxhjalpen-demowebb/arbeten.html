@@ -11,13 +11,13 @@
 <head>
   <meta charset="utf-8" />
   <title>Våra tjänster - Läxhjälpen</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link href='http://fonts.googleapis.com/css?family=Merienda+One' rel='stylesheet' />
   <link href="laxhjalpen.css" title="Finished" rel="stylesheet" />
-  <link rel="stylesheet" href="themes/default/default.css" type="text/css" media="screen" />
-  <link rel="stylesheet" href="themes/pascal/pascal.css" type="text/css" media="screen" />
-  <link rel="stylesheet" href="themes/orman/orman.css" type="text/css" media="screen" />
-  <link rel="stylesheet" href="nivo-slider.css" type="text/css" media="screen" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" href="themes/default/default.css" media="screen" />
+  <!-- link rel="stylesheet" href="themes/pascal/pascal.css" media="screen" />
+  <link rel="stylesheet" href="themes/orman/orman.css" media="screen" / -->
+  <link rel="stylesheet" href="nivo-slider.css" media="screen" />
 </head>
 <body class="subpage">
   <header>
@@ -36,15 +36,15 @@
     </ul>
   </nav>
   <div role="main">
-    <div class="blockslider">
-      <div class="slider-wrapper theme-default">
+    <div class="blockslider theme-default">
+      <!-- div class="" -->
         <div id="slider" class="nivoSlider">
           <a href="#lstuga"><img src="img/1.png" alt="" title="Läxstuga med dig och dina kompisar" /></a>
           <a href="#skypeh"><img src="img/2.png" alt="" title="Hjälp via Skype" /></a>
-          <a href="#mailhp"><img src="img/3.png" alt="" title="Hjälp via email" data-transition="slideInLeft" />
+          <a href="#mailhp"><img src="img/3.png" alt="" title="Hjälp via email" /></a>
           <a href="#videos"><img src="img/4.png" alt="" title="Vi har också videolektioner" /></a>
         </div>
-      </div>
+      <!-- /div -->
     </div>
     <table class="borderless services">
       <thead>
@@ -76,12 +76,11 @@
   <footer>
     <small>&copy; Lars Gunther och Thelin AB</small>
   </footer>
-  <script type="text/javascript" src="scripts/jquery-1.7.1.min.js"></script>
-    <script type="text/javascript" src="scripts/jquery.nivo.slider.pack.js"></script>
-    <script type="text/javascript">
-    $(window).load(function() {
-        $('#slider').nivoSlider();
-    });
-    </script>
+  <!-- script src="scripts/jquery-1.7.1.min.js"></script -->
+  <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+  <script src="scripts/jquery.nivo.slider.pack.js"></script>
+  <script>
+    $('#slider').nivoSlider();
+  </script>
 </body>
 </html>
