@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8" />
+  <title>Kontakt - Läxhjälpen</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link href='http://fonts.googleapis.com/css?family=Merienda+One' rel='stylesheet' />
+  <link href="laxhjalpen.css" title="Finished" rel="stylesheet" />
+</head>
+<body class="subpage">
+  <header>
+    <!--img id="logo" alt="Startsidan" src="laxlogo.png" / -->
+    <!-- imagefiller är bara temporär utfyllnad -->
+    <span class="imagefiller">&#x2619;</span>
+    <h1>Läxhjälpen: <span>Kontakt</span></h1>
+   <hr class="tagline">
+  </header>
+  <nav>
+    <ul class="menu">
+    <li><a href="om-oss.html">Vilka vi är &#x3020;</a></li>
+    <li><a href="">Vad vi gör &#x2318;</a></li>
+    <li><a href="">Blogg &#x272A;</a></li>
+    <li><a href="contact.php">Kontakt &#x260E;</a></li>
+    </ul>
+  </nav>
+  <div role="main">
+  <h1>Kontaktformulär</h1>
+  <!-- Telefon bör också finnas -->
+  <form action="contact.php" method="post">
+    <fieldset id="userdata">
+      <legend>Vem är du?</legend>
+      <p>
+        <label for="uname">Namn:{$uname_extra}</label>
+        <input type="text" name="uname" id="uname" value="{$uname}" placeholder="Förnamn Efternamn" required />
+      </p>
+      <p>
+        <label for="umail">Mejladress:{$umail_extra}</label>
+        <input type="email" name="umail" id="umail" value="{$umail}" placeholder="foo@bar.com" required />
+      </p>
+    </fieldset>
+    <fieldset id="messagedata">
+      <legend>Meddelande</legend>
+      <p>
+        <label for="msubject">Ärende:{$msubject_extra}</label>
+        <input type="text" id="msubject" name="msubject" value="{$msubject}"  placeholder="Minst 5 tecken" required />
+      </p>
+      <p>
+        <label for="mmessage">Text:{$mmessage_extra}</label>
+        <textarea id="mmessage" name="mmessage" placeholder="Skriv ditt meddelande. Minst 25 tecken." required>{$mmessage}</textarea>
+      </p>
+    </fieldset>
+    <fieldset id="submitbutton">
+      <input type="submit" value="Skicka" />
+      <!--
+        The following field is used to prevent multiple submits. If removed it will be considered a configuration error.  
+       -->
+       <input type="hidden" name="prevent_multiple_submits" value="{$random_string}" />
+    </fieldset>
+  </form>
+  </div>
+  <footer>
+    <small>&copy; Lars Gunther och Thelin AB</small>
+  </footer>
+  <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+</body>
+</html>
