@@ -303,7 +303,12 @@ if ( ! empty($_POST) ) {
         $message = str_replace('{$smtpsafe_message}', $still_unsafe['mmessage'], $message);
 
         // Store return value from the mail function to enable error message
-        $successfully_sent = mail($recipient, $smtpsafe_subject, $message, "Reply-to: {$smtpsafe_replyto}");
+        // Dry run? (Testing)
+        if ( empty($recipient) ) {
+            $successfully_sent = true;
+        } else {
+            $successfully_sent = mail($recipient, $smtpsafe_subject, $message, "Reply-to: {$smtpsafe_replyto}");
+        }
 
         $_SESSION['prevent_multiple_submits'] = null;
 
@@ -353,7 +358,7 @@ if ( $use_form_template ) {
 } elseif ( $successfully_sent ) {
     $template = $path_to_templates . $success_template;
     // Use the SMTP-formatted message in this scenario
-    $mmessage = htmlspecialchars($message);
+    $mmessage = nl2br(htmlspecialchars($message));
 } else {
     // Form was technically OK, but message could not be delivered
     exit("<h1>Technical error. Mail could not be delivered.</h1>\n<h2>Note: All data was correctly submitted.</h2>");

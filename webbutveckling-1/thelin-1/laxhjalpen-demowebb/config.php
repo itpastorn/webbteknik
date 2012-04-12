@@ -40,7 +40,7 @@ $msubject = "";
 /**
  * This will be the default message
  */
-$mmessage = "Skriv ditt meddelande. Minst 25 tecken.";
+$mmessage = ""; // Placeholder i stället
 
 
 // In addition to the variables above, the following are used in the template
@@ -89,7 +89,7 @@ $umail_error = '<strong class="error">Måste vara en fungerande mejladress.</str
  * @var string
  */
 $msubject_error = '<strong class="error">Måste vara mellan 5 och 150 tecken. ' .
-    'Får bara innehålla bokstäver, siffror, symboler och skiljetecken.</strong>';
+    'Bara bokstäver, siffror, symboler och skiljetecken.</strong>';
 
 /**
  * This will be the error message that is provided if message is too short

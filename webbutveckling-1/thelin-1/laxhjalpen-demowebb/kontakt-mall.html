@@ -31,22 +31,22 @@
       <legend>Vem är du?</legend>
       <p>
         <label for="uname">Namn:{$uname_extra}</label>
-        <input type="text" name="uname" id="uname" value="{$uname}" />
+        <input type="text" name="uname" id="uname" value="{$uname}" placeholder="Förnamn Efternamn" required />
       </p>
       <p>
         <label for="umail">Mejladress:{$umail_extra}</label>
-        <input type="text" name="umail" id="umail" value="{$umail}" />
+        <input type="email" name="umail" id="umail" value="{$umail}" placeholder="foo@bar.com" required />
       </p>
     </fieldset>
     <fieldset id="messagedata">
-      <legend>Meddelande:</legend>
+      <legend>Meddelande</legend>
       <p>
         <label for="msubject">Ärende:{$msubject_extra}</label>
-        <input type="text" id="msubject" name="msubject" value="{$msubject}" />
+        <input type="text" id="msubject" name="msubject" value="{$msubject}"  placeholder="Minst 5 tecken" required />
       </p>
       <p>
         <label for="mmessage">Text:{$mmessage_extra}</label>
-        <textarea id="mmessage" name="mmessage">{$mmessage}</textarea>
+        <textarea id="mmessage" name="mmessage" placeholder="Skriv ditt meddelande. Minst 25 tecken." required>{$mmessage}</textarea>
       </p>
     </fieldset>
     <fieldset id="submitbutton">
