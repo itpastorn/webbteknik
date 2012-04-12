@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>DeviceOrientationEvent</title>
+  <style>
+    body {
+        font:  300% sans-serif;
+        margin: 0;
+        text-align: center;
+    }
+    #count::after {
+        display: block;
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        width: 180px;
+        margin-left: -90px;
+    }
+    @media screen and (orientation: portrait) {
+        body {
+            color: navajowhite;
+            background-color: black;
+        }
+        #count::after {
+            content: "Portrait";
+        }
+    }
+    @media screen and (orientation: landscape) {
+        body {
+            background-color: navajowhite;
+            color: black;
+        }
+        #count::after {
+            content: "Landscape";
+        }
+    }
+    /* TODO: transition ... */
+    
+  </style>
+</head>
+<body>
+  <p>Turn device!</p>
+  <p id="count">Changed 0 times</p>
+  <script>
+    if (!window.DeviceOrientationEvent) {
+        alert("Browser must support DeviceOrientationEvent for this demo");
+    } else {
+        var times = 0,
+            count = document.getElementById("count");
+        window.addEventListener("deviceorientation", function () {
+            count.innerHTML = "Changed " + times + " times";
+        }, true);
+    }
+  </script>
+</body>
+</html>

@@ -277,6 +277,32 @@ Nivo Slider
     text-align: center;
 }
 
+/* =====================================================
+======== Contact page ==================================
+======================================================*/
+
+form p {
+    position: relative; /* position-aboslute rot */
+}
+label {
+    display: inline-block;
+    width: 7em;
+    vertical-align: top;
+}
+label > strong {
+    position: absolute;
+    left: 20em;
+    outline: 1px solid red;
+}
+textarea {
+    width: 200px;
+    height: 100px;
+    /* Gör demo med resize */
+}
+input[type="submit"] {
+    margin-left: 7em;
+}
+
 /*====================*/
 /*=== Other Styles ===*/
 /*====================*/

@@ -45,6 +45,11 @@ Zebra striping
 
 # Kapitel 13: Formulär
 
+Jag såg två fel i texten som kanske redan är fixade. 
+
+
+http://html5accessibility.com/
+
 
  * Fördjupningslänk: [CSS3 Pseudo-Classes and HTML5 Forms ](http://html5doctor.com/css3-pseudo-classes-and-html5-forms/)
 
@@ -63,8 +68,27 @@ http://nivo.dev7studios.com/support/jquery-plugin-usage/
 
 # Kapitel 15: Mobil webb
 
+ * Referenslänk: [Using the viewport meta tag to control layout on mobile browsers](https://developer.mozilla.org/en/Mobile/Viewport_meta_tag)
+ * Referenslänk: [An introduction to meta viewport and @viewport](http://dev.opera.com/articles/view/an-introduction-to-meta-viewport-and-viewport/)
+ * Referenslänk: [Combining meta viewport and media queries](http://www.quirksmode.org/blog/archives/2010/09/combining_meta.html)
 
 Nämn på slutet: http://www.w3.org/TR/css-device-adapt/
+
+https://developer.mozilla.org/en/CSS/Media_queries
+http://www.w3.org/TR/css3-mediaqueries/
+http://www.1stwebdesigner.com/css/how-to-use-css3-orientation-media-queries/
+
+https://developer.mozilla.org/en/detecting_device_orientation
+
+-moz-device-pixel-ratio
+-webkit-device-pixel-ratio device pixlar per CSS-pixel...
+
+Förutsätt inte att det är en iPhone bara för att...
+
+
+ * Referenslänk: [Touch Events](https://developer.mozilla.org/en/DOM/Touch_events)
+ * Referenslänk: [DOM event reference](https://developer.mozilla.org/en/DOM/DOM_event_reference)
+ * Referenslänk: [Using geolocation](https://developer.mozilla.org/En/Using_geolocation)
 
 # Kapitel 16: Ljud och video
 
@@ -72,26 +96,24 @@ Nämn på slutet: http://www.w3.org/TR/css-device-adapt/
 
  https://developer.mozilla.org/en/DOM/Using_full-screen_mode
 
-Tillgänglighet
+http://en.wikipedia.org/wiki/Comparison_of_container_formats
+
+https://developer.mozilla.org/En/HTML/Element/Audio
+https://developer.mozilla.org/en/HTML/Element/source
+https://developer.mozilla.org/En/Media_formats_supported_by_the_audio_and_video_elements 
+
+http://latrine.dgx.cz/how-to-correctly-insert-a-flash-into-xhtml
+
+# Kapitel 17: Tillgänglighet
 
 
-# Kapitel 17: Säkerhet
+# Kapitel 18: Säkerhet
 
-Lite teori om säkerhet på webben
-
-Lösenord
-
-Cross Site Scripting (XSS)
-
-Iframe i sandlåda (fördjupning)
-
-# Kapitel 18: Jazz
-
-Favicon
 
 
 -------------------------------------------------------------------------------
 
+https://developer.mozilla.org/en/Web_development/Historical_artifacts_to_avoid
 
 Fotnot Henri S: SVG kräver space i tomma element???
 

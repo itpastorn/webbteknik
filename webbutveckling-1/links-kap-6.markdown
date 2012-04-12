@@ -77,6 +77,7 @@
  * Fotnot: http://www.w3.org/TR/SVG/fonts.html
  * Fotnot: http://en.wikipedia.org/wiki/Embedded_OpenType
  * Fotnot: http://hacks.mozilla.org/2010/11/firefox-4-font-feature-support/
+ * Fördjupningslänk: [Graphite Smart Fonts](http://junglecode.net/graphite/)
 
 ### Nedladdningsbara typsnitt
 
