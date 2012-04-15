@@ -106,10 +106,20 @@ http://latrine.dgx.cz/how-to-correctly-insert-a-flash-into-xhtml
 
 # Kapitel 17: Tillgänglighet
 
+ * Fotnot: [A quick Siri note - talsyntes på telefoner](http://www.quirksmode.org/blog/archives/2011/11/a_quick_siri_no.html)
+ * Fotnot: [Color Difference](http://en.wikipedia.org/wiki/Color_difference)
+ * Referenslänk: [WAI-ARIA Overview](http://www.w3.org/WAI/intro/aria.php)
+ * Referernslänk: [A Quick Introduction to WAI-ARIA](http://www.slideshare.net/maxdesign/a-quick-introduction-to-aria)
+
+Fördjupningsvideo om ARIA med formuläret
+I stället för asterisk så sätter vi aria-required="true" och kägger på asterisken som generated content.
+I stället för position absolute så lägger vi en span och aria-describedby
+
++ Aria-invalid i HTML-koden som PHP-skriptet genererar.
 
 # Kapitel 18: Säkerhet
 
-
+http://en.wikipedia.org/wiki/Code_injection
 
 -------------------------------------------------------------------------------
 

@@ -309,7 +309,7 @@ label > strong {
 .error {
     color: #421300;
 }
-input[type="text"] {
+input[type="text"], input[type="email"] {
     width: 200px;
 }
 textarea {
