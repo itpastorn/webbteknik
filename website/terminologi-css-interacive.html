@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS terminology</title>
+  <style>
+    body {
+        width: 600px;
+        margin: auto;
+        font: medium sans-serif;
+    }
+    .active {
+        outline: 1px solid red;
+        background-color: navajowhite;
+    }
+    pre {
+        font: bolder large monospace;
+    }
+  </style>
+</head>
+<body>
+  <h1>CSS terminology</h1>
+  <p>Click on the button to activate its outline.</p>
+  <!-- whitespace at end of lines needed -->
+  <pre><code>
+<span class="rule"><span class="selector">body</span> <span class="declaration_block">{
+                                 
+    <span class="declaration"><span class="property">width</span>: <span class="value">600<span class="unit">px</span></span>;</span>                
+                                 
+    <span class="declaration"><span class="property">margin</span>: <span class="value"><span class="keyword">auto</span></span>;</span>                
+                                 
+    <span class="declaration"><span class="property">font</span>: <span class="value"><span class="keyword">bolder</span> <span class="keyword">large</span> <span class="keyword">monospace</span></span>;</span>
+                                 
+}</span></span>
+  </code></pre>
+  <p id="btns">
+    <button id="a_rule">Rule</button>
+    <button id="a_declaration_block">Declaration Block</button>
+    <button id="a_selector">Selector</button>
+    <button id="a_declaration">Declaration</button>
+    <button id="a_property">Property</button>
+    <button id="a_value">Value</button>
+    <button id="a_keyword">Keyword</button>
+    <button id="a_unit">Unit</button>
+  </p>
+  <script>
+    var btns     = document.getElementById("btns"),
+        spans    = document.getElementsByTagName("span"),
+        numspans = spans.length;
+    btns.onclick = function (e) {
+        var activate = e.target.id.substr(2);
+        console.log(activate);
+        for ( var i = 0; i < numspans; i += 1 ) {
+            spans[i].classList.remove("active");
+        }
+        var aspans = document.getElementsByClassName(activate),
+            anum   = aspans.length;
+        for ( i = 0; i < anum; i += 1 ) {
+            aspans[i].classList.add("active");
+        }
+    };
+  </script>
+</body>
+</html>

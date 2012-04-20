@@ -66,6 +66,7 @@
 ## Mer om selektorer
 
  * Referenslänk: [30 tips på smarta selektorer](http://net.tutsplus.com/tutorials/html-css-techniques/the-30-css-selectors-you-must-memorize/)
+ * Referenslänk: [CSS Selectors interactive demo](http://vogtjosh.com/selectors/)
  * Tipslänk: [Useful nth-child Recipes](http://css-tricks.com/useful-nth-child-recipies/) av Chris Coyier
  * Tipslänk: [What's Your CSS Style](http://webstandardssherpa.com/reviews/whats-your-css-style/) om att hitta rätt selektor för varje situation.
 
@@ -83,7 +84,7 @@
 
 ### Attributselektorer
 
-## Specificitivitet ⏩
+## Specificitet ⏩
 
 ## (Not so) ! Important
 
