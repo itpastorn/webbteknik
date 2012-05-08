@@ -15,20 +15,40 @@ p {
 .startpage > header,
 .subpage > header {
     text-align: center;
-    overflow: auto; /* provisorisk så länge som imagefiller används */
+    padding: 20px 0 0;
+    width: 100%;
+    /* outline: 1px dotted red; */
 }
-.imagefiller {
-    font-size: 800%;
-    float: left;
-       -moz-transform: translate(0, -30px) rotate(90deg) scale(2);
-         -o-transform: translate(0, -30px) rotate(90deg) scale(2);
+.hwrap {
+    /* outline: 1px dotted green; */
 }
-.startpage > header > h1 {
-    font-size: 500%;
+.hwrap a {
+    display: inline-block;
+    margin-right: 30px;
+    /* outline: 1px dotted blue; */
+}
+/* 261 x 220 */
+.logo {
+    width: 235px;
+    height: 198px;
+}
+/* flytta ned sedan */
+.subpage .logo {
+    width: 146px;
+    height: 123px;
+}
+h1 {
     font-family: 'Merienda One', cursive;
+    margin: 0;
+    display: inline-block;
+    /* outline: 1px dotted teal; */
 }
-.startpage > header > h1:first-letter,
-.subpage   > header > h1:first-letter {
+.startpage > header h1 {
+    font-size: 500%;
+    vertical-align: 53%;
+}
+.startpage > header h1:first-letter,
+.subpage   > header h1:first-letter {
     color: #00af64;
 }
 .subpage   > header > h1 > span {
@@ -39,7 +59,8 @@ p.tagline  {
     padding: 0.5em;
     border-top: 3px double #00af64;
     border-bottom: 3px double #00af64;
-    margin: 4em 0;
+    margin: 3em 0;
+    clear: both;
 }
 .startpage > section {
     display: inline-block;
@@ -139,12 +160,12 @@ Class för positioneringar - block, bilder, captions med mera
 Subpages
 ==================================================================================
 */
-.subpage .imagefiller {
-    font-size: 600%;
+hr.tagline {
+    clear: both;
 }
-.subpage > header > h1 {
-    font-size: 300%;
-    font-family: 'Merienda One', cursive;
+.subpage > header h1 {
+    font-size: 260%;
+    vertical-align: 40px;
 }
 .subpage > nav {
     float: left;

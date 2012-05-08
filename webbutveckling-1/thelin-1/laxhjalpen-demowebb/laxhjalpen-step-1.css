@@ -11,9 +11,6 @@ section, header, footer {
 .startpage > header {
     text-align: center;
 }
-.imagefiller {
-    display: none;
-}
 .startpage > header > h1 {
     font-size: 500%;           /* Massiv rubrik */
 }

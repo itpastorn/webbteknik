@@ -41,6 +41,9 @@ https://developer.mozilla.org/en/HTML/Element/th
 https://developer.mozilla.org/en/HTML/Element/td
 http://www.w3.org/TR/html5-author/the-th-element.html
 
+Lovar demo med colspan och rowspan i avsnitt 12.3.5
+
+
 Zebra striping
 
 # Kapitel 13: Formulär
@@ -52,6 +55,8 @@ http://html5accessibility.com/
 
 
  * Fördjupningslänk: [CSS3 Pseudo-Classes and HTML5 Forms ](http://html5doctor.com/css3-pseudo-classes-and-html5-forms/)
+
+Lovar video om integration PHP-skriptet och formuläret.
 
 # Kapitel 14: JavaScript
 
@@ -101,6 +106,8 @@ http://en.wikipedia.org/wiki/Comparison_of_container_formats
 https://developer.mozilla.org/En/HTML/Element/Audio
 https://developer.mozilla.org/en/HTML/Element/source
 https://developer.mozilla.org/En/Media_formats_supported_by_the_audio_and_video_elements 
+
+http://html5doctor.com/html5-audio-the-state-of-play/
 
 http://latrine.dgx.cz/how-to-correctly-insert-a-flash-into-xhtml
 
