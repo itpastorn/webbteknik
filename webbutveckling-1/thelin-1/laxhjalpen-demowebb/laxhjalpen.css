@@ -22,7 +22,7 @@ p {
 .hwrap {
     /* outline: 1px dotted green; */
 }
-.hwrap a {
+.hwrap > a {
     display: inline-block;
     margin-right: 30px;
     /* outline: 1px dotted blue; */
@@ -31,11 +31,6 @@ p {
 .logo {
     width: 235px;
     height: 198px;
-}
-/* flytta ned sedan */
-.subpage .logo {
-    width: 146px;
-    height: 123px;
 }
 h1 {
     font-family: 'Merienda One', cursive;
@@ -47,11 +42,10 @@ h1 {
     font-size: 500%;
     vertical-align: 53%;
 }
-.startpage > header h1:first-letter,
-.subpage   > header h1:first-letter {
+header h1:first-letter {
     color: #00af64;
 }
-.subpage   > header > h1 > span {
+.subpage > header h1 > span {
     color: #a62f00;
 }
 p.tagline  {
@@ -163,9 +157,18 @@ Subpages
 hr.tagline {
     clear: both;
 }
-.subpage > header h1 {
+.subpage header a {
+    margin: 0 40px 0 0;
+    width: 172px;
+}
+.subpage .logo {
+    width: 146px;
+    height: 123px;
+}
+.subpage h1 {
     font-size: 260%;
     vertical-align: 40px;
+    width: 640px;
 }
 .subpage > nav {
     float: left;
