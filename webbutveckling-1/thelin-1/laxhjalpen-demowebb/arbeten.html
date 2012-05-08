@@ -11,42 +11,42 @@
 <head>
   <meta charset="utf-8" />
   <title>Våra tjänster - Läxhjälpen</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link href='http://fonts.googleapis.com/css?family=Merienda+One' rel='stylesheet' />
   <link href="laxhjalpen.css" title="Finished" rel="stylesheet" />
-  <link rel="stylesheet" href="themes/default/default.css" type="text/css" media="screen" />
-  <link rel="stylesheet" href="themes/pascal/pascal.css" type="text/css" media="screen" />
-  <link rel="stylesheet" href="themes/orman/orman.css" type="text/css" media="screen" />
-  <link rel="stylesheet" href="nivo-slider.css" type="text/css" media="screen" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" href="themes/default/default.css" media="screen" />
+  <!-- link rel="stylesheet" href="themes/pascal/pascal.css" media="screen" />
+  <link rel="stylesheet" href="themes/orman/orman.css" media="screen" / -->
+  <link rel="stylesheet" href="nivo-slider.css" media="screen" />
 </head>
 <body class="subpage">
   <header>
-    <!--img id="logo" alt="Startsidan" src="laxlogo.png" / -->
-    <!-- imagefiller är bara temporär utfyllnad -->
-    <span class="imagefiller">&#x2619;</span>
-    <h1>Läxhjälpen: <span>Våra tjänster</span></h1>
+    <div class="hwrap">
+      <a href="./"><img class="logo" alt="Startsidan" src="laxlogo.png"></a>
+      <h1>Läxhjälpen: <span>Våra tjänster</span></h1>
+    </div>
    <hr class="tagline">
   </header>
   <nav>
-    <ul>
-    <li><a href="om-oss.html">Vilka vi är &#x3020;</a></li>
-    <li><a href="">Vad vi gör &#x2318;</a></li>
-    <li><a href="">Blogg &#x272A;</a></li>
-    <li><a href="">Kontakt &#x260E;</a></li>
+    <ul class="menu">
+      <li><a href="om-oss.html">Vilka vi är &#x3020;</a></li>
+      <li><a href="arbeten.html">Vad vi gör &#x2318;</a></li>
+      <li><a href="blog.php">Blogg &#x272A;</a></li>
+      <li><a href="contact.php">Kontakt &#x260E;</a></li>
     </ul>
   </nav>
   <div role="main">
-    <div class="blockslider">
-      <div class="slider-wrapper theme-default">
+    <div class="blockslider theme-default">
+      <!-- div class="" -->
         <div id="slider" class="nivoSlider">
           <a href="#lstuga"><img src="img/1.png" alt="" title="Läxstuga med dig och dina kompisar" /></a>
           <a href="#skypeh"><img src="img/2.png" alt="" title="Hjälp via Skype" /></a>
-          <a href="#mailhp"><img src="img/3.png" alt="" title="Hjälp via email" data-transition="slideInLeft" />
+          <a href="#mailhp"><img src="img/3.png" alt="" title="Hjälp via email" /></a>
           <a href="#videos"><img src="img/4.png" alt="" title="Vi har också videolektioner" /></a>
         </div>
-      </div>
+      <!-- /div -->
     </div>
-    <table summary="">
+    <table class="borderless services">
       <thead>
         <tr>
           <th>Våra tjänster</th>
@@ -55,7 +55,7 @@
       </thead>
       <tbody>
         <tr id="lstuga">
-          <td>Läxsstuga för 3-8 deltagare</td>
+          <td>Läxstuga för 3-8 deltagare</td>
           <td>500 kr/tim</td>
         </tr>
         <tr id="skypeh">
@@ -76,12 +76,11 @@
   <footer>
     <small>&copy; Lars Gunther och Thelin AB</small>
   </footer>
-  <script type="text/javascript" src="scripts/jquery-1.7.1.min.js"></script>
-    <script type="text/javascript" src="scripts/jquery.nivo.slider.pack.js"></script>
-    <script type="text/javascript">
-    $(window).load(function() {
-        $('#slider').nivoSlider();
-    });
-    </script>
+  <!-- script src="scripts/jquery-1.7.1.min.js"></script -->
+  <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+  <script src="scripts/jquery.nivo.slider.pack.js"></script>
+  <script>
+    $('#slider').nivoSlider();
+  </script>
 </body>
 </html>
