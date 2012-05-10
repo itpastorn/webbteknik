@@ -77,12 +77,15 @@
  * Fotnot: http://www.w3.org/TR/SVG/fonts.html
  * Fotnot: http://en.wikipedia.org/wiki/Embedded_OpenType
  * Fotnot: http://hacks.mozilla.org/2010/11/firefox-4-font-feature-support/
+ * Fördjupningslänk: [
+Using OpenType font features with CSS 3: Part 1](http://blog.fontdeck.com/post/15777165734/opentype-1)
  * Fördjupningslänk: [Graphite Smart Fonts](http://junglecode.net/graphite/)
 
 ### Nedladdningsbara typsnitt
 
  * Referenslänk: http://www.w3.org/TR/WOFF/
  * Referenslänk: [CSS @ Ten: The Next Big Thing](http://www.alistapart.com/articles/cssatten) av Håkon Wium Lie på A List Apart!
+ * Referenslänk: [Review of Popular Web Font Embedding Services](http://www.smashingmagazine.com/2010/10/20/review-of-popular-web-font-embedding-services/)
 
 ### Font-stackar
 
