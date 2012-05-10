@@ -1,5 +1,10 @@
 @CHARSET "UTF-8";
 /* http://colorschemedesigner.com/#3321Tw0w0w0w0 */
+/*
+====================================================
+Global rules
+====================================================
+*/
 body {
     margin: auto;
     width: 860px;
@@ -7,30 +12,22 @@ body {
     font-size: 100%;
 }
 section, header, footer {
-    outline: none;
+    outline: none; /* reset */
 }
 p {
     -moz-hyphen: auto;
 }
-.startpage > header,
-.subpage > header {
+header {
     text-align: center;
     padding: 20px 0 0;
-    width: 100%;
     /* outline: 1px dotted red; */
 }
 .hwrap {
     /* outline: 1px dotted green; */
 }
 .hwrap > a {
-    display: inline-block;
     margin-right: 30px;
     /* outline: 1px dotted blue; */
-}
-/* 261 x 220 */
-.logo {
-    width: 235px;
-    height: 198px;
 }
 h1 {
     font-family: 'Merienda One', cursive;
@@ -38,15 +35,61 @@ h1 {
     display: inline-block;
     /* outline: 1px dotted teal; */
 }
+h1:first-letter {
+    color: #00af64;
+}
+/*
+=============================================================
+Rules for positioning - block, images, captions, etc.
+=============================================================
+*/
+.block {
+    overflow: auto;
+    margin-bottom: 20px;
+}
+.blockslider {
+    /* overflow: auto; */
+    height: 300px;
+    margin-bottom: 20px;
+}
+.double {
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+.alignright {
+    float: right;
+    padding: 0;
+    margin: 0 0 10px 10px;
+    display: inline; /* Fixes double margin bug in IE 6 */
+}
+.alignleft {
+    float: left;
+    padding: 0;
+    margin: 0 10px 15px 0;
+    display: inline; /* Fixes double margin bug in IE 6 */
+}
+.aligncenter{
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    padding: 10px 0;
+}
+.clear {
+    clear:both;
+}
+/*
+====================================================
+Start page rules
+====================================================
+*/
+/* Original 261 x 220 */
+.startpage .logo {
+    width: 235px;
+    height: 198px;
+}
 .startpage > header h1 {
     font-size: 500%;
     vertical-align: 53%;
-}
-header h1:first-letter {
-    color: #00af64;
-}
-.subpage > header h1 > span {
-    color: #a62f00;
 }
 p.tagline  {
     font-size: 120%;
@@ -84,7 +127,7 @@ Main site navigation
 .menu > li  {
     margin: 0 0 1em;
     padding: 2em 0;
-    background-color: #F5F5F5; /* mkt ljus grå */ 
+    background-color: #F5F5F5; /* very light grey */ 
     box-shadow: inset 0 0 20px #007241;
     border-radius: 50%;
     font: large 'Merienda One', cursive;
@@ -113,50 +156,10 @@ Main site navigation
     color: #FF4900;
 }
 /*
-=============================================================
-Class för positioneringar - block, bilder, captions med mera
-=============================================================
-*/
-.block {
-    overflow: auto;
-    margin-bottom: 20px;
-}
-.blockslider {
-    /* overflow: auto; */
-    height: 300px;
-    margin-bottom: 20px;
-}
-.double {
-    border: 1px solid #ccc;
-    padding: 5px;
-}
-.alignright {
-    float: right;
-    padding: 0;
-    margin: 0 0 10px 10px;
-    display: inline; /* Fixes double margin bug in IE 6 */
-}
-.alignleft {
-    float: left;
-    padding: 0;
-    margin: 0 10px 15px 0;
-    display: inline; /* Fixes double margin bug in IE 6 */
-}
-.aligncenter{
-    display: block;
-    margin: 0 auto;
-    text-align: center;
-    padding: 10px 0;
-}
-
-/*
 ==================================================================================
 Subpages
 ==================================================================================
 */
-hr.tagline {
-    clear: both;
-}
 .subpage header a {
     margin: 0 40px 0 0;
     width: 172px;
@@ -170,6 +173,17 @@ hr.tagline {
     vertical-align: 40px;
     width: 640px;
 }
+.subpage > header h1 > span {
+    color: #a62f00;
+}
+/* TODO: Video som förklarar kantlinjer med denna */
+hr {
+    padding: 0.5em; /* To make sub-pages have similar look as p.tag-line */
+    border-style: double;
+    border-width: 3px;
+    border-color: #00af64 transparent;
+    margin: 2em 0;
+}
 .subpage > nav {
     float: left;
     width: 20%;
@@ -178,7 +192,7 @@ hr.tagline {
 div[role="main"] {
     margin-left: 25%;
 }
-/* För sidan om-oss */
+/* The page "om-oss" */
 div[role="main"] > article {
     display: block;
     width: 100%; 
@@ -197,13 +211,6 @@ div[role="main"] > article:last-child {
 .block > p:first-of-type {
     margin-top: 0;
 }
-hr {
-    padding: 0.5em; /* För att snygga till undersidorna utan p.tag-line men ändå ha samma design */
-    border-style: double;
-    border-width: 3px;
-    border-color: #00af64 transparent;
-    margin: 2em 0;
-}
 /*
 figure {
     border: 0 solid #E6E6E6;
@@ -217,11 +224,11 @@ div[role="main"] figure > img {
 }
 .bildcaption {
     font: italic bolder 110% monospace;
-    font-family: inherit; /* Återställer efter shorthand*/
+    font-family: inherit; /* Restore after shorthand*/
     text-align: center;
     text-transform: uppercase;
     color: #666;
-    margin-bottom: 1em; /* samma som p till höger */
+    margin-bottom: 1em;   /* Same as p to the right */
 }
 .subpage > footer {
     margin-top: 0;
@@ -233,18 +240,11 @@ div[role="main"] figure > img {
 Tables
 ========================================================================
 */
-/*
-Fråga Lena:
-Här finns några grå nyanser #ddd, #e0e0e0 och #d3d3d3 – kan du förklara variationen?
-Varför overflow: hidden?
-
-*/
 .borderless {
-    *border-collapse: collapse; /* Fulhack för IE7 och lägre */
+    *border-collapse: collapse; /* Ugly hack for IE7 and lower */
     border-spacing: 0;
 }
 .services {
-    /*overflow: hidden;*//* Varför satte du denna Lena? */
     border:1px solid #d3d3d3;
     background: #fff;
     width: 96%;
@@ -280,11 +280,11 @@ tr {
         -ms-transition: background-color 0.3s;
          -o-transition: background-color 0.3s;
 }
-        
-/*========================================================================
+/*
+========================================================================
 Nivo Slider
-========================================================================*/
-
+========================================================================
+*/
 .nivoSlider {
     margin: 0 auto;
     width:  618px; /* Make sure your images are the same size */
@@ -300,11 +300,11 @@ Nivo Slider
 .nivo-caption {
     text-align: center;
 }
-
-/* =====================================================
-======== Contact page ==================================
-======================================================*/
-
+/*
+=====================================================
+Forms (contact page)
+======================================================
+*/
 fieldset {
     padding: 1em;
     border-radius: 10px;
@@ -314,7 +314,7 @@ legend {
     font-size: larger;
 }
 form p {
-    position: relative; /* position absolute rot */
+    position: relative; /* position absolute root */
     margin: 1.5em 0;
 }
 label {
@@ -339,21 +339,12 @@ input[type="text"], input[type="email"] {
 textarea {
     width: 200px;
     height: 100px;
-    /* Gör demo med resize */
+    /* TODO: Gör demo med resize */
     resize: vertical;
 }
 input[type="submit"] {
     display: block;
     margin: auto;
 }
-input:-moz-placeholder {
-    /* Bara demo */
-}
-/* , :-o-placeholder, :-ms-placeholder, :placeholder */
-/*====================*/
-/*=== Other Styles ===*/
-/*====================*/
-.clear {
-    clear:both;
-}
+
 
