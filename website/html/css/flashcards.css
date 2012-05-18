@@ -1,0 +1,110 @@
+#explain {
+    height: auto;
+    -moz-transition: 0.5s; 
+}
+#explain dt, #explain dd {
+    
+}
+#navigationbuttons {
+    position: relative; /* absolute anchor */
+    text-align: center;
+}
+.doexplain {
+    position: absolute;
+    right: 0;
+}
+.flashcards {
+    position: relative;
+    height: 264px;
+    width: 324px;
+    margin: 30px auto;
+    padding-top: 20px;
+    overflow-x: hidden;
+    /* TODO: Workaround using clip-path mask */
+       -moz-transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+       -moz-perspective: 800px;
+    -webkit-perspective: 800px; /* TODO: Investigate why this has no effect */
+}
+.flashcards.flipped {
+    /* Currently unused */
+}
+.flashcards > dt, .flashcards > dd  {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 200px;
+    width: 300px;
+    margin: 30px 0;
+    padding: 10px;
+    border: 1px solid #333;
+    border-radius: 5px;
+       -moz-backface-visibility: hidden;
+    -webkit-backface-visibility: hidden; /* TODO: Investigate why this has no effect */
+    /*
+       -moz-transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    */
+       -moz-transition: 0.7s linear;
+    -webkit-transition: 0.7s linear;
+    /* Would love the following not to override the above... CSS animation ? */
+    /*
+       -moz-transition: left 0.5s linear;
+    -webkit-transition: left 0.5s linear;
+    */
+    /* TODO: No delay for z-index when 3D transform is not supported */
+    font-size: x-large;
+    background-color: #DFFA00;
+    box-shadow: 5px 5px 5px silver;
+}
+.flashcards > dt  {
+    font-size: xx-large;
+    text-align: center;
+    line-height: 2;
+    background-color: #FFDF00;
+}
+.flashcards >  dd > p {
+    font-size: smaller;
+}
+.flashcards > .activecard {
+    display: block;
+       -moz-transform: rotateY(0deg);
+    -webkit-transform: rotateY(0deg);
+}
+.flashcards > dt.activecard {
+    z-index: 10;
+    /* translateZ hides backface of dt during transition */
+       -moz-transform: translateZ(0) rotateY(0deg);
+    -webkit-transform: translateZ(0) rotateY(0deg);
+    /* TODO: Investigate why translateZ no hiding effect in Webkit
+       I'm using a non transparent background so it does not matter now */
+}
+/* Todo: Trigger with JS */
+.flashcards.flipped > dt.activecard {
+       -moz-transform: translateZ(0) rotateY(180deg);
+    -webkit-transform: translateZ(0) rotateY(180deg);
+    z-index: 1;
+}
+.flashcards > dd.activecard {
+    z-index: 1;
+       -moz-transform: translateZ(0) rotateY(180deg);
+    -webkit-transform: translateZ(0) rotateY(180deg);
+}
+.flashcards.flipped > dd.activecard {
+    z-index: 10;
+       -moz-transform: translateZ(0) rotateY(360deg);
+    -webkit-transform: translateZ(0) rotateY(360deg);
+}
+/* Sideay slide */
+/* TODO: (Fix) This animation gives away the answer when 3D is not supported */
+/* It also looks bad when clicking the button while flipped */
+/* TODO: Tilt 45 deg + transform-origin */
+.flashcards > dt.nextcard {
+    display: block;
+    left: 324px;
+}
+.flashcards > dt.prevcard {
+    display: block;
+    left: -324px;
+}

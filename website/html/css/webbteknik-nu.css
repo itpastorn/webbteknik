@@ -1,0 +1,40 @@
+@CHARSET "UTF-8";
+html {
+    background-color: rgb(0, 175,63);
+    background-image: -webkit-linear-gradient(to bottom, rgb(0, 175,63), #fff);
+    background-image:    -moz-linear-gradient(to bottom, rgb(0, 175,63), #fff);
+    background-image:     -ms-linear-gradient(to bottom, rgb(0, 175,63), #fff);
+    background-image:      -o-linear-gradient(to bottom, rgb(0, 175,63), #fff);
+    min-height: 100%; /* Needed for gradients to appear */
+}
+body {
+    width: 720px;
+    margin: auto;
+    padding: 0 30px 10px;
+    background-color: #FFF;
+    font-family: sans-serif;
+    font-size: large;
+    border-radius: 4px;    
+}
+h1 {
+    font-family: consolas, monospace;
+    text-align: center;
+}
+.centered {
+    text-align: center;
+}
+.space {
+    margin: 2em 0 0;
+}
+.sign {
+    font-family: 'Handlee', cursive;
+    font-size: xx-large;
+}
+.hidden {
+    display: none;
+}
+iframe {
+    width: 560px;
+    height: 315px;
+    border: none;
+}

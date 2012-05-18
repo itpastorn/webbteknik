@@ -57,4 +57,8 @@ Att fundera på: Ska koden också vara 12pt?
 Använd "ska" inte "skall"
 font-stack med bindestreck
 
+# Färgtema i gEdit
+
+Oblivion
+
 

@@ -1,4 +1,7 @@
 anteckningskladd
 *.cvs
 pop-admins.php
-
+*.webm
+*.mp4
+*.camrec
+*.camproj
