@@ -10,16 +10,52 @@
         text-align: center;
         font-family: sans-serif;
     }
+    p {
+        text-align: left;
+    }
     line, circle {
         stroke: black;
         stroke-width: 2;
+    }
+    #sltab {
+        border-spacing: 0;
+        border: 2px solid black;
+        margin: 1em auto;
+        background-color: black;
+    }
+    #sltab td {
+        width: 0;
+        height: 0;
+        padding: 4px;
+    }
+    td:hover {
+        -webkit-transform: scale(2);
+           -moz-transform: scale(2);
+            -ms-transform: scale(2);
+             -o-transform: scale(2);
+                transform: scale(2);
+                border: 1px solid;
+    }
+    .highlight {
+        opacity: 0.7;
+    }
+    .highlight > .highlight {
+        opacity: 1; 
+    }
+    #hslval {
+        margin: 1em;
+        font-size: 2em;
     }
   </style>
 </head>
 <body>
   <h1>HSL Color wheel demo</h1>
-  <p>A pedagogic tool. Not suitable as a colorpicker. (+Only hue so far.)</p>
-  <p>Click center circle or hit space to toggle animation. Click a color to chose it.</p>
+  <p>A pedagogic tool. Not suitable as a colorpicker.</p>
+  <p>
+    Click center circle or hit space to toggle animation. Click a color to chose it.
+    Saturation and lightness will be demonstrated below when the animation is paused.
+    Click on the saturation/lightness square to see the values.
+  </p>
   <!-- div needed for JS below since SVG math is way too weird. Can't use offset and getBoundingClientRect uses another scale. -->
   <div id="container">
     <svg
@@ -54,23 +90,31 @@
       <circle cx="80" cy="80" r="1" id="dot" />
     </svg>
   </div>
+  <table id="sltab" role="presentational"></table>
+  <div id="hslval"></div>
   <script>
   (function () {
     "use strict";
     var container =  document.getElementById("container"),
-        svg =  document.getElementById("svg"),
-        wheel = document.getElementById("wheel"),
-        hand = document.getElementById("hand"),
-        result = document.getElementById("result"),
+        svg       =  document.getElementById("svg"),
+        wheel     = document.getElementById("wheel"),
+        hand      = document.getElementById("hand"),
+        result    = document.getElementById("result"),
         animangle = document.getElementById("animangle"),
-        text = document.getElementById("text"),
-        dot = document.getElementById("dot"),
-        angle = 30,
-        running = true,
-        wait = 50;
+        text      = document.getElementById("text"),
+        dot       = document.getElementById("dot"),
+        angle     = 30,
+        running   = true,
+        wait      = 50,
+        sltab     = document.getElementById("sltab"),
+        slcells   = 50,
+        hslval     = document.getElementById("hslval");
+
     function rot() {
-        angle += 1;
-        angle = angle % 360;
+        if ( running ) {
+            angle += 1;
+            angle = angle % 360;
+        }
         hand.setAttribute("transform", "rotate(" + angle + " 80 80)");
         result.setAttribute("fill", "hsl(" + angle + ", 100%, 50%)");
         var x = Math.sin((angle) * Math.PI / 180) * 15,
@@ -89,6 +133,8 @@
         running = !running;
         if ( running ) {
             rot();
+        } else {
+            update_sl_table();
         }
     }
     result.onclick = toggleRunning;
@@ -97,14 +143,12 @@
             toggleRunning();
         }
     };
-    // TODO: If it's running it will take one step extra. It should halt at once.
     wheel.onclick = function (e) {
         running = false;
         // middle of SVG = middle of DIV. DIV is 600px w/h
         // Calibration is 1-2 px off
         var mx = e.pageX - container.offsetLeft - 304;
         var my = e.pageY - container.offsetTop - 303;
-        console.log(mx + " " + my);
         if (mx === 0 ) {
             angle = ( my < 0 ) ? 0 : 180;
             return;
@@ -116,9 +160,69 @@
         } else {
             angle = 360 + Math.atan(mx/-my) * 180 / Math.PI;
         }
-        console.log(angle);
         rot();
+        update_sl_table();
     };
+    function update_sl_table() {
+        var tbody = document.createElement("tbody");
+        for (var i = slcells; i >= 0; i -= 1) {
+            var tr = document.createElement("tr");
+            for (var j = 0; j <= slcells; j += 1) {
+                var td = document.createElement("td");
+                td.style.backgroundColor = "hsl(" + angle + ", " + i*100/slcells + "%, " + j*100/slcells + "%)";
+                tr.appendChild(td);
+                // attach a data attribute + click = get hsl value
+            }
+            tbody.appendChild(tr);
+        }
+        if ( sltab.tBodies.length ) {
+            sltab.replaceChild(tbody, sltab.tBodies[0]);
+        } else {
+            sltab.appendChild(tbody);
+        }
+        hslval.innerHTML = "";
+    }
+    sltab.onclick = function (e) {
+        var target     = e.target,
+            sibling    = target,
+            numsibl    = 0,
+            pnode      = target.parentNode,
+            psibling   = pnode,
+            saturval   = 0,
+            cur_hlight = document.getElementsByClassName("highlight");
+        // Remove previous highlighting
+        // Make static array
+        cur_hlight = Array.prototype.slice.call(cur_hlight);
+        for ( var i = 0, len = cur_hlight.length; i < len; i += 1 ) {
+            cur_hlight[i].classList.remove("highlight");
+        }
+        // count previous siblings + add class as you go
+        while ( sibling = sibling.previousSibling ) {
+            numsibl += 1;
+            sibling.classList.add("highlight");
+        }
+        // Add class to the rest of the cells as well
+        sibling = target;
+        while ( sibling = sibling.nextSibling ) {
+            sibling.classList.add("highlight");
+        }
+        var colnum = numsibl + 1;
+        var colcells = document.querySelectorAll("td:nth-child(" + colnum + ")");
+        for ( i = 0, len = colcells.length; i < len; i += 1 ) {
+            colcells[i].classList.add("highlight");
+        }
+        target.classList.remove("highlight");
+        // count rows above to get saturation value
+        while ( psibling = psibling.previousSibling ) {
+            saturval += 1;
+        }
+        // We are starting at 0
+        saturval = slcells - saturval;
+        saturval = saturval / slcells;
+        // Re use numsibl
+        numsibl = numsibl / slcells;
+        hslval.innerHTML = "Picked value: hsl(" + Math.round(angle) + ", " + saturval + ", " + numsibl + ")";
+    }
   }());
   // TODO: Click line to move it
   // TODO: SVG filter to emulate saturation (if possible) + slider
