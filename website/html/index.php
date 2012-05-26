@@ -35,7 +35,20 @@
     en eller ett par såda uppsättningar flashcards per kapitel. Dessutom en version anpassad för mobiler.
   </p>
   <h2>Information</h2>
-  <p>Skriv ett mejl till gunther@keryx.se för att bli meddelad så fort det finns något mer här <q>på riktigt</q>.</p>
+  <p>Elevresurser som vi planerar för denna webbplats:</p>
+  <ul>
+    <li>Videos</li>
+    <li>Demokod</li>
+    <li>Länkar till mer information</li>
+    <li>Interaktiva demos</li>
+    <li>Flashcards</li>
+  </ul>
+  <p>Lärarresurser som vi planerar för denna webbplats:</p>
+  <ul>
+    <li>Slides (tänk PowerPoint fast online)</li>
+    <li>Utskriftsversioner av material för rollspel</li>
+  </ul>
+  <p>Skriv ett mejl till gunther@keryx.se för att bli meddelad så fort det finns något här <q>på riktigt</q>.</p>
   <p class="centered sign">Lars Gunther</p>
   <p class="centered">
     <a href="http://www.skolportalen.se/"><img src="img/skolportalen-logo-408-111.png" width="408" height="111" alt="Thelin Läromedel, Skolportalen" /></a>
