@@ -31,7 +31,7 @@
   </p>
   <h2>Smakprov på Flashcards</h2>
   <p>
-    <a href="flashcards.php?set=test">Flashcards med grundläggande datatermer</a>. Det kommer finnas
+    <a href="flashcards.php?set=wu1-1">Flashcards med ord från kapitel 1</a>. Det kommer finnas
     en eller ett par såda uppsättningar flashcards per kapitel. Dessutom en version anpassad för mobiler.
   </p>
   <h2>Information</h2>
