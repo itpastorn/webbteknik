@@ -2,28 +2,34 @@
 
 ## HTML-terminologi
 
+Länkar
  * Referenslänk: TODO Tommys terminologi-genomgång på Sitepoint
- * Fotnot: http://en.wikipedia.org/wiki/Whitespace_%28programming_language%29
- * Fotnot: http://www.w3.org/TR/html-markup/spec.html#void-element
+ * Referenslänk: [HTML Element](http://en.wikipedia.org/wiki/HTML_element)
+ * Fotnot: [Whitespace](http://en.wikipedia.org/wiki/Whitespace_%28programming_language%29)
+ * Fotnot: [Void/tomt element](http://www.w3.org/TR/html-markup/spec.html#void-element)
 
 ## CSS-terminologi
 
- * Referenslänk: http://reference.sitepoint.com/css/syntax
+Länkar
+ * Referenslänk: [CSS Syntax](http://reference.sitepoint.com/css/syntax)
 
 ## Block- och inline-element
 
- * Referenslänk: https://developer.mozilla.org/en/HTML/Block-level_elements
- * Referenslänk: https://developer.mozilla.org/en/HTML/Inline_elements
+Länkar
+ * Referenslänk: [Block Level Elements](https://developer.mozilla.org/en/HTML/Block-level_elements)
+ * Referenslänk: [Inline Elements](https://developer.mozilla.org/en/HTML/Inline_elements)
 
 ## <!-- kommentarer i HTML -->
 
- * Referenslänk: https://developer.mozilla.org/en/HTML/???  TODO 
+Länkar
+ * Referenslänk: [The Importance of Correct HTML Commenting](https://developer.mozilla.org/en/The_Importance_of_Correct_HTML_Commenting)
 
 ## Några HTML element och attribut
 
 ### \<html>
 
- * Referenslänk: https://developer.mozilla.org/en/HTML/Element/html
+Länkar
+ * Referenslänk: [The html-element](https://developer.mozilla.org/en/HTML/Element/html)
 
 TODO för alla dessa: Sitepoints länk också
 
