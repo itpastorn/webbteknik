@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS selectors</title>
+  <style>
+    body {
+        width: 600px;
+        margin: auto;
+        font: medium sans-serif;
+    }
+    .active {
+        outline: 1px solid red;
+        background-color: navajowhite;
+    }
+    pre {
+        font: bolder X-large monospace;
+        line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <h1>CSS selectors</h1>
+  <p>Click on the button to activate its outline.</p>
+  <!-- whitespace at end of lines needed ??? -->
+  <pre><code>
+<div class="group"><span class="combination child"><span class="id">#foo</span>  &gt;  <span class="type">p</span><span class="pclass">:nth-child(odd)</span></span>,
+<span class="combination descendant"><span class="class">.bar</span>     <span class="type">input</span><span class="attr">[type=&quot;text&quot]</span></span></span>,
+<span class="combination sibling"><span class="type">p</span><span class="attr">[dir]</span> + <span class="type">p</span><span class="pelem">::first-line</span></span></span>
+</div>
+  </code></pre>
+  <div id="btns">
+    <p>
+      <button id="a_group">Group selector</button>
+      <button id="a_combination">Combination selector</button>
+    </p>
+    <p>
+      <button id="a_child">Child selector</button>
+      <button id="a_descendant">Descendant selector</button>
+      <button id="a_sibling">Sibling selector</button>
+    </p>
+    <p>
+      <button id="a_type">Type selector</button>
+      <button id="a_class">Class selector</button>
+      <button id="a_id">Id selector</button>
+    </p>
+    <p>
+      <button id="a_attr">Attribute selector</button>
+      <button id="a_pclass">Pseudo class selector</button>
+      <button id="a_pelem">Pseudo element selector</button>
+    </p>
+  </div>
+  <script>
+    var btns     = document.getElementById("btns"),
+        spans    = document.getElementsByTagName("span"),
+        numspans = spans.length;
+    btns.onclick = function (e) {
+        var activate = e.target.id.substr(2);
+        console.log(activate);
+        for ( var i = 0; i < numspans; i += 1 ) {
+            spans[i].classList.remove("active");
+        }
+        document.getElementsByClassName("group")[0].classList.remove("active");
+        var aspans = document.getElementsByClassName(activate),
+            anum   = aspans.length;
+        for ( i = 0; i < anum; i += 1 ) {
+            aspans[i].classList.add("active");
+        }
+    };
+  </script>
+</body>
+</html>
