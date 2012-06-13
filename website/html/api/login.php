@@ -2,6 +2,7 @@
 /*
  * Server side verification of browserid assertions
  *
+ * @author <gunther@keryx.se>
  */
 
 session_start();
@@ -50,11 +51,14 @@ if ( $response->status === "okay" ) {
 	$_SESSION['user'] = $response->email;
     echo "Assertion okay";
     
-    // TODO local check
+    // TODO local check for account
     /*
      * Check that user has an account
      *   if not send to registration page
      *   if (s)he has - update DB
+     *   and
+     *   set a session variable concerning type of user admin/teacher/workbook/textbook/webonly/loggedin
+     *   constant values                                32      16        8        4       2     1
      */
     
     exit;
@@ -62,3 +66,14 @@ if ( $response->status === "okay" ) {
 
 // Assertion not OK - Why...?
 echo "Assertion failed. Reason: " . $response->status;
+
+/*
+ * How to register
+ *  1. Get a BrowserID
+ *  2. Log in
+ *  3. Chose what type of account you want
+ *  4. (Grant admin access manually only)
+ *  5. Answer question from book (or buy web only access...)
+ *  6. Set personal info (real names required, Github, JSFiddle) and join group
+ *  7. Teachers must OK students joining
+ */

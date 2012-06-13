@@ -3,6 +3,7 @@
  * Sign in usig BrowserID test
  * 
  * @link https://developer.mozilla.org/en/BrowserID/Quick_Setup
+ * @author <gunther@keryx.se>
  */
 
 session_start();
@@ -55,8 +56,9 @@ function gotAssertion(assertion) {
     }
 }
 // Runs if assertion has been verified as OK
-// Whicj also means that $_SESSION has been set and DB updated with login data
+// Which also means that $_SESSION has been set and DB updated with login data
 function loggedIn(res) {
     console.log(res);
+    // What URL are you on? Special? Stay. Otherwise load personal start page.
 }
 </script>
