@@ -62,6 +62,36 @@ class user
         
     }
     
+    /**
+     * Ask if user has a certain access level
+     * 
+     * @example if ( user::validate(user::TEACHER) ) {}
+     * 
+     * @param int $req_level The level that the inquiry is about
+     * @param int $userlevel The user's actual level
+     */
+    public static function validate($req_level, $userlevel = null) {
+        if ( empty($userlevel) && isset($_SESSION['userlevel']) ) {
+            $userlevel = $_SESSION['userlevel'];
+        }
+        return ($req_level & $userlevel) >= $req_level;
+    }
+    
+    /**
+     * Creates a user instance
+     * 
+     * @todo factory method...?
+     * 
+     * @param string $email User identity
+     */
+     public function __construct($email)
+     {
+         if ( !filter_var(FILTER_VALIDATE_EMAIL, $email) ) {
+             return null;
+         }
+         $this->email = $email;
+     }
+    
 }
 /*
      *   user::requires(TEACHER)  // restrict page to teachers or better

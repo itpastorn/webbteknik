@@ -2,16 +2,23 @@
 /*
  * Server side verification of browserid assertions
  *
+ * This file is part of the Ajax API
  * @author <gunther@keryx.se>
  */
 
 session_start();
 
 /**
- * Fire PHP
+ * All needed files
  */
-require_once('FirePHPCore/FirePHP.class.php');
+require_once '../../includes/loadfiles.php';
+
 $firephp = FirePHP::getInstance(true);
+
+// Database settings and connection
+$dbx = config::get('dbx');
+// init
+keryxDB2_cx::get($dbx);
 
 // Prepare data
 // Ajax (assertion) data sent as POST
@@ -38,7 +45,7 @@ curl_close($ch);
 
 // Check response
 $response = json_decode($response);
-$firephp->log($response);
+//$firephp->log($response);
 /*
 $response->status     - should be "okay"
 $response->email
@@ -48,24 +55,32 @@ $response->expires
 */
 
 if ( $response->status === "okay" ) {
-	$_SESSION['user'] = $response->email;
-    echo "Assertion okay";
     
-    // TODO local check for account
-    /*
-     * Check that user has an account
-     *   if not send to registration page
-     *   if (s)he has - update DB
-     *   and
-     *   set a session variable concerning type of user admin/teacher/workbook/textbook/webonly/loggedin
-     *   constant values                                32      16        8        4       2     1
-     */
+    session_regenerate_id();
+
+    $dbh  = keryxDB2_cx::get();
+    $stmt = $dbh->prepare(
+        'SELECT email, firstname, lastname, privileges FROM users WHERE email = :email'
+    );
+    $stmt->bindParam(':email', $response->email);
+    $stmt->execute();
+    $userdata = $stmt->fetch();
     
+    if ( empty($userdata) ) {
+        // Non registered user
+        $userdata['email']      = $response->email;
+        $userdata['firstname']  = null;
+        $userdata['lastname']   = null;
+        $userdata['privileges'] = 1;
+    }
+    $_SESSION['user'] = $response->email;
+    $_SESSION['userdata'] = json_encode($userdata);
+    echo $_SESSION['userdata'];
     exit;
 }
 
 // Assertion not OK - Why...?
-echo "Assertion failed. Reason: " . $response->status;
+echo '{"email" : null, "privileges": 0, "reason" : "'. $response->status . '"}';
 
 /*
  * How to register
