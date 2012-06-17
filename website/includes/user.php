@@ -39,6 +39,28 @@ class user
      * Constant to represent superusers (me and JE)
      */
     const SUPER    = 127;
+    /**
+     * Constant to represent impossible level of authority, for tests
+     */
+    const HYPER    = 255;
+    
+    /**
+     * Extract session variables from JSON if they do not exist
+     * 
+     * TODO: Remove this and rely on PHP serialization
+     * @return bool True if userdata already is an abject or has been turned into an object
+     */
+    public static function setSessionData()
+    {
+        if ( isset($_SESSION['userdata']->email) ) {
+            return true;
+        }
+        if ( isset($_SESSION['userdata']) && is_string($_SESSION['userdata']) ) {
+            $_SESSION['userdata'] = json_decode($_SESSION['userdata']);
+            return true;
+        }
+        return false;
+    }
     
     /**
      * Page access control
@@ -50,15 +72,12 @@ class user
      * @param int $userlevel The user's actual level
      */
     public static function requires($req_level, $userlevel = null) {
-        if ( empty($userlevel) && isset($_SESSION['userlevel']) ) {
-            $userlevel = $_SESSION['userlevel'];
-        }
-        if ( ($req_level & $userlevel) >= $req_level ) {
+        if ( self::validate($req_level, $userlevel) ) {
             return true;
         }
         // Access violation
-        // TODO Error page
-        exit("<h1>Verboten</h1>");
+        header("Location: sign-in.php?nopriv=1&ref=" . $_SERVER['PHP_SELF']);
+        exit;
         
     }
     
@@ -71,8 +90,8 @@ class user
      * @param int $userlevel The user's actual level
      */
     public static function validate($req_level, $userlevel = null) {
-        if ( empty($userlevel) && isset($_SESSION['userlevel']) ) {
-            $userlevel = $_SESSION['userlevel'];
+        if ( empty($userlevel) && isset($_SESSION['userdata']->privileges) ) {
+            $userlevel = $_SESSION['userdata']->privileges;
         }
         return ($req_level & $userlevel) >= $req_level;
     }
@@ -92,6 +111,43 @@ class user
          $this->email = $email;
      }
     
+    /**
+     * Sanitize rules for filter_input_array and filter_var on allowed names
+     * 
+     * @return array
+     */
+    public static function nameSanitizeRules()
+    {
+        return array(
+            'firstname' => array(
+                'filter' => FILTER_SANITIZE_STRING,
+                'flags'  => FILTER_FLAG_STRIP_LOW
+            ),
+            'lastname' => array(
+                'filter' => FILTER_SANITIZE_STRING,
+                'flags'  => FILTER_FLAG_STRIP_LOW
+            )
+        );
+    }
+    /**
+     * Strict rules for filter_input_array and filter_var on allowed names
+     * 
+     * @todo Strange bug won't let me allow x22 for names like O'Reilly and Al'Hasmouty
+     * @return array
+     */
+    public static function nameRules()
+    {
+        return array(
+            'firstname' => array(
+                'filter' => FILTER_VALIDATE_REGEXP,
+                'options'  => array('regexp' => "/^\\p{L}{1}(\\p{Pd}|\\x20||\\p{L}){0,98}$/u")
+            ),
+            'lastname' => array(
+                'filter' => FILTER_VALIDATE_REGEXP,
+                'options'  => array('regexp' => "/^\\p{L}{1}(\\p{Pd}|\\x20||\\p{L}){0,98}$/u")
+            )
+        );
+    }
 }
 /*
      *   user::requires(TEACHER)  // restrict page to teachers or better

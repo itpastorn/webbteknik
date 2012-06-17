@@ -16,6 +16,10 @@ body {
     font-size: medium;
     border-radius: 4px;    
 }
+.wide {
+    width: 1280px;
+}
+
 h1 {
     font-family: consolas, monospace;
     text-align: center;
@@ -40,4 +44,76 @@ iframe {
     width: 560px;
     height: 315px;
     border: none;
+}
+video.fullsize {
+    width: 1280px;
+    height: 720px;
+}
+video.halfsize {
+    width: 640px;
+    height: 360px;
+}
+.signinbox {
+    margin: 2em;
+    padding: 1em;
+    border: 1px solid rgb(0, 175,63);
+    border-radius: 4px;
+}
+fieldset {
+    margin-top: 1em;
+    margin-bottom: 2em;
+    border-color:  rgb(0, 175,63);
+    border-radius: 10px;
+}
+label:first-child,
+.labeldummysincecssalignmentisnearimpossible {
+    display: inline-block;
+    width: 6em;
+    padding-right: 1em;
+    text-align: right;
+}
+input[disabled] + label {
+    color: #999;
+}
+.nonimplemented + label::after,
+.nonimplemented::after {
+    content: " (Framtida funktion. Ej klar ännu.)";
+}
+.nonimplemented {
+    opacity: 0.5;
+    text-decoration: line-through;
+}
+.updated {
+    background-color: yellow;
+    /* TODO Fade yellow, add ARIA */
+}
+.updated::after {
+    content: " - Databas uppdaterad.";
+}
+.wrong {
+    background-color: hsl(359, 60%, 80%);
+    /* TODO Fade red, add ARIA */
+}
+.wrong::after {
+    content: " - Fel svar.";
+}
+hr.todo {
+    margin-top: 2em;
+}
+@media screen and (max-width: 1320px) {
+    body {
+        width: 720px;
+    }
+    .wide {
+        width: 90%;
+        max-width: 1280px;
+    }
+    video.fullsize {
+        width: 640px;
+        height: 360px;
+    }
+    video.halfsize {
+        width: 320px;
+        height: 180px;
+    }
 }

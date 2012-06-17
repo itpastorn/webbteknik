@@ -25,10 +25,11 @@
   <p>
     Här finns också <a href="laxhjalpen-demowebb/">Läxhjälpen &ndash; bokens demowebbplats</a>.
   </p>
-  <h2>Smakprov på en video (fler kommer)</h2>
+  <h2>Smakprov på en video</h2>
   <p class="centered">
     <iframe src="http://www.youtube.com/embed/JdJA9w-vyJY"></iframe>
   </p>
+  <p><a href="videos-test.php">Fler videos och full storlek på video</a></p>
   <h2>Smakprov på Flashcards</h2>
   <p>
     <a href="flashcards.php?set=wu1-1">Flashcards med ord från kapitel 1</a>. Det kommer finnas

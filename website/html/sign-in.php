@@ -3,6 +3,7 @@
  * Sign in usig BrowserID test
  * 
  * @link https://developer.mozilla.org/en/BrowserID/Quick_Setup
+ * @link https://developer.mozilla.org/en/BrowserID/Advanced_Features
  * @author <gunther@keryx.se>
  */
 
@@ -13,54 +14,79 @@ session_start();
  */
 require_once '../includes/loadfiles.php';
 
+// user::setSessionData();
 
-if ( isset($_SESSION['user']) ) {
-    echo $_SESSION['user'];
-    echo " is logged in<br>";
-}
-?>
-<a href="#" id="browserid" title="Logga in med BrowserID">  
-  <img src="img/sign-in-green.png" alt="Logga in">  
-</a>
-<script src="https://browserid.org/include.js" type="text/javascript"></script> 
-<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
-<script>
-"use strict";
-$("#browserid").click( function () {
-   navigator.id.get(gotAssertion);
-   return false;
-});
-function gotAssertion(assertion) {
-    if ( assertion !== null ) {
-        $.ajax({
-            type : 'POST',
-            url  : 'api/login.php',
-            data : { assertion: assertion },
-            success : function (res, status, xhr) {
-                res = JSON.parse(res);
-                if ( res.email == null ) {
-                    // Fail or logout
-                    // loggedOut();
-                    console.log("Login fail: " +  res.reason);
-                } else {
-                    loggedIn(res);
-                }
-            },
-            error : function (res, status, xhr) {
-                res = JSON.parse(res);
-                alert("Login fel: " +  res.reason);
-                
-            }
-        });
-    } else {
-        // loggedOut();
-        console.log("Assertion was null - loggedOut()")
+$note    = "";      // Message why page is shown
+$ref     = "false"; // Where to be redirected if sign in is ok
+$curuser = "";      // Information about possible logged in user (users may switch login)
+
+if ( user::validate(user::LOGGEDIN) ) {
+    $curuser  = '<p><strong>' . htmlspecialchars($_SESSION['user']) . "</strong> är inloggad</p>";
+    $curuser .= "<ul><li>Logga in på nytt om du vill <strong>byta användare</strong>. (Främst för admins.)</li>";
+    $curuser .= "<li><a href=\"edituser.php\">Redigera användardata</a> om du vill ansöka om högre behörighet.</li></ul>\n";
+    if ( isset($_GET['nopriv']) ) {
+        $note = "<h2>Sidan kräver högre nivå på din behörighet</h2>\n";
     }
+} else {
+    $note = "<h2>Sidan kräver inloggning</h2>\n";
 }
-// Runs if assertion has been verified as OK
-// Which also means that $_SESSION has been set and DB updated with login data
-function loggedIn(res) {
-    console.log(res.email + " has now logged in");
-    // What URL are you on? Special? Stay. Otherwise load personal start page.
+if ( isset($_GET['ref']) ) {
+    $ref  = '"' . htmlspecialchars($_GET['ref']) . '"';
 }
-</script>
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - webbteknik.nu</title>
+  <link rel="stylesheet" href="css/webbteknik-nu.css" />
+  <link href='http://fonts.googleapis.com/css?family=Handlee' rel='stylesheet' type='text/css'>
+</head>
+<body>
+  <h1>webbteknik.nu &ndash; login</h1>
+<?php
+echo $note;
+echo $curuser;
+?>
+  <p class="signinbox">
+    <a href="#" id="browserid" title="Logga in med BrowserID">  
+      <img src="img/sign-in-green.png" alt="Logga in">  
+    </a>
+  </p>
+  <p>
+    För att bevara din bekvämlighet, trygghet och integritet, så använder denna webbplats
+    <a href="https://browserid.org/">BrowserID</a>.
+  </p>
+  <hr class="todo" />
+  <pre>
+    TODO <strong>Capability detect</strong> det som krävs av webbläsaren
+     - JavaScript enabled
+     - strict mode
+     - classList
+     - JSON
+     - general ES 5.1
+     - getElementsByClassName
+     - querySelector
+    
+     - DOM 2 events
+    
+     - Canvas
+     - SVG
+     - HTML5 video
+     - drag and drop
+    
+     - CSS transitions, transforms, 3D transforms, animation
+     - gradients
+     - media queries
+    
+  </pre>
+  <script src="https://browserid.org/include.js" type="text/javascript"></script> 
+  <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+  <script>
+    "use strict";
+    var ref = <?php echo $ref; ?>;
+  </script>
+  <script src="script/sign-in.js"></script>
+</body>
+</html>

@@ -3,6 +3,10 @@
  * Server side verification of browserid assertions
  *
  * This file is part of the Ajax API
+ *
+ * @todo Rework userdata to be an instance of the user class and not StdObject
+ * @todo Perhaps always reload userdata from DB on page load to keep DRY?
+ * @todo Check that user is not suspended
  * @author <gunther@keryx.se>
  */
 
@@ -39,7 +43,7 @@ $ch  = curl_init($url);
 curl_setopt($ch, CURLOPT_POST, 1);
 curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
- 
+
 $response = curl_exec($ch);
 curl_close($ch);
 
@@ -55,27 +59,29 @@ $response->expires
 */
 
 if ( $response->status === "okay" ) {
-    
+
     session_regenerate_id();
 
     $dbh  = keryxDB2_cx::get();
+    // TODO - this is not DRY
     $stmt = $dbh->prepare(
-        'SELECT email, firstname, lastname, privileges FROM users WHERE email = :email'
+        'SELECT email, firstname, lastname, privileges, user_since FROM users WHERE email = :email'
     );
     $stmt->bindParam(':email', $response->email);
     $stmt->execute();
-    $userdata = $stmt->fetch();
-    
+    $userdata = $stmt->fetch(PDO::FETCH_OBJ);
+
     if ( empty($userdata) ) {
         // Non registered user
-        $userdata['email']      = $response->email;
-        $userdata['firstname']  = null;
-        $userdata['lastname']   = null;
-        $userdata['privileges'] = 1;
+        $userdata             = new StdClass();
+        $userdata->email      = $response->email;
+        $userdata->firstname  = null;
+        $userdata->lastname   = null;
+        $userdata->privileges = 1;
     }
-    $_SESSION['user'] = $response->email;
-    $_SESSION['userdata'] = json_encode($userdata);
-    echo $_SESSION['userdata'];
+    $_SESSION['user']     = $response->email;
+    $_SESSION['userdata'] = $userdata;
+    echo json_encode($_SESSION['userdata']); // Send to receiving script
     exit;
 }
 
