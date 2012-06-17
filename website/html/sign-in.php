@@ -62,10 +62,10 @@ echo $curuser;
   <pre>
     TODO <strong>Capability detect</strong> det som krävs av webbläsaren
      - JavaScript enabled
-     - strict mode
+     - strict mode support (non current browsers general fail)
      - classList
      - JSON
-     - general ES 5.1
+     - More ES 5.1 - perhaps
      - getElementsByClassName
      - querySelector
     
@@ -79,7 +79,6 @@ echo $curuser;
      - CSS transitions, transforms, 3D transforms, animation
      - gradients
      - media queries
-    
   </pre>
   <script src="https://browserid.org/include.js" type="text/javascript"></script> 
   <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>

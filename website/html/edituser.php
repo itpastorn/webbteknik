@@ -151,7 +151,6 @@ if ( $tocagree ) :
         Lärare kommer kunna skapa undervisningsgrupper.
       </p>
     </fieldset>
-    <p><a href="sign-in.php?ref=edituser.php">Logga in som en annan användare</a></p>
   </form>
 <?php
 else: // tocagree - not - show TOC
@@ -198,6 +197,11 @@ if ( user::validate(user::TEXTBOOK) ):
     <strong>Test: <a href="videos-test.php">Kolla filmer</strong>
   </p>
   <p><a href="statistik.php" class="nonimplemented">Statistiksidan &ndash; se hur långt du kommit</a></p>
+<?php
+endif;
+if ( user::validate(user::TEACHER) ):
+?>
+    <p><a href="sign-in.php?ref=edituser.php">Logga in som en annan användare</a></p>
 <?php
 endif;
 ?>
