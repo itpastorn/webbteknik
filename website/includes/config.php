@@ -26,7 +26,7 @@ class config
             'hostspec' => 'localhost',
             'database' => 'webbtek_webbtek',
             'username' => 'webbtek_webbtek',
-            'password' => 'gunthelWUWU'
+            'password' => 'thule-is-valiant'
         )
     );
     

@@ -15,7 +15,7 @@ user::requires(user::TEXTBOOK);
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
   <meta charset="UTF-8">
   <title>Provsida med fler videos - webbteknik.nu</title>

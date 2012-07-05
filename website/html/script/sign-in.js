@@ -40,9 +40,9 @@
 	    }
 	    // What URL are you on? Special? Stay. Otherwise load personal start page.
 	    if ( window.ref ) {
-	        window.location.href=window.ref;
+	        window.location.href = window.ref;
 	    } else {
-	        window.location.href="./";
+	        window.location.href = "./";
 	    }
 	}
 }());
