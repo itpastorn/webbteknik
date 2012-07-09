@@ -24,6 +24,7 @@ user::requires(user::TEXTBOOK);
 </head>
 <body class="wide">
   <h1>webbteknik.nu &ndash; provsida med fler videos</h1>
+  <?php require "../includes/snippets/mainmenu.php"; ?>
   <p>
     <strong>Tips!</strong> Högerklicka på videon och välj visning i helskärm.
     Videons inbyggda upplösning är 1280 x 720 pixlar.
@@ -48,6 +49,20 @@ user::requires(user::TEXTBOOK);
     <video controls class="fullsize">
       <source src="media/kap-1-a-3.webm" type="video/webm" />
       <source src="media/kap-1-a-3.mp4" type="video/mp4" />
+    </video>
+  </p>
+  <h3>Bonusvideo: Mozilla Thimble</h3>
+  <p>
+    <video controls class="fullsize">
+      <source src="media/thimble.webm" type="video/webm" />
+      <source src="media/thimble.mp4" type="video/mp4" />
+    </video>
+  </p>
+  <h3>Avsnitt 1.3: Validering</h3>
+  <p>
+    <video controls class="fullsize">
+      <source src="media/kap-1-a-4.webm" type="video/webm" />
+      <source src="media/kap-1-a-4.mp4" type="video/mp4" />
     </video>
   </p>
   <p><a href="./">Startsidan</a></p>

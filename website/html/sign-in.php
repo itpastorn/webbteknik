@@ -58,6 +58,15 @@ echo $curuser;
     För att bevara din bekvämlighet, trygghet och integritet, så använder denna webbplats
     <a href="https://browserid.org/">BrowserID</a>.
   </p>
+  <p>
+    Om du inte redan har det, så kommer du först få skaffa just ett BrowserID-konto,
+    när du klickar på logga in-knappen. BrowserID är ett
+    <a lang="en" href="http://en.wikipedia.org/wiki/Single_sign-on">single sign on-system</a>.
+    Det används för att <dfn>autentisera</dfn> dig som användare.
+    Därefter kommer du få skapa ett användarkonto på den här specifika webbplatsen.
+  </p>
+  <p>
+  </p>
   <hr class="todo" />
   <pre>
     TODO <strong>Capability detect</strong> det som krävs av webbläsaren

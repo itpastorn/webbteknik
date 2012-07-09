@@ -17,6 +17,7 @@
 </head>
 <body>
   <h1>webbteknik.nu</h1>
+  <?php require "../includes/snippets/mainmenu.php"; ?>
   <p>
     Hej. Roligt att du är intresserad av
     <a href="http://www.skolportalen.se/laromedel/produkt/J200%204500/Webbutveckling%201%20-%20L%C3%A4robok/">vårt läromedel</a>.

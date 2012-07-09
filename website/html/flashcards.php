@@ -80,7 +80,7 @@ if ( empty($_GET['norand']) ) {
 $stmt = $dbh->prepare($sql);
 $stmt->bindParam(":set", $set);
 
-$set = $_GET['set'];
+$set = isset($_GET['set']) ? $_GET['set'] : "wu1-1";
 $stmt->execute();
 $dbresult = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -115,8 +115,9 @@ foreach ( $dbresult as $row ) {
 </head>
 <body>
   <h1>Flashcards hjälper dig öva in termer</h1>
+  <?php require "../includes/snippets/mainmenu.php"; ?>
   <div id="explain">
-    <p>Klicka kortet för att vända det eller tryck på mellanslagstangenten.</p>
+    <p>Klicka på kortet för att vända det eller tryck på mellanslagstangenten.</p>
     <p>Kräver  Firefox 10 eller senare, Chrome eller Safari.</p>
     <p>Keyboard support:</p>
     <dl>

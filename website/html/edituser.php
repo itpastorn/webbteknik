@@ -81,6 +81,7 @@ if ( isset($_POST['firstname']) ) {
 </head>
 <body>
   <h1>webbteknik.nu &ndash; Redigera din användare</h1>
+  <?php require "../includes/snippets/mainmenu.php"; ?>
 <?php
 if ( $tocagree ) :
 ?>
