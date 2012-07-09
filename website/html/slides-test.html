@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <title>{$the-title-of-your-presentation}</title>
+  <link rel="stylesheet" href="css/webbteknik-nu.css" />
+  <link href='http://fonts.googleapis.com/css?family=Handlee' rel='stylesheet' />
+  <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' />
+  <link href='css/slides.css' rel='stylesheet' />
+</head>
+<body>
+<!-- One section is one slide -->
+
+<section>
+    <!-- This is the first slide -->
+    <h1>Vad är webbteknik</h1>
+    <footer>Webbutveckling 1</footer>
+</section>
+
+<section>
+    <p>HTML = Hyper Text Markup Language, för innehåll</p>
+    <pre><code class="html">
+&lt;html lang="sv"&gt;
+  &lt;title&gt;test&lt;/title&gt;
+  &lt;p&gt;test&lt;/p&gt;
+&lt;/html lang="sv"&gt;
+    </code></pre>
+</section>
+
+<section>
+    <p>CSS = Cascading Style Sheets, för design</p>
+    <pre><code class="css">
+body {
+    background-color: pink;
+    font-family: sans-serif;
+}
+    </code></pre>
+</section>
+
+<section>
+    <h3>Länkar</h3>
+    <p>Förbinder sidor med andra sidor, eller med en annan del av samma sida.</p>
+</section>
+
+<section>
+    <h3>An incremental list{$slides[i]['h3']}</h3>
+    <ul class="incremental">
+      <li>{$slides[i]['li'][j]}</li>
+      <li>Item 2</li>
+      <li>Item 3</li>
+    </ul>
+    <div class="details">Some notes. They are only visible using onstage shell.</div>
+</section>
+
+<section>
+  <blockquote>
+    Who's brave enough to fly into something we all keep calling a death sphere?
+  </blockquote>
+</section>
+
+<section>
+    <h2>Part two</h2>
+</section>
+
+<section>
+    <figure> <!-- Figures are used to display images and videos fullpage -->
+      <img src="http://placekitten.com/g/800/600">
+      <figcaption>An image</figcaption>
+    </figure>
+    <div class="details">Kittens are so cute!</div>
+</section>
+
+<section>
+    <figure> <!-- Videos are automatically played -->
+      <video src="http://videos-cdn.mozilla.net/brand/Mozilla_Firefox_Manifesto_v0.2_640.webm" poster="http://www.mozilla.org/images/about/poster.jpg"></video>
+      <figcaption>A video</figcaption>
+    </figure>
+</section>
+
+<section>
+    <h2>End!</h2>
+</section>
+
+<!-- {{{{ dzslides core
+#
+#
+#     __  __  __       .  __   ___  __
+#    |  \  / /__` |    | |  \ |__  /__`
+#    |__/ /_ .__/ |___ | |__/ |___ .__/ core :€
+#
+#
+# The following block of code is not supposed to be edited.
+# But if you want to change the behavior of these slides,
+# feel free to hack it!
+#
+-->
+
+<div id="progress-bar"></div>
+<script src="script/slides.js"></script>
+</body>
+</html>
