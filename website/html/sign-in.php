@@ -58,12 +58,15 @@ echo $curuser;
     För att bevara din bekvämlighet, trygghet och integritet, så använder denna webbplats
     <a href="https://browserid.org/">BrowserID</a>.
   </p>
-  <p>
-    Om du inte redan har det, så kommer du först få skaffa just ett BrowserID-konto,
+  <p>Om du inte redan har det, så kommer du först få skaffa just ett BrowserID-konto,
     när du klickar på logga in-knappen. BrowserID är ett
     <a lang="en" href="http://en.wikipedia.org/wiki/Single_sign-on">single sign on-system</a>.
     Det används för att <dfn>autentisera</dfn> dig som användare.
+  </p>
+  <p>
     Därefter kommer du få skapa ett användarkonto på den här specifika webbplatsen.
+    <em>Om det är första gången</em> du använder BrowserID, så kommer du alltså behöva
+    utföra båda stegen.
   </p>
   <p>
   </p>
@@ -74,6 +77,7 @@ echo $curuser;
      - strict mode support (non current browsers general fail)
      - classList
      - JSON
+     - videoelement.played (TimeRanges)
      - More ES 5.1 - perhaps
      - getElementsByClassName
      - querySelector

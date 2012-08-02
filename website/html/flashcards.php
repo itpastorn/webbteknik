@@ -3,6 +3,18 @@
  * System to show flashcards
  */
 
+session_start();
+require_once '../includes/loadfiles.php';
+
+user::setSessionData();
+
+user::requires(user::TEXTBOOK);
+
+// Database settings and connection
+$dbx = config::get('dbx');
+// init
+$dbh = keryxDB2_cx::get($dbx);
+
 /*
  * WHERE set = :set
  * 
@@ -59,17 +71,7 @@ foreach ( $dbresult as $row ) {
 }
 exit;
 */
-require '../keryxIncludes.ep/keryxDB/cx.php';
-$GLOBALS['dsn']['phptype']  = 'mysql';
-$GLOBALS['dsn']['hostspec'] = 'localhost';
-$GLOBALS['dsn']['database'] = 'webbtek_webbtek';
-$GLOBALS['dsn']['username'] = 'webbtek_webbtek';
-$GLOBALS['dsn']['password'] = 'thule-is-valiant';
-$GLOBALS['dsn']['charset']  = 'utf8';
-$GLOBALS['dsn']['collate']  = 'utf8_swedish_ci';
 
-$dbh  = keryxDB_cx::get();
-// var_dump($_GET); exit;
 $sql  = "SELECT * FROM flashcards WHERE setID = :set";
 if ( empty($_GET['norand']) ) {
 	$sql .= " ORDER BY RAND()";

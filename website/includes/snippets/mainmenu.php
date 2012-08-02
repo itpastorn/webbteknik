@@ -1,9 +1,9 @@
-  <nav class="temp">
+  <nav class="mainmenu">
     <ul>
       <li><a href="./">Startsidan</a></li>
-      <li><a href="videos-test.php">Videos (demo)</a></li>
+      <li><a href="userpage.php">Arbetssida</a></li>
       <li><a href="flashcards.php">Flaschards (demo)</a></li>
-      <li><a href="edituser.php">Användarsida</a></li>
+      <li><a href="edituser.php">Redigera användaruppgifter</a></li>
     </ul>
   </nav>
 
