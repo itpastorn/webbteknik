@@ -59,34 +59,50 @@
             reportobj.stops[si.merge]       = {};
             reportobj.stops[si.merge].start = data[use].stops[si[use]].start;
 
-
-            console.log("Have both");
-            while ( data[use].stops[si[use]].end >= data[other].stops[si[other]].start - 0.1 ) {
-                // Subtract 0.1 above to get a little margin
-                if ( data[other].stops[si[other]].end > data[use].stops[si[use]].end ) {
+            while ( data[use].stops[si[use]].end > data[other].stops[si[other]].start - 0.2 ) {
+                // Subtract 0.2 above to get a little margin
+                if ( data[other].stops[si[other]].end < data[use].stops[si[use]].end ) {
+                    si[other] += 1;
+                    if ( typeof data[other].stops[si[other]] === "undefined" ) {
+                        console.log("Breaking - no more other = "+ other);
+                        break;
+                    }
+                } else {
                     // Switch roles, the other end is further up
                     var temp = use;
                     use = other;
                     other = temp;
-                    console.log("switcherooo, other is now: " + other);
-                }
-                si[other] += 1;
-                console.log("si[other]: " + si[other]);
-                if ( typeof data[other].stops[si[other]] === "undefined" ) {
-                    console.log("Breaking - no more other = "+ other);
-                    break;
-                }
-                if ( typeof data[use].stops[si[use] + 1] === "undefined" ) {
-                    console.log("Breaking - no more use");
-                    use = other;
-                    break;
+                    console.log("switcherooo, use is now: " + use);
                 }
             }
 
-// OBS! Hittar inga "hål" med denna algoritm.........:!!!!!!!!!
-
             reportobj.stops[si.merge].end = data[use].stops[si[use]].end;
-	        si[use] += 1;
+            si.merge += 1;
+
+            // Find next lowest start
+            si[use] += 1;
+            if ( data.prev.stops[si.prev] && data.cur.stops[si.cur] ) {
+		        if ( data.prev.stops[si.prev].start <= data.cur.stops[si.cur].start ) {
+		            var use   = 'prev',
+		                other = 'cur';
+		        } else {
+		            var use   = 'cur',
+		                other = 'prev';
+		        }
+            }
+        }
+        while ( data.prev.stops[si.prev] ) {
+            console.log("adding lone prev: " + si.prev + ":" + JSON.stringify(data.prev.stops[si.prev]));
+            console.log("si.merge: " + si.merge);
+            reportobj.stops[si.merge] = data.prev.stops[si.prev];
+            si.prev  += 1;
+            si.merge += 1;
+        }
+        while ( data.cur.stops[si.cur] ) {
+            console.log("adding lone cur: " + si.cur + ":" + JSON.stringify(data.cur.stops[si.cur]));
+            console.log("si.merge: " + si.merge);
+            reportobj.stops[si.merge] = data.cur.stops[si.cur];
+            si.cur   += 1;
             si.merge += 1;
         }
 
