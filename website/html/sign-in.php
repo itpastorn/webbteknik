@@ -50,49 +50,48 @@ echo $note;
 echo $curuser;
 ?>
   <p class="signinbox">
-    <a href="#" id="browserid" title="Logga in med BrowserID">  
-      <img src="img/sign-in-green.png" alt="Logga in">  
-    </a>
+    Testar din webbläsare. Var god vänta.
   </p>
   <p>
-    För att bevara din bekvämlighet, trygghet och integritet, så använder denna webbplats
+    För din trygghet och integritet, så använder denna webbplats
     <a href="https://browserid.org/">BrowserID</a>.
   </p>
-  <p>Om du inte redan har det, så kommer du först få skaffa just ett BrowserID-konto,
-    när du klickar på logga in-knappen. BrowserID är ett
+  <p>Har du ett BrowserID-konto? Annars, så kommer du först få skaffa det.</p>
+  <ol>
+    <li>Du skickas i så fall dit när du klickar på logga in-knappen (sign in) ovan.</li>
+    <li>Därefter måste du kontrollera din email för en bekräftelse.</li>
+    <li>När du gjort det måste du klicka på sign-in knappen ovan en gång till.</li>
+  </ol>
+  <p>
+    BrowserID är ett
     <a lang="en" href="http://en.wikipedia.org/wiki/Single_sign-on">single sign on-system</a>.
-    Det används för att <dfn>autentisera</dfn> dig som användare.
+    Det används för att <dfn>autentisera</dfn> dig som användare. I framtiden kommer du förhoppningsvis
+    få nytta av ditt BrowserID-konto på fler webbplatser än denna.
   </p>
   <p>
-    Därefter kommer du få skapa ett användarkonto på den här specifika webbplatsen.
+    Efter att ha loggat in, så måste du skapa ett användarkonto på den här specifika webbplatsen.
     <em>Om det är första gången</em> du använder BrowserID, så kommer du alltså behöva
     utföra båda stegen.
   </p>
   <p>
   </p>
   <hr class="todo" />
-  <pre>
-    TODO <strong>Capability detect</strong> det som krävs av webbläsaren
-     - JavaScript enabled
-     - strict mode support (non current browsers general fail)
-     - classList
-     - JSON
-     - videoelement.played (TimeRanges)
-     - More ES 5.1 - perhaps
-     - getElementsByClassName
-     - querySelector
-    
-     - DOM 2 events
-    
-     - Canvas
-     - SVG
-     - HTML5 video
-     - drag and drop
-    
-     - CSS transitions, transforms, 3D transforms, animation
-     - gradients
-     - media queries
-  </pre>
+  <h2>Tekniska krav</h2>
+  <p>
+    På den här webbplatsen används flera nya tekniker. Här ser du om din webbläsare stödjer dem.
+  </p>
+  <p id="nojsatall">
+    Först och främst måste du aktivera JavaScript. Utan det kan du varken logga in eller gör något
+    annat på den här webbplatsen. Dessutom måste din webbläsare stödja alla tekniker i tabellen nedan.
+  </p>
+  <table id="required_tech" class="techtests">
+    <caption>Nödvändiga tekniker</caption>
+    <tr>
+      <th>Teknik</th>
+      <th>Stöd</th>
+    </tr>
+  </table>
+  <script src="script/featuredetect.js"></script>
   <script src="https://browserid.org/include.js" type="text/javascript"></script> 
   <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
   <script>

@@ -142,6 +142,29 @@ input[disabled] + label {
 hr.todo {
     margin-top: 2em;
 }
+.techtests {
+    border-collapse: collapse;
+}
+.techtests {
+    margin: 1em auto;
+    border: 1px solid #222;
+    border-collapse: collapse;
+}
+.techtests th, .techtests td {
+    border: 1px solid #222;
+    border-collapse: collapse;
+    padding: 3px 5px;
+}
+.techtests th[scope='row'] {
+    text-align: left;
+    font-weight: normal;
+}
+.tsupported {
+    color: darkgreen;
+}
+.tunsupported {
+    color: darkred;
+}
 @media screen and (max-width: 1320px) {
     body {
         width: 720px;
