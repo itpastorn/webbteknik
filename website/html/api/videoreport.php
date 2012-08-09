@@ -84,7 +84,7 @@ try {
     $stmt->bindParam(':progressdata', $progressdata); // JSON-encoded
     $stmt->bindParam(':percentage_complete', $reportdata->percentage_complete);
     $stmt->bindParam(':status', $reportdata->status);
-    // $stmt->execute();
+    $stmt->execute();
 }
 catch (PDOException $e) {
     header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);

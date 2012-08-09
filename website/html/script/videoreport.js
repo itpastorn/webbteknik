@@ -13,10 +13,12 @@
         video_status    = wtglobal_old_status;
 
     // Starting video position, from global variable in inline script
-    // TODO Check why this sometimes says
+    // Timeout used to remove this error:
     //     "InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable"
-    //     Page reload is needed, but why?
-    vid.currentTime = wtglobal_start_video_at;
+    // TODO: Find better solution
+    setTimeout( function () {
+        vid.currentTime = wtglobal_start_video_at > 0 ? wtglobal_start_video_at : 0;
+    }, 150);
     
     // Tell old status
     var status_string = {
