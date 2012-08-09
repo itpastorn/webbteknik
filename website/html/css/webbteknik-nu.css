@@ -60,14 +60,14 @@ iframe {
 .mainmenu a {
     text-decoration: none;
 }
-video.fullsize {
+.fullsize {
     width: 1280px;
     height: 720px;
 }
 #videocontainer {
     float: left;
 }
-video.halfsize {
+.halfsize {
     width: 640px;
     height: 360px;
 }
