@@ -128,7 +128,7 @@
         var reportobj = create_report();
         video_progress.html("Du har sett " + reportobj.percentage_complete + " % av videon");
         reportdata = JSON.stringify(reportobj);
-//        $.post('./api/videoreport.php', { "reportdata": reportdata }, reportSuccessCallback);
+        $.post('./api/videoreport.php', { "reportdata": reportdata }, reportSuccessCallback);
     }
     // TODO: Handle failure....
     function reportSuccessCallback(serverdata) {
