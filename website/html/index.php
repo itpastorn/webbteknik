@@ -21,16 +21,19 @@
   <p>
     Hej. Roligt att du är intresserad av
     <a href="http://www.skolportalen.se/laromedel/produkt/J200%204500/Webbutveckling%201%20-%20L%C3%A4robok/">vårt läromedel</a>.
-    Tyvärr är inte webbplatsen igång ännu. Än så länge finns här bara några smakprov.
+    Just nu arbetar jag (Lars Gunther) på att göra den här webbplatsen användbar.
   </p>
   <p>
-    Här finns också <a href="laxhjalpen-demowebb/">Läxhjälpen &ndash; bokens demowebbplats</a>.
+    <strong>Om du <a href="http://webbteknik.nu/sign-in.php">registrerar dig</a>, så kommer du
+    få meddelande när det sker uppdateringar.</strong> Du kan då också se fler videos.
+  </p>
+  <p>
+    Här finns <a href="laxhjalpen-demowebb/">Läxhjälpen &ndash; bokens demowebbplats</a>.
   </p>
   <h2>Smakprov på en video</h2>
   <p class="centered">
     <iframe src="http://www.youtube.com/embed/JdJA9w-vyJY"></iframe>
   </p>
-  <p><a href="videos-test.php">Fler videos och full storlek på video</a></p>
   <h2>Smakprov på Flashcards</h2>
   <p>
     <a href="flashcards.php?set=wu1-1">Flashcards med ord från kapitel 1</a>. Det kommer finnas

@@ -23,7 +23,8 @@ $dbh = keryxDB2_cx::get($dbx);
 if ( isset($_GET['video']) ) {
     // TODO filter, but prepared statements should catch any SQL-injection attempt
     $sql = <<<SQL
-        SELECT v.*, up.progressdata, up.percentage_complete, up.status FROM videos AS v 
+        SELECT v.*, up.progressdata, up.percentage_complete, up.status, MAX(v.order) AS last
+        FROM videos AS v 
         LEFT JOIN userprogress AS up
         ON (up.resourceID = v.videoname)
         WHERE v.videoname = :video AND ( up.email = :email or up.email IS NULL )
@@ -34,7 +35,8 @@ SQL;
 } else {
     // Find next unseen video for user
     $sql = <<<SQL
-        SELECT v.*, up.progressdata, up.percentage_complete, up.status FROM videos AS v 
+        SELECT v.*, up.progressdata, up.percentage_complete, up.status, MAX(v.order) AS last
+        FROM videos AS v 
         LEFT JOIN userprogress AS up
         ON (up.resourceID = v.videoname)
         WHERE up.email = :email AND up.tablename = 'videos' AND up.status = 'begun' 
@@ -48,6 +50,7 @@ $stmt->bindParam(':email', $_SESSION['user']);
 $stmt->execute();
 
 $videos = $stmt->fetchAll();
+// TODO Do I need to fetch more than on one?
 
 if ( $videos ) {
     $curvid = $videos[0];
@@ -58,6 +61,18 @@ if ( $videos ) {
     $progressdata->viewTotal = 0;
     if ( !empty($curvid['status']) ) {
         $progressdata = json_decode($curvid['progressdata']);
+    }
+    // Is this the last video?
+    if ( $curvid['order'] == $curvid['last'] ) {
+        $curvid['next'] = null;
+    } else {
+        $curvid['next'] = $curvid['order'] + 1;
+    }
+    // Is this the first video?
+    if ( $curvid['order'] == 1 ) {
+        $curvid['prev'] = null;
+    } else {
+        $curvid['prev'] = $curvid['order'] - 1;
     }
 } else {
     $curvid       = array('title' => 'Video ej funnen');
@@ -104,8 +119,8 @@ if ( !isset($curvid['status']) ) {
   <div id="videobuttons">
     <button id="skipvid" disabled>Markera videon <br /> som <b>sedd</b></button>
     <button id="unskipvid" disabled>Markera videon <br /> som <b>osedd</b></button>
-    <button id="nextvideo" disabled>Gå till <br /> <b>nästa</b> video</button>
-    <button id="prevvideo" disabled>Gå till <br /> <b>föregående</b> video</button>
+    <button class="prevnextvideo" disabled >Gå till <br /> <b>nästa</b> video</button>
+    <button class="prevnextvideo" disabled>Gå till <br /> <b>föregående</b> video</button>
   </div>
   <p id="vidprogress">Status för denna video: </p><!-- TODO Clickable progress bar with timeranges converted to graphics -->
   <section id="resource_suggestions">
@@ -117,10 +132,11 @@ if ( !isset($curvid['status']) ) {
   <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
   <script>
      var wtglobal_start_video_at   = <?php
-         if ( isset($progressdata->firstStop) ) { echo $progressdata->firstStop - 2; }
+         // 5 seconds repeat to make it a bit easier to catch up
+         if ( isset($progressdata->firstStop) ) { echo $progressdata->firstStop - 5; }
          else { echo 0; }; ?>;
      var wtglobal_old_progressdata = <?php
-         if ( isset($curvid['progressdata']) ) { echo $curvid['progressdata']; }
+         if ( !empty($curvid['progressdata']) ) { echo $curvid['progressdata']; }
          else { echo 0; }; ?>;
      var wtglobal_old_status       = "<?php echo $curvid['status']; ?>";
   </script>

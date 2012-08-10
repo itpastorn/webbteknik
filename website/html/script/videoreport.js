@@ -6,7 +6,7 @@
     // The name of the video source, excluding type, using capturing parenthesis
     var video_src       = vid.getElementsByTagName("source")[0].src.match(/\/([^/]+)\.[a-z]{3,4}$/)[1],
         video_reporting = false,
-        video_duration  = false
+        video_duration  = false,
         video_start_at  = 0,
         video_first_run = true,
         video_progress  = $("#vidprogress"),
@@ -17,7 +17,12 @@
     //     "InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable"
     // TODO: Find better solution
     setTimeout( function () {
-        vid.currentTime = wtglobal_start_video_at > 0 ? wtglobal_start_video_at : 0;
+        // Can I remove video_duration or is it truly a performance saver? INVESTIGATE
+        video_duration = vid.duration;
+        if ( wtglobal_start_video_at > 0 && wtglobal_old_status !== "finished" ) {
+            vid.currentTime = wtglobal_start_video_at;
+        }
+        console.log("Duration: " + video_duration);
     }, 150);
     
     // Tell old status
@@ -179,7 +184,10 @@
             }
             // Less than 10 seconds left = It is finished
             if ( reportobj.viewTotal >= video_duration - 10 ) {
-                video_status = 'finished';
+                video_status     = 'finished';   // Inter function communication
+                reportobj.status = video_status;
+                // No need to enable skip button any more
+                $('#skipvid').attr("disabled", "disabled");
             }
             reportobj.percentage_complete = Math.floor(100 * reportobj.viewTotal / video_duration);
         }
@@ -193,6 +201,11 @@
         }
         reportdata = JSON.stringify(reportobj);
         $.post('./api/videoreport.php', { "reportdata": reportdata }, reportSuccessCallback);
+        if ( video_status === "finished" ) {
+	        console.log("Video finished, reporting stops");
+	        video_reporting && clearInterval(video_reporting);
+	        video_reporting = false;
+        }
     }
     // TODO: Handle failure....
     function reportSuccessCallback(serverdata) {
@@ -200,11 +213,8 @@
         console.log("Server status message was: " + serverdata);
     }
 
-    // Only "playing" is reliable, but metadataloaded would be better for fetching duration
     $(vid).on('playing', function() {
         if ( video_first_run ) {
-            video_duration = this.duration;
-            console.log("video duration: " + video_duration);
             video_first_run = false;
             if ( video_status === "unset" ) {
                 video_status = "begun";
@@ -228,15 +238,37 @@
         video_reporting = false;
     });
     // Skip this video manually
-    // TODO: Skip button only active if needed, else replaced with message
-    $('#skipvid').removeAttr("disabled").on('click', function () {
-        if ( video_status === "unset" || video_status === "begun" ) {
-            video_status = "skipped";
-        }
-        video_reporting && clearInterval(video_reporting);
-        console.log("Skipping this video");
-        send_video_report();
-        video_reporting = false;
-    });
+    var manual_skip = function () {
+            console.log("Skipping this video");
+            $(this).attr("disabled", "disabled");
+            if ( video_status === "unset" || video_status === "begun" ) {
+                video_status = "skipped";
+            }
+            video_reporting && clearInterval(video_reporting);
+            send_video_report();
+            video_reporting = false;
+            
+            // Load next video = page reload
+            window.location.reload();
+    };
+    if ( video_status === "unset" || video_status === "begun" ) {
+        $('#skipvid').removeAttr("disabled").on('click', manual_skip);
+    }
+    if ( video_status === "skipped" || video_status === "finished" ) {
+        $('#unskipvid').removeAttr("disabled").on('click', function () {
+            console.log("Setting video as unseen");
+            $(this).attr("disabled", "disabled");
+            video_status = "unset";
+            
+            // Set all old data to nothing
+            wtglobal_old_progressdata = 0;
+            
+            // Tell server to delete DB record
+            $.post('./api/videoreport.php', { "reset": video_src }, reportSuccessCallback);
+            
+            // Enable skip button, but do not re-register event listener twice TODO
+            $('#skipvid').removeAttr("disabled").on('click', manual_skip);
+        });
+    }
     
 })(window);
