@@ -1,4 +1,53 @@
 @CHARSET "UTF-8";
+/* ------------------------------- *\
+   Information
+\* ------------------------------- */
+
+Project: Webbteknik.nu
+Version: alpha
+Author:  Lars Gunther <gunther@keryx.se>
+License: MPL 2.0 http://www.mozilla.org/MPL/
+
+/* ------------------------------- *\
+   Contents
+\* ------------------------------- */
+/*
+$notes       Style considerations
+$reset       Browser equalazation rules
+$defaults    Element specific rules (<html>, <body>, <h1>, <p>, etc)
+$forms       Form element defaults 
+$media       Video, plugins, iframes 
+$shared      Simple, one-declaration only, rules used by lots of elements in lieu of variables
+$reused      Classes to be reused, OOCSS-style
+$masthead    Page header
+$primarynav  Primary navigation
+$masthead    Page header
+$footer      Page header
+$index       Rules for the start page (page specific or exceptions)
+$userpage    Rules for userpage.php (page specific or exceptions)
+$signin      Sign in page
+$flashcards  Flashcards page
+$TODO        Unsorted WIP rules
+
+TODO mobile section
+*/
+
+/* ------------------------------- *\
+   $Notes
+\* ------------------------------- */
+/*
+
+*/
+
+
+/* ------------------------------- *\
+   $reset
+\* ------------------------------- */
+
+
+/* ------------------------------- *\
+   $defaults
+\* ------------------------------- */
 html {
     background-color: rgb(0, 175,63);
     background-image: -webkit-linear-gradient(to bottom, rgb(0, 175,63), #fff);
@@ -16,10 +65,6 @@ body {
     font-size: medium;
     border-radius: 4px;    
 }
-.wide {
-    width: 1000px;
-}
-
 h1 {
     font-family: consolas, monospace;
     text-align: center;
@@ -27,80 +72,11 @@ h1 {
 h2 {
     font-size: 1.3em;
 }
-.centered {
-    text-align: center;
-}
-.space {
-    margin: 2em 0 0;
-}
-.sign {
-    font-family: 'Handlee', cursive;
-    font-size: xx-large;
-}
-.hidden {
-    display: none;
-}
-iframe {
-    width: 560px;
-    height: 315px;
-    border: none;
-}
-.mainmenu {
-    padding: 0;
-    margin: 0;
-    text-align: center;
-    background-color: #DDD;
-}
-.mainmenu li {
-    display: inline-block;
-    padding: 2px 5px;
-    min-width: 150px;
-    text-transform: uppercase;
-}
-.mainmenu a {
-    text-decoration: none;
-}
-.fullsize {
-    width: 1280px;
-    height: 720px;
-}
-#videocontainer {
-    float: left;
-}
-.halfsize {
-    width: 640px;
-    height: 360px;
-}
-#vidprogress {
-    color: #666;
-    clear: both;
-}
-#videobuttons {
-    margin-left: 680px;
-    width: 150px;
-}
-#videobuttons button {
-    width: 149px;
-    margin-bottom: 20px;
-}
-#resource_suggestions {
-    /* */
-}
-#resource_suggestions > div {
-    display: inline-block;
-    margin-right: 20px;
-    width: 180px;
-    height: 80px;
-    padding: 10px;
-    background-color: #DDD;
-    border-radius: 5px; 
-}
-.signinbox {
-    margin: 2em;
-    padding: 1em;
-    border: 1px solid rgb(0, 175,63);
-    border-radius: 4px;
-}
+
+
+/* ------------------------------- *\
+   $forms
+\* ------------------------------- */
 fieldset {
     margin-top: 1em;
     margin-bottom: 2em;
@@ -117,28 +93,86 @@ label:first-child,
 input[disabled] + label {
     color: #999;
 }
-.nonimplemented + label::after,
-.nonimplemented::after {
-    content: " (Framtida funktion. Ej klar ännu.)";
+
+
+/* ------------------------------- *\
+   $media
+\* ------------------------------- */
+iframe {
+    width: 560px;
+    height: 315px;
+    border: none;
 }
-.nonimplemented {
-    opacity: 0.5;
-    text-decoration: line-through;
+/* Fullsize video, according recording dimensions */
+.fullsize {
+    width: 1280px;
+    height: 720px;
 }
-.updated {
-    background-color: yellow;
-    /* TODO Fade yellow, add ARIA */
+.halfsize {
+    width: 640px;
+    height: 360px;
 }
-.updated::after {
-    content: " - Databas uppdaterad.";
+#videocontainer {
+    float: left;
 }
-.wrong {
-    background-color: hsl(359, 60%, 80%);
-    /* TODO Fade red, add ARIA */
+
+
+/* ------------------------------- *\
+   $shared
+\* ------------------------------- */
+
+
+/* ------------------------------- *\
+   $reused
+\* ------------------------------- */
+.wide {
+    width: 1000px;
 }
-.wrong::after {
-    content: " - Fel svar.";
+.centered {
+    text-align: center;
 }
+.space {
+    margin: 2em 0 0;
+}
+.sign {
+    font-family: 'Handlee', cursive;
+    font-size: xx-large;
+}
+.hidden {
+    display: none;
+}
+
+
+
+/* ------------------------------- *\
+   $masthead
+\* ------------------------------- */
+
+
+/* ------------------------------- *\
+   $primarynav
+\* ------------------------------- */
+.mainmenu {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    background-color: #DDD;
+}
+.mainmenu li {
+    display: inline-block;
+    padding: 2px 5px;
+    min-width: 150px;
+    text-transform: uppercase;
+}
+.mainmenu a {
+    text-decoration: none;
+}
+
+
+/* ------------------------------- *\
+   $footer
+\* ------------------------------- */
+
 hr.todo {
     margin-top: 2em;
 }
@@ -165,6 +199,104 @@ hr.todo {
 .tunsupported {
     color: darkred;
 }
+
+/* ------------------------------- *\
+   $index
+\* ------------------------------- */
+
+
+/* ------------------------------- *\
+   $userpage
+\* ------------------------------- */
+#vidprogress {
+    color: #888;
+    font-size: smaller;
+    clear: both;
+}
+#videobuttons {
+    margin-left: 680px;
+    width: 150px;
+}
+#videobuttons button {
+    width: 149px;
+    margin-bottom: 20px;
+}
+#resource_suggestions {
+    /* */
+}
+#resource_suggestions > div {
+    display: inline-block;
+    margin-right: 20px;
+    width: 180px;
+    height: 80px;
+    padding: 10px;
+    background-color: #DDD;
+    border-radius: 5px; 
+}
+
+
+/* ------------------------------- *\
+   $userpage
+\* ------------------------------- */
+
+
+
+/* ------------------------------- *\
+   $signin
+\* ------------------------------- */
+
+.signinbox {
+    margin: 2em;
+    padding: 1em;
+    border: 1px solid rgb(0, 175,63);
+    border-radius: 4px;
+}
+
+
+
+/* ------------------------------- *\
+   $edituser
+\* ------------------------------- */
+
+/* Possibly move some stuff to forms section */
+
+.nonimplemented + label::after,
+.nonimplemented::after {
+    content: " (Framtida funktion. Ej klar ännu.)";
+}
+.nonimplemented {
+    opacity: 0.5;
+    text-decoration: line-through;
+}
+.updated {
+    background-color: yellow;
+    /* TODO Fade yellow, add ARIA */
+}
+.updated::after {
+    content: " - Databas uppdaterad.";
+}
+.wrong {
+    background-color: hsl(359, 60%, 80%);
+    /* TODO Fade red, add ARIA */
+}
+.wrong::after {
+    content: " - Fel svar.";
+}
+
+
+
+
+/* ------------------------------- *\
+   $flashcards
+\* ------------------------------- */
+
+/* Separate file thus far, maybe keep it that way */
+
+
+
+/* ------------------------------- *\
+   $TODO
+\* ------------------------------- */
 @media screen and (max-width: 1320px) {
     body {
         width: 720px;
@@ -185,3 +317,17 @@ hr.todo {
 
 
 /* icons: http://www.smashingmagazine.com/2012/06/18/freebie-academic-icon-set-10-png-psd-icons/ */
+
+/*
+TODO list
+1. Remove id selectors
+2. Smarter grouping of declarations (re-use vz page specific)
+3. Tons of design improvements
+
+*/
+
+/* ----------------------------------------------------------------------------------
+
+Watch this space for easter eggs
+
+------------------------------------------------------------------------------------ */
