@@ -136,6 +136,8 @@
 }());
 /*
 Switch to Modernizr?
+
+Inspiration from Modernizr: https://github.com/Modernizr/Modernizr/blob/master/modernizr.js
 Tests to add
  - More ES 5.1 - perhaps
 

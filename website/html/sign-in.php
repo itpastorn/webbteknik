@@ -23,9 +23,10 @@ $curuser = "";      // Information about possible logged in user (users may swit
 if ( user::validate(user::LOGGEDIN) ) {
     $curuser  = '<p><strong>' . htmlspecialchars($_SESSION['user']) . "</strong> är inloggad</p>";
     $curuser .= "<ul><li>Logga in på nytt om du vill <strong>byta användare</strong>. (Främst för admins.)</li>";
-    $curuser .= "<li><a href=\"edituser.php\">Redigera användardata</a> om du vill ansöka om högre behörighet.</li></ul>\n";
     if ( isset($_GET['nopriv']) ) {
-        $note = "<h2>Sidan kräver högre nivå på din behörighet</h2>\n";
+        $note  = "<h2>Du har inte behörighet att gå till sidan</h2>\n";
+        $note .= "<p>Det kan bero på att du inte har registrerat bokinköp eller anslutit dig till en undervisningsgrupp.\n";
+        $note .= "Det gör du genom att <a href=\"edituser.php\">redigera dina användardata</a>.</p>\n";
     }
 } else {
     $note = "<h2>Sidan kräver inloggning</h2>\n";
@@ -69,7 +70,7 @@ echo $curuser;
     få nytta av ditt BrowserID-konto på fler webbplatser än denna.
   </p>
   <p>
-    Efter att ha loggat in, så måste du skapa ett användarkonto på den här specifika webbplatsen.
+    Efter att ha loggat in, så måste du redigera dina användaruppgifter på den här specifika webbplatsen.
     <em>Om det är första gången</em> du använder BrowserID, så kommer du alltså behöva
     utföra båda stegen.
   </p>

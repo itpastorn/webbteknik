@@ -1,12 +1,13 @@
-@CHARSET "UTF-8";
+@charset "UTF-8";
 /* ------------------------------- *\
    Information
 \* ------------------------------- */
-
+/*
 Project: Webbteknik.nu
 Version: alpha
 Author:  Lars Gunther <gunther@keryx.se>
 License: MPL 2.0 http://www.mozilla.org/MPL/
+*/
 
 /* ------------------------------- *\
    Contents
@@ -15,8 +16,8 @@ License: MPL 2.0 http://www.mozilla.org/MPL/
 $notes       Style considerations
 $reset       Browser equalazation rules
 $defaults    Element specific rules (<html>, <body>, <h1>, <p>, etc)
-$forms       Form element defaults 
-$media       Video, plugins, iframes 
+$forms       Form element defaults
+$media       Video, plugins, iframes
 $shared      Simple, one-declaration only, rules used by lots of elements in lieu of variables
 $reused      Classes to be reused, OOCSS-style
 $masthead    Page header
@@ -324,6 +325,13 @@ TODO list
 2. Smarter grouping of declarations (re-use vz page specific)
 3. Tons of design improvements
 
+*/
+
+/* ------------------------------- *\
+   $Attributions
+\* ------------------------------- */
+/*
+CSS Code style tips: http://csswizardry.com/2012/04/my-html-css-coding-style/
 */
 
 /* ----------------------------------------------------------------------------------
