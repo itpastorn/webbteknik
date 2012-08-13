@@ -76,7 +76,7 @@ $stmt->bindParam(':email', $_SESSION['user']);
 $stmt->execute();
 
 $videos = $stmt->fetchAll();
-// TODO Do I need to fetch more than on one?
+// TODO Do I really need to fetch more than on one?
 
 // Last video
 $sql  = "SELECT MAX(`order`) AS `last` FROM videos";
@@ -114,6 +114,14 @@ if ( $videos ) {
 if ( !isset($curvid['status']) ) {
     $curvid['status'] = "unset";
 }
+
+// Flashcards
+
+// Next job not done
+
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="sv">

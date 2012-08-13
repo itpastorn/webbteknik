@@ -1,3 +1,8 @@
+/**
+ * Report progress automatically while watching a video
+ *
+ *
+ */
 (function (window, undefined) {
     var vid = document.querySelector("#videocontainer video");
     if ( !vid ) {

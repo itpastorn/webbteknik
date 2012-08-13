@@ -82,7 +82,7 @@ $jobs = $stmt->fetchAll();
     	}
     	if ( $curjob['status'] == 'finished' ) {
     	    // Job is done, low key
-    	    echo '<tr class="jobdone">';
+    	    echo '<tr class="finished">';
     	} elseif ( $curjob['status'] == 'skipped' ) {
     	    // Job is done, low key
     	    echo '<tr class="skipped">';
@@ -99,7 +99,13 @@ $jobs = $stmt->fetchAll();
             echo $curjob['what_to_do']. " i " . $curjob['where_to_do_it'];
         }
         echo "</td>\n";
-        echo "<td>\n";
+        // Set class for CSS and JS to know if it is a video or not
+        // Perhaps move to TR?
+        if ( $curjob['what_to_do'] == 'video' ) {
+            echo "<td data-jobid=\"{$curjob['joblistID']}\" class=\"job_is_video\">\n";
+        } else {
+            echo "<td data-jobid=\"{$curjob['joblistID']}\">\n";
+        }
         if ( $curjob['what_to_do'] == 'video' ) {
             // Automatically reported when watching
             // PHP 5.3 shorthand below for default zero
@@ -108,7 +114,13 @@ $jobs = $stmt->fetchAll();
                 echo " (överhoppad)";
             }
         } else {
-            echo "checkmark if done";
+            if ( $curjob['status'] == 'skipped' ) {
+                echo " (överhoppad)";
+            } elseif ( $curjob['status'] == 'finished' ) {
+                echo " (Färdig)";
+            } else {
+                echo 'Ej klar';
+            }
         }
         echo "</td>\n";
         echo "<td>Sätts av lärare";
@@ -119,5 +131,6 @@ $jobs = $stmt->fetchAll();
   ?>
   </table>
   <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+  <script src="script/progressreport.js"></script>
 </body>
 </html>
