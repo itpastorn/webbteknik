@@ -42,6 +42,7 @@ SQL;
     $stmt = $dbh->prepare($sql);
     $stmt->bindParam(':video', $_GET['video']);
 } elseif (isset($_GET['vidnum']) ) {
+	// TODO: Change to use job number, video table should not have any suggested order
 	$vidnum = (int)$_GET['vidnum'];
     $sql = <<<SQL
         SELECT v.*, jl.joblistID, up.progressdata, up.percentage_complete, up.status
@@ -64,7 +65,7 @@ SQL;
         ON (jl.where_to_do_it = v.videoname)
         LEFT JOIN userprogress AS up
         ON (jl.joblistID = up.joblistID)
-        WHERE up.email = :email AND up.tablename = 'videos' AND up.status = 'begun' 
+        WHERE up.email = :email AND jl.what_to_do = 'video' AND up.status = 'begun' 
               OR up.email IS NULL
         ORDER BY jl.chapter ASC, jl.slow_track_order ASC
 SQL;
