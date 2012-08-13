@@ -271,4 +271,20 @@
         });
     }
     
+    // Next unseen video
+    $("#nextunseen").removeAttr("disabled").on('click', function () {
+        // Remove all get-params from current location
+        var current_href = window.location.href.match(/([^?]*)(\?.*)*/)[1]
+        window.location.href = current_href;
+    });
+    
+    // Goto previous and next
+    $(".prevnextvideo:not([data-vidnum='none'])").removeAttr("disabled").on('click', function () {
+        var show_video_number = $(this).data('vidnum');
+        // Remove all get-params from current location
+        var current_href = window.location.href.match(/([^?]*)(\?.*)*/)[1]
+        window.location.href = current_href + "?vidnum=" + show_video_number;
+    });
+    
+    
 })(window);

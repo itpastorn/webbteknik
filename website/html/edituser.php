@@ -7,6 +7,8 @@
  * 
  * @author <gunther@keryx.se>
  * @version "Under construction 1"
+ * @license http://www.mozilla.org/MPL/
+ * @package webbteknik.nu
  */
 
 session_start();

@@ -4,6 +4,9 @@
  *
  * @author <gunther@keryx.se>
  * @version "Under construction 1"
+ * @license http://www.mozilla.org/MPL/
+ * @package webbteknik.nu
+ * 
  */
 
 session_start();
@@ -28,6 +31,7 @@ SQL;
     $stmt->bindParam(':reset', $_POST['reset']);
     $stmt->bindParam(':email', $_SESSION['user']);
     $stmt->execute();
+    // TODO Check for no rows affected == bad name for video
     echo "User progress data for video deleted";
     exit;
 }

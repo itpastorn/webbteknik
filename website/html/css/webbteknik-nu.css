@@ -20,14 +20,17 @@ $forms       Form element defaults
 $media       Video, plugins, iframes
 $shared      Simple, one-declaration only, rules used by lots of elements in lieu of variables
 $reused      Classes to be reused, OOCSS-style
-$masthead    Page header
-$primarynav  Primary navigation
-$masthead    Page header
-$footer      Page header
-$index       Rules for the start page (page specific or exceptions)
-$userpage    Rules for userpage.php (page specific or exceptions)
-$signin      Sign in page
-$flashcards  Flashcards page
+Pageparts
+    $masthead    Page header
+    $primarynav  Primary navigation
+    $footer      Page header
+Pages
+    $index       Rules for the start page (page specific or exceptions)
+    $userpage    Rules for userpage.php (page specific or exceptions)
+    $joblist     Job list page
+    $signin      Sign in page
+Effects
+    $flashcards  Flashcards page
 $TODO        Unsorted WIP rules
 
 TODO mobile section
@@ -142,8 +145,15 @@ iframe {
 .hidden {
     display: none;
 }
-
-
+.blackborder,
+.blackborder th,
+.blackborder td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+.zebra tr:nth-child(odd) {
+    background-color: #DDD;
+}
 
 /* ------------------------------- *\
    $masthead
@@ -242,6 +252,40 @@ hr.todo {
 
 
 
+/* ------------------------------- *\
+   $joblist
+\* ------------------------------- */
+.jobreport {
+    font-size: smaller;
+    margin: auto;
+}
+.jobreport th,
+.jobreport td {
+    padding: 3px 5px;
+}
+.jobdone {
+    opacity: 0.5;
+}
+.jobreport tr:hover {
+    opacity: 1;
+    background-color: lightgreen;
+}
+.jobreport a:link {
+    /* color: rgb(0, 0, 238); */
+    color: rgb(0, 0, 180);
+}
+/*
+.jobreport a:visited {
+    color: pink;
+}
+.jobreport a:focus,
+.jobreport a:hover {
+    color: blue;
+}
+.jobreport a:active {
+    color: red;
+}
+*/
 /* ------------------------------- *\
    $signin
 \* ------------------------------- */
