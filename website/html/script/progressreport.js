@@ -83,5 +83,29 @@
         // console.log("Report received by server");
         console.log("Server status message was: " + serverdata);
     }
+    
+    // Buttons to toggle hide/show for finished and skipped jobs
+    
+    var toggle_finished_button = doc.createElement("button");
+    toggle_finished_button.innerHTML = "Dölj avklarade uppgifter";
+    var finished_button_text = "Dölj";
+    $(toggle_finished_button).on('click', function () {
+        // Toggle text on the clicked button
+        finished_button_text = ( finished_button_text === "Visa" ) ? "Dölj" : "Visa";
+        $(this).html(finished_button_text + " avklarade uppgifter");
+        $(".finished").toggle();
+    });
+    
+    var toggle_skipped_button = doc.createElement("button");
+    toggle_skipped_button.innerHTML = "Dölj överhoppade uppgifter";
+    var skipped_button_text = "Dölj";
+    $(toggle_skipped_button).on('click', function () {
+        // Toggle text on the clicked button
+        skipped_button_text = ( skipped_button_text === "Visa" ) ? "Dölj" : "Visa";
+        $(this).html(skipped_button_text + " överhoppade uppgifter");
+        $(".skipped").toggle();
+    });
+    
+    $("#showhidebuttons").append(toggle_finished_button, toggle_skipped_button);
 
 }(window, window.document));

@@ -48,7 +48,6 @@ $stmt = $dbh->prepare($sql);
 // $stmt->bindParam(':email', $_SESSION['user']);
 $stmt->execute();
 $jobs = $stmt->fetchAll();
-
 ?>
 <!DOCTYPE html>
 <html lang="sv">
@@ -67,8 +66,9 @@ $jobs = $stmt->fetchAll();
   </p>
   <p>
     <em>Preliminär info: Här kommer alla uppgifter och resurser att listas, så att elever kan checka av vad de gjort
-    och lärare få en rapport. Videotittande rapporteras av sig självt när man tittar.
+    och lärare få en rapport. Videotittande rapporteras av sig självt när man tittar.</em>
   </p>
+  <p id="showhidebuttons">&nbsp;</p><!-- placeholder for show/hide finished jobs -->
   <table class="jobreport blackborder zebra">
     <tr>
       <th>Uppgift</th>

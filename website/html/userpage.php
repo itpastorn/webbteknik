@@ -41,9 +41,9 @@ SQL;
     $stmt = $dbh->prepare($sql);
     $stmt->bindParam(':video', $_GET['video']);
 } elseif (isset($_GET['vidnum']) ) {
-	// TODO: Change to use job number, video table should not have any suggested order
-	// Problem with that is that we can not do+/- 1 to get previous and next
-	$vidnum = (int)$_GET['vidnum'];
+    // TODO: Change to use job number, video table should not have any suggested order
+    // Problem with that is that we can not do+/- 1 to get previous and next
+    $vidnum = (int)$_GET['vidnum'];
     $sql = <<<SQL
         SELECT v.*, jl.joblistID, up.progressdata, up.percentage_complete, up.status
         FROM videos AS v 
@@ -56,7 +56,7 @@ SQL;
     $stmt = $dbh->prepare($sql);
     $stmt->bindParam(':vidnum', $vidnum);
 } else {
-	// Default
+    // Default
     // Find next unseen video for user
     $sql = <<<SQL
         SELECT v.*, jl.joblistID, up.progressdata, up.percentage_complete, up.status
@@ -118,9 +118,28 @@ if ( !isset($curvid['status']) ) {
 // Flashcards
 
 // Next job not done
-
-
-
+$sql = <<<SQL
+    SELECT jl.*, up.email, up.status
+    FROM `joblist` AS jl
+    LEFT JOIN userprogress AS up ON up.joblistID = jl.joblistID
+    WHERE 
+        ( up.status ='begun' OR up.status IS NULL )
+    AND
+        ( up.email = 'gunther@keryx.se' OR up.email IS NULL )
+    AND
+        jl.what_to_do !=  'video'
+    ORDER BY jl.slow_track_order ASC
+    LIMIT 0,1
+SQL;
+$stmt = $dbh->prepare($sql);
+$stmt->bindParam('email', $_SESSION['user']);
+$stmt->execute();
+$nextjob = $stmt->fetch();
+if ( $nextjob ) {
+    $nextjobbdesc = $nextjob['what_to_do'] . "<br />" . $nextjob['where_to_do_it'];
+} else {
+    $nextjobbdesc = "Inga fler förslag.";
+}
 
 ?>
 <!DOCTYPE html>
@@ -156,8 +175,8 @@ if ( !isset($curvid['status']) ) {
     </div>
   <?php endif; ?>
   </div>
+<!--    <?php echo "Jobb: " . $curvid['joblistID'] . "(debug)"; ?> -->
   <div id="videobuttons">
-    <?php echo "Jobb: " . $curvid['joblistID'] . "(debug)"; ?>
     <button id="skipvid" disabled>Markera videon <br /> som <b>sedd</b></button>
     <button id="unskipvid" disabled>Markera videon <br /> som <b>osedd</b></button>
     <button id="nextunseen" disabled"><b>Första osedda</b> video</button>
@@ -170,7 +189,10 @@ if ( !isset($curvid['status']) ) {
     <div>Flashcards (todo)</div>
     <div>Länkar (todo)</div>
     <div>Filer (todo)</div>
-    <div>Förslag (todo) Nästa ej gjorda uppgift i arbetsplaneringen</div>
+    <div>
+      <h3 class="boxedheader">Nästa uppgift</h3>
+      <p class="tightparagraph"><?php echo $nextjobbdesc; ?></p>
+    </div>
   </section>
   <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
   <script>

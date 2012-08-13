@@ -116,9 +116,6 @@ iframe {
     width: 640px;
     height: 360px;
 }
-#videocontainer {
-    float: left;
-}
 
 
 /* ------------------------------- *\
@@ -153,6 +150,13 @@ iframe {
 }
 .zebra tr:nth-child(odd) {
     background-color: #DDD;
+}
+/* Headers in boxes need no margin */
+.boxedheader {
+    margin: 0;
+}
+.tightparagraph {
+    margin: 0.3em 0;
 }
 
 /* ------------------------------- *\
@@ -219,10 +223,9 @@ hr.todo {
 /* ------------------------------- *\
    $userpage
 \* ------------------------------- */
-#vidprogress {
-    color: #888;
-    font-size: smaller;
-    clear: both;
+#videocontainer {
+    margin-top: 1.5em;
+    float: left;
 }
 #videobuttons {
     margin-left: 680px;
@@ -232,17 +235,23 @@ hr.todo {
     width: 149px;
     margin-bottom: 20px;
 }
+#vidprogress {
+    color: #888;
+    font-size: smaller;
+    clear: both;
+}
 #resource_suggestions {
     /* */
 }
 #resource_suggestions > div {
     display: inline-block;
     margin-right: 20px;
-    width: 180px;
+    width: 200px;
     height: 80px;
     padding: 10px;
     background-color: #DDD;
     border-radius: 5px; 
+    vertical-align: top;
 }
 
 
