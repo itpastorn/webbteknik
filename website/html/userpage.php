@@ -30,39 +30,43 @@ $dbh = keryxDB2_cx::get($dbx);
 if ( isset($_GET['video']) ) {
     // TODO filter, but prepared statements should catch any SQL-injection attempt
     $sql = <<<SQL
-        SELECT v.*, up.progressdata, up.percentage_complete, up.status
+        SELECT v.*, jl.joblistID, up.progressdata, up.percentage_complete, up.status
         FROM videos AS v
         LEFT JOIN joblist AS jl
         ON (jl.where_to_do_it = v.videoname)
         LEFT JOIN userprogress AS up
         ON (jl.joblistID = up.joblistID)
         WHERE v.videoname = :video AND ( up.email = :email or up.email IS NULL )
-        ORDER BY chapter ASC, slow_track_order ASC
+        ORDER BY jl.chapter ASC, jl.slow_track_order ASC
 SQL;
     $stmt = $dbh->prepare($sql);
     $stmt->bindParam(':video', $_GET['video']);
 } elseif (isset($_GET['vidnum']) ) {
 	$vidnum = (int)$_GET['vidnum'];
     $sql = <<<SQL
-        SELECT v.*, up.progressdata, up.percentage_complete, up.status
+        SELECT v.*, jl.joblistID, up.progressdata, up.percentage_complete, up.status
         FROM videos AS v 
+        LEFT JOIN joblist AS jl
+        ON (jl.where_to_do_it = v.videoname)
         LEFT JOIN userprogress AS up
-        ON (up.resourceID = v.videoname)
+        ON (jl.joblistID = up.joblistID)
         WHERE v.order = :vidnum AND ( up.email = :email or up.email IS NULL )
-        ORDER BY v.order ASC
+        ORDER BY jl.chapter ASC, jl.slow_track_order ASC
 SQL;
     $stmt = $dbh->prepare($sql);
     $stmt->bindParam(':vidnum', $vidnum);
 } else {
     // Find next unseen video for user
     $sql = <<<SQL
-        SELECT v.*, up.progressdata, up.percentage_complete, up.status
+        SELECT v.*, jl.joblistID, up.progressdata, up.percentage_complete, up.status
         FROM videos AS v 
+        LEFT JOIN joblist AS jl
+        ON (jl.where_to_do_it = v.videoname)
         LEFT JOIN userprogress AS up
-        ON (up.resourceID = v.videoname)
+        ON (jl.joblistID = up.joblistID)
         WHERE up.email = :email AND up.tablename = 'videos' AND up.status = 'begun' 
               OR up.email IS NULL
-        ORDER BY v.order ASC
+        ORDER BY jl.chapter ASC, jl.slow_track_order ASC
 SQL;
     $stmt = $dbh->prepare($sql);
 }
@@ -144,6 +148,7 @@ if ( !isset($curvid['status']) ) {
   <?php endif; ?>
   </div>
   <div id="videobuttons">
+    <?php echo "Jobb: " . $curvid['joblistID'] . "(debug)"; ?>
     <button id="skipvid" disabled>Markera videon <br /> som <b>sedd</b></button>
     <button id="unskipvid" disabled>Markera videon <br /> som <b>osedd</b></button>
     <button id="nextunseen" disabled"><b>Första osedda</b> video</button>
@@ -168,6 +173,7 @@ if ( !isset($curvid['status']) ) {
          if ( !empty($curvid['progressdata']) ) { echo $curvid['progressdata']; }
          else { echo 0; }; ?>;
      var wtglobal_old_status       = "<?php echo $curvid['status']; ?>";
+     var wtglobal_joblistID        = <?php echo $curvid['joblistID']; ?>
   </script>
   <script src="script/videoreport.js"></script>
 </body>

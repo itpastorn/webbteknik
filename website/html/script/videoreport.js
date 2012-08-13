@@ -3,7 +3,7 @@
     if ( !vid ) {
         return;
     }
-    // The name of the video source, excluding type, using capturing parenthesis
+    // The name of the video source, excluding type, using capturing parenthesis (UNUSED for now)
     var video_src       = vid.getElementsByTagName("source")[0].src.match(/\/([^/]+)\.[a-z]{3,4}$/)[1],
         video_reporting = false,
         video_duration  = false,
@@ -11,6 +11,12 @@
         video_first_run = true,
         video_progress  = $("#vidprogress"),
         video_status    = wtglobal_old_status;
+
+    // Joblist must be set in order for report to be usable
+    if ( +wtglobal_joblistID < 1 ) {
+        console.log("Video has no job list item. Report unavailable");
+        return false;
+    }
 
     // Starting video position, from global variable in inline script
     // Timeout used to remove this error:
@@ -39,11 +45,11 @@
     var create_report = function () {
 
         // Prepare an object to send via XHR to server
-        var reportobj = {};
-        reportobj.src       = video_src;
-        reportobj.viewTotal = 0;
-        reportobj.stops     = [];
-        reportobj.status    = video_status;
+        var reportobj        = {};
+        reportobj.joblistID  = wtglobal_joblistID;
+        reportobj.viewTotal  = 0;
+        reportobj.stops      = [];
+        reportobj.status     = video_status;
         // Previous data
         var data  = {};
         // TODO Check that old data exists and is not corrupt
@@ -248,8 +254,8 @@
             send_video_report();
             video_reporting = false;
             
-            // Load next video = page reload
-            window.location.reload();
+            // Load next video = page reload minus parameters
+            // window.location.reload();
     };
     if ( video_status === "unset" || video_status === "begun" ) {
         $('#skipvid').removeAttr("disabled").on('click', manual_skip);
@@ -264,7 +270,7 @@
             wtglobal_old_progressdata = 0;
             
             // Tell server to delete DB record
-            $.post('./api/videoreport.php', { "reset": video_src }, reportSuccessCallback);
+            $.post('./api/videoreport.php', { "reset": wtglobal_joblistID }, reportSuccessCallback);
             
             // Enable skip button, but do not re-register event listener twice TODO
             $('#skipvid').removeAttr("disabled").on('click', manual_skip);

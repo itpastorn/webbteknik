@@ -80,9 +80,12 @@ $jobs = $stmt->fetchAll();
     	if ( empty($curjob['status']) ) {
     	    $curjob['status'] = "0";
     	}
-    	if ( $curjob['status'] >= 100 ) {
+    	if ( $curjob['status'] == 'finished' ) {
     	    // Job is done, low key
     	    echo '<tr class="jobdone">';
+    	} elseif ( $curjob['status'] == 'skipped' ) {
+    	    // Job is done, low key
+    	    echo '<tr class="skipped">';
     	} else {
     	    echo '<tr>';
     	    
@@ -101,6 +104,9 @@ $jobs = $stmt->fetchAll();
             // Automatically reported when watching
             // PHP 5.3 shorthand below for default zero
             echo "Sett " . ($curjob['percentage_complete'] ?: 0) . " %";
+            if ( $curjob['status'] == 'skipped' ) {
+                echo " (överhoppad)";
+            }
         } else {
             echo "checkmark if done";
         }

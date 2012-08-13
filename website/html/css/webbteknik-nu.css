@@ -266,6 +266,13 @@ hr.todo {
 .jobdone {
     opacity: 0.5;
 }
+.skipped {
+    opacity: 0.8;
+    background-color: #fdf8ed;
+}
+.skipped:nth-row(odd) {
+    background-color: #e0b7b2;
+}
 .jobreport tr:hover {
     opacity: 1;
     background-color: lightgreen;

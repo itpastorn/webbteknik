@@ -22,20 +22,20 @@ $dbx = config::get('dbx');
 $dbh = keryxDB2_cx::get($dbx);
 
 // Reset - if present, must be name of video
+// TODO Change to use joblistID
 if ( isset($_POST['reset']) ) {
     $sql = <<<SQL
         DELETE FROM `userprogress`
-        WHERE tablename = 'videos' AND resourceID = :reset and email = :email
+        WHERE joblistID = :joblistID and email = :email
 SQL;
     $stmt = $dbh->prepare($sql);
-    $stmt->bindParam(':reset', $_POST['reset']);
+    $stmt->bindParam(':joblistID', $_POST['reset']);
     $stmt->bindParam(':email', $_SESSION['user']);
     $stmt->execute();
     // TODO Check for no rows affected == bad name for video
     echo "User progress data for video deleted";
     exit;
 }
-
 
 
 $reportdata = filter_var($_POST['reportdata'], FILTER_UNSAFE_RAW, FILTER_FLAG_STRIP_LOW|FILTER_FLAG_STRIP_HIGH);
@@ -72,11 +72,12 @@ if ( isset($reportdata->firstStop) ) {
 
 // First view = create row
 
-$sql = "SELECT * FROM userprogress WHERE email = :email AND tablename = 'videos' AND resourceID = :videoname";
+// TODO Change this to use joblist
+$sql = "SELECT * FROM userprogress WHERE email = :email AND joblistID = :joblistID";
 
 $stmt = $dbh->prepare($sql);
 $stmt->bindParam(':email', $_SESSION['user']);
-$stmt->bindParam(':videoname', $reportdata->src);
+$stmt->bindParam(':joblistID', $reportdata->joblistID);
 $stmt->execute();
 
 $curdata = $stmt->fetch();
@@ -88,17 +89,17 @@ if ( empty($reportdata->status) ) {
 }
 
 if ( !$curdata ) {
-    $sql = "INSERT INTO userprogress (email, tablename, resourceID, progressdata, percentage_complete, status) " .
-           "VALUES (:email, 'videos', :videoname, :progressdata, :percentage_complete, :status)";
+    $sql = "INSERT INTO userprogress (email, joblistID, progressdata, percentage_complete, status) " .
+           "VALUES (:email, :joblistID, :progressdata, :percentage_complete, :status)";
 } else {
     $sql = "UPDATE userprogress " .
            "SET progressdata = :progressdata, percentage_complete = :percentage_complete, status = :status " .
-           "WHERE email = :email AND tablename = 'videos' AND resourceID = :videoname";
+           "WHERE email = :email AND joblistID = :joblistID";
 }
 try {
     $stmt = $dbh->prepare($sql);
     $stmt->bindParam(':email', $_SESSION['user']);
-    $stmt->bindParam(':videoname', $reportdata->src);
+    $stmt->bindParam(':joblistID', $reportdata->joblistID);
     $stmt->bindParam(':progressdata', $progressdata); // JSON-encoded
     $stmt->bindParam(':percentage_complete', $reportdata->percentage_complete);
     $stmt->bindParam(':status', $reportdata->status);
@@ -107,6 +108,7 @@ try {
 catch (PDOException $e) {
     header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
     echo "Progressdata could not be loaded into database";
+    var_dump($e);
     // TODO FirePHP for debug
     exit;
 }
