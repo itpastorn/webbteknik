@@ -4,6 +4,15 @@
  * 
  * @author <gunther@keryx.se>
  * @version "Under construction 1"
+ * @license http://www.mozilla.org/MPL/
+ * @package webbteknik.nu
+ * 
+ * @todo ACL to videos based on privileges and what book it is related to
+ * @todo Make generic resource page
+ * 
+ * @todo Remove order from videos table in DB and use joblist instead
+ * 
+ * @todo Sort should know if on fast-track
  */
 
 session_start();
@@ -18,24 +27,36 @@ $dbx = config::get('dbx');
 // init
 $dbh = keryxDB2_cx::get($dbx);
 
-// TODO: Specific video can be set using get-param
-
 if ( isset($_GET['video']) ) {
     // TODO filter, but prepared statements should catch any SQL-injection attempt
     $sql = <<<SQL
-        SELECT v.*, up.progressdata, up.percentage_complete, up.status, MAX(v.order) AS last
-        FROM videos AS v 
+        SELECT v.*, up.progressdata, up.percentage_complete, up.status
+        FROM videos AS v
+        LEFT JOIN joblist AS jl
+        ON (jl.where_to_do_it = v.videoname)
         LEFT JOIN userprogress AS up
-        ON (up.resourceID = v.videoname)
+        ON (jl.joblistID = up.joblistID)
         WHERE v.videoname = :video AND ( up.email = :email or up.email IS NULL )
-        ORDER BY v.order ASC
+        ORDER BY chapter ASC, slow_track_order ASC
 SQL;
     $stmt = $dbh->prepare($sql);
     $stmt->bindParam(':video', $_GET['video']);
+} elseif (isset($_GET['vidnum']) ) {
+	$vidnum = (int)$_GET['vidnum'];
+    $sql = <<<SQL
+        SELECT v.*, up.progressdata, up.percentage_complete, up.status
+        FROM videos AS v 
+        LEFT JOIN userprogress AS up
+        ON (up.resourceID = v.videoname)
+        WHERE v.order = :vidnum AND ( up.email = :email or up.email IS NULL )
+        ORDER BY v.order ASC
+SQL;
+    $stmt = $dbh->prepare($sql);
+    $stmt->bindParam(':vidnum', $vidnum);
 } else {
     // Find next unseen video for user
     $sql = <<<SQL
-        SELECT v.*, up.progressdata, up.percentage_complete, up.status, MAX(v.order) AS last
+        SELECT v.*, up.progressdata, up.percentage_complete, up.status
         FROM videos AS v 
         LEFT JOIN userprogress AS up
         ON (up.resourceID = v.videoname)
@@ -52,6 +73,12 @@ $stmt->execute();
 $videos = $stmt->fetchAll();
 // TODO Do I need to fetch more than on one?
 
+// Last video
+$sql  = "SELECT MAX(`order`) AS `last` FROM videos";
+$stmt = $dbh->prepare($sql);
+$stmt->execute();
+$last = $stmt->fetchColumn(0);
+
 if ( $videos ) {
     $curvid = $videos[0];
     
@@ -63,14 +90,14 @@ if ( $videos ) {
         $progressdata = json_decode($curvid['progressdata']);
     }
     // Is this the last video?
-    if ( $curvid['order'] == $curvid['last'] ) {
-        $curvid['next'] = null;
+    if ( $curvid['order'] == $last ) {
+        $curvid['next'] = "none";
     } else {
         $curvid['next'] = $curvid['order'] + 1;
     }
     // Is this the first video?
     if ( $curvid['order'] == 1 ) {
-        $curvid['prev'] = null;
+        $curvid['prev'] = "none";
     } else {
         $curvid['prev'] = $curvid['order'] - 1;
     }
@@ -119,15 +146,17 @@ if ( !isset($curvid['status']) ) {
   <div id="videobuttons">
     <button id="skipvid" disabled>Markera videon <br /> som <b>sedd</b></button>
     <button id="unskipvid" disabled>Markera videon <br /> som <b>osedd</b></button>
-    <button class="prevnextvideo" disabled >Gå till <br /> <b>nästa</b> video</button>
-    <button class="prevnextvideo" disabled>Gå till <br /> <b>föregående</b> video</button>
+    <button id="nextunseen" disabled"><b>Första osedda</b> video</button>
+    <button class="prevnextvideo" disabled data-vidnum="<?php echo $curvid['next']; ?>"><b>Nästa</b> video</button>
+    <button class="prevnextvideo" disabled data-vidnum="<?php echo $curvid['prev']; ?>"><b>Föregående</b> video</button>
   </div>
-  <p id="vidprogress">Status för denna video: </p><!-- TODO Clickable progress bar with timeranges converted to graphics -->
+  <p id="vidprogress">Status för denna video: </p>
+  <!-- TODO Clickable progress bar with timeranges converted to graphics -->
   <section id="resource_suggestions">
     <div>Flashcards (todo)</div>
     <div>Länkar (todo)</div>
     <div>Filer (todo)</div>
-    <div>Förslag (todo)</div>
+    <div>Förslag (todo) Nästa ej gjorda uppgift i arbetsplaneringen</div>
   </section>
   <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
   <script>
