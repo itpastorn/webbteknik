@@ -2,6 +2,8 @@
  * Report progress automatically while watching a video
  *
  * First turn text into JS-operated buttons
+ * 
+ * @TODO Do not update DOM if Ajax request fails
  *
  */
 (function (win, doc, undefined) {
@@ -31,14 +33,20 @@
             send_progressreport(jobid, "finished");
             $(this).parent().find(".curstate").removeClass("curstate").removeAttr("disabled");
             $(this).addClass("curstate").attr("disabled", "disabled");
+            // If finished one must not be able to skip (reset + skip works though)
+            $(this).parent().find(".btnskip").attr("disabled", "disabled");
         });
 
+        // If finished one must not be able to skip (reset + skip works though)
         var btnskip = doc.createElement("button");
         btnskip.innerHTML = "Skip";
+        btnskip.className = "btnskip";
         btnskip.title = "Rapportera att uppgiften hoppas över";
+        if ( curstate === "skipped" || curstate === "finished" ) {
+            $(btnskip).attr("disabled", "disabled");
+        }
         if ( curstate === "skipped" ) {
-            $(btnskip).attr("disabled", "disabled").
-                       addClass("curstate");
+            $(btnskip).addClass("curstate");
         }
         $(btnskip).on('click', function () {
             send_progressreport(jobid, "skipped");
@@ -57,6 +65,7 @@
             send_progressreport(jobid, "reset");
             $(this).parent().find(".curstate").removeClass("curstate").removeAttr("disabled");
             $(this).addClass("curstate").attr("disabled", "disabled");
+            $(this).parent().find(".btnskip").removeAttr("disabled");
         });
         
         $(this).html(""); // Delete text
