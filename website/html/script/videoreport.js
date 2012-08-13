@@ -246,7 +246,7 @@
     // Skip this video manually
     var manual_skip = function () {
             console.log("Skipping this video");
-            $(this).attr("disabled", "disabled");
+            $(this).attr("disabled", "disabled").off('click', manual_skip);
             if ( video_status === "unset" || video_status === "begun" ) {
                 video_status = "skipped";
             }
@@ -272,7 +272,7 @@
             // Tell server to delete DB record
             $.post('./api/videoreport.php', { "reset": wtglobal_joblistID }, reportSuccessCallback);
             
-            // Enable skip button, but do not re-register event listener twice TODO
+            // Re-register event listener
             $('#skipvid').removeAttr("disabled").on('click', manual_skip);
         });
     }

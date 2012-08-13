@@ -56,6 +56,7 @@ SQL;
     $stmt = $dbh->prepare($sql);
     $stmt->bindParam(':vidnum', $vidnum);
 } else {
+	// Default
     // Find next unseen video for user
     $sql = <<<SQL
         SELECT v.*, jl.joblistID, up.progressdata, up.percentage_complete, up.status
