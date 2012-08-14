@@ -89,11 +89,11 @@ if ( empty($reportdata->status) ) {
 }
 
 if ( !$curdata ) {
-    $sql = "INSERT INTO userprogress (email, joblistID, progressdata, percentage_complete, status) " .
-           "VALUES (:email, :joblistID, :progressdata, :percentage_complete, :status)";
+    $sql = "INSERT INTO userprogress (email, joblistID, progressdata, percentage_complete, status, lastupdate) " .
+           "VALUES (:email, :joblistID, :progressdata, :percentage_complete, :status, NOW())";
 } else {
     $sql = "UPDATE userprogress " .
-           "SET progressdata = :progressdata, percentage_complete = :percentage_complete, status = :status " .
+           "SET progressdata = :progressdata, percentage_complete = :percentage_complete, status = :status, lastupdate =NOW() " .
            "WHERE email = :email AND joblistID = :joblistID";
 }
 try {
@@ -101,7 +101,7 @@ try {
     $stmt->bindParam(':email', $_SESSION['user']);
     $stmt->bindParam(':joblistID', $reportdata->joblistID);
     $stmt->bindParam(':progressdata', $progressdata); // JSON-encoded
-    $stmt->bindParam(':percentage_complete', $reportdata->viewTotal);
+    $stmt->bindParam(':percentage_complete', $reportdata->percentage_complete);
     $stmt->bindParam(':status', $reportdata->status);
     $stmt->execute();
 }

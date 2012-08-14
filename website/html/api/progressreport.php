@@ -51,9 +51,9 @@ SQL;
             die("Can not set that status");
     }
     $sql = <<<SQL
-        INSERT INTO userprogress (email, joblistID, status)
-        VALUES  (:email, :jobid, :status)
-        ON DUPLICATE KEY UPDATE status = :status
+        INSERT INTO userprogress (email, joblistID, status,lastupdate)
+        VALUES  (:email, :jobid, :status, NOW())
+        ON DUPLICATE KEY UPDATE status = :status, lastupdate = NOW()
 SQL;
     $stmt = $dbh->prepare($sql);
     $stmt->bindParam(':email', $_SESSION['user']);
