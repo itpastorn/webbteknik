@@ -3,8 +3,8 @@
  *
  *
  */
-(function (window, undefined) {
-    var vid = document.querySelector("#videocontainer video");
+(function (win, doc, undefined) {
+    var vid = doc.querySelector("#videocontainer video");
     if ( !vid ) {
         return;
     }
@@ -248,6 +248,11 @@
         send_video_report();
         video_reporting = false;
     });
+    // Page unload
+    $(win).on('unload', function() {
+        console.log("Page unload");
+        send_video_report();
+    });
     // Skip this video manually
     var manual_skip = function () {
             console.log("Skipping this video");
@@ -260,7 +265,7 @@
             video_reporting = false;
             
             // Load next video = page reload minus parameters
-            // window.location.reload();
+            // win.location.reload();
     };
     if ( video_status === "unset" || video_status === "begun" ) {
         $('#skipvid').removeAttr("disabled").on('click', manual_skip);
@@ -285,17 +290,17 @@
     // Next unseen video
     $("#nextunseen").removeAttr("disabled").on('click', function () {
         // Remove all get-params from current location
-        var current_href = window.location.href.match(/([^?]*)(\?.*)*/)[1]
-        window.location.href = current_href;
+        var current_href = win.location.href.match(/([^?]*)(\?.*)*/)[1]
+        win.location.href = current_href;
     });
     
     // Goto previous and next
     $(".prevnextvideo:not([data-vidnum='none'])").removeAttr("disabled").on('click', function () {
         var show_video_number = $(this).data('vidnum');
         // Remove all get-params from current location
-        var current_href = window.location.href.match(/([^?]*)(\?.*)*/)[1]
-        window.location.href = current_href + "?vidnum=" + show_video_number;
+        var current_href = win.location.href.match(/([^?]*)(\?.*)*/)[1]
+        win.location.href = current_href + "?vidnum=" + show_video_number;
     });
     
     
-})(window);
+})(window, window.document);
