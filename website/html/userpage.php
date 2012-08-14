@@ -154,9 +154,9 @@ if ( $nextjob ) {
   <h1>webbteknik.nu &ndash; Användarsida</h1>
   <?php require "../includes/snippets/mainmenu.php"; ?>
   <h3>Video: <?php echo $curvid['title']; ?></h3>
-  <p>
+  <p class="usertip" data-tipname="videotip">
     <strong>Tips!</strong> Högerklicka på videon och välj visning i helskärm.
-    Videons inbyggda upplösning är 1280 x 720 pixlar. (TODO: Dölj tips)
+    Videons inbyggda upplösning är 1280 x 720 pixlar.
   </p> 
   <div id="videocontainer">
   <?php if ( isset($curvid['videoname']) ): ?>
@@ -194,7 +194,7 @@ if ( $nextjob ) {
       <p class="tightparagraph"><?php echo $nextjobbdesc; ?></p>
     </div>
   </section>
-  <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+  <?php require "../includes/snippets/footer.php"; ?>
   <script>
      var wtglobal_start_video_at   = <?php
          // 5 seconds repeat to make it a bit easier to catch up

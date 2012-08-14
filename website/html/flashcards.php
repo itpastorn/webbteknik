@@ -118,7 +118,7 @@ foreach ( $dbresult as $row ) {
 <body>
   <h1>Flashcards hjälper dig öva in termer</h1>
   <?php require "../includes/snippets/mainmenu.php"; ?>
-  <div id="explain">
+  <div class="usertip" data-tipname="explainFlashcards">
     <p>Klicka på kortet för att vända det eller tryck på mellanslagstangenten.</p>
     <p>Kräver  Firefox 10 eller senare, Chrome eller Safari.</p>
     <p>Keyboard support:</p>
@@ -141,6 +141,7 @@ echo $list;
     <span id="curnum">1</span>/<span id="totnum"><?php echo count($dbresult); ?></span>
     <button id="goto_nextcard">Nästa</button>
   </p>
+  <?php require "../includes/snippets/footer.php"; ?>
   <script src="flashcards.js"></script>
   <!-- 
   TODO major items:

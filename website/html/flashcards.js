@@ -152,8 +152,7 @@
         return true;
     }
 
-    // Show hide explanationarea
-
+    /*
     function hide_explain() {
         var now     = new Date(),
             nowYear = now.getFullYear(),
@@ -185,4 +184,5 @@
         // console.log("hidden");
         hide_explain();
     }
+    */
 }());

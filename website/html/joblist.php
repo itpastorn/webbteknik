@@ -130,7 +130,7 @@ $jobs = $stmt->fetchAll();
   
   ?>
   </table>
-  <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+  <?php require "../includes/snippets/footer.php"; ?>
   <script src="script/progressreport.js"></script>
 </body>
 </html>

@@ -188,6 +188,23 @@ iframe {
    $footer
 \* ------------------------------- */
 
+footer {
+    margin-top: 2em;
+    border-top: 2px ridge lightgreen;
+    padding-top: 1em;
+font-size: smaller;
+}
+footer ul,
+footer li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+footer li {
+    display: inline-block;
+    margin-right: 2em;
+    
+}
 hr.todo {
     margin-top: 2em;
 }
@@ -224,7 +241,6 @@ hr.todo {
    $userpage
 \* ------------------------------- */
 #videocontainer {
-    margin-top: 1.5em;
     float: left;
 }
 #videobuttons {
