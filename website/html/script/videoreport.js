@@ -233,7 +233,7 @@
         }
         if ( typeof vid.played !== "undefined" ) {
             // Report every 10th second
-            video_reporting = setInterval(send_video_report, 4000);
+            video_reporting = setInterval(send_video_report, 15000);
         }
     });
     $(vid).on('pause', function() {
