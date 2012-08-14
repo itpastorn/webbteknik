@@ -67,7 +67,7 @@ SQL;
         ON (jl.joblistID = up.joblistID)
         WHERE up.email = :email AND jl.what_to_do = 'video' AND up.status = 'begun' 
               OR up.email IS NULL
-        ORDER BY jl.chapter ASC, jl.slow_track_order ASC
+        ORDER BY jl.chapter ASC, jl.joborder ASC
 SQL;
     $stmt = $dbh->prepare($sql);
 }
@@ -128,7 +128,7 @@ $sql = <<<SQL
         ( up.email = 'gunther@keryx.se' OR up.email IS NULL )
     AND
         jl.what_to_do !=  'video'
-    ORDER BY jl.slow_track_order ASC
+    ORDER BY jl.joborder ASC
     LIMIT 0,1
 SQL;
 $stmt = $dbh->prepare($sql);

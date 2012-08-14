@@ -36,7 +36,7 @@ $sql = <<<SQL
     FROM `joblist` AS jl
     LEFT JOIN videos AS v ON v.videoname = jl.where_to_do_it
     LEFT JOIN userprogress AS up ON up.joblistID = jl.joblistID
-    ORDER BY chapter ASC, bonusjob DESC, ISNULL(fast_track_order), fast_track_order ASC, slow_track_order ASC
+    ORDER BY chapter ASC, track ASC, joborder ASC
 SQL;
 /*
     WHERE jl.fast_track_order IS NOT NULL
