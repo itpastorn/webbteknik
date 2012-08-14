@@ -34,7 +34,7 @@
             vid.currentTime = wtglobal_start_video_at;
         }
         console.log("Duration: " + video_duration);
-    }, 150);
+    }, 350);
     
     // Tell old status
     var status_string = {

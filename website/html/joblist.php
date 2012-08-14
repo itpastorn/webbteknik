@@ -30,11 +30,15 @@ $dbx = config::get('dbx');
 // init
 $dbh = keryxDB2_cx::get($dbx);
 
+// All jobs, but fast-track first
 $sql = <<<SQL
     SELECT jl.* , v.*, up.percentage_complete, up.status
     FROM `joblist` AS jl
     LEFT JOIN videos AS v ON v.videoname = jl.where_to_do_it
     LEFT JOIN userprogress AS up ON up.joblistID = jl.joblistID
+    ORDER BY chapter ASC, ISNULL(fast_track_order), fast_track_order ASC, slow_track_order ASC
+SQL;
+/*
     WHERE jl.fast_track_order IS NOT NULL
     UNION
     SELECT jl.* , v.*, up.percentage_complete, up.status
@@ -42,8 +46,9 @@ $sql = <<<SQL
     LEFT JOIN videos AS v ON v.videoname = jl.where_to_do_it
     LEFT JOIN userprogress AS up ON up.joblistID = jl.joblistID
     WHERE jl.fast_track_order IS NULL
-    ORDER BY chapter ASC, slow_track_order ASC
-SQL;
+
+ */
+
 $stmt = $dbh->prepare($sql);
 // $stmt->bindParam(':email', $_SESSION['user']);
 $stmt->execute();

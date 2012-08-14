@@ -204,7 +204,7 @@ if ( $nextjob ) {
          if ( !empty($curvid['progressdata']) ) { echo $curvid['progressdata']; }
          else { echo 0; }; ?>;
      var wtglobal_old_status       = "<?php echo $curvid['status']; ?>";
-     var wtglobal_joblistID        = <?php echo $curvid['joblistID']; ?>
+     var wtglobal_joblistID        = <?php echo $curvid['joblistID']; ?>;
   </script>
   <script src="script/videoreport.js"></script>
 </body>

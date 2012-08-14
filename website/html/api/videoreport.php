@@ -101,7 +101,7 @@ try {
     $stmt->bindParam(':email', $_SESSION['user']);
     $stmt->bindParam(':joblistID', $reportdata->joblistID);
     $stmt->bindParam(':progressdata', $progressdata); // JSON-encoded
-    $stmt->bindParam(':percentage_complete', $reportdata->percentage_complete);
+    $stmt->bindParam(':percentage_complete', $reportdata->viewTotal);
     $stmt->bindParam(':status', $reportdata->status);
     $stmt->execute();
 }
