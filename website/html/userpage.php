@@ -30,7 +30,8 @@ $dbh = keryxDB2_cx::get($dbx);
 if ( isset($_GET['video']) ) {
     // TODO filter, but prepared statements should catch any SQL-injection attempt
     $sql = <<<SQL
-        SELECT v.*, jl.joblistID FROM videos AS v
+        SELECT v.*, jl.joblistID, bs.section FROM videos AS v
+        INNER JOIN booksections AS bs USING (booksectionID)
         LEFT JOIN joblist AS jl
         ON (v.videoname = jl.where_to_do_it)
         WHERE v.videoname = :video
@@ -60,7 +61,8 @@ SQL;
     // Problem with that is that we can not do+/- 1 to get previous and next
     $vidnum = (int)$_GET['vidnum'];
     $sql = <<<SQL
-        SELECT v.*, jl.joblistID FROM videos AS v
+        SELECT v.*, jl.joblistID, bs.section FROM videos AS v
+        INNER JOIN booksections AS bs USING (booksectionID)
         LEFT JOIN joblist AS jl
         ON (v.videoname = jl.where_to_do_it)
         WHERE v.order = :vidnum
@@ -88,8 +90,9 @@ SQL;
     // Default
     // Find next unseen video for user
     $sql = <<<SQL
-        SELECT v.*, jl.joblistID, up.progressdata, up.percentage_complete, up.status
+        SELECT v.*, jl.joblistID, bs.section, up.progressdata, up.percentage_complete, up.status
         FROM videos AS v 
+        INNER JOIN booksections AS bs USING (booksectionID)
         LEFT JOIN joblist AS jl
         ON (jl.where_to_do_it = v.videoname)
         LEFT JOIN userprogress AS up
@@ -103,11 +106,6 @@ SQL;
     $stmt->execute();
     $curvid = $stmt->fetch();
 }
-
-// $stmt->bindParam(':email', $_SESSION['user']);
-// $stmt->execute();
-// $curvid = $stmt->fetch();
-
 
 // Last video
 $sql  = "SELECT MAX(`order`) AS `last` FROM videos";
@@ -136,6 +134,38 @@ if ( $curvid ) {
     } else {
         $curvid['prev'] = $curvid['order'] - 1;
     }
+    
+    // Find related links
+    $sql = <<<SQL
+       SELECT * FROM links WHERE booksectionID = :booksectionID
+SQL;
+    $stmt = $dbh->prepare($sql);
+    $stmt->bindParam(':booksectionID', $curvid['booksectionID']);
+    $stmt->execute();
+    $linkhtml = "<ul class=\"tightparagraph\">";
+    $linktypes = array(
+        'book' => "Boklänk",
+        'ref'  => "Referens/läs mer",
+        'note' => "Fotnot/faktakälla",
+        'tip'  => "Tips",
+        'deep' => "Fördjupning"
+    );
+    while ( $linkrow = $stmt->fetch() ) {
+    	$type = $linkrow['linktype'];
+        $linkhtml .= <<<LINKHTML
+            <li>
+              <a href="{$linkrow['linkurl']} class="{$type}link"> 
+                <span class="linktype" title="{$linktypes[$type]}">[{$type}]</span> 
+                     {$linkrow['linktext']}</a>
+            </li>
+LINKHTML;
+    }
+    $linkhtml .= "</ul>\n";
+    /*
+        } else {
+            $linkhtml .= "Inga matchande länkar till denna video.";
+        }
+    */
 } else {
     $curvid       = array('title' => 'Video ej funnen');
     $progressdata = "";
@@ -171,6 +201,9 @@ if ( $nextjob ) {
     $nextjobbdesc = "Inga fler förslag.";
 }
 
+
+// Preparing for mod_rewrite, set base-element
+// TODO: Make this generic!
 $baseref = dirname(htmlspecialchars($_SERVER['SCRIPT_NAME'])) . "/";
 if ( "//" == $baseref ) {
     $baseref = "/";
@@ -188,7 +221,7 @@ if ( "//" == $baseref ) {
 <body class="wide">
   <h1>webbteknik.nu &ndash; Användarsida</h1>
   <?php require "../includes/snippets/mainmenu.php"; ?>
-  <h3>Video: <?php echo $curvid['title']; ?></h3>
+  <h3>Video: <?php echo "{$curvid['title']} (Bokavsnitt {$curvid['section']})"; ?></h3>
   <p class="usertip" data-tipname="videotip">
     <strong>Tips!</strong> Högerklicka på videon och välj visning i helskärm.
     Videons inbyggda upplösning är 1280 x 720 pixlar.
@@ -205,12 +238,8 @@ if ( "//" == $baseref ) {
       <ul>
         <li>Snart kommer</li>
         <li>en lista</li>
-        <li>med förslag</li><!-- TODO -->
+        <li>med förslag&hellip;</li><!-- TODO -->
       </ul>
-      <pre>
-        DEBUG
-<?php var_dump($curvid); !empty($userdata) && var_dump($userdata); ?>
-      </pre>
     </div>
   <?php endif; ?>
   </div>
@@ -224,13 +253,22 @@ if ( "//" == $baseref ) {
   <p id="vidprogress" class="unobtrusive">Status för denna video: </p>
   <p class="unobtrusive">
      Om sidan strular, vänligen tala om vilken webbläsare du använder (namn + version) samt vad du ser i
-     konsollen (CTRL + SHIFT + K i Firefox, CTRL + SHIFT + J i Chrome) till gunther@keryx.se
+     konsollen<br /> (CTRL + SHIFT + K i Firefox, CTRL + SHIFT + J i Chrome) till gunther@keryx.se
   </p>
   <!-- TODO Clickable progress bar with timeranges converted to graphics -->
   <section id="resource_suggestions">
-    <div>Flashcards (todo)</div>
-    <div>Länkar (todo)</div>
-    <div>Filer (todo)</div>
+    <div>
+      <h3 class="boxedheader">Länkar</h3>
+      <?php echo $linkhtml; ?>
+    </div>
+    <div>
+      <h3 class="boxedheader">Resurser 1</h3>
+      <p class="tightparagraph">JSBin testa själv (TODO)</p>
+    </div>
+    <div>
+      <h3 class="boxedheader">Resurser 2</h3>
+      <p class="tightparagraph">TODO (Flashcards, interactive, etc)</p>
+    </div>
     <div>
       <h3 class="boxedheader">Nästa uppgift</h3>
       <p class="tightparagraph"><?php echo $nextjobbdesc; ?></p>

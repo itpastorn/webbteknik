@@ -161,7 +161,23 @@ iframe {
 }
 .tightparagraph {
     margin: 0.3em 0;
+    font-size: 0.9em;
 }
+
+/* TODO: Show a nice icon instead for these links */
+a[href^="https://developer.mozilla.org"]:after {
+    content: " (@MDN)";
+    font-size: 80%;
+}
+a[href*="w3.org"]:after {
+    content: " (@W3C)";
+    font-size: 80%;
+}
+.linktype[title] {
+    border-bottom: 1px dotted;
+    font-size: 80%;
+}
+
 
 /* ------------------------------- *\
    $masthead
@@ -265,13 +281,18 @@ hr.todo {
     display: inline-block;
     margin-right: 20px;
     width: 200px;
-    height: 80px;
+    min-height: 90px;
     padding: 10px;
     background-color: #DDD;
     border-radius: 5px; 
     vertical-align: top;
 }
-
+#resource_suggestions > div > ul {
+    padding-left: 1.5em;
+}
+#resource_suggestions > div > ul > li > a {
+    text-decoration: none;
+}
 
 /* ------------------------------- *\
    $userpage

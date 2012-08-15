@@ -226,6 +226,10 @@
         if ( reportobj.percentage_complete ) {
             video_progress.html("Du har sett " + reportobj.percentage_complete + " % av videon");
         }
+        // Do not report if less than 1 percent
+        if ( reportobj.percentage_complete < 1 ) {
+            return false;
+        }
         reportdata = JSON.stringify(reportobj);
         $.post('./api/videoreport.php', { "reportdata": reportdata }, reportSuccessCallback);
         if ( video_status === "finished" ) {
