@@ -51,7 +51,7 @@ SQL;
         ON (jl.where_to_do_it = v.videoname)
         LEFT JOIN userprogress AS up
         ON (jl.joblistID = up.joblistID)
-        WHERE v.order = :vidnum AND ( up.email = :email or up.email IS NULL )
+        WHERE v.order = :vidnum AND ( up.email = :email OR up.email IS NULL )
 SQL;
     $stmt = $dbh->prepare($sql);
     $stmt->bindParam(':vidnum', $vidnum);
@@ -77,6 +77,7 @@ $stmt->execute();
 
 $videos = $stmt->fetchAll();
 // TODO Do I really need to fetch more than on one?
+
 
 // Last video
 $sql  = "SELECT MAX(`order`) AS `last` FROM videos";
@@ -154,6 +155,7 @@ if ( $nextjob ) {
   <h1>webbteknik.nu &ndash; Användarsida</h1>
   <?php require "../includes/snippets/mainmenu.php"; ?>
   <h3>Video: <?php echo $curvid['title']; ?></h3>
+  <p><strong>Just nu strular den här sidan. Man kan bara se nästa osedda video. Felsökning pågår.</strong></p>
   <p class="usertip" data-tipname="videotip">
     <strong>Tips!</strong> Högerklicka på videon och välj visning i helskärm.
     Videons inbyggda upplösning är 1280 x 720 pixlar.
