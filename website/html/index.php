@@ -4,8 +4,40 @@
  * 
  * @author <gunther@keryx.se>
  * 
- * @version "Under construction 1"
+ * @version "Under construction 2"
  */
+
+session_start();
+require_once '../includes/loadfiles.php';
+
+user::setSessionData();
+
+// Database settings and connection
+$dbx = config::get('dbx');
+// init
+$dbh = keryxDB2_cx::get($dbx);
+
+$stattypes = array('Videos', 'Länkar', 'Uppgifter', 'Flashcards');
+
+$sql = <<<SQL
+    SELECT count(videoname) AS num FROM videos
+    UNION
+    SELECT count(linkID) AS num FROM links
+    UNION
+    SELECT count(joblistID) AS num FROM joblist
+    UNION
+    SELECT count(flashcardID) AS num FROM flashcards
+SQL;
+$status = "<ul>\n";
+$i = 0;
+$stmt = $dbh->prepare($sql);
+$stmt->execute();
+$numbers = $stmt->fetchAll();
+foreach ( $numbers as $num ) {
+    $status .= "<li>{$stattypes[$i++]}: {$num['num']}</li>\n";
+}
+$status .= "</ul>\n";
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,6 +62,8 @@
   <p>
     Här finns <a href="laxhjalpen-demowebb/">Läxhjälpen &ndash; bokens demowebbplats</a>.
   </p>
+  <h2>Uppdateringsstatus</h2>
+  <?php echo $status; ?>
   <h2>Smakprov på en video</h2>
   <p class="centered">
     <iframe src="http://www.youtube.com/embed/JdJA9w-vyJY"></iframe>

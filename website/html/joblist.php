@@ -32,13 +32,16 @@ $dbh = keryxDB2_cx::get($dbx);
 
 // All jobs, but fast-track first
 $sql = <<<SQL
-    SELECT jl.* , v.*, up.percentage_complete, up.status
+    SELECT jl.* , v.*
     FROM `joblist` AS jl
     LEFT JOIN videos AS v ON v.videoname = jl.where_to_do_it
-    LEFT JOIN userprogress AS up ON up.joblistID = jl.joblistID
-    ORDER BY chapter ASC, track ASC, joborder ASC
+    ORDER BY jl.chapter ASC, jl.track ASC, jl.joborder ASC
 SQL;
 /*
+    SELECT jl.* , v.*, up.percentage_complete, up.status
+    LEFT JOIN userprogress AS up ON up.joblistID = jl.joblistID
+    WHERE up.email = :email OR up.email IS NULL
+
     WHERE jl.fast_track_order IS NOT NULL
     UNION
     SELECT jl.* , v.*, up.percentage_complete, up.status
@@ -81,22 +84,44 @@ $jobs = $stmt->fetchAll();
       <th>Godkänd</th>
     </tr>
   <?php
+    /* 
+     * TEMP FIX BAD BAD BAD
+     * SQL IN HTML quick fix
+     * URGENT TODO FIXME
+     */
+    $firephp = FirePHP::getInstance(true);
+    $stmt2 = $dbh->prepare(
+        "SELECT percentage_complete, status FROM userprogress WHERE email = :email AND joblistID = :joblistID"
+    );
+    $stmt2->bindParam(':email', $_SESSION['user']);
+    $stmt2->bindParam(':joblistID', $jlid);
     foreach ( $jobs as $curjob ) {
-    	if ( empty($curjob['status']) ) {
-    	    $curjob['status'] = "0";
-    	}
-    	if ( $curjob['status'] == 'finished' ) {
-    	    // Job is done, low key
-    	    echo '<tr class="finished">';
-    	} elseif ( $curjob['status'] == 'skipped' ) {
-    	    // Job is done, low key
-    	    echo '<tr class="skipped">';
-    	} else {
-    	    echo '<tr>';
-    	    
-    	}
-    	echo "<td>";
+    	$jlid = $curjob['joblistID'];
+        $stmt2->execute();
+        $temp = $stmt2->fetch();
+        if ( $temp ) {
+            $curjob['percentage_complete'] = $temp['percentage_complete'];
+            $curjob['status']              = $temp['status'];
+        } else {
+            $curjob['percentage_complete'] = false;
+            $curjob['status']              = false;
+        }
+        if ( empty($curjob['status']) ) {
+            $curjob['status'] = "0";
+        }
+        if ( $curjob['status'] == 'finished' ) {
+            // Job is done, low key
+            echo '<tr class="finished">';
+        } elseif ( $curjob['status'] == 'skipped' ) {
+            // Job is done, low key
+            echo '<tr class="skipped">';
+        } else {
+            echo '<tr>';
+            
+        }
+        echo "<td>";
         if ( $curjob['what_to_do'] == 'video' ) {
+            echo "<script>console.log('{$curjob['joblistID']} : {$curjob['percentage_complete']}')</script>\n";
             echo 'Video: <a href="userpage.php?video=' . $curjob['where_to_do_it'] . '">';
             echo $curjob['title'] . '</a>';
         } else {

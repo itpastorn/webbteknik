@@ -136,8 +136,9 @@ if ( $curvid ) {
     }
     
     // Find related links
+    // TODO Find a better way to handle lots of links
     $sql = <<<SQL
-       SELECT * FROM links WHERE booksectionID = :booksectionID
+       SELECT * FROM links WHERE booksectionID = :booksectionID LIMIT 0,5
 SQL;
     $stmt = $dbh->prepare($sql);
     $stmt->bindParam(':booksectionID', $curvid['booksectionID']);

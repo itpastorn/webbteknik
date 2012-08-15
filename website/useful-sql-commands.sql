@@ -168,6 +168,9 @@ INSERT INTO `videos` (`videoname`, `title`, `bookID`, `booksectionID`, `tags`, `
 ALTER TABLE `videos` CHANGE `book` `bookID` VARCHAR( 5 ) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL;
 ALTER TABLE `videos` DROP `section`;
 
+ALTER TABLE `flashcards` CHANGE `flashcardsID` `flashcardID` MEDIUMINT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT 
+
+
 -- Not put to server below
 
 
