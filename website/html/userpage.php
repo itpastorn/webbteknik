@@ -171,12 +171,17 @@ if ( $nextjob ) {
     $nextjobbdesc = "Inga fler förslag.";
 }
 
+$baseref = dirname(htmlspecialchars($_SERVER['SCRIPT_NAME'])) . "/";
+if ( "//" == $baseref ) {
+    $baseref = "/";
+}
 ?>
 <!DOCTYPE html>
 <html lang="sv">
 <head>
   <meta charset="UTF-8">
   <title>Användarsida - webbteknik.nu</title>
+  <base href="<?php echo $baseref; ?>" />
   <link rel="stylesheet" href="css/webbteknik-nu.css" />
   <link href='http://fonts.googleapis.com/css?family=Handlee' rel='stylesheet' type='text/css'>
 </head>

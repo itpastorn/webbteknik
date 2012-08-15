@@ -1,0 +1,14 @@
+# TODO Prevent hotlinking and direct access to videos
+
+Options +FollowSymlinks
+RewriteEngine on
+RewriteRule video/(.*)$ userpage.php?video=$1 [NC,L]
+
+# The idea
+# - Logged in users should be directed to userpage.php?video=xyz
+# - Non-logged in users should be directed to userpage.php?video=xyz
+
+# Notes
+# HTTP_HOST
+# REQUEST_URI
+# SCRIPT_NAME
