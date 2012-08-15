@@ -154,7 +154,7 @@ SQL;
     	$type = $linkrow['linktype'];
         $linkhtml .= <<<LINKHTML
             <li>
-              <a href="{$linkrow['linkurl']} class="{$type}link"> 
+              <a href="{$linkrow['linkurl']}" class="{$type}link"> 
                 <span class="linktype" title="{$linktypes[$type]}">[{$type}]</span> 
                      {$linkrow['linktext']}</a>
             </li>
