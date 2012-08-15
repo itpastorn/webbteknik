@@ -56,19 +56,19 @@ header("Content-type: text/plain; charset=utf-8");
 echo "Number of parsed links in file: " . $haslinks . "\n\n";
 
 $sql = <<<SQL
-    INSERT INTO links (linkID, linktext, linkurl, linktype, booksection, time_added, bookID)
-    VALUES (null, :linktext, :linkurl, :linktype, :booksection, NOW(), 'wu1')
+    INSERT INTO links (linkID, linktext, linkurl, linktype, section, time_added, bookID)
+    VALUES (null, :linktext, :linkurl, :linktype, :section, NOW(), 'wu1')
 SQL;
 $stmt = $dbh->prepare($sql);
 
 $stmt->bindParam(':linktext', $linktext);
 $stmt->bindParam(':linkurl', $linkurl);
 $stmt->bindParam(':linktype', $linktype);
-$stmt->bindParam(':booksection', $booksection);
+$stmt->bindParam(':section', $section);
 
 $duplicates = 0;
 foreach ( $links as $lnk ) {
-    list($fullmatch, $booksection, $linktype, $linktext, $linkurl) = $lnk;
+    list($fullmatch, $section, $linktype, $linktext, $linkurl) = $lnk;
     try {
         $stmt->execute();
         echo "Added link: {$fullmatch}\n\n";
@@ -78,8 +78,42 @@ foreach ( $links as $lnk ) {
     	    $duplicates++;
     	    echo "LINK ALREADY EXISTS: {$fullmatch}\n\n";
     	} else {
-    	    trigger_error(E_USER_ERROR, $e->getMessage());
+    	    trigger_error($e->getMessage(), E_USER_ERROR);
     	}
     }
+}
+ob_flush();
+flush();
+echo "Fixing relations - wait\n\n";
+
+// TODO remove booksection and do this directly!
+
+$sql = <<<SQL
+    SELECT linkID, section FROM links ORDER BY linkID
+SQL;
+$stmt = $dbh->prepare($sql);
+$stmt->execute();
+
+$sql = <<<SQL
+    UPDATE links SET booksectionID = :booksectionID WHERE linkID = :linkID
+SQL;
+$stmtfix = $dbh->prepare($sql);
+$stmtfix->bindParam(':booksectionID', $booksectionID);
+$stmtfix->bindParam(':linkID', $linkID);
+
+$sql = <<<SQL
+    SELECT booksectionID FROM booksections WHERE section = :section;
+SQL;
+$stmtfixfetch = $dbh->prepare($sql);
+$stmtfixfetch->bindParam(':section', $section);
+
+foreach ( $stmt as $row ) {
+	$linkID  = $row['linkID'];
+	$section = $row['section'];
+    echo "Fixing link {$linkID}\n";
+    $stmtfixfetch->execute();
+    $booksectionID = $stmtfixfetch->fetchColumn();    
+    $stmtfix->execute();
+    
 }
 echo "Finished";
