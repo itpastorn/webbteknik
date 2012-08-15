@@ -11,3 +11,13 @@ ALTER TABLE `userprogress` ADD `lastupdate` DATETIME NOT NULL
 ALTER TABLE `userprogress` CHANGE `approved` `approved` DATETIME NULL DEFAULT NULL COMMENT 'Set by teacher'
 UPDATE `userprogress` SET `lastupdate`=NOW()
 ALTER TABLE `userprogress` MODIFY COLUMN `approved` DATETIME AFTER `lastupdate`
+
+CREATE TABLE IF NOT EXISTS `links` (
+  `linkID` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `linktext` varchar(80) NOT NULL,
+  `linkurl` varchar(250) NOT NULL,
+  `linktype` enum('book','ref','note','tip','deep') NOT NULL,
+  `booksection` varchar(10) NOT NULL,
+  `time_added` datetime NOT NULL,
+  PRIMARY KEY (`linkID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Links for and from the book(s)' AUTO_INCREMENT=1 ;

@@ -1,10 +1,8 @@
 # Kapitel 1: Vad är webbteknik? (spring)
 
-Video: 1-a-1
-Video: 1-a-2
+3 videos
 
-Länkar
- * Referenslänk: [HTML Introduction](https://developer.mozilla.org/en/HTML/Introduction)
+ * 1:ref:[HTML Introduction](https://developer.mozilla.org/en/HTML/Introduction)
 
 ## Några snabba kommentarer om koden (spring)
 
@@ -13,7 +11,7 @@ Video: 1-a-3
 ### JavaScript för beteende
 
 Länkar
- * Fotnot: [What's the difference between JavaScript and Java](http://stackoverflow.com/questions/245062/whats-the-difference-between-javascript-and-java)
+ * 1.1.1:note:[What's the difference between JavaScript and Java](http://stackoverflow.com/questions/245062/whats-the-difference-between-javascript-and-java)
 
 ### Standarder (spring)
 
@@ -29,25 +27,25 @@ Planering
    * CSS på W3C (välj profil CSS 3)
 
 Länkar
- * Boklänk: [validator.nu](http://validator.nu/)
+ * 1.3:book:[validator.nu](http://validator.nu/)
 
 ## Standardiseringsorgan och fler standarder
 
 Länkar
- * Referens: [W3C](http://w3.org)
- * Referens: [ECMAScript hos ECMA](http://www.ecma-international.org/publications/standards/Stnindex.htm#Software)
- * Referens: [WhatWG](http://www.whatwg.org/)
- * Referens: [Khronos Group](http://www.khronos.org/webgl/)
- * Referens: [The WebM Project](http://www.webmproject.org/)
- * Fotnot: [WebCL](http://www.khronos.org/webcl/wiki/Main_Page)
+ * 1.4:ref:[W3C](http://w3.org)
+ * 1.4:ref:[ECMAScript hos ECMA](http://www.ecma-international.org/publications/standards/Stnindex.htm#Software)
+ * 1.4:ref:[WhatWG](http://www.whatwg.org/)
+ * 1.4:ref:[Khronos Group](http://www.khronos.org/webgl/)
+ * 1.4:ref:[The WebM Project](http://www.webmproject.org/)
+ * 1.4:note:[WebCL](http://www.khronos.org/webcl/wiki/Main_Page)
 
 ### DNS och URL:er
 
- * Tipslänk: [URI scheme](http://en.wikipedia.org/wiki/URI_scheme)
+ * 1.5:tip:[URI scheme](http://en.wikipedia.org/wiki/URI_scheme)
 
- * Fördjupningslänk: URL - todo
- * Fördjupningslänk: DNS - todo
- * Boklänk: [about:about](about:about)
+ * 1.5:deep:URL - todo
+ * 1.5:deep:DNS - todo
+ * 1.5:book:[about:about](about:about)
 
 ### Schema (fördjupning)
 
@@ -61,17 +59,17 @@ Fördjupningstext
 
 ### Query strings och fragment identifiers
 
- * Boklänk: [Sökning efter itpastorn](http://google.com/search?q=itpastorn&lang=sv)
- * Fotnot: [Et-tecknet](http://sv.wikipedia.org/wiki/Et-tecken)
- * Fotnot: [Nummertecknet #](http://sv.wikipedia.org/wiki/Nummertecken)
+ * 1.4.5:book:[Sökning efter itpastorn](http://google.com/search?q=itpastorn&lang=sv)
+ * 1.4.5:note:[Et-tecknet](http://sv.wikipedia.org/wiki/Et-tecken)
+ * 1.4.5:note:[Nummertecknet #](http://sv.wikipedia.org/wiki/Nummertecken)
 
 ### Bra URL-design
 
- * Fördjupningslänk: URL-design - todo
+ * deep: URL-design - todo
 
 ### Relativa och absoluta sökvägar
 
-* Fotnot: [Protocole Relative URL](http://paulirish.com/2010/the-protocol-relative-url/)
+* 1.4.7:note:[Protocole Relative URL](http://paulirish.com/2010/the-protocol-relative-url/)
 
 ### http och https
 
@@ -81,12 +79,12 @@ Planering
  * Video: Emulera http med Netcat
 
 Länkar
- * Fördjupningslänk: http metoder TODO
- * Fördjupningslänk: http huvuden TODO
- * Fördjupningslänk: http statuskoder TODO
- * Fördjupningslänk: cookies beskrivning TODO
- * Fördjupningslänk: cookies lag och etik TODO
- * Fördjupningslänk: Do not Track TODO
+ * deep: http metoder TODO
+ * deep: http huvuden TODO
+ * deep: http statuskoder TODO
+ * deep: cookies beskrivning TODO
+ * deep: cookies lag och etik TODO
+ * deep: Do not Track TODO
 
 ## Vattenfallsdiagram, cachning och sidornas fart (fördjupning)
 
@@ -96,30 +94,30 @@ Planering
 ## Cachning
 
 Länkar
- * Fördjupningslänk: Cachning TODO
+ * deep: Cachning TODO
 
 ## Statiska kontra dynamiska sidor
 
 Länkar
- * Referenslänk: PHP TODO
- * Referenslänk: Wordpress TODO
- * Referenslänk: Mediawiki TODO
- * Referenslänk: Drupal TODO
- * Referenslänk: Joomla TODO
- * Referenslänk: Plone TODO
- * Referenslänk: Episerver TODO
- * Referenslänk: Sitecore TODO
- * Referenslänk: Wiki Markup TODO
- * Referenslänk: Markdown TODO
- * Referenslänk: BBCode TODO
+ * ref: PHP TODO
+ * ref: Wordpress TODO
+ * ref: Mediawiki TODO
+ * ref: Drupal TODO
+ * ref: Joomla TODO
+ * ref: Plone TODO
+ * ref: Episerver TODO
+ * ref: Sitecore TODO
+ * ref: Wiki Markup TODO
+ * ref: Markdown TODO
+ * ref: BBCode TODO
 
 ## Enkla sidor kontra fullfjädrade applikationer (Ajax)
 
 Länkar
- * Fotnot: [Ajax: A New Approach to Web Applications](http://www.adaptivepath.com/ideas/ajax-new-approach-web-applications) av Jesse James Garrett
- * Referenslänk: TODO om Ajax
- * Referenslänk: [Mozillas demosida för nya webbtekniker](https://developer.mozilla.org/en-US/demos/)
- * Tipslänk: [Emberwind i HTML5 canvas](http://my.opera.com/chooseopera/blog/2011/07/07/emberwind-a-html5-masterpiece)
+ * 1.8:note:[Ajax: A New Approach to Web Applications](http://www.adaptivepath.com/ideas/ajax-new-approach-web-applications) av Jesse James Garrett
+ * 1.8:ref: TODO om Ajax
+ * 1.8:ref:[Mozillas demosida för nya webbtekniker](https://developer.mozilla.org/en-US/demos/)
+ * 1.8:tip:[Emberwind i HTML5 canvas](http://my.opera.com/chooseopera/blog/2011/07/07/emberwind-a-html5-masterpiece)
 
 ## Proprietära tekniker
 
@@ -127,27 +125,27 @@ Länkar
 ### Insticksprogram (plug-ins)
 
 Länkar
- * Fotnot: Quicktime (ursprungligen) TODO
- * Fotnot: Real Audio/Media TODO
- * Fotnot: Flash TODO
- * Fotnot: Silverlight TODO
- * Fotnot: Java applets TODO
+ * note: Quicktime (ursprungligen) TODO
+ * note: Real Audio/Media TODO
+ * note: Flash TODO
+ * note: Silverlight TODO
+ * note: Java applets TODO
 
 ### Ljud- och videoformat
 
 Länkar
- * Fotnot: WebM TODO
- * Fotnot: H.264 TODO
+ * note: WebM TODO
+ * note: H.264 TODO
 
 ### Öppen källkod och öppna standarder
 
- * Fotnot: Open Source TODO
- * Fotnot: Apache TODO
- * Fotnot: Sendmail TODO
+ * note: Open Source TODO
+ * note: Apache TODO
+ * note: Sendmail TODO
 
 ### Webbläsarkrig
 
- * Fotnot: Netscape TODO
+ * note: Netscape TODO
 
 ## Läs mer här (spring)
 
@@ -157,20 +155,20 @@ Planering
    * Inkl. lägg till "MDN" när du googlar
 
 Länkar
- * Boklänk (dubblering): [Boken InterACT with Web Standards](http://interactwithwebstandards.com/)
- * Boklänk: [Web Standards Curriculum](http://www.w3.org/wiki/Web_Standards_Curriculum) TODO: Kolla perma-URL
- * Boklänk: [HTML beginner](http://htmldog.com/guides/htmlbeginner/)
- * Boklänk: [Mozilla Developer Network](https://developer.mozilla.org/)
- * Boklänk: [MDN Learn](https://developer.mozilla.org/en-US/learn)
- * Boklänk: [SitePoint](http://www.sitepoint.com/)
- * Boklänk: [Page Structure](http://reference.sitepoint.com/html/page-structure)
- * Boklänk: [Webforum](http://www.webforum.nu/)
- * Boklänk: [Webforums stora tipstråd](http://www.webforum.nu/forumdisplay.php?f=12)
- * Boklänk: [Stackoverflow](http://stackoverflow.com/)
- * Boklänk: [Om boken Max Räckvidd med HTML och CSS](http://kaxigt.com/2009/11/max-rackvidd-med-html-css-tommy-olsson-berattar-om-sin-bok/)
- * Boklänk: [W3 Fools](http://w3fools.com/)
+ * 1.10.2:book:[Boken InterACT with Web Standards](http://interactwithwebstandards.com/)
+ * 1.10.3:book:[Web Standards Curriculum](http://www.w3.org/wiki/Web_Standards_Curriculum) TODO: Kolla perma-URL
+ * 1.10.4:book:[HTML beginner](http://htmldog.com/guides/htmlbeginner/)
+ * 1.10.5:book:[Mozilla Developer Network](https://developer.mozilla.org/)
+ * 1.10.5:book:[MDN Learn](https://developer.mozilla.org/en-US/learn)
+ * 1.10.6:book:[SitePoint](http://www.sitepoint.com/)
+ * 1.10.6:book:[Page Structure](http://reference.sitepoint.com/html/page-structure)
+ * 1.10.7:book:[Webforum](http://www.webforum.nu/)
+ * 1.10.7:book:[Webforums stora tipstråd](http://www.webforum.nu/forumdisplay.php?f=12)
+ * 1.10.8:book:[Stackoverflow](http://stackoverflow.com/)
+ * 1.10.9:book:[Om boken Max Räckvidd med HTML och CSS](http://kaxigt.com/2009/11/max-rackvidd-med-html-css-tommy-olsson-berattar-om-sin-bok/)
 
 ## Men inte här (spring)
 
- * Referenslänk: [Historical artifacts to avoid](https://developer.mozilla.org/en/Web_development/Historical_artifacts_to_avoid)
+ * 1.11:book:[W3 Fools](http://w3fools.com/)
+ * 1.11:ref:[Historical artifacts to avoid](https://developer.mozilla.org/en/Web_development/Historical_artifacts_to_avoid)
 
