@@ -30,31 +30,60 @@ $dbh = keryxDB2_cx::get($dbx);
 if ( isset($_GET['video']) ) {
     // TODO filter, but prepared statements should catch any SQL-injection attempt
     $sql = <<<SQL
-        SELECT v.*, jl.joblistID, up.progressdata, up.percentage_complete, up.status
-        FROM videos AS v
+        SELECT v.*, jl.joblistID FROM videos AS v
         LEFT JOIN joblist AS jl
-        ON (jl.where_to_do_it = v.videoname)
-        LEFT JOIN userprogress AS up
-        ON (jl.joblistID = up.joblistID)
-        WHERE v.videoname = :video AND ( up.email = :email or up.email IS NULL )
+        ON (v.videoname = jl.where_to_do_it)
+        WHERE v.videoname = :video
 SQL;
     $stmt = $dbh->prepare($sql);
     $stmt->bindParam(':video', $_GET['video']);
+    $stmt->execute();
+    $curvid = $stmt->fetch();
+    //var_dump($curvid); exit;
+    if ( $curvid ) {
+        // Video exists, lets find user progress data
+        $sql = <<<SQL
+            SELECT progressdata, percentage_complete, status
+            FROM   userprogress
+            WHERE  joblistID = :joblistID AND email = :email
+SQL;
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam(':joblistID', $curvid['joblistID']);
+        $stmt->bindParam(':email', $_SESSION['user']);
+        $stmt->execute();
+        $userdata = $stmt->fetch();
+        $curvid = array_merge($curvid, (array)$userdata);
+    }
+    
 } elseif (isset($_GET['vidnum']) ) {
     // TODO: Change to use job number, video table should not have any suggested order
     // Problem with that is that we can not do+/- 1 to get previous and next
     $vidnum = (int)$_GET['vidnum'];
     $sql = <<<SQL
-        SELECT v.*, jl.joblistID, up.progressdata, up.percentage_complete, up.status
-        FROM videos AS v 
+        SELECT v.*, jl.joblistID FROM videos AS v
         LEFT JOIN joblist AS jl
-        ON (jl.where_to_do_it = v.videoname)
-        LEFT JOIN userprogress AS up
-        ON (jl.joblistID = up.joblistID)
-        WHERE v.order = :vidnum AND ( up.email = :email OR up.email IS NULL )
+        ON (v.videoname = jl.where_to_do_it)
+        WHERE v.order = :vidnum
 SQL;
     $stmt = $dbh->prepare($sql);
-    $stmt->bindParam(':vidnum', $vidnum);
+    $stmt->bindParam(':vidnum', $_GET['vidnum']);
+    $stmt->execute();
+    $curvid = $stmt->fetch();
+    //var_dump($curvid); exit;
+    if ( $curvid ) {
+        // Video exists, lets find user progress data
+        $sql = <<<SQL
+            SELECT progressdata, percentage_complete, status
+            FROM   userprogress
+            WHERE  joblistID = :joblistID AND email = :email
+SQL;
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam(':joblistID', $curvid['joblistID']);
+        $stmt->bindParam(':email', $_SESSION['user']);
+        $stmt->execute();
+        $userdata = $stmt->fetch();
+        $curvid = array_merge($curvid, (array)$userdata);
+    }
 } else {
     // Default
     // Find next unseen video for user
@@ -70,13 +99,14 @@ SQL;
         ORDER BY jl.chapter ASC, jl.joborder ASC
 SQL;
     $stmt = $dbh->prepare($sql);
+    $stmt->bindParam(':email', $_SESSION['user']);
+    $stmt->execute();
+    $curvid = $stmt->fetch();
 }
 
-$stmt->bindParam(':email', $_SESSION['user']);
-$stmt->execute();
-
-$videos = $stmt->fetchAll();
-// TODO Do I really need to fetch more than on one?
+// $stmt->bindParam(':email', $_SESSION['user']);
+// $stmt->execute();
+// $curvid = $stmt->fetch();
 
 
 // Last video
@@ -85,8 +115,7 @@ $stmt = $dbh->prepare($sql);
 $stmt->execute();
 $last = $stmt->fetchColumn(0);
 
-if ( $videos ) {
-    $curvid = $videos[0];
+if ( $curvid ) {
     
     $progressdata = new stdClass();
     $progressdata->firstStop = 0;
@@ -174,10 +203,13 @@ if ( $nextjob ) {
         <li>en lista</li>
         <li>med förslag</li><!-- TODO -->
       </ul>
+      <pre>
+        DEBUG
+<?php var_dump($curvid); !empty($userdata) && var_dump($userdata); ?>
+      </pre>
     </div>
   <?php endif; ?>
   </div>
-<!--    <?php echo "Jobb: " . $curvid['joblistID'] . "(debug)"; ?> -->
   <div id="videobuttons">
     <button id="skipvid" disabled>Markera videon <br /> som <b>sedd</b></button>
     <button id="unskipvid" disabled>Markera videon <br /> som <b>osedd</b></button>
@@ -206,7 +238,7 @@ if ( $nextjob ) {
          if ( !empty($curvid['progressdata']) ) { echo $curvid['progressdata']; }
          else { echo 0; }; ?>;
      var wtglobal_old_status       = "<?php echo $curvid['status']; ?>";
-     var wtglobal_joblistID        = <?php echo $curvid['joblistID']; ?>;
+     var wtglobal_joblistID        = <?php echo isset($curvid['joblistID']) ? $curvid['joblistID'] : "null"; ?>;
   </script>
   <script src="script/videoreport.js"></script>
 </body>

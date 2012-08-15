@@ -4,6 +4,22 @@
  *
  */
 (function (win, doc, undefined) {
+
+    // Next unseen video button
+    $("#nextunseen").removeAttr("disabled").on('click', function () {
+        // Remove all get-params from current location
+        var current_href = win.location.href.match(/([^?]*)(\?.*)*/)[1]
+        win.location.href = current_href;
+    });
+
+    // Goto previous and next
+    $(".prevnextvideo:not([data-vidnum='none'])").removeAttr("disabled").on('click', function () {
+        var show_video_number = $(this).data('vidnum');
+        // Remove all get-params from current location
+        var current_href = win.location.href.match(/([^?]*)(\?.*)*/)[1]
+        win.location.href = current_href + "?vidnum=" + show_video_number;
+    });
+    
     var vid = doc.querySelector("#videocontainer video");
     if ( !vid ) {
         return;
@@ -286,21 +302,6 @@
             $('#skipvid').removeAttr("disabled").on('click', manual_skip);
         });
     }
-    
-    // Next unseen video
-    $("#nextunseen").removeAttr("disabled").on('click', function () {
-        // Remove all get-params from current location
-        var current_href = win.location.href.match(/([^?]*)(\?.*)*/)[1]
-        win.location.href = current_href;
-    });
-    
-    // Goto previous and next
-    $(".prevnextvideo:not([data-vidnum='none'])").removeAttr("disabled").on('click', function () {
-        var show_video_number = $(this).data('vidnum');
-        // Remove all get-params from current location
-        var current_href = win.location.href.match(/([^?]*)(\?.*)*/)[1]
-        win.location.href = current_href + "?vidnum=" + show_video_number;
-    });
     
     
 })(window, window.document);
