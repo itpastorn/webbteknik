@@ -139,6 +139,10 @@ iframe {
     font-family: 'Handlee', cursive;
     font-size: xx-large;
 }
+.unobtrusive {
+    color: #888;
+    font-size: smaller;
+}
 .hidden {
     display: none;
 }
@@ -252,8 +256,6 @@ hr.todo {
     margin-bottom: 20px;
 }
 #vidprogress {
-    color: #888;
-    font-size: smaller;
     clear: both;
 }
 #resource_suggestions {

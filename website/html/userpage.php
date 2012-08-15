@@ -184,7 +184,6 @@ if ( $nextjob ) {
   <h1>webbteknik.nu &ndash; Användarsida</h1>
   <?php require "../includes/snippets/mainmenu.php"; ?>
   <h3>Video: <?php echo $curvid['title']; ?></h3>
-  <p><strong>Just nu strular den här sidan. Man kan bara se nästa osedda video. Felsökning pågår.</strong></p>
   <p class="usertip" data-tipname="videotip">
     <strong>Tips!</strong> Högerklicka på videon och välj visning i helskärm.
     Videons inbyggda upplösning är 1280 x 720 pixlar.
@@ -217,7 +216,11 @@ if ( $nextjob ) {
     <button class="prevnextvideo" disabled data-vidnum="<?php echo $curvid['next']; ?>"><b>Nästa</b> video</button>
     <button class="prevnextvideo" disabled data-vidnum="<?php echo $curvid['prev']; ?>"><b>Föregående</b> video</button>
   </div>
-  <p id="vidprogress">Status för denna video: </p>
+  <p id="vidprogress" class="unobtrusive">Status för denna video: </p>
+  <p class="unobtrusive">
+     Om sidan strular, vänligen tala om vilken webbläsare du använder (namn + version) samt vad du ser i
+     konsollen (CTRL + SHIFT + K i Firefox, CTRL + SHIFT + J i Chrome) till gunther@keryx.se
+  </p>
   <!-- TODO Clickable progress bar with timeranges converted to graphics -->
   <section id="resource_suggestions">
     <div>Flashcards (todo)</div>
