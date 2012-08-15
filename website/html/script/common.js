@@ -48,7 +48,8 @@
             show_tips_link = doc.createElement("a");
         show_tips_link.href = "#";
         show_tips_link.innerHTML = "Visa användningstips på denna sida";
-        $(show_tips_link).on("click", function () {
+        $(show_tips_link).on("click", function (e) {
+            e.preventDefault();
             // TODO Yellow flash/fade (use CSS animation!)
             $(".usertip").show().each( function () {
                 var tipname = $(this).data('tipname');
