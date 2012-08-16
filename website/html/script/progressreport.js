@@ -7,6 +7,7 @@
  *
  */
 (function (win, doc, undefined) {
+    "use strict";
     $('table td:nth-child(2):not(.job_is_video)').each( function () {
         var cell  = $(this),
             jobid = cell.data('jobid');
@@ -80,8 +81,11 @@
     }
 
     function reportSuccessCallback(serverdata) {
-        // console.log("Report received by server");
         console.log("Server status message was: " + serverdata);
+        serverdata = JSON.parse(serverdata);
+        // Update DOM to show what has happened
+        $("td[data-jobid='" + serverdata.jobid + "']").parent().attr('class', serverdata.status);
+        
     }
     
     // Buttons to toggle hide/show for finished and skipped jobs

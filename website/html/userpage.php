@@ -167,6 +167,7 @@ LINKHTML;
             $linkhtml .= "Inga matchande länkar till denna video.";
         }
     */
+     $curvid['title'] .= " (Bokavsnitt {$curvid['section']})";
 } else {
     $curvid       = array('title' => 'Video ej funnen');
     $progressdata = "";
@@ -222,7 +223,7 @@ if ( "//" == $baseref ) {
 <body class="wide">
   <h1>webbteknik.nu &ndash; Användarsida</h1>
   <?php require "../includes/snippets/mainmenu.php"; ?>
-  <h3>Video: <?php echo "{$curvid['title']} (Bokavsnitt {$curvid['section']})"; ?></h3>
+  <h3>Video: <?php echo "{$curvid['title']}"; ?></h3>
   <p class="usertip" data-tipname="videotip">
     <strong>Tips!</strong> Högerklicka på videon och välj visning i helskärm.
     Videons inbyggda upplösning är 1280 x 720 pixlar.

@@ -40,6 +40,7 @@ SQL;
     $stmt = $dbh->prepare($sql);
     $stmt->bindParam(':email', $_SESSION['user']);
     $stmt->bindParam(':jobid', $jobid);
+    $status = $_POST['status'];
 } else {
     switch ( $_POST['status'] ) {
         case 'begun':
@@ -71,4 +72,11 @@ catch ( Exception $e ) {
     exit;
 }
 
-echo "Database updated";
+echo <<<JSON
+{
+	"jobid"   : "{$jobid}",
+    "status"  : "{$status}",
+    "dbstatus": "Database updated"
+}
+JSON;
+    
