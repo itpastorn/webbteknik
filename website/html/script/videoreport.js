@@ -103,6 +103,7 @@
     }
     // Limit number of fallback tries
     var metadata_fallback_tries = 0;
+    // Give the metadata event ½ second to trigger first
     setTimeout(metadata_fallback, 500);
     
     
