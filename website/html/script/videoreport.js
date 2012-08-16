@@ -40,28 +40,73 @@
     }
 
     // Starting video position, from global variable in inline script
-    // Timeout used to remove this error:
-    //     "InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable"
-    // TODO: Find better solution
-
-    vid.addEventListener('loadedmetadata', function () {
-        console.log("Metadata loaded (DOM 2 style");
-        video_duration = vid.duration;
-        if ( wtglobal_start_video_at > 0 && wtglobal_old_status !== "finished" ) {
-            vid.currentTime = wtglobal_start_video_at;
-        }
-        console.log("MD: Duration: " + video_duration);
-    }, true);
-    /*
-    setTimeout( function () {
+    
+    var set_starting_point = function (logtext) {
         // Can I remove video_duration or is it truly a performance saver? INVESTIGATE
-        video_duration = vid.duration;
-        if ( wtglobal_start_video_at > 0 && wtglobal_old_status !== "finished" ) {
-            vid.currentTime = wtglobal_start_video_at;
+        try {
+            video_duration = vid.duration;
+            if ( video_duration && (wtglobal_start_video_at > 0) && (wtglobal_old_status !== "finished") ) {
+                vid.currentTime = wtglobal_start_video_at;
+            }
+            console.log(logtext);
+            console.log("Duration: " + video_duration);
+            console.log("Starting video at " + vid.currentTime);
         }
-        console.log("Duration: " + video_duration);
-    }, 350);
-    */
+        catch (e) {
+            console.log("Failed attempt to set video_duration and starting point");
+            console.log(e.message);
+        }
+    }
+
+    // Best pint to set starting point = onloadedmetadata 
+    vid.addEventListener('loadedmetadata', function () {
+        set_starting_point("Metadata loaded via loadedmetadata.");
+    }, true);
+
+    // The loadedmetadata event is not reliable, this is a fallback
+    // Timeout used to remove this possibility:
+    //     "InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable"
+    var metadata_fallback       = function () {
+        // First check if load event has fired
+        if ( !isNaN(video_duration) && video_duration ) {
+            return;
+        }
+        
+        set_starting_point("Metadata loaded timeout (" + metadata_fallback_tries + ")");
+
+        // Failed request = try again later, max 50 times
+        if ( metadata_fallback_tries < 50 && ( isNaN(video_duration) || !video_duration ) ) {
+            console.log("trying again: " + video_duration);
+            setTimeout(metadata_fallback, 200);
+        } else {
+            /*
+             * Exceptionally strange intermittent bug in Firefox can affect the functionality
+             * This ASSIGNMENT sometimes fails (in the function above)
+             * video_duration = vid.duration;
+             * 
+             * That means by no vid.duration can be a number, while video_duration is NaN
+             * Because of this bug, we make one last try!
+             */
+            if ( (metadata_fallback_tries > 49)  && (isNaN(video_duration) || !video_duration)  ) {
+                try {
+                    video_duration  = vid.duration;
+                    vid.currentTime = wtglobal_start_video_at;
+                    console.log("Got it at last: " + vid.duration + "= " + video_duration);
+                }
+                catch (e) {
+                    console.log("video_duration and starting point could not be set by fallback");
+                }
+            }
+        }
+        // Increment number of tries
+        metadata_fallback_tries += 1;
+    }
+    // Limit number of fallback tries
+    var metadata_fallback_tries = 0;
+    setTimeout(metadata_fallback, 500);
+    
+    
+
     // Tell old status
     var status_string = {
         begun : "Påbörjad",

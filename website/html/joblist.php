@@ -121,7 +121,7 @@ $jobs = $stmt->fetchAll();
         }
         echo "<td>";
         if ( $curjob['what_to_do'] == 'video' ) {
-            echo "<script>console.log('{$curjob['joblistID']} : {$curjob['percentage_complete']}')</script>\n";
+            // echo "<script>console.log('{$curjob['joblistID']} : {$curjob['percentage_complete']}')</script>\n";
             echo 'Video: <a href="userpage.php?video=' . $curjob['where_to_do_it'] . '">';
             echo $curjob['title'] . '</a>';
         } else {
