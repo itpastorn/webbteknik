@@ -75,6 +75,9 @@
     
     var create_report = function () {
         
+        // Make a new attempt to load metadata if it previously did not work
+        video_duration = video_duration || vid.duration;
+
         // Prepare an object to send via XHR to server
         var reportobj        = {};
         reportobj.joblistID  = wtglobal_joblistID;
