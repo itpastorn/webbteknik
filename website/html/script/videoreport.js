@@ -43,6 +43,16 @@
     // Timeout used to remove this error:
     //     "InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable"
     // TODO: Find better solution
+
+    vid.addEventListener('loadedmetadata', function () {
+        console.log("Metadata loaded (DOM 2 style");
+        video_duration = vid.duration;
+        if ( wtglobal_start_video_at > 0 && wtglobal_old_status !== "finished" ) {
+            vid.currentTime = wtglobal_start_video_at;
+        }
+        console.log("MD: Duration: " + video_duration);
+    }, true);
+    /*
     setTimeout( function () {
         // Can I remove video_duration or is it truly a performance saver? INVESTIGATE
         video_duration = vid.duration;
@@ -51,7 +61,7 @@
         }
         console.log("Duration: " + video_duration);
     }, 350);
-    
+    */
     // Tell old status
     var status_string = {
         begun : "Påbörjad",
@@ -64,7 +74,7 @@
     // wtglobal_old_progressdata holds data from previous pageviews
     
     var create_report = function () {
-
+        
         // Prepare an object to send via XHR to server
         var reportobj        = {};
         reportobj.joblistID  = wtglobal_joblistID;
@@ -92,15 +102,19 @@
             };
         }
 
-        if ( typeof vid.played === "undefined" ) {
-            video_progress.html("Kan inte mäta ditt tittande. (video.played attributet stöds inte)");
+        if ( typeof vid.played === "undefined" || !video_duration ) {
+            if ( !video_duration ) {
+                video_progress.html("Kan inte mäta ditt tittande. (video metadata laddades inte)");
+            } else {
+                video_progress.html("Kan inte mäta ditt tittande. (video.played attributet stöds inte)");
+            }
 
             // Keep old data in order not to accidenally set them to null
             // Code duplicated below FIXME
             reportobj.stops     = data.prev.stops;
             reportobj.viewTotal = data.prev.viewTotal;
             reportobj.firstStop = data.prev.firstStop;
-            console.log("Only old data - played attribute not supported: " + JSON.stringify(reportobj));
+            console.log("Only old data - played attribute not supported or metadata not loaded: " + JSON.stringify(reportobj));
             return reportobj;
         } else {
 
@@ -109,7 +123,7 @@
 
             // Has anything been played at all since page load?
             if ( !snippets ) {
-                // Code duplication FIXME
+                // Code duplication FIXME.
 	            // Keep old data in order not to accidenally set them to null
 	            reportobj.stops     = data.prev.stops;
 	            reportobj.viewTotal = data.prev.viewTotal;
@@ -216,19 +230,27 @@
                 // No need to enable skip button any more
                 $('#skipvid').attr("disabled", "disabled");
             }
-            reportobj.percentage_complete = Math.floor(100 * reportobj.viewTotal / video_duration);
+            if ( video_duration ) {
+                reportobj.percentage_complete = Math.floor(100 * reportobj.viewTotal / video_duration);
+            } else {
+                reportobj.percentage_complete = null;
+            }
         }
         return reportobj;
     }
     
     var send_video_report = function() {
         var reportobj = create_report();
-        if ( reportobj.percentage_complete ) {
+        if ( reportobj && reportobj.percentage_complete ) {
             video_progress.html("Du har sett " + reportobj.percentage_complete + " % av videon");
         }
         // Do not report if less than 1 percent
-        if ( reportobj.percentage_complete < 1 ) {
+        if ( reportobj && reportobj.percentage_complete < 1 && video_status !== "finished" && video_status !== "skipped" ) {
             return false;
+        }
+        // Reportobj should be sent if manually skipped even if time is not calculated
+        if ( !reportobj ) {
+            reportobj = {"joblistID":8,"viewTotal":69.267005,"stops":[{"start":0,"end":69.267005}],"status":"skipped","firstStop":69.267005,"percentage_complete":9}
         }
         reportdata = JSON.stringify(reportobj);
         $.post('./api/videoreport.php', { "reportdata": reportdata }, reportSuccessCallback);

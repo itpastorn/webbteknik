@@ -32,8 +32,11 @@ SQL;
     $stmt->bindParam(':joblistID', $_POST['reset']);
     $stmt->bindParam(':email', $_SESSION['user']);
     $stmt->execute();
-    // TODO Check for no rows affected == bad name for video
-    echo "User progress data for video deleted";
+    if ( $stmt->rowCount() ) {
+        echo "User progress data for video deleted. Jobnum: {$_POST['reset']}. User {$_SESSION['user']}";
+    } else {
+        echo "No userdata deleted. Bad post params?";
+    }
     exit;
 }
 
@@ -54,9 +57,6 @@ $reportdata->viewTotal must be numeric
 $reportdata->stops must be array (at least 1 in size)
 $reportdata->percentage_complete must be integer 0 <= x <= 100
 
-
-client side normalization of stops-array is taken for granted
-Total reset of stops array if resetstatus should be 'unset'
 */
 
 // Partial clone to insert into db column progressdata
@@ -112,4 +112,4 @@ catch (PDOException $e) {
     // TODO FirePHP for debug
     exit;
 }
-echo "Progressdata saved";
+echo "Progressdata saved ({$reportdata->percentage_complete} % seen - jobnum: {$reportdata->joblistID})";
