@@ -187,11 +187,19 @@ a[href*="w3.org"]:after {
 /* ------------------------------- *\
    $primarynav
 \* ------------------------------- */
+.userdata {
+    margin: 0;
+    text-align: right;
+    font-size: x-small;
+}
 .mainmenu {
     padding: 0;
     margin: 0;
     text-align: center;
     background-color: #DDD;
+}
+.mainmenu ul {
+    margin-top: 0.2em;
 }
 .mainmenu li {
     display: inline-block;
