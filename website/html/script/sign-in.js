@@ -42,7 +42,7 @@
 	    if ( window.ref ) {
 	        window.location.href = window.ref;
 	    } else {
-	        window.location.href = "./";
+	        window.location.href = "./userpage.php";
 	    }
 	}
 }());
