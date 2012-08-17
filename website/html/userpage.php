@@ -27,7 +27,47 @@ $dbx = config::get('dbx');
 // init
 $dbh = keryxDB2_cx::get($dbx);
 
-if ( isset($_GET['video']) ) {
+// Name of video to show
+$video = null;
+
+// No chosen video
+if ( empty($_GET['vidnum']) && empty($_GET['video']) ) {
+    // Find next unseen video for user
+    // First joblist-video not done
+    // Inner query finds all watched videos
+    // If 1,2,3 and 5 have been seen we want to find #4
+    $sql = <<<SQL
+        SELECT jl.where_to_do_it FROM joblist AS jl
+        INNER JOIN userprogress AS up
+        ON (jl.joblistID = up.joblistID)
+        WHERE jl.what_to_do = 'video'
+             AND jl.joblistID NOT IN
+              (
+                SELECT injl.joblistID
+                FROM joblist AS injl
+                INNER JOIN userprogress AS inup
+                ON (injl.joblistID = inup.joblistID)
+                WHERE
+                     (inup.status = 'finished' OR inup.status = 'skipped')
+                  AND
+                     inup.email = :email
+                  AND
+                     injl.what_to_do = 'video'
+              )
+        ORDER BY jl.joborder ASC
+        LIMIT 0,1
+SQL;
+    $stmt = $dbh->prepare($sql);
+    $stmt->bindParam(':email', $_SESSION['user']);
+    $stmt->execute();
+    $video = $stmt->fetchColumn();
+}
+
+if ( !$video && isset($_GET['video'])) {
+    $video  = filter_input(INPUT_GET, 'video', FILTER_SANITIZE_URL);
+}
+
+if ( $video ) {
     // TODO filter, but prepared statements should catch any SQL-injection attempt
     $sql = <<<SQL
         SELECT v.*, jl.joblistID, bs.section FROM videos AS v
@@ -37,7 +77,7 @@ if ( isset($_GET['video']) ) {
         WHERE v.videoname = :video
 SQL;
     $stmt = $dbh->prepare($sql);
-    $stmt->bindParam(':video', $_GET['video']);
+    $stmt->bindParam(':video', $video);
     $stmt->execute();
     $curvid = $stmt->fetch();
     //var_dump($curvid); exit;
@@ -86,25 +126,6 @@ SQL;
         $userdata = $stmt->fetch();
         $curvid = array_merge($curvid, (array)$userdata);
     }
-} else {
-    // Default
-    // Find next unseen video for user
-    $sql = <<<SQL
-        SELECT v.*, jl.joblistID, bs.section, up.progressdata, up.percentage_complete, up.status
-        FROM videos AS v 
-        INNER JOIN booksections AS bs USING (booksectionID)
-        LEFT JOIN joblist AS jl
-        ON (jl.where_to_do_it = v.videoname)
-        LEFT JOIN userprogress AS up
-        ON (jl.joblistID = up.joblistID)
-        WHERE up.email = :email AND jl.what_to_do = 'video' AND up.status = 'begun' 
-              OR up.email IS NULL
-        ORDER BY jl.chapter ASC, jl.joborder ASC
-SQL;
-    $stmt = $dbh->prepare($sql);
-    $stmt->bindParam(':email', $_SESSION['user']);
-    $stmt->execute();
-    $curvid = $stmt->fetch();
 }
 
 // Last video
@@ -152,7 +173,7 @@ SQL;
         'deep' => "Fördjupning"
     );
     while ( $linkrow = $stmt->fetch() ) {
-    	$type = $linkrow['linktype'];
+        $type = $linkrow['linktype'];
         $linkhtml .= <<<LINKHTML
             <li>
               <a href="{$linkrow['linkurl']}" class="{$type}link"> 

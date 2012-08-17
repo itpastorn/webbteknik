@@ -170,7 +170,8 @@ ALTER TABLE `videos` DROP `section`;
 
 ALTER TABLE `flashcards` CHANGE `flashcardsID` `flashcardID` MEDIUMINT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT 
 
-
+ ALTER TABLE `userprogress` ADD INDEX ( `status` ) 
+ 
 -- Not put to server below
 
 
