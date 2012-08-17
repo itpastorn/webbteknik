@@ -57,6 +57,47 @@ if ( empty($_GET['vidnum']) && empty($_GET['video']) ) {
         ORDER BY jl.joborder ASC
         LIMIT 0,1
 SQL;
+// Better SQL questions
+// http://stackoverflow.com/questions/11998528/sql-optimization-finding-first-unwatched-video-using-no-subselect/11998669
+/*
+SELECT jl.where_to_do_it
+FROM joblist jl INNER JOIN
+     userprogress up
+     ON (jl.joblistID = up.joblistID)
+ WHERE jl.what_to_do = 'video' and
+       not exists (
+           (SELECT 1
+            FROM joblist injl INNER JOIN
+                 userprogress inup
+                 ON (injl.joblistID = inup.joblistID)
+            WHERE (inup.status = 'finished' OR inup.status = 'skipped') and
+                  inup.email = 'info@keryx.se' and
+                  injl.what_to_do = 'video' and
+                  injl.joblistid = jl.joblistid
+          )
+)
+ORDER BY jl.joborder ASC
+LIMIT 0,1
+
+SELECT jl.where_to_do_it, up.* FROM joblist AS jl
+ INNER JOIN userprogress AS up
+ ON (jl.joblistID = up.joblistID)
+ LEFT JOIN (
+    SELECT injl.joblistID
+    FROM joblist AS injl
+    INNER JOIN userprogress AS inup
+    ON (injl.joblistID = inup.joblistID)
+    WHERE
+         (inup.status = 'finished' OR inup.status = 'skipped')
+      AND
+         inup.email = 'ingrid.sjoberg@kungsbacka.se'
+      AND
+         injl.what_to_do = 'video'
+  ) SQ ON jl.joblistID = SQ.joblistID
+ WHERE jl.what_to_do = 'video'
+ AND SQ.joblistID IS NULL      
+ ORDER BY jl.joborder ASC
+*/
     $stmt = $dbh->prepare($sql);
     $stmt->bindParam(':email', $_SESSION['user']);
     $stmt->execute();
