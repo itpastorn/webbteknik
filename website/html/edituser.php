@@ -128,8 +128,8 @@ if ( $tocagree ) :
         <label for="guest">Inga privilegier alls</label>
       </p>
       <p>
-        <input type="radio" name="priv" value="3" id="webonly" disabled class="nonimplemented" <?php echo $checked[3]; ?>>
-        <label for="webonly">Bara webb</label>
+        <input type="radio" name="priv" value="3" id="webonly" disabled <?php echo $checked[3]; ?>>
+        <label for="webonly">Bara webb (kan ännu inte väljas)</label>
       </p>
       <p>
         <input type="radio" name="priv" value="7" id="textbook" <?php echo $checked[7]; ?>>
