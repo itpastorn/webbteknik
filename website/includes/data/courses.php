@@ -102,6 +102,18 @@ SQL;
     }
 
     /**
+     * Get the full name
+     * 
+     * For this class, an alias of getName
+     * 
+     * @return string
+     */
+    public function getFullName()
+    {
+        return $this->courseName;
+    }
+
+    /**
      * Get the url
      * 
      * @return string

@@ -16,17 +16,10 @@
  * 
  * @todo interface and/or abstract class for all data types
  */
-class data_schools implements data
+class data_schools extends items implements data
 {
-    /**
-     * The school ID, matches DB-record
-     */
-    protected $schoolID;
-
-    /**
-     * The school spoken name, matches DB-record
-     */
-    protected $schoolName;
+	
+	// All properties that are not i abstract class are written as schoolProp
 
     /**
      * Where the school is located, matches DB-record
@@ -40,28 +33,30 @@ class data_schools implements data
      */
     protected $schoolUrl = null;
     
-    private function __construct($schoolID, $schoolName, $schoolUrl)
+    
+    private function __construct($id, $name, $schoolPlace, $schoolUrl)
     {
-        $this->schoolID   = $schoolID;
-        $this->schoolName = $schoolName;
-        $this->schoolUrl  = $schoolUrl;
+        $this->id          = $id;
+        $this->name        = $name;
+        $this->schoolPlace = $schoolPlace;
+        $this->schoolUrl   = $schoolUrl;
     }
     
     /**
      * Loads an instance from DB
      * 
-     * @param string $schoolID  The school ID, matches DB primary key
-     * @param object $dbh       Instance of PDO
+     * @param string $id  The school ID, matches DB primary key
+     * @param object $dbh Instance of PDO
      */
-    public static function loadOne($schoolID, PDO $dbh) {
+    public static function loadOne($id, PDO $dbh) {
         $sql  = <<<SQL
-            SELECT schoolID, school_name AS schoolName, school_url AS schoolUrl, school_place AS schoolPlace
-            FROM schools WHERE schoolID = :schoolID
+            SELECT schoolID AS id, school_name AS name, school_place AS schoolPlace, school_url AS schoolUrl
+            FROM schools WHERE id = :id
 SQL;
         $stmt = $dbh->prepare($sql);
-        $stmt->bindParam(':schoolID', $schoolID);
+        $stmt->bindParam(':id', $id);
         $stmt->execute();
-        $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, __CLASS__, array('schoolID', 'schoolName', 'schoolUrl')); 
+        $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, __CLASS__, array('id', 'name', 'schoolPlace', 'schoolUrl'));
         return $stmt->fetch();
     }
     
@@ -71,40 +66,104 @@ SQL;
      * @todo set limits, interval for pagination, etc
      * @todo 
      * 
-     * @param object $dbh       Instance of PDO
+     * @param object $dbh Instance of PDO
+     * @param string $dbh Custom SQL query
      * @return array of instances of this class
      */
-    public static function loadAll(PDO $dbh) {
+    public static function loadAll(PDO $dbh, $sql = false) {
+    	if ( !$sql ) {
         $sql  = <<<SQL
-            SELECT schoolID, school_name AS schoolName, school_url AS schoolUrl, school_place AS schoolPlace
+            SELECT schoolID AS id, school_name AS name, school_place AS schoolPlace, school_url AS schoolUrl
             FROM schools
-            ORDER BY schoolName
+            ORDER BY name
 SQL;
+    	}
         $stmt = $dbh->prepare($sql);
-        $stmt->bindParam(':schoolID', $schoolID);
         $stmt->execute();
-        $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, __CLASS__, array('schoolID', 'schoolName', 'schoolUrl'));
+        $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, __CLASS__, array('id', 'name', 'schoolPlace', 'schoolUrl'));
         return $stmt->fetchAll();
     }
     
     /**
-     * Get the id
+     * Make a new object from user data
+     * 
+     * @param Array $arr
+     */
+    public static function fromArray($arr)
+    {
+        if ( !isset($arr['id']) || empty($arr['name']) || empty($arr['schoolPlace']) ) {
+        	echo "<pre>";
+        	trigger_error("Trying to create school object with too little data", E_USER_NOTICE);
+            return false;
+        }
+        if ( empty($arr['id']) ) {
+            // TODO: Generate new id
+            $arr['id'] = "test";
+        }
+        $schoolUrl  = ( empty($arr['schoolUrl']) ) ? '' : $arr['schoolUrl'];
+        $obj = new data_schools($arr['id'], $arr['name'], $arr['schoolPlace'], $schoolUrl);
+        // $obj->validate();
+        return $obj;
+        
+    }    
+    
+    /**
+     * A mock/example object
+     * 
+     * Must not be savable
+     */
+    public static function fake($id, $name, $schoolUrl="")
+    {
+        $fakeobj = new data_schools($id, $name, $schoolUrl);
+        $fakeobj->isFake = true;
+        return $fakeobj;
+    }
+    
+    /**
+     * Saving an object
+     * 
+     * Should only happen if it has been validated and is error free
+     */
+    public static function save()
+    {
+        if ( $this->isFake() ) {
+            trigger_error(E_USER_WARNING, "Trying to save a fake object");
+            return false;
+        }
+        if ( $this->propertyErrors['tested'] == false ) {
+            trigger_error(E_USER_NOTICE, "Can not save an object that is untested");
+            return false;
+        }
+        // TODO Write SQL to save object, etc
+        trigger_error(E_USER_WARNING, "Not implemented yet");
+    }
+    
+    /**
+     * Get error message for a property
+     */
+    public function errorMessage($propName)
+    {
+        return isset($this->propertyErrors[$propName]) ? $this->propertyErrors[$propName] : '';
+    }
+    
+    /**
+     * Get the place
      * 
      * @return string
      */
-    public function getId()
+    public function getPlace()
     {
-        return $this->schoolID;
+        return $this->schoolPlace;
     }
 
     /**
-     * Get the name
+     * Get the full name (includes place)
      * 
      * @return string
      */
-    public function getName()
+    public function getFullName()
     {
-        return $this->schoolName;
+        return "{$this->name}, {$this->schoolPlace}";
     }
 
     /**

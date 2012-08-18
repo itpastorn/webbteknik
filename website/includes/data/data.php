@@ -32,27 +32,33 @@ interface data
 }
 
 /**
- * A function that makes a select list for HTML from an array of data-objects
+ * A function that makes a list of options for the select element, from an array of data-objects
  * 
- * @param string $name_id      Used for name and it attributes on the select tag
  * @param array  $list         An array of objects that use the data interface
  * @param string $pre_selected The value that should be set as default (selected attribute)
+ * @param bool   $fullinfo     If true, duplicate name and id both for value and text (for datalists)
  * @return string HTML-code
  */
-function makeSelectElement($name_id, $list, $pre_selected = '')
+function makeSelectElement($list, $pre_selected='', $fullinfo=false)
 {
-    $select_elem = "<select name=\"{$name_id}\" id=\"{$name_id}\">\n";
+    $select_elem = "";
     foreach ( $list as $item ) {
         if ( $item->getId() == $pre_selected ) {
             $selected = ' selected';
         } else {
             $selected = '';
         }
-        $select_elem .= '<option value="' . htmlspecialchars($item->getId()) . '"' . "{$selected}>";
-        $select_elem .= htmlspecialchars($item->getname());
-        $select_elem .= "</option>\n";
+    	$name = htmlspecialchars($item->getFullName());
+        $id   = htmlspecialchars($item->getId());
+        if ( $fullinfo ) {
+        	$id   = "{$name} ({$id})";
+        	$name = $id;
+        }
+        $select_elem .= <<<HTML
+            <option value="{$id}"{$selected}>{$name}</option>
+
+HTML;
     }
-    $select_elem .= "</select>\n";
     return $select_elem;
 }
 
@@ -79,6 +85,7 @@ function makeCheckboxes($name, $list)
               <input type="checkbox" name="{$name}[]" id="{$name}_{$i}" value="{$id}">
               <label for="{$name}_{$i}">{$itemname}</label>
             </p>
+
 PARA;
          $i++;
     }
