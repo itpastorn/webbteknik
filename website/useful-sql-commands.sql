@@ -170,9 +170,13 @@ ALTER TABLE `videos` DROP `section`;
 
 ALTER TABLE `flashcards` CHANGE `flashcardsID` `flashcardID` MEDIUMINT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT 
 
- ALTER TABLE `userprogress` ADD INDEX ( `status` ) 
+ALTER TABLE `userprogress` ADD INDEX ( `status` );
  
 -- Not put to server below
 
-
+ALTER TABLE `webbtek_webbtek`.`joblist` ADD INDEX ( `what_to_do` );
+ALTER TABLE `webbtek_webbtek`.`joblist` ADD INDEX ( `where_to_do_it` );
+ALTER TABLE `webbtek_webbtek`.`joblist` ADD INDEX ( `joborder` );
+ALTER TABLE `webbtek_webbtek`.`joblist` ADD INDEX ( `track` );
+ALTER TABLE `webbtek_webbtek`.`joblist` ADD INDEX ( `chapter` );
 

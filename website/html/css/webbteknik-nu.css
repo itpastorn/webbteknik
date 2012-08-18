@@ -105,8 +105,15 @@ input[disabled] + label {
     width: 90%;
     text-align: left;
 }
-.blocklabels input,
+.blocklabels input[type="radio"]    + label, 
+.blocklabels input[type="checkbox"] + label {
+    display: inline;
+}
 .blocklabels input[type="text"],
+.blocklabels input[type="number"],
+.blocklabels input[type="email"],
+.blocklabels input[type="url"],
+.blocklabels input[type="date"],
 .blocklabels input[type="password"] {
     width: 50%;
     background-color: #F8F8F8;

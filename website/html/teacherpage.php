@@ -93,6 +93,7 @@ $pageref = 'teacherpage.php';
   </ul>
 SECNAV;
 ?>
+<p><strong>Utan skolanslutning ska inget annat kunna fungera....</strong></p>
   <h2 id="mygroups">Mina grupper</h2>
   <h3>Grupp smeknamn (inbjudningskod)</h3>
   <p>
@@ -119,12 +120,12 @@ SECNAV;
         <?php echo $select_school; ?>
       </p>
       <p>
-        <label for="course">Kurs</label>
+        <label for="course_id">Kurs</label>
         <?php echo $select_course; ?>
       </p>
       <p>
         <label for="groupnick">Smeknamn på gruppen (Hur ni pratar om gruppen i dagligt tal)</label>
-        <input id="groupnick" name="groupnick" placeholder="Exempel: Webbettan" required />
+        <input type="text" id="groupnick" name="groupnick" placeholder="Exempel: Webbettan" required />
       </p>
     </fieldset>
     <fieldset class="blocklabels">
@@ -132,18 +133,18 @@ SECNAV;
       <p>
         <!-- Should be limited to the number of books bought for one year (with some grace overlap)-->
         <label for="numstudents">Antal elever i gruppen</label>
-        <input id="numstudents" name="numstudents" type="number" required />
+        <input type="number" id="numstudents" name="numstudents" required />
       </p>
       <p>
         <label for="startdate">Kursstart (gruppens livslängd är 12 månader)</label>
-        <input id="startdate" name="startdate" type="date" value="<?php echo $TODAY; ?>" required />
+        <input type="date" id="startdate" name="startdate" value="<?php echo $TODAY; ?>" required />
       </p>
       <p>
         <em>OBS! Man kan aldrig sätta startdatum längre in i framtiden än vad det sattes första gången.</em>
       </p>
       <p>
         <label for="groupurl">Länk till eventuell kurssida</label>
-        <input id="groupurl" name="groupurl" placeholder="Länk till kursens webbplats på din skola" />
+        <input type="url" id="groupurl" name="groupurl" placeholder="Länk till kursens webbplats på din skola" />
       </p>
       <p>
         <em>OBS! Man kan aldrig sätta startdatum längre in i framtiden än vad det sattes första gången.</em>

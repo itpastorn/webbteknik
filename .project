@@ -3,6 +3,7 @@
 	<name>webbteknik</name>
 	<comment></comment>
 	<projects>
+		<project>keryxIncludes.ep</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

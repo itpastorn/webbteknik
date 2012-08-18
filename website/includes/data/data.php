@@ -41,18 +41,47 @@ interface data
  */
 function makeSelectElement($name_id, $list, $pre_selected = '')
 {
-    $select_elem     = "<SELECT name=\"{$name_id}\" id=\"{$name_id}\">\n";
+    $select_elem = "<select name=\"{$name_id}\" id=\"{$name_id}\">\n";
     foreach ( $list as $item ) {
         if ( $item->getId() == $pre_selected ) {
             $selected = ' selected';
         } else {
             $selected = '';
         }
-        $select_elem .= '<OPTION value="' . htmlspecialchars($item->getId()) . '"' . "{$selected}>";
+        $select_elem .= '<option value="' . htmlspecialchars($item->getId()) . '"' . "{$selected}>";
         $select_elem .= htmlspecialchars($item->getname());
-        $select_elem .= "</OPTION>\n";
+        $select_elem .= "</option>\n";
     }
-    $select_elem .= "</SELECT>\n";
+    $select_elem .= "</select>\n";
     return $select_elem;
+}
+
+/**
+ * A function that makes a list of checkboxes for HTML from an array of data-objects
+ * 
+ * Each checkbox will come before a label element, both wrappen in a paragraph
+ * 
+ * @param string $name         Used for name attribute on the select tag
+ * @param array  $list         An array of objects that use the data interface
+ * @return string HTML-code
+ */
+function makeCheckboxes($name, $list)
+{
+	$i          = 0;
+    $checkboxes = "";
+    foreach ( $list as $item ) {
+    	// Prepare values
+    	$id       = htmlspecialchars($item->getId());
+    	$itemname = htmlspecialchars($item->getName());
+    	// Make the paragraph
+        $checkboxes .= <<<PARA
+            <p>
+              <input type="checkbox" name="{$name}[]" id="{$name}_{$i}" value="{$id}">
+              <label for="{$name}_{$i}">{$itemname}</label>
+            </p>
+PARA;
+         $i++;
+    }
+    return $checkboxes;
 }
 
