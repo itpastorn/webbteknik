@@ -16,17 +16,8 @@
  * 
  * @todo interface and/or abstract class for all data types
  */
-class data_courses implements data
+class data_courses extends items implements data
 {
-    /**
-     * The course ID, matches DB-record
-     */
-    protected $courseID;
-
-    /**
-     * The course spoken name, matches DB-record
-     */
-    protected $courseName;
 
     /**
      * The course url
@@ -35,28 +26,28 @@ class data_courses implements data
      */
     protected $courseUrl = null;
     
-    private function __construct($courseID, $courseName, $courseUrl)
+    private function __construct($id, $name, $courseUrl)
     {
-        $this->courseID   = $courseID;
-        $this->courseName = $courseName;
+        $this->id   = $id;
+        $this->name = $name;
         $this->courseUrl  = $courseUrl;
     }
     
     /**
      * Loads an instance from DB
      * 
-     * @param string $courseID  The course ID, matches DB primary key
+     * @param string $id  The course ID, matches DB primary key
      * @param object $dbh       Instance of PDO
      */
-    public static function loadOne($courseID, PDO $dbh) {
+    public static function loadOne($id, PDO $dbh) {
         $sql  = <<<SQL
-            SELECT courseID, course_name AS courseName, course_url AS courseUrl
-            FROM courses WHERE courseID = :courseID
+            SELECT courseID AS id, course_name AS name, course_url AS courseUrl
+            FROM courses WHERE id = :id
 SQL;
         $stmt = $dbh->prepare($sql);
-        $stmt->bindParam(':courseID', $courseID);
+        $stmt->bindParam(':id', $id);
         $stmt->execute();
-        $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, __CLASS__, array('courseID', 'courseName', 'courseUrl')); 
+        $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, __CLASS__, array('id', 'name', 'courseUrl')); 
         return $stmt->fetch();
     }
     
@@ -71,48 +62,16 @@ SQL;
      */
     public static function loadAll(PDO $dbh) {
         $sql  = <<<SQL
-            SELECT courseID, course_name AS courseName, course_url AS courseUrl FROM courses
-            ORDER BY courseName
+            SELECT courseID AS id, course_name AS name, course_url AS courseUrl FROM courses
+            ORDER BY name
 SQL;
         $stmt = $dbh->prepare($sql);
-        $stmt->bindParam(':courseID', $courseID);
+        $stmt->bindParam(':id', $id);
         $stmt->execute();
-        $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, __CLASS__, array('courseID', 'courseName', 'courseUrl'));
+        $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, __CLASS__, array('id', 'name', 'courseUrl'));
         return $stmt->fetchAll();
     }
     
-    /**
-     * Get the id
-     * 
-     * @return string
-     */
-    public function getId()
-    {
-        return $this->courseID;
-    }
-
-    /**
-     * Get the name
-     * 
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->courseName;
-    }
-
-    /**
-     * Get the full name
-     * 
-     * For this class, an alias of getName
-     * 
-     * @return string
-     */
-    public function getFullName()
-    {
-        return $this->courseName;
-    }
-
     /**
      * Get the url
      * 

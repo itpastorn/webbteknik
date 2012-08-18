@@ -49,10 +49,10 @@ abstract class items
      */
     public static function fromArray($arr)
     {
-    	// Compare with bare minumum required in validation rules array
-    	
+    // Compare with bare minumum required in validation rules array
+    
         if ( empty($arr['id']) ) {
-        	trigger_error("Trying to create an item with too little data", E_USER_NOTICE);
+            trigger_error("Trying to create an item with too little data", E_USER_NOTICE);
             return false;
         }
         $obj = new data_schools($arr['id'], $arr['name'], $arr['schoolUrl']);
@@ -68,7 +68,7 @@ abstract class items
      */
     public static function fake($id, $name, $schoolUrl="")
     {
-    	// TODO: Use fromArray
+        // TODO: Use fromArray
         $fakeobj = new data_schools($id, $name, $schoolUrl);
         $fakeobj->isFake = true;
         return $fakeobj;
@@ -79,7 +79,7 @@ abstract class items
      * 
      * Should only happen if it has been validated and is error free
      */
-    public static function save()
+    public function save()
     {
         if ( $this->isFake() ) {
             trigger_error(E_USER_WARNING, "Trying to save a fake object");
@@ -116,6 +116,52 @@ abstract class items
         return $status;
     }
     
+    /**
+     * Is it a fake object?
+     */
+    public function isFake()
+    {
+        return $this->isFake;
+    }
+
+    /**
+     * Check that properties conform to validation rules
+     * 
+     * @return bool If check was passed or not
+     */
+    public function validate()
+    {
+        $prop_rules = json_decode($this->validationRules);
+        if ( !is_object($prop_rules) ) {
+            echo "<pre>";
+            var_dump($this->validationRules);
+            var_dump($prop_rules);
+            throw new Exception("Empty contents for validationRules in " . __CLASS__);
+        }
+        foreach ( $prop_rules as $propName => $sp_rules ) {
+            foreach ( $sp_rules as $rule_name => $rule_rules ) {
+                if ( $rule_name == "required" && $rule_rules ) {
+                    if ( empty($this->$propName) ) {
+                        // TODO: Move strings to config
+                        $this->propertyErrors[$propName] = "Värde krävs";
+                        // No need to check any more rules
+                        break;
+                    }
+                }
+                $valid = validator::$rule_name($this->$propName, $rule_rules, true);
+                if ( !$valid ) {
+                    $this->propertyErrors[$propName] = $valid;
+                }
+                 
+                
+            }
+        }
+        $this->propertyErrors['tested'] = true;
+        
+    }
+    
+    // TODO Tomorrow: Export rules to JavaScript
+    
      /**
      * Get the id
      * 
@@ -147,4 +193,68 @@ abstract class items
     }
 
 
+}
+
+
+/**
+ * The validator class has a set of extra methods that PHP does not provide in its filter extension
+ * 
+ * Used for the callback filter
+ * 
+ * All methods must follow the convention
+ * methodname($prop_to_check, $rules/value_to_use, $try_to_sanitize_first)
+ * Simple rules must provide all parameters, but may chose to leave the unused
+ * If possible, method names should equal names of PHP-filters
+ */
+class validator
+{
+
+    /**
+     * Validate boolean values
+     */
+    public static function boolean($prop, $unused1, $unused2)
+    {
+        return filter_var(FILTER_VALIDATE_BOOLEAN );
+    }
+    
+    /**
+     * Sanitize input from textarea and similar fields, allow HTML and newlines
+     */
+    public static function safe_html()
+    {
+        trigger_error("safe_html() not implemented yet", E_USER_ERROR);
+    }
+    /*
+    PHP filters:
+    Simple types
+    FILTER_VALIDATE_BOOLEAN "boolean"         FILTER_NULL_ON_FAILURE              
+    FILTER_VALIDATE_FLOAT   "float"           FILTER_FLAG_ALLOW_THOUSAND          FILTER_SANITIZE_NUMBER_FLOAT
+    FILTER_VALIDATE_INT 	"int"                                                 FILTER_SANITIZE_NUMBER_INT
+
+    FILTER_SANITIZE_STRIPPED "stripped"       FILTER_FLAG_STRIP_LOW  My own option: Allow newline, strip additional problem chars
+
+    Content types
+    FILTER_VALIDATE_EMAIL   "validate_email"                                      FILTER_SANITIZE_EMAIL
+    FILTER_VALIDATE_URL     "validate_url"                                        FILTER_SANITIZE_URL
+    FILTER_VALIDATE_IP      "validate_ip"
+    Pattern
+    FILTER_VALIDATE_REGEXP  "validate_regexp"    Note: Provide usable error message
+    
+    FILTER_CALLBACK         "callback"
+
+    FILTER_SANITIZE_ENCODED
+    
+    FILTER_UNSAFE_RAW   + FILTER_FLAG_STRIP_LOW   My own option: Allow newline, strip additional problem chars
+    
+    My own filters/options
+    
+    maxlength for strings
+    minlength for strings
+    is_json
+    
+    */
+	
+    /**
+     * 
+     */
 }

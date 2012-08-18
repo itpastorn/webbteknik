@@ -11,6 +11,9 @@
  * @filesource
  */
 
+// Common config settings
+ini_set('default_charset', 'UTF-8'); // Move to .htaccess ?
+
 // Include path
 $BELOWROOT = dirname(dirname(__FILE__));
 set_include_path(

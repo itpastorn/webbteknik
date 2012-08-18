@@ -37,9 +37,10 @@ interface data
  * @param array  $list         An array of objects that use the data interface
  * @param string $pre_selected The value that should be set as default (selected attribute)
  * @param bool   $fullinfo     If true, duplicate name and id both for value and text (for datalists)
+ * @param array  $extra        An extra value
  * @return string HTML-code
  */
-function makeSelectElement($list, $pre_selected='', $fullinfo=false)
+function makeSelectElement($list, $pre_selected='', $fullinfo=false, $extra=array())
 {
     $select_elem = "";
     foreach ( $list as $item ) {
@@ -59,6 +60,12 @@ function makeSelectElement($list, $pre_selected='', $fullinfo=false)
 
 HTML;
     }
+    if ( !empty($extra) ) {
+        $select_elem .= <<<HTML
+            <option value="{$extra['id']}">{$extra['name']}</option>
+HTML;
+
+    }
     return $select_elem;
 }
 
@@ -67,28 +74,37 @@ HTML;
  * 
  * Each checkbox will come before a label element, both wrappen in a paragraph
  * 
- * @param string $name         Used for name attribute on the select tag
- * @param array  $list         An array of objects that use the data interface
+ * @param string $name      Used for name attribute on the select tag
+ * @param array  $list      An array of objects that use the data interface
+ * @param array  $extra     An extra value
  * @return string HTML-code
  */
-function makeCheckboxes($name, $list)
+function makeCheckboxes($name, $list, $extra)
 {
 	$i          = 0;
     $checkboxes = "";
     foreach ( $list as $item ) {
     	// Prepare values
-    	$id       = htmlspecialchars($item->getId());
-    	$itemname = htmlspecialchars($item->getName());
+    	$id        = htmlspecialchars($item->getId());
+    	$item_name = htmlspecialchars($item->getName());
     	// Make the paragraph
         $checkboxes .= <<<PARA
             <p>
               <input type="checkbox" name="{$name}[]" id="{$name}_{$i}" value="{$id}">
-              <label for="{$name}_{$i}">{$itemname}</label>
+              <label for="{$name}_{$i}">{$item_name}</label>
             </p>
 
 PARA;
          $i++;
     }
+    if ( !empty($extra) ) {
+        $checkboxes .= <<<HTML
+            <p>
+              <input type="checkbox" name="{$name}[]" id="{$name}_{$i}" value="{$extra['id']}">
+              <label for="{$name}_{$i}">{$extra['item_name']}</label>
+            </p>
+HTML;
+    }    
     return $checkboxes;
 }
 

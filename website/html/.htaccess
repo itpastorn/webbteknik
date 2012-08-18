@@ -1,3 +1,7 @@
+AddDefaultCharset utf-8
+
+# http://stackoverflow.com/questions/6987929/preparing-php-application-to-use-with-utf-8
+
 # TODO Prevent hotlinking and direct access to videos
 
 Options +FollowSymlinks

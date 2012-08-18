@@ -79,10 +79,18 @@ if ( isset($_POST['new_school_school_added']) ) {
 } else {
     $new_school = data_schools::fake('', '');
 }
-
+echo "<pre>";
+var_dump($new_school);
+$new_school->save();
+exit;
 
 // TODO load sql for affiliations
 // $workplace = data_schools::loadFromSql("");
+$workplaces = data_schools::loadAll($dbh);
+// Om bara en skola är satt som arbetsplats, låt den vara default
+
+$select_wp  = makeSelectElement($all_schools, "", true, array('id' => 'null', 'name' => 'Ej i listan/lägg till'));
+
 
 
 // Preparing for mod_rewrite, set base-element
@@ -140,7 +148,7 @@ SECNAV;
         <!-- Should be limited to the schools where the teacher works and be a select list -->
         <label for="g_school">Skola</label>
         <select name="g_school" id="g_school">
-          <?php echo $select_school; ?>
+          <?php echo $select_wp; ?>
         </select>
       </p>
       <p>
@@ -196,7 +204,7 @@ SECNAV;
     <fieldset class="blocklabels">
       <legend>Lägg till ny arbetsplats</legend>
       <p>
-        <label for="s_school_id">Lägg till skola (du måste använda ett färdigt förslag i detta fält)</label>
+        <label for="s_school_id">Lägg till plats där du jobbar (du måste använda ett färdigt förslag i detta fält)</label>
         <input type="text" name="s_school_id" id="s_school_id" list="s_school_list" /> 
           <datalist id="s_school_list">
             <select name="s_school_id">
@@ -213,7 +221,7 @@ SECNAV;
   <?php echo <<<FORMCONTENTS
   <form action="{$pageref}#new_school_form" method="post" id="new_school_form">
     <fieldset class="blocklabels">
-      <legend>Lägg till ny skola eller annan arbetsplats</legend>
+      <legend>Lägg till ny skola eller annan arbetsplats i systemet</legend>
       <p>
         <label for="new_school_school_name">Namn på skolan{$new_school->errorMessage('schoolName')}</label>
         <input type="text"
@@ -273,6 +281,14 @@ FORMCONTENTS;
     	    $("#new_school_form").data("hidden" ,"hidden").hide();
     	}
     });
+    
+    $("#g_school").on("change", function () {
+        if ( $(this).val() === "null" ) {
+            $("#myschools").get()[0].scrollIntoView(true);
+            $("#s_school_id").focus();
+            win.location.hash = "#myschools";
+        }
+    })
 }(window, window.document));
   </script>
   

@@ -18,8 +18,8 @@
  */
 class data_schools extends items implements data
 {
-	
-	// All properties that are not i abstract class are written as schoolProp
+    
+    // All properties that are not i abstract class are written as schoolProp
 
     /**
      * Where the school is located, matches DB-record
@@ -33,6 +33,70 @@ class data_schools extends items implements data
      */
     protected $schoolUrl = null;
     
+    /**
+     * Property validation rules, in addition to what PHP can provide
+     */
+     /*
+    protected $validationRules = '
+        {
+            "id" : {
+                "required" : true,
+                "type"     : "string"
+            },
+            "name" : {
+                "required" : true,
+                "type"     : "string"
+            },
+            "schoolPlace" : {
+                "required" : true,
+                "type"     : "string"
+            },
+            "schoolUrl" : {
+                "required" : false,
+                "type"     : "url"
+            }
+        }';
+    */
+
+    /**
+     * Rules for filter_input_array/filter_var_array, sanitization step
+     */
+    protected $filter_sanitize_rules = array(
+        'id' => array(
+            'filter' => FILTER_SANITIZE_STRIPPED,
+            'flags'  => FILTER_FLAG_STRIP_LOW
+        ),
+        'name' => array(
+            'filter' => FILTER_SANITIZE_STRIPPED,
+            'flags'  => FILTER_FLAG_STRIP_LOW
+        ),
+        'schoolPlace' => array(
+            'filter' => FILTER_SANITIZE_STRIPPED,
+            'flags'  => FILTER_FLAG_STRIP_LOW
+        ),
+        'schoolUrl' => array(
+            'filter' => FILTER_SANITIZE_URL,
+            'flags'  => FILTER_FLAG_STRIP_LOW
+        )
+    );
+    
+    /**
+     * Rules for filter_input_array/filter_var_array, validation step
+     */
+    protected $filter_validate_rules = array(
+        'id' => array(
+            'filter'  => FILTER_VALIDATE_REGEXP,
+            'options' => ""
+        ),
+        'name' => array(
+        ),
+        'schoolPlace' => array(
+        ),
+        'schoolUrl' => array(
+        )
+    );
+    // TODO Add more fields to map DB completetly
+    // TODO Future -> build rules from DB structure
     
     private function __construct($id, $name, $schoolPlace, $schoolUrl)
     {
@@ -71,13 +135,13 @@ SQL;
      * @return array of instances of this class
      */
     public static function loadAll(PDO $dbh, $sql = false) {
-    	if ( !$sql ) {
+        if ( !$sql ) {
         $sql  = <<<SQL
             SELECT schoolID AS id, school_name AS name, school_place AS schoolPlace, school_url AS schoolUrl
             FROM schools
             ORDER BY name
 SQL;
-    	}
+        }
         $stmt = $dbh->prepare($sql);
         $stmt->execute();
         $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, __CLASS__, array('id', 'name', 'schoolPlace', 'schoolUrl'));
@@ -92,8 +156,8 @@ SQL;
     public static function fromArray($arr)
     {
         if ( !isset($arr['id']) || empty($arr['name']) || empty($arr['schoolPlace']) ) {
-        	echo "<pre>";
-        	trigger_error("Trying to create school object with too little data", E_USER_NOTICE);
+            echo "<pre>";
+            trigger_error("Trying to create school object with too little data", E_USER_NOTICE);
             return false;
         }
         if ( empty($arr['id']) ) {
@@ -102,7 +166,7 @@ SQL;
         }
         $schoolUrl  = ( empty($arr['schoolUrl']) ) ? '' : $arr['schoolUrl'];
         $obj = new data_schools($arr['id'], $arr['name'], $arr['schoolPlace'], $schoolUrl);
-        // $obj->validate();
+        $obj->validate();
         return $obj;
         
     }    
@@ -124,18 +188,22 @@ SQL;
      * 
      * Should only happen if it has been validated and is error free
      */
-    public static function save()
+    public function save()
     {
         if ( $this->isFake() ) {
-            trigger_error(E_USER_WARNING, "Trying to save a fake object");
+            trigger_error("Trying to save a fake object", E_USER_WARNING);
             return false;
         }
         if ( $this->propertyErrors['tested'] == false ) {
-            trigger_error(E_USER_NOTICE, "Can not save an object that is untested");
+            trigger_error("Can not save an object that is untested", E_USER_ERROR);
+            return false;
+        }
+        if ( count($this->propertyErrors) > 1 ) {
+            trigger_error("Can not save an object that has errors", E_USER_NOTICE);
             return false;
         }
         // TODO Write SQL to save object, etc
-        trigger_error(E_USER_WARNING, "Not implemented yet");
+        trigger_error("Not implemented yet", E_USER_ERROR);
     }
     
     /**
