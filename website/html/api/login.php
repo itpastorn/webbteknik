@@ -17,8 +17,6 @@ session_start();
  */
 require_once '../../includes/loadfiles.php';
 
-$firephp = FirePHP::getInstance(true);
-
 // Database settings and connection
 $dbx = config::get('dbx');
 // init

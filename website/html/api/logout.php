@@ -7,11 +7,6 @@
 
 session_start();
 
-/**
- * Fire PHP
- */
-require_once('FirePHPCore/FirePHP.class.php');
-$firephp = FirePHP::getInstance(true);
 
 $_SESSION = array();
 session_regenerate_id();

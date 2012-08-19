@@ -185,6 +185,12 @@ iframe {
 .hidden {
     display: none;
 }
+.yellowfade {
+    -moz-animation: 3s yellowfade;
+}
+.greenfade {
+    -moz-animation: 5s greenfade;
+}
 
 @-moz-keyframes yellowfade {
     from {
@@ -192,7 +198,31 @@ iframe {
     }
     to {
         background-color: transparent;
+    }
 }
+
+@-moz-keyframes greenfade {
+    from {
+        background-color: green;
+    }
+    20% {
+        background-color: transparent;
+    }
+    40% {
+        background-color: green;
+    }
+    to {
+        background-color: transparent;
+    }
+}
+
+@-moz-keyframes redfade {
+    from {
+        background-color: red;
+    }
+    to {
+        background-color: transparent;
+    }
 }
 
 /* ------------------------------- *\
@@ -237,7 +267,14 @@ a[href*="w3.org"]:after {
     border-bottom: 1px dotted;
     font-size: 80%;
 }
-
+.errormsg {
+    color: darkred;
+    font-style: italic;
+    -moz-animation: 2s redfade;
+}
+.error {
+    outline: 1px solid red;
+}
 
 /* ------------------------------- *\
    $masthead

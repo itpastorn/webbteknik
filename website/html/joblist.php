@@ -89,7 +89,6 @@ $jobs = $stmt->fetchAll();
      * SQL IN HTML quick fix
      * URGENT TODO FIXME
      */
-    $firephp = FirePHP::getInstance(true);
     $stmt2 = $dbh->prepare(
         "SELECT percentage_complete, status FROM userprogress WHERE email = :email AND joblistID = :joblistID"
     );

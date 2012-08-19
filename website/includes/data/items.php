@@ -27,7 +27,21 @@ abstract class items
     /**
      * Property validation rules
      */
-    protected $validationRules;
+    // protected $validationRules;
+
+    /**
+     * Rules for filter_input_array/filter_var_array, sanitization step
+     * 
+     * Abstract
+     */
+    protected static $filterSanitizeRules = null;
+    
+    /**
+     * Rules for filter_input_array/filter_var_array, validation step
+     * 
+     * Abstract
+     */
+    protected static $filterValidateRules = null;
 
     /**
      * Error on properties
@@ -56,7 +70,7 @@ abstract class items
             return false;
         }
         $obj = new data_schools($arr['id'], $arr['name'], $arr['schoolUrl']);
-        // $obj->validate();
+        $obj->validate();
         return $obj;
         
     }
@@ -65,7 +79,10 @@ abstract class items
      * A mock/example object
      * 
      * Must not be savable
+     * Example only since params may not be the same
+     * TODO Move to interface and set array as para, for consistency?
      */
+    /*
     public static function fake($id, $name, $schoolUrl="")
     {
         // TODO: Use fromArray
@@ -73,13 +90,16 @@ abstract class items
         $fakeobj->isFake = true;
         return $fakeobj;
     }
-    
+    */
+
     /**
      * Saving an object
      * 
      * Should only happen if it has been validated and is error free
+     * @param object $dbh A PDO object
+     * @return bool Successfully saved or not
      */
-    public function save()
+    public function save(PDO $dbh)
     {
         if ( $this->isFake() ) {
             trigger_error(E_USER_WARNING, "Trying to save a fake object");
@@ -89,16 +109,27 @@ abstract class items
             trigger_error(E_USER_NOTICE, "Can not save an object that is untested");
             return false;
         }
+        if ( !$this->isErrorFree ) {
+            trigger_error(E_USER_WARNING, "Can not save an object that has errors");
+            return false;
+        }
         // TODO Write SQL to save object, etc
-        trigger_error(E_USER_WARNING, "Not implemented yet");
+        trigger_error(E_USER_ERROR, "Not implemented yet");
     }
     
     /**
      * Get error message for a property
+     * 
+     * @param string $propName Name of property that might have an error 
+     * @param bool   $asHTML   Return HTML-escaped
      */
-    public function errorMessage($propName)
+    public function errorMessage($propName, $asHTML)
     {
-        return isset($this->propertyErrors[$propName]) ? $this->propertyErrors[$propName] : '';
+        $msg = isset($this->propertyErrors[$propName]) ? $this->propertyErrors[$propName] : '';
+        if ( $asHTML ) {
+            return htmlspecialchars($msg);
+        }
+        return $msg;
     }
     
     /**
@@ -127,40 +158,58 @@ abstract class items
     /**
      * Check that properties conform to validation rules
      * 
+     * @todo Future, validate only one property
+     * 
      * @return bool If check was passed or not
      */
     public function validate()
     {
-        $prop_rules = json_decode($this->validationRules);
-        if ( !is_object($prop_rules) ) {
-            echo "<pre>";
-            var_dump($this->validationRules);
-            var_dump($prop_rules);
-            throw new Exception("Empty contents for validationRules in " . __CLASS__);
+
+        // Debug with FirePHP;
+        $fphp = $GLOBALS['FIREPHP'];
+        
+        // Using late static binding, since we want to fetch rules from subclasses
+
+        // What to test = Available rules and available properties (as array) intersection
+        $test      = array_intersect_key(get_object_vars($this), static::$filterSanitizeRules);
+        $sanitized = filter_var_array($test, static::$filterSanitizeRules);
+
+        // Sanitized values should be put back into the object
+        foreach ( $sanitized as $propName => $value ) {
+            $this->$propName = $value;
         }
-        foreach ( $prop_rules as $propName => $sp_rules ) {
-            foreach ( $sp_rules as $rule_name => $rule_rules ) {
-                if ( $rule_name == "required" && $rule_rules ) {
-                    if ( empty($this->$propName) ) {
-                        // TODO: Move strings to config
-                        $this->propertyErrors[$propName] = "Värde krävs";
-                        // No need to check any more rules
-                        break;
-                    }
-                }
-                $valid = validator::$rule_name($this->$propName, $rule_rules, true);
-                if ( !$valid ) {
-                    $this->propertyErrors[$propName] = $valid;
-                }
-                 
-                
-            }
+        
+        // Note that we are keeping perhaps invalid properties
+        // because we want to re-populate forms
+            
+        $test      = array_intersect_key($sanitized, static::$filterValidateRules);
+        $validated = filter_var_array($test, static::$filterValidateRules);
+
+        // Purge non true values
+        $validated = array_filter($validated, function ($v) { return (bool)$v; });
+        
+        // Error messages to be set on array key diff
+        $error_keys = array_keys(array_diff_key(static::$filterValidateRules, $validated));
+        
+        // Remove all previously set errors
+        $this->propertyErrors = array();
+        foreach ( $error_keys as $key ) {
+            $this->propertyErrors[$key] = $this->errorStrings[$key];
         }
+    
         $this->propertyErrors['tested'] = true;
         
     }
     
-    // TODO Tomorrow: Export rules to JavaScript
+    /**
+     * See if object is error free
+     * 
+     * @return bool
+     */
+    public function isErrorFree()
+    {
+        return (count($this->propertyErrors) < 2) && ($this->propertyErrors['tested'] == true);
+    }
     
      /**
      * Get the id
@@ -226,16 +275,19 @@ class validator
     }
     /*
     PHP filters:
+    
+    FILTER_REQUIRE_SCALAR
+    
     Simple types
     FILTER_VALIDATE_BOOLEAN "boolean"         FILTER_NULL_ON_FAILURE              
     FILTER_VALIDATE_FLOAT   "float"           FILTER_FLAG_ALLOW_THOUSAND          FILTER_SANITIZE_NUMBER_FLOAT
-    FILTER_VALIDATE_INT 	"int"                                                 FILTER_SANITIZE_NUMBER_INT
+    FILTER_VALIDATE_INT     "int"                                                 FILTER_SANITIZE_NUMBER_INT
 
     FILTER_SANITIZE_STRIPPED "stripped"       FILTER_FLAG_STRIP_LOW  My own option: Allow newline, strip additional problem chars
 
     Content types
     FILTER_VALIDATE_EMAIL   "validate_email"                                      FILTER_SANITIZE_EMAIL
-    FILTER_VALIDATE_URL     "validate_url"                                        FILTER_SANITIZE_URL
+    FILTER_VALIDATE_URL     "validate_url"   FILTER_FLAG_SCHEME_REQUIRED          FILTER_SANITIZE_URL
     FILTER_VALIDATE_IP      "validate_ip"
     Pattern
     FILTER_VALIDATE_REGEXP  "validate_regexp"    Note: Provide usable error message
@@ -253,7 +305,7 @@ class validator
     is_json
     
     */
-	
+    
     /**
      * 
      */

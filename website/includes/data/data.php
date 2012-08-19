@@ -49,11 +49,11 @@ function makeSelectElement($list, $pre_selected='', $fullinfo=false, $extra=arra
         } else {
             $selected = '';
         }
-    	$name = htmlspecialchars($item->getFullName());
+        $name = htmlspecialchars($item->getFullName());
         $id   = htmlspecialchars($item->getId());
         if ( $fullinfo ) {
-        	$id   = "{$name} ({$id})";
-        	$name = $id;
+            $id   = "{$name} ({$id})";
+            $name = $id;
         }
         $select_elem .= <<<HTML
             <option value="{$id}"{$selected}>{$name}</option>
@@ -74,20 +74,20 @@ HTML;
  * 
  * Each checkbox will come before a label element, both wrappen in a paragraph
  * 
- * @param string $name      Used for name attribute on the select tag
  * @param array  $list      An array of objects that use the data interface
+ * @param string $name      Used for name attribute on the select tag
  * @param array  $extra     An extra value
  * @return string HTML-code
  */
-function makeCheckboxes($name, $list, $extra)
+function makeCheckboxes($list, $name, $extra=false)
 {
-	$i          = 0;
+    $i          = 0;
     $checkboxes = "";
     foreach ( $list as $item ) {
-    	// Prepare values
-    	$id        = htmlspecialchars($item->getId());
-    	$item_name = htmlspecialchars($item->getName());
-    	// Make the paragraph
+        // Prepare values
+        $id        = htmlspecialchars($item->getId());
+        $item_name = htmlspecialchars($item->getName());
+        // Make the paragraph
         $checkboxes .= <<<PARA
             <p>
               <input type="checkbox" name="{$name}[]" id="{$name}_{$i}" value="{$id}">

@@ -15,8 +15,6 @@ session_start();
  */
 require_once '../../includes/loadfiles.php';
 
-$firephp = FirePHP::getInstance(true);
-
 user::setSessionData();
 
 user::requires(user::LOGGEDIN);

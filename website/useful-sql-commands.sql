@@ -163,6 +163,28 @@ INSERT INTO `videos` (`videoname`, `title`, `bookID`, `booksectionID`, `tags`, `
 ('kap-1-a-4', 'Validering', 'wu1', 5, 'verktyg, validering', 5),
 ('thimble', 'Bonusvideo: Mozilla Thimble', 'wu1', 1, 'verktyg', 4);
 
+CREATE TABLE IF NOT EXISTS `workplaces` (
+  `workplaceID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `schoolID` varchar(6) COLLATE utf8_swedish_ci NOT NULL,
+  `email` varchar(150) COLLATE utf8_swedish_ci NOT NULL,
+  `since` date NOT NULL,
+  PRIMARY KEY (`workplaceID`),
+  UNIQUE KEY `nodup` (`schoolID`,`email`),
+  KEY `email` (`email`),
+  KEY `schoolID` (`schoolID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci COMMENT='Where teachers work' AUTO_INCREMENT=1 ;
+
+--
+-- Restriktioner för dumpade tabeller
+--
+
+--
+-- Restriktioner för tabell `workplaces`
+--
+ALTER TABLE `workplaces`
+  ADD CONSTRAINT `workplaces_ibfk_2` FOREIGN KEY (`email`) REFERENCES `users` (`email`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `workplaces_ibfk_1` FOREIGN KEY (`schoolID`) REFERENCES `schools` (`schoolID`) ON UPDATE CASCADE;
+
 -- Changelog
 
 ALTER TABLE `videos` CHANGE `book` `bookID` VARCHAR( 5 ) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL;
@@ -180,3 +202,8 @@ ALTER TABLE `webbtek_webbtek`.`joblist` ADD INDEX ( `joborder` );
 ALTER TABLE `webbtek_webbtek`.`joblist` ADD INDEX ( `track` );
 ALTER TABLE `webbtek_webbtek`.`joblist` ADD INDEX ( `chapter` );
 
+ALTER TABLE `schools`
+  CHANGE `numtextbooks` `numtextbooks` MEDIUMINT( 11 ) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Willl limit total size of all groups',
+  CHANGE `numworkbooks` `numworkbooks` MEDIUMINT( 11 ) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Will limit total size of all groups',
+  CHANGE `numteachguides` `numteachguides` SMALLINT( 11 ) UNSIGNED NOT NULL DEFAULT '0';
+ALTER TABLE `webbtek_webbtek`.`schools` ADD UNIQUE `nodup` ( `school_name` , `school_place` );
