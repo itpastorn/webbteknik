@@ -1,0 +1,9 @@
+window_sizes 1920 1168 900 1014 974 120
+show_stereotypes
+selected classrelation_ref 128514 // <generalisation>
+open
+  classview_ref 128002 // includes
+  class_ref 128258 // data_courses
+  class_ref 128898 // data_schools
+end
+end

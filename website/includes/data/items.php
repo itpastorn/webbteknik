@@ -23,6 +23,12 @@ abstract class items
      * The school spoken name, matches DB-record
      */
     protected $name;
+
+    /**
+     * Array of names of the properties that may be accessed via the __get() magic method
+     */
+    protected $gettable =  array();
+
     
     /**
      * Property validation rules
@@ -253,6 +259,30 @@ abstract class items
     public function getFullName()
     {
         return $this->name;
+    }
+
+    /**
+     * Safe getter
+     * 
+     * Adapted straight from the PHP-manual
+     * @link http://www.php.net/manual/en/language.oop5.overloading.php#object.get
+     * @return mixed
+     */
+    public function __get($prop)
+    {
+    	// Gettable props array must have the item
+
+        if ( isset($this->$prop) && in_array($prop, $this->gettable) ) {
+            return $this->$prop;
+        }
+
+        $trace = debug_backtrace();
+        trigger_error(
+            'Undefined or disallowed property access via __get(): ' . $prop .
+            ' in ' . $trace[0]['file'] .
+            ' on line ' . $trace[0]['line'],
+            E_USER_ERROR);
+        return null;
     }
 
 

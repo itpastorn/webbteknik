@@ -170,7 +170,6 @@ SQL;
     public static function fromArray($arr)
     {
         if ( !isset($arr['id']) || empty($arr['name']) || empty($arr['schoolPlace']) ) {
-            echo "<pre>";
             trigger_error("Trying to create school object with too little data", E_USER_NOTICE);
             return false;
         }

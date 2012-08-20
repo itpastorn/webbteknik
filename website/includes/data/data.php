@@ -10,9 +10,18 @@
 
 /**
  * Data classes
+ * 
+ * All classes should also inherit from the abstract class data_item
  */
 interface data
 {
+	
+	/*
+	 * Contains the 'SELECT ... FROM table' part of SQL-queries
+	 * 
+	 * Manually check for this, since there are no "abstract constants"
+	 */
+	// abstract const SELECT_SQL = "";
 	
     /**
      * Loads an instance from DB
@@ -46,7 +55,10 @@ interface data
      */
     public function save(PDO $dbh);
     
+    // Documented in abstract class items
     public function getId();
+    
+    // Documented in abstract class items
     public function getName();
 
     /**
