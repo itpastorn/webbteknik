@@ -32,17 +32,28 @@ $FIREPHP = FirePHP::getInstance(true);
 /**
  * Configuration
  */
-require_once 'config.php';
+require 'config.php';
 
 /**
  * Database
  */
-require_once 'keryxDB2/cx.php';
+require 'keryxDB2/cx.php';
 
 /**
  * Users
  */
-require_once 'user.php';
+require 'user.php';
+
+/**
+ * Abstract items-class
+ */
+require "../includes/data/items.php";
+
+/**
+ * Data class interface
+ */
+require "../includes/data/data.php";
+
 
 date_default_timezone_set("Europe/Stockholm");
 $CURRENT_LOCALE = setlocale(LC_ALL, "sv_SE", "Swedish", "sve");

@@ -82,6 +82,16 @@ SQL;
         return $this->courseUrl;
     }
     
+    public static function isExistingId($id, PDO $dbh)
+    {
+    	// TODO Validate single prop, before invoking DB
+        $sql  = "SELECT count(*) FROM courses where courseID = :id";
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
+    
 
 }
 

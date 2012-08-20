@@ -24,7 +24,9 @@ keryxDB2_cx::get($dbx);
 
 // Prepare data
 // Ajax (assertion) data sent as POST
-$assertion = filter_input(INPUT_POST, 'assertion', FILTER_SANITIZE_ENCODED, FILTER_FLAG_STRIP_LOW|FILTER_FLAG_STRIP_HIGH);
+$assertion = filter_input(
+    INPUT_POST, 'assertion', FILTER_SANITIZE_ENCODED, FILTER_FLAG_STRIP_LOW|FILTER_FLAG_STRIP_HIGH
+);
 
 if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != "off" ) {
     $audience = "https://";

@@ -52,7 +52,8 @@ $status .= "</ul>\n";
   <?php require "../includes/snippets/mainmenu.php"; ?>
   <p>
     Hej. Roligt att du är intresserad av
-    <a href="http://www.skolportalen.se/laromedel/produkt/J200%204500/Webbutveckling%201%20-%20L%C3%A4robok/">vårt läromedel</a>.
+    <a href="http://www.skolportalen.se/laromedel/produkt/J200%204500/Webbutveckling%201%20-%20L%C3%A4robok/">vårt
+    läromedel</a>.
     Just nu arbetar jag (Lars Gunther) på att göra den här webbplatsen användbar.
   </p>
   <p>
@@ -89,7 +90,8 @@ $status .= "</ul>\n";
   </ul>
   <p class="centered sign">Lars Gunther</p>
   <p class="centered">
-    <a href="http://www.skolportalen.se/"><img src="img/skolportalen-logo-408-111.png" width="408" height="111" alt="Thelin Läromedel, Skolportalen" /></a>
+    <a href="http://www.skolportalen.se/"><img src="img/skolportalen-logo-408-111.png" 
+      width="408" height="111" alt="Thelin Läromedel, Skolportalen" /></a>
   </p>
 </body>
 </html>

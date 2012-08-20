@@ -74,7 +74,29 @@ abstract class items
         return $obj;
         
     }
-    
+
+    /**
+     * Common checks tu run before saving an object
+     * 
+     * Saving should only happen if it has been validated and is error free
+     * @return bool Successfully passed checks or not
+     */
+    public function preSaveChecks()
+    {
+        if ( $this->isFake() ) {
+            trigger_error(E_USER_WARNING, "Trying to save a fake object");
+            return false;
+        }
+        if ( $this->propertyErrors['tested'] == false ) {
+            trigger_error(E_USER_NOTICE, "Can not save an object that is untested");
+            return false;
+        }
+        if ( !$this->isErrorFree() ) {
+            trigger_error(E_USER_WARNING, "Can not save an object that has errors");
+            return false;
+        }
+        return true;
+    }
     /**
      * A mock/example object
      * 
@@ -101,16 +123,8 @@ abstract class items
      */
     public function save(PDO $dbh)
     {
-        if ( $this->isFake() ) {
-            trigger_error(E_USER_WARNING, "Trying to save a fake object");
-            return false;
-        }
-        if ( $this->propertyErrors['tested'] == false ) {
-            trigger_error(E_USER_NOTICE, "Can not save an object that is untested");
-            return false;
-        }
-        if ( !$this->isErrorFree ) {
-            trigger_error(E_USER_WARNING, "Can not save an object that has errors");
+        $safe = parent::preSaveChecks();
+        if ( !$safe ) {
             return false;
         }
         // TODO Write SQL to save object, etc
@@ -273,40 +287,37 @@ class validator
     {
         trigger_error("safe_html() not implemented yet", E_USER_ERROR);
     }
-    /*
-    PHP filters:
     
-    FILTER_REQUIRE_SCALAR
-    
-    Simple types
-    FILTER_VALIDATE_BOOLEAN "boolean"         FILTER_NULL_ON_FAILURE              
-    FILTER_VALIDATE_FLOAT   "float"           FILTER_FLAG_ALLOW_THOUSAND          FILTER_SANITIZE_NUMBER_FLOAT
-    FILTER_VALIDATE_INT     "int"                                                 FILTER_SANITIZE_NUMBER_INT
-
-    FILTER_SANITIZE_STRIPPED "stripped"       FILTER_FLAG_STRIP_LOW  My own option: Allow newline, strip additional problem chars
-
-    Content types
-    FILTER_VALIDATE_EMAIL   "validate_email"                                      FILTER_SANITIZE_EMAIL
-    FILTER_VALIDATE_URL     "validate_url"   FILTER_FLAG_SCHEME_REQUIRED          FILTER_SANITIZE_URL
-    FILTER_VALIDATE_IP      "validate_ip"
-    Pattern
-    FILTER_VALIDATE_REGEXP  "validate_regexp"    Note: Provide usable error message
-    
-    FILTER_CALLBACK         "callback"
-
-    FILTER_SANITIZE_ENCODED
-    
-    FILTER_UNSAFE_RAW   + FILTER_FLAG_STRIP_LOW   My own option: Allow newline, strip additional problem chars
-    
-    My own filters/options
-    
-    maxlength for strings
-    minlength for strings
-    is_json
-    
-    */
-    
-    /**
-     * 
-     */
 }
+/*
+PHP filters:
+
+FILTER_REQUIRE_SCALAR
+
+Simple types
+FILTER_VALIDATE_BOOLEAN "boolean"         FILTER_NULL_ON_FAILURE              
+FILTER_VALIDATE_FLOAT   "float"           FILTER_FLAG_ALLOW_THOUSAND          FILTER_SANITIZE_NUMBER_FLOAT
+FILTER_VALIDATE_INT     "int"                                                 FILTER_SANITIZE_NUMBER_INT
+
+FILTER_SANITIZE_STRIPPED "stripped"  FILTER_FLAG_STRIP_LOW  My own option: Allow newline, strip additional problem chars
+
+Content types
+FILTER_VALIDATE_EMAIL   "validate_email"                                      FILTER_SANITIZE_EMAIL
+FILTER_VALIDATE_URL     "validate_url"   FILTER_FLAG_SCHEME_REQUIRED          FILTER_SANITIZE_URL
+FILTER_VALIDATE_IP      "validate_ip"
+Pattern
+FILTER_VALIDATE_REGEXP  "validate_regexp"    Note: Provide usable error message
+
+FILTER_CALLBACK         "callback"
+
+FILTER_SANITIZE_ENCODED
+
+FILTER_UNSAFE_RAW   + FILTER_FLAG_STRIP_LOW   My own option: Allow newline, strip additional problem chars
+
+My own filters/options
+
+maxlength for strings
+minlength for strings
+is_json
+
+*/

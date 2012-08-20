@@ -13,11 +13,46 @@
  */
 interface data
 {
+	
+    /**
+     * Loads an instance from DB
+     * 
+     * @param string $id  The school ID, matches DB primary key
+     * @param object $dbh Instance of PDO
+     * @return mixed The object instance or false
+     */
+    public static function loadOne($id, PDO $dbh);
+
+    /**
+     * Return array of objects with all available records
+     * 
+     * @todo set limits, interval for pagination, etc
+     * 
+     * @param object $dbh Instance of PDO
+     * @param string $dbh Custom SQL SELECT-query
+     * @return Array of instances of this class
+     */
+    public static function loadAll(PDO $dbh, $sql=false);
+
+    /**
+     * Saving an object
+     * 
+     * Should only happen if it has been validated and is error free
+     * That test can be deferred to the abstract class preSaveChecks-method
+     * @see data_items::preSaveChecks()
+     * 
+     * @param object $dbh A PDO object
+     * @return bool Successfully saved or not
+     */
+    public function save(PDO $dbh);
+    
     public function getId();
     public function getName();
-    public static function loadOne($id, PDO $dbh);
-    public static function loadAll(PDO $dbh);
-    // public function save();
+
+    /**
+     * Helper functions for sibling classes to verify foreign key relationships
+     */
+    public static function isExistingId($id, PDO $dbh);
     
     /*
      * Constructor must be private

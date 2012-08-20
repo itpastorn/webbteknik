@@ -25,7 +25,8 @@ if ( user::validate(user::LOGGEDIN) ) {
     $curuser .= "<ul><li>Logga in på nytt om du vill <strong>byta användare</strong>. (Främst för admins.)</li>";
     if ( isset($_GET['nopriv']) ) {
         $note  = "<h2>Du har inte behörighet att gå till sidan</h2>\n";
-        $note .= "<p>Det kan bero på att du inte har registrerat bokinköp eller anslutit dig till en undervisningsgrupp.\n";
+        $note .= "<p>Det kan bero på att du inte har registrerat bokinköp " .
+        		 "eller anslutit dig till en undervisningsgrupp.\n";
         $note .= "Det gör du genom att <a href=\"edituser.php\">redigera dina användardata</a>.</p>\n";
     }
 } else {

@@ -96,11 +96,13 @@ if ( $tocagree ) :
       </p>
       <p>
         <label for="firstname">Förnamn:</label>
-        <input type="text" id="firstname" name="firstname" value="<?php echo htmlspecialchars($userdata->firstname); ?>" required />
+        <input type="text" id="firstname" name="firstname" 
+               value="<?php echo htmlspecialchars($userdata->firstname); ?>" required />
       </p>
       <p>
         <label for="lastname">Efternamn:</label>
-        <input type="text" id="lastname" name="lastname" value="<?php echo htmlspecialchars($userdata->lastname); ?>" required />
+        <input type="text" id="lastname" name="lastname"
+               value="<?php echo htmlspecialchars($userdata->lastname); ?>" required />
       </p>
       <p>
         <span class="labeldummysincecssalignmentisnearimpossible"></span>
@@ -181,11 +183,14 @@ else: // tocagree - not - show TOC
         I stora drag:
       </p>
       <ul>
-        <li>När du köpt en bok, så får du tillgång till webbplatsen i ett år. (Skolor: Det räcker att köpa en ny övningsbok.)</li>
+        <li>När du köpt en bok, så får du tillgång till webbplatsen i ett år.
+          (Skolor: Det räcker att köpa en ny övningsbok.)</li>
         <li>Du får inte kopiera materialet.</li>
         <li>Du får inte dela din inloggning med någon annan.</li>
-        <li>Du får inte skapa flera inloggningar om du inte är admin eller lärare (som kan få ha ett konto där de låtsas vara elever).</li>
-        <li>Du måste uppge ditt korrekta för- och efternamn. (Din email är ditt kontonamn, du behöver ingen <i>nick</i>.)</li>
+        <li>Du får inte skapa flera inloggningar om du inte är admin eller lärare
+          (som kan få ha ett konto där de låtsas vara elever).</li>
+        <li>Du måste uppge ditt korrekta för- och efternamn. (Din email är ditt kontonamn,
+          du behöver ingen <i>nick</i>.)</li>
       </ul>
     </fieldset>
   </form>

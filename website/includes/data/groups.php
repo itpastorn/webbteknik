@@ -1,6 +1,6 @@
 <?php
 /**
- * Class definition for schools
+ * Class definition for groups
  * 
  * @author <gunther@keryx.se>
  * @version "Under construction 1"
@@ -10,53 +10,59 @@
  */
 
 /**
- * School
+ * group
  *
- * Name and description of schools offered at the national level or by the institute
+ * Name and description of groups offered at the national level or by the institute
  * 
  * @todo interface and/or abstract class for all data types
  */
-class data_schools extends items implements data
+class data_groups extends items implements data
 {
     
-    // All properties that are not i abstract class are written as schoolProp
+    // All properties that are not i abstract class are written as groupProp
+    
+    // Inherit
+    // + id   <=> groupID in DB
+    // + name <=> group_nickname in DB
+    
+    // "Foreign keys" must map to pre-existing record in DB
+    // Sanitization rules are imported, validation used via DB
 
     /**
-     * Where the school is located, matches DB-record
+     * At what school does this course exist
+     * 
+     * Foreign key
      */
-    protected $schoolPlace;
+    protected $schoolID;
 
     /**
-     * The web page of the school
+     * What course is it that the group studies
+     * 
+     * Foreign key
+     */
+    protected $courseID;
+
+    /**
+     * The web page of the group
      * 
      * May be null, if no URL exists
      */
-    protected $schoolUrl = null;
+    protected $groupUrl = null;
+
+    /**
+     * The maximum number of students in the group, not including teachers
+     */
+    protected $groupSize = 0;
+
     
     /**
-     * Property validation rules, in addition to what PHP can provide
+     * Start date the group
+     * 
+     * Formatted YYYY-MM-DD
      */
-     /*
-    protected $validationRules = '
-        {
-            "id" : {
-                "required" : true,
-                "type"     : "string"
-            },
-            "name" : {
-                "required" : true,
-                "type"     : "string"
-            },
-            "schoolPlace" : {
-                "required" : true,
-                "type"     : "string"
-            },
-            "schoolUrl" : {
-                "required" : false,
-                "type"     : "url"
-            }
-        }';
-    */
+    protected $groupDate = null;
+
+    
 
     /**
      * Rules for filter_input_array/filter_var_array, sanitization step
@@ -70,11 +76,14 @@ class data_schools extends items implements data
             'filter' => FILTER_SANITIZE_STRIPPED,
             'flags'  => 68
         ),
-        'schoolPlace' => array(
+        'groupSize' => array(
+            'filter' => FILTER_SANITIZE_NUMBER_INT
+        ),
+        'groupDate' => array(
             'filter' => FILTER_SANITIZE_STRIPPED,
             'flags'  => 68
         ),
-        'schoolUrl' => array(
+        'groupUrl' => array(
             'filter' => FILTER_SANITIZE_URL
         )
     );
@@ -82,82 +91,110 @@ class data_schools extends items implements data
 
     /**
      * Rules for filter_input_array/filter_var_array, validation step
+     * 
+     * @todo Validate date using callback
      */
     protected static $filterValidateRules = array(
         'id' => array(
             'filter'  => FILTER_VALIDATE_REGEXP,
-            'options' => array( 'regexp' => "/^[a-z0-9]{5,6}$/u" )
+            'options' => array( 'regexp' => "/^[a-z0-9]{5}$/u" )
         ),
         'name' => array(
             'filter'  => FILTER_VALIDATE_REGEXP,
-            'options' => array( 'regexp' => "/^\\p{L}[\\p{L}\\x20\\p{Pd}&#38;]{2,100}$/u" )
+            'options' => array( 'regexp' => "/^\\p{L}[\\p{L}\\x20\\p{Pd}&#38;]{2,20}$/u" )
         ),
-        'schoolPlace' => array(
+        'groupSize' => array(
+            'filter'  => FILTER_VALIDATE_INT,
+            'flags'   => FILTER_REQUIRE_SCALAR,
+            'options' => array('min_range' => 1, 'max_range' => 500)
+        ),
+        'groupDate' => array(
             'filter'  => FILTER_VALIDATE_REGEXP,
-            'options' => array( 'regexp' => "/^\\p{L}[\\p{L}\\x20\\p{Pd}]{2,50}$/u" )
+            'options' => array( 'regexp' => "/^20[1-3][0-9]-[01][0-9]-[0-3][0-9]$/u" )
         ),
-        'schoolUrl' => array(
+        'groupUrl' => array(
             'filter'  => FILTER_VALIDATE_URL,
             'flags'   => FILTER_FLAG_SCHEME_REQUIRED
-        )
+        ),
+        'schoolID' => array(
+            'filter'  => FILTER_CALLBACK,
+            'flags'   => "data_scools::isExistingId"
+        ),
+        'courseID' => array(
+            'filter'  => FILTER_CALLBACK,
+            'flags'   => "data_courses::isExistingId"
+        ),
     );
     // The u-flag also ensures UTF-8 validity
     // Pd = Punctuation, Dash
     // L  = Letter
     // &#38; is allowed, for encoded &
     
-    // TODO Add more fields to map DB completetly
     
     /**
      * Rules for filter_input_array/filter_var_array, validation step
      */
     protected $errorStrings = array(
-        'id' => "Fel format, inte enligt /^[a-z]{4,5}[a-z0-9]$/u",
-        'name' => "Fel format, inte enligt /^\\p{L}[\\p{L}\\x20\\p{Pd}&#38;]{2,100}$/u",
-        'schoolPlace' => "Fel format, inte enligt /^\\p{L}[\\p{L}\\x20\\p{Pd}]{2,50}$/u",
-        'schoolUrl' => "Inte en URL. (Den måste inkludera schema.)"
+        'id' => "Fel format, inte enligt /^[a-z0-9]{5}$/u",
+        'name' => "Fel format, inte enligt /^\\p{L}[\\p{L}\\x20\\p{Pd}&#38;]{2,20}$/u",
+        'groupUrl' => "Inte en URL. (Den måste inkludera schema.)"
     );
 /*
         'id' => "För kort (min 5), för långt (max 6), eller otillåtna tecken",
         'name' => "För kort (min 2), för långt (max 100), eller otillåtna tecken",
-        'schoolPlace' => "För kort (min 2), för långt (max 50), eller otillåtna tecken",
-        'schoolUrl' => "Inte en URL. (Den måste inkludera schema.)"
+        'groupPlace' => "För kort (min 2), för långt (max 50), eller otillåtna tecken",
+        'groupUrl' => "Inte en URL. (Den måste inkludera schema.)"
 */
 
-    private function __construct($id, $name, $schoolPlace, $schoolUrl)
+    private function __construct($id, $name, $groupPlace, $groupUrl)
     {
         $this->id          = $id;
         $this->name        = $name;
-        $this->schoolPlace = $schoolPlace;
-        $this->schoolUrl   = $schoolUrl;
+        $this->groupPlace = $groupPlace;
+        $this->groupUrl   = $groupUrl;
     }
     
+    /**
+     * Loads an instance from DB
+     * 
+     * @param string $id  The group ID, matches DB primary key
+     * @param object $dbh Instance of PDO
+     */
     public static function loadOne($id, PDO $dbh) {
         $sql  = <<<SQL
-            SELECT schoolID AS id, school_name AS name, school_place AS schoolPlace, school_url AS schoolUrl
-            FROM schools WHERE schoolID = :id
+            SELECT groupID AS id, group_name AS name, group_place AS groupPlace, group_url AS groupUrl
+            FROM groups WHERE groupID = :id
 SQL;
         $stmt = $dbh->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
         $stmt->setFetchMode(
-            PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, __CLASS__, array('id', 'name', 'schoolPlace', 'schoolUrl')
+            PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, __CLASS__, array('id', 'name', 'groupPlace', 'groupUrl')
         );
         return $stmt->fetch();
     }
     
+    /**
+     * Return array of objects with all available records
+     * 
+     * @todo set limits, interval for pagination, etc
+     * 
+     * @param object $dbh Instance of PDO
+     * @param string $dbh Custom SQL query
+     * @return array of instances of this class
+     */
     public static function loadAll(PDO $dbh, $sql = false) {
         if ( !$sql ) {
         $sql  = <<<SQL
-            SELECT schoolID AS id, school_name AS name, school_place AS schoolPlace, school_url AS schoolUrl
-            FROM schools
+            SELECT groupID AS id, group_name AS name, group_place AS groupPlace, group_url AS groupUrl
+            FROM groups
             ORDER BY name
 SQL;
         }
         $stmt = $dbh->prepare($sql);
         $stmt->execute();
         $stmt->setFetchMode(
-            PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, __CLASS__, array('id', 'name', 'schoolPlace', 'schoolUrl')
+            PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, __CLASS__, array('id', 'name', 'groupPlace', 'groupUrl')
         );
         return $stmt->fetchAll();
     }
@@ -169,13 +206,13 @@ SQL;
      */
     public static function fromArray($arr)
     {
-        if ( !isset($arr['id']) || empty($arr['name']) || empty($arr['schoolPlace']) ) {
+        if ( !isset($arr['id']) || empty($arr['name']) || empty($arr['groupPlace']) ) {
             echo "<pre>";
-            trigger_error("Trying to create school object with too little data", E_USER_NOTICE);
+            trigger_error("Trying to create group object with too little data", E_USER_NOTICE);
             return false;
         }
-        $schoolUrl  = ( empty($arr['schoolUrl']) ) ? '' : $arr['schoolUrl'];
-        $obj = new data_schools($arr['id'], $arr['name'], $arr['schoolPlace'], $schoolUrl);
+        $groupUrl  = ( empty($arr['groupUrl']) ) ? '' : $arr['groupUrl'];
+        $obj = new data_groups($arr['id'], $arr['name'], $arr['groupPlace'], $groupUrl);
         $obj->validate();
         if ( empty($arr['id']) ) {
             $obj->generateId();
@@ -194,13 +231,13 @@ SQL;
         $fphp = $GLOBALS['FIREPHP'];
         
         // Name and place must be error free properties
-        if ( $this->isError('name') || $this->isError('schoolPlace') || !$this->propertyErrors['tested'] ) {
-            trigger_error("Trying to create id for school from untested or faulty data.", E_USER_NOTICE);
+        if ( $this->isError('name') || $this->isError('groupPlace') || !$this->propertyErrors['tested'] ) {
+            trigger_error("Trying to create id for group from untested or faulty data.", E_USER_NOTICE);
             return false;
         }
         // Temporarily undo any escaping och ampersand
         $name  = str_replace("&#38;", "&", $this->name);
-        $place = str_replace("&#38;", "&", $this->schoolPlace);
+        $place = str_replace("&#38;", "&", $this->groupPlace);
         
         // Only allow [a-z], replace all else logically and convert all to lower case
         $name  = normalize_chars($name);
@@ -220,11 +257,11 @@ SQL;
         $tot_words = $nc + $pc + 2; // Total number of words
         switch ($tot_words) {
         case 2:
-            $fphp->log("generating schoolID from 2 words total.");
+            $fphp->log("generating groupID from 2 words total.");
             $id = substr($name, 0, 2) . substr($name, -1, 1) . substr($place, 1, 1) . substr($place, -1, 1); 
             break;
         case 3:
-            $fphp->log("generating schoolID from 3 words total.");
+            $fphp->log("generating groupID from 3 words total.");
             if ( 1 == $nc ) {
                 // First letter in first name-word, first and last in 2nd name-word
                 $id = substr($name, 0, 1) . substr($n_words[1], 0, 1) . substr($name, -1, 1) .
@@ -235,7 +272,7 @@ SQL;
             }
             break;
         case 4:
-            $fphp->log("generating schoolID from 4 words total.");
+            $fphp->log("generating groupID from 4 words total.");
             if ( 2 == $nc ) {
                 // First letter in first, 2nd and last name-word
                 $id = substr($name, 0, 1) . substr($n_words[1], 0, 1) . substr($n_words[2], 0, 1) .
@@ -251,7 +288,7 @@ SQL;
             }
             break;
         default:
-            $fphp->log("generating schoolID from 5 or more words total.");
+            $fphp->log("generating groupID from 5 or more words total.");
             // 5 or more words
             // switch inside switch is hard to read, using if -else instead
             if ( 0 == $nc ) {
@@ -276,14 +313,14 @@ SQL;
                 }
             }
         }
-        $fphp->log("The generated schoolID pre-DB is: " . $id);
+        $fphp->log("The generated groupID pre-DB is: " . $id);
         // Construction of pattern complete. Check availability
         // Find highest already in use
         // Geberated data is SQL-injection safe
         $sql = <<<SQL
-                SELECT schoolID from schools
-                WHERE schoolID lIKE '{$id}%'
-                ORDER BY schoolID DESC
+                SELECT groupID from groups
+                WHERE groupID lIKE '{$id}%'
+                ORDER BY groupID DESC
                 LIMIT 0,1
 SQL;
         $dbx      = config::get('dbx');
@@ -291,9 +328,9 @@ SQL;
         $stmt     = $dbh->prepare($sql);
         $stmt->execute();
         $db_high_id = $stmt->fetchColumn();
-        // If no other school has this letter-combination set this to 0 (zero)
+        // If no other group has this letter-combination set this to 0 (zero)
         if ( empty($db_high_id) ) {
-            $fphp->log("The generated schoolID was first with the letter combination.");
+            $fphp->log("The generated groupID was first with the letter combination.");
             $id .= "0";
         } else {
             // Increment as character to get sequence from 0-9 and then a-z
@@ -306,12 +343,12 @@ SQL;
             $last++;
             if ( ord($last) > 123 ) {
                 // We are past "z"
-                trigger_error("Can not generate unique schoolID.", E_USER_WARNING);
+                trigger_error("Can not generate unique groupID.", E_USER_WARNING);
                 return false;
             }
             $id .= $last;
         }
-        $fphp->log("The final generated schoolID is: " . $id);
+        $fphp->log("The final generated groupID is: " . $id);
         $this->id = $id;
         return true;
     } 
@@ -322,33 +359,48 @@ SQL;
      * Must not be savable
      * Same arguments as the constructor
      */
-    public static function fake($id, $name, $schoolPlace, $schoolUrl="")
+    public static function fake($id, $name, $groupPlace, $groupUrl="")
     {
-        $fakeobj = new data_schools($id, $name, $schoolPlace, $schoolUrl);
+        $fakeobj = new data_groups($id, $name, $groupPlace, $groupUrl);
         $fakeobj->isFake = true;
         return $fakeobj;
     }
     
+    /**
+     * Saving an object
+     * 
+     * Should only happen if it has been validated and is error free
+     * @param object $dbh A PDO object
+     * @return bool Successfully saved or not
+     */
     public function save(PDO $dbh)
     {
-        $safe = parent::preSaveChecks();
-        if ( !$safe ) {
+        if ( $this->isFake() ) {
+            trigger_error(E_USER_WARNING, "Trying to save a fake object");
+            return false;
+        }
+        if ( $this->propertyErrors['tested'] == false ) {
+            trigger_error(E_USER_NOTICE, "Can not save an object that is untested");
+            return false;
+        }
+        if ( !$this->isErrorFree() ) {
+            trigger_error(E_USER_WARNING, "Can not save an object that has errors");
             return false;
         }
         // TODO Add support for the num-fields
         $sql = <<<SQL
-            INSERT INTO schools (schoolID, school_name, school_place, school_url)
-            VALUES (:schoolID, :school_name, :school_place, :school_url)
+            INSERT INTO groups (groupID, group_name, group_place, group_url)
+            VALUES (:groupID, :group_name, :group_place, :group_url)
 SQL;
             /*
             ON DUPLICATE KEY UPDATE
-            schoolID = :schoolID, school_name = :school_name, school_place = :school_place, school_url = :school_url
+            groupID = :groupID, group_name = :group_name, group_place = :group_place, group_url = :group_url
             */
         $stmt = $dbh->prepare($sql);
-        $stmt->bindParam(':schoolID', $this->id);
-        $stmt->bindParam(':school_name', $this->name);
-        $stmt->bindParam(':school_place', $this->schoolPlace);
-        $stmt->bindParam(':school_url', $this->schoolUrl);
+        $stmt->bindParam(':groupID', $this->id);
+        $stmt->bindParam(':group_name', $this->name);
+        $stmt->bindParam(':group_place', $this->groupPlace);
+        $stmt->bindParam(':group_url', $this->groupUrl);
         return $stmt->execute();
         
     }
@@ -360,7 +412,7 @@ SQL;
      */
     public function getPlace()
     {
-        return $this->schoolPlace;
+        return $this->groupPlace;
     }
 
     /**
@@ -370,7 +422,7 @@ SQL;
      */
     public function getFullName()
     {
-        return "{$this->name}, {$this->schoolPlace}";
+        return "{$this->name}, {$this->groupPlace}";
     }
 
     /**
@@ -380,18 +432,18 @@ SQL;
      */
     public function getUrl()
     {
-        return $this->schoolUrl;
+        return $this->groupUrl;
     }
     
     /**
-     * Validate or extract schoolid within parenthesis from end of string
+     * Validate or extract groupid within parenthesis from end of string
      * 
      * Used to extract valid id when working with relationship-data
      * @param string $id Test string
      * @param bool   $extract Set to true to extract substring
      * @return mixed The valid/extracted id or false
      */
-    public static function checkSchoolId($id, $extract = false)
+    public static function checkgroupId($id, $extract = false)
     {
     	$regexp = self::$filterValidateRules['id']['options']['regexp'];
         if ( !$extract ) {
@@ -408,14 +460,15 @@ SQL;
         return ( $test ) ? $matches[1] : false; 
     }
     
-   
+    
     public static function isExistingId($id, PDO $dbh)
     {
     	// TODO Validate single prop, before invoking DB
-        $sql  = "SELECT count(*) FROM schools where schoolID = :id";
+        $sql  = "SELECT count(*) FROM groups where groupID = :id";
         $stmt = $dbh->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
         return $stmt->fetchColumn();
     }
+    
 }

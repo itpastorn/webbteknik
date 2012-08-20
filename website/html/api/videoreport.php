@@ -89,12 +89,17 @@ if ( empty($reportdata->status) ) {
 }
 
 if ( !$curdata ) {
-    $sql = "INSERT INTO userprogress (email, joblistID, progressdata, percentage_complete, status, lastupdate) " .
-           "VALUES (:email, :joblistID, :progressdata, :percentage_complete, :status, NOW())";
+    $sql = <<<SQL
+        INSERT INTO userprogress (email, joblistID, progressdata, percentage_complete, status, lastupdate)
+        VALUES (:email, :joblistID, :progressdata, :percentage_complete, :status, NOW())
+SQL;
 } else {
-    $sql = "UPDATE userprogress " .
-           "SET progressdata = :progressdata, percentage_complete = :percentage_complete, status = :status, lastupdate =NOW() " .
-           "WHERE email = :email AND joblistID = :joblistID";
+    $sql = <<<SQL
+        UPDATE userprogress
+        SET progressdata = :progressdata, percentage_complete = :percentage_complete,
+            status = :status, lastupdate =NOW()
+        WHERE email = :email AND joblistID = :joblistID
+SQL;
 }
 try {
     $stmt = $dbh->prepare($sql);

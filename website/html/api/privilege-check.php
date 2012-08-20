@@ -62,7 +62,8 @@ $isCorrect = array( 'istrue' => (bool)$stmt->fetch());
 if ( $isCorrect['istrue'] ) {
     // Update DB
     try {
-        $stmt = $dbh->prepare("UPDATE users SET privileges = :privileges, privlevel_since = NOW() WHERE email = :email");
+    	$sql = "UPDATE users SET privileges = :privileges, privlevel_since = NOW() WHERE email = :email";
+        $stmt = $dbh->prepare($sql);
         $stmt->bindParam(':privileges', $_SESSION['levelrequest']);
         $stmt->bindParam(':email', $_SESSION['user']);
         $stmt->execute();
