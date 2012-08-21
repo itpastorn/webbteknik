@@ -33,6 +33,11 @@ require_once '../includes/loadfiles.php';
 $FIREPHP->dump('_POST', $_POST);
 
 /**
+ * Groups - the main object type on this page!
+ */
+require "../includes/data/groups.php";
+
+/**
  * Courses - available courses shall be listed
  */
 require "../includes/data/courses.php";
@@ -57,47 +62,91 @@ $dbh = keryxDB2_cx::get($dbx);
 
 // TODO Show groups
 
-// TODO Add group
+// Variables for group add/modify form
+$g_group_id             = '';
+$g_group_id_msg         = '';
+if ( filter_has_var(INPUT_POST, 'admingroup_form_submitted') ) {
+	
 
-/*
-
-Group
-+ id
-+ schoolID
-+ courseID
-+ group_nickname <=> name
-+ group_size
-+ start_date     --> unchangeable
-
-$g_school
-$g_school_msg
-
-$g_course
-$g_course_msg
-
-$g_numstudents
-$g_numstudents_msg
-
-$g_groupnick
-$g_groupnick_msg
-
-$g_startdate      Default = TODAY
-$g_startdate_msg
-
-$g_groupurl
-$g_groupurl_msg
-*/
+    $g_group_id = trim(filter_input(INPUT_POST, 'g_group_id', FILTER_SANITIZE_STRIPPED, FILTER_FLAG_STRIP_LOW));
+    if ( $g_group_id ) {
+        if ( data_groups::isExistingId($g_course_id, $dbh) ) {
+            // Updating existing group
+            trigger_error("Can not update existing group. Not implemented yet.", E_USER_WARNING);
+            $g_group_msg("Kan ännu inte uppdatera grupper. Funktionen ej implementerad.");
+            
+            // Remember to keep groupStartDate away from UPDATE
+            // and not show it in form when editin existing group
+            
+        }
+        // Bad groupID
+        trigger_error("No such groupID in DB.", E_USER_WARNING);
+        $g_group_msg("Felaktig grupp angiven, gruppen finns inte");
+    } else {
+        $g_group_id = ''; // Reset to string type
+    }
+    $g_school_id = trim(filter_input(INPUT_POST, 'g_school_id', FILTER_SANITIZE_STRIPPED, FILTER_FLAG_STRIP_LOW));
+    $g_school_id = data_schools::checkSchoolId($g_school_id, true);
 
 
+    $new_group = filter_input_array(INPUT_POST, FILTER_UNSAFE_RAW);
+    
+    // HTML and DB use one naming scheme, Classes another (they both make sense in their context)
+    $new_group['id']             = $g_group_id;
+    $new_group['schoolID']       = $g_school_id;
+    $new_group['courseID']       = $new_group['g_course_id'];
+    $new_group['name']           = $new_group['g_group_nickname'];
+    $new_group['groupMaxSize']   = $new_group['g_group_max_size'];
+    $new_group['groupStartDate'] = $new_group['g_group_start_date'];
+    $new_group['groupUrl']       = $new_group['g_group_url'];
+    
+    $new_group = data_groups::fromArray($new_group);
+    
+    // TODO: The following if-section is repeated verbatim to 95 % below - REmove this code duplication!
+    if ( $new_group->isErrorFree() ) {
+        $FIREPHP->log("Was error free");
+        try {
+            $new_group_saved = $new_group->save($dbh);
+            if ( $new_group_saved ) {
+            	// Small difference in this string, from the following (no link)
+                $g_new_group_save_msg = <<<HTML
+                    <p class="greenfade">Databasen uppdaterad.
+                    <strong>Kursens inbjudningskod: <strong>{$new_group->getId()}</strong></strong>
+HTML;
+            } else {
+                throw new Exception('Failed save, but no exception.');
+            }
+        }
+        catch( Exception $e ) {
+            $g_new_group_save_msg = $e->getMessage();
+            $FIREPHP->log($g_new_group_save_msg);
+            // Re-use variable for end user
+            $g_new_group_save_msg = "<p class=\"errormsg\">Det gick inte att spara gruppen i databasen. Felorsak:\n";
+            if ( $e->getCode() == 23000 ) {
+                // Duplicate entry in PDO-MySQL
+                $g_new_group_save_msg .= "Det finns redan en grupp med det namnet, med samma startdatum.</p>\n";
+            } else {
+                $g_new_group_save_msg .= "Okänt databasfel. Vänligen kontakta administratören.</p>\n";
+            }
+        }
+    } else {
+        // Could not generate an error free object
+        $g_new_group_save_msg = "<p class=\"errormsg\">Det gick inte att spara gruppen i databasen.</p>\n";
+        
+    }
+} else {
+    $new_group = data_groups::fake();
+}
+$FIREPHP->log($new_group);
 
-
+// TODO Pre-select in SELECT-lists if form has been submitted
 
 // TODO Edit group
 
 // TODO Workplaces (This is done - keeping todo as label)
 $new_workplace_save_msg = "";
 if ( filter_has_var(INPUT_POST, 'new_workplace_added') ) {
-    // Investigate: new teacher inherits from user....
+
     $working_at = trim(filter_input(INPUT_POST, 's_school_id', FILTER_SANITIZE_STRIPPED, FILTER_FLAG_STRIP_LOW));
     if ( empty($working_at) ) {
         // Perhaps an old browser that used the select list?
@@ -149,7 +198,8 @@ HTML;
 
 // Normal/always page view data
 $all_courses   = data_courses::loadAll($dbh);
-$g_course = makeSelectElement($all_courses, 'WEBWEU01');
+$pre_select_g_gourse = ( $new_group->courseID ) ?: 'WEBWEU01';
+$g_course = makeSelectElement($all_courses, $pre_select_g_gourse);
 
 $all_schools   = data_schools::loadAll($dbh);
 $select_school = makeSelectElement($all_schools, "", true);
@@ -163,9 +213,11 @@ $sql = <<<SQL
     INNER JOIN workplaces USING ( schoolID)
     ORDER BY name
 SQL;
-$workplaces  = data_schools::loadAll($dbh, $sql);
-$g_school   = makeSelectElement($workplaces, "", true, array('id' => 'null', 'name' => 'Ej i listan/lägg till'));
-$wp_checkbox = makeCheckboxes($workplaces, "current_workplaces");
+$workplaces = data_schools::loadAll($dbh, $sql);
+
+// TODO Pre-select school according to form entry from last subbmit
+$g_schools  = makeSelectElement($workplaces, "", true, array('id' => 'null', 'name' => 'Ej i listan/lägg till'));
+$wp_list    = makeListItems($workplaces, "current_workplaces");
 
 
 $new_school_save_msg = "";
@@ -209,8 +261,9 @@ HTML;
         $new_school_save_msg .= "Kunde inte skapa ett felfritt skolobjekt. Vänligen kontakta administratören.</p>\n";
     }
 } else {
-    $new_school = data_schools::fake('', '', '');
+    $new_school = data_schools::fake();
 }
+
 // TODO Tomorrow, make it possible to edit school information, if:
 // You're affiliated to that school or you're an admin
 
@@ -266,45 +319,62 @@ SECNAV;
       echo "<p>Du kan inte skapa grupper ännu, eftersom du inte angivit någon skola där du jobbar.</p>";
   else:
   echo <<<FORMCONTENTS1
-  <form method="post" action="{$pageref}#admingroup_form" id"admingroup_form">
+  <form method="post" action="{$pageref}#admingroup_form" id="admingroup_form">
     <fieldset class="blocklabels">
       <legend>Allmän information</legend>
+      <!-- g_group_id and g_group_id_msg must exist in order to modify existing group -->
+      {$g_new_group_save_msg}
       <p>
-        <label for="g_school">Skola{$g_school_msg}</label>
-        <select name="g_school" id="g_school">
-          {$g_school}
+        <label for="g_school_id">
+          Skola<strong class="errormsg">{$new_group->errorMessage('schoolID', true)}</strong>
+        </label>
+        <select name="g_school_id" id="g_school_id">
+          {$g_schools}
         </select>
       </p>
       <p>
-        <label for="g_course_id">Kurs{$g_course_id_msg}</label>
+        <label for="g_course_id">
+          Kurs<strong class="errormsg">{$new_group->errorMessage('courseID', true)}</strong>
+        </label>
         <select name="g_course_id" id="g_course_id">
           {$g_course}
         </select>
       </p>
       <p>
-        <label for="g_groupnick">Smeknamn på gruppen
-          (Hur ni pratar om gruppen i dagligt tal) {$g_groupnick_msg}</label>
-        <input type="text" id="g_groupnick" name="g_groupnick" value="{$g_groupnick}"
-               placeholder="Exempel: Webbettan" required />
+        <label for="g_group_nickname">
+          Smeknamn på gruppen (Hur ni pratar om gruppen i dagligt tal, inga mellanslag)
+          <strong class="errormsg">{$new_group->errorMessage('name', true)}</strong>
+        </label>
+        <input type="text" id="g_group_nickname" name="g_group_nickname" value="{$new_group->getName()}"
+               placeholder="Exempel: Webbettan-13" required />
       </p>
     </fieldset>
     <fieldset class="blocklabels">
       <legend>Gruppinformation</legend>
       <p>
         <!-- Should be limited to the number of books bought for one year (with some grace overlap)-->
-        <label for="g_numstudents">Antal elever i gruppen {$g_numstudents_msg}</label>
-        <input type="number" id="g_numstudents" name="g_numstudents" value={{$g_numstudents} required />
+        <label for="g_group_max_size">
+          Max antal elever i gruppen
+          <strong class="errormsg">{$new_group->errorMessage('groupMaxSize', true)}</strong>
+        </label>
+        <input type="number" id="g_group_max_size" name="g_group_max_size" value="{$new_group->groupMaxSize}" required />
       </p>
       <p>
-        <label for="g_startdate">Kursstart (gruppens livslängd är 12 månader){$g_startdate_msg}</label>
-        <input type="date" id="g_startdate" name="g_startdate" value="{$g_startdate}" required />
+        <label for="g_group_start_date">
+          Kursstart (gruppens livslängd är 12 månader)
+          <strong class="errormsg">{$new_group->errorMessage('groupStartDate', true)}</strong>
+        </label>
+        <input type="date" id="g_group_start_date" name="g_group_start_date" value="{$new_group->groupStartDate}" required />
       </p>
       <p>
         <em>OBS! Man kan aldrig sätta startdatum längre in i framtiden än vad det sattes första gången.</em>
       </p>
       <p>
-        <label for="g_groupurl">Länk till eventuell kurssida{$g_groupurl_msg}</label>
-        <input type="url" id="g_groupurl" name="g_groupurl" value="{$g_groupurl}"
+        <label for="g_group_url">
+          Länk till eventuell kurssida
+          <strong class="errormsg">{$new_group->errorMessage('groupUrl', true)}</strong>
+        </label>
+        <input type="url" id="g_group_url" name="g_group_url" value="{$new_group->getUrl()}"
                placeholder="Länk till kursens webbplats på din skola" />
       </p>
       <p>
@@ -330,7 +400,9 @@ endif;
       <p>
         Du är registrerade som lärare på följande skolor:
       </p>
-      {$wp_checkbox}
+      <ul>
+        {$wp_list}
+      </ul>
       <p>
         Just nu kan endast admin ändra på skolors namn, eller ta bort en lärare från en skola.
         Har ni gjort en liten felstavning, så registrera ingen ny skola. Det kan åtgärdas i sinom tid.

@@ -31,7 +31,7 @@ class data_courses extends items implements data
      * 
      * Can be used to help build outside queries for 2nd param of loadAll method
      */
-    const SELECT_SQL = "SELECT courseID AS id, course_name AS name, course_url AS courseUrl ";
+    const SELECT_SQL = "SELECT courseID AS id, course_name AS name, course_url AS courseUrl FROM courses ";
 
 
     private function __construct($id, $name, $courseUrl)
@@ -41,14 +41,8 @@ class data_courses extends items implements data
         $this->courseUrl  = $courseUrl;
     }
     
-    /**
-     * Loads an instance from DB
-     * 
-     * @param string $id  The course ID, matches DB primary key
-     * @param object $dbh       Instance of PDO
-     */
     public static function loadOne($id, PDO $dbh) {
-        $sql  = SELECT_SQL . "FROM courses WHERE id = :id";
+        $sql  = self::SELECT_SQL . "FROM courses WHERE id = :id";
         $stmt = $dbh->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
@@ -56,17 +50,8 @@ class data_courses extends items implements data
         return $stmt->fetch();
     }
     
-    /**
-     * Return array of objects with all available records
-     * 
-     * @todo set limits, interval for pagination, etc
-     * @todo 
-     * 
-     * @param object $dbh       Instance of PDO
-     * @return array of instances of this class
-     */
-    public static function loadAll(PDO $dbh) {
-        $sql  = SELECT_SQL . "ORDER BY name";
+    public static function loadAll(PDO $dbh, $sql=null) {
+        $sql  = self::SELECT_SQL . "ORDER BY name";
         $stmt = $dbh->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
@@ -84,8 +69,12 @@ class data_courses extends items implements data
         return $this->courseUrl;
     }
     
-    public static function isExistingId($id, PDO $dbh)
+    public static function isExistingId($id, PDO $dbh=null)
     {
+    	if ( empty($dbh) ) {
+            $dbx = config::get('dbx');
+            $dbh = keryxDB2_cx::get($dbx);
+    	}
     	// TODO Validate single prop, before invoking DB
         $sql  = "SELECT count(*) FROM courses where courseID = :id";
         $stmt = $dbh->prepare($sql);

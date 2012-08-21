@@ -109,6 +109,10 @@ a:active {
     -moz-animation: 3s yellowfade;
 }
 
+strong > strong {
+    font-size: larger;
+}
+
 /* ------------------------------- *\
    $forms
 \* ------------------------------- */

@@ -64,7 +64,7 @@ interface data
     /**
      * Helper functions for sibling classes to verify foreign key relationships
      */
-    public static function isExistingId($id, PDO $dbh);
+    public static function isExistingId($id, PDO $dbh=null);
     
     /*
      * Constructor must be private
@@ -155,3 +155,33 @@ HTML;
     return $checkboxes;
 }
 
+/**
+ * A function that makes a listitem in HTML from an array of data-objects
+ * 
+ * If there is an URL, the item will contain a link
+ * 
+ * @param array  $list      An array of objects that use the data interface
+ * @return string HTML-code
+ */
+function makeListItems($list, $name, $extra=false)
+{
+    $list_items = "";
+    foreach ( $list as $item ) {
+        // Prepare values
+        $list_item = htmlspecialchars($item->getName());
+        if ( method_exists($item, 'getUrl') ) {
+            $url = $item->getUrl();
+            if ( !empty($url) ) {
+                $list_item = "<a href=\"{$url}\">{$list_item}</a>\n";
+            }
+        }
+        // Make the li
+        $list_items .= <<<LI
+            <li>
+               {$list_item}
+            </li>
+
+LI;
+    }
+    return $list_items;
+}

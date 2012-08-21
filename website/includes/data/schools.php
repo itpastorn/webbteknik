@@ -321,7 +321,7 @@ SQL;
      * Must not be savable
      * Same arguments as the constructor
      */
-    public static function fake($id, $name, $schoolPlace, $schoolUrl="")
+    public static function fake($id='', $name='', $schoolPlace='', $schoolUrl='')
     {
         $fakeobj = new data_schools($id, $name, $schoolPlace, $schoolUrl);
         $fakeobj->isFake = true;
@@ -408,8 +408,12 @@ SQL;
     }
     
    
-    public static function isExistingId($id, PDO $dbh)
+    public static function isExistingId($id, PDO $dbh=null)
     {
+    	if ( empty($dbh) ) {
+            $dbx = config::get('dbx');
+            $dbh = keryxDB2_cx::get($dbx);
+    	}
     	// TODO Validate single prop, before invoking DB
         $sql  = "SELECT count(*) FROM schools where schoolID = :id";
         $stmt = $dbh->prepare($sql);

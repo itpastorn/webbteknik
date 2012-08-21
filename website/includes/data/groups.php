@@ -69,6 +69,14 @@ class data_groups extends items implements data
             'filter' => FILTER_SANITIZE_STRIPPED,
             'flags'  => FILTER_FLAG_STRIP_LOW
         ),
+        'schoolID' => array(
+            'filter' => FILTER_SANITIZE_STRIPPED,
+            'flags'  => FILTER_FLAG_STRIP_LOW
+        ),
+        'courseID' => array(
+            'filter' => FILTER_SANITIZE_STRIPPED,
+            'flags'  => FILTER_FLAG_STRIP_LOW
+        ),
         'name' => array(
             'filter' => FILTER_SANITIZE_STRIPPED,
             'flags'  => 68
@@ -91,9 +99,17 @@ class data_groups extends items implements data
             'filter'  => FILTER_VALIDATE_REGEXP,
             'options' => array( 'regexp' => "/^[a-z0-9]{5}$/u" )
         ),
+        'schoolID' => array(
+            'filter'  => FILTER_CALLBACK,
+            'options' => 'data_schools::isExistingId'
+        ),
+        'courseID' => array(
+            'filter'  => FILTER_CALLBACK,
+            'options' => 'data_courses::isExistingId'
+        ),
         'name' => array(
             'filter'  => FILTER_VALIDATE_REGEXP,
-            'options' => array( 'regexp' => "/^\\p{L}[\\p{L}\\x20\\p{Pd}&#38;]{2,20}$/u" )
+            'options' => array( 'regexp' => "/^\\p{L}[\\p{L}\\p{Nd}\\p{Pd}&#38;]{2,20}$/u" )
         ),
         'groupMaxSize' => array(
             'filter'   => FILTER_VALIDATE_INT,
@@ -107,20 +123,8 @@ class data_groups extends items implements data
         'groupUrl' => array(
             'filter'  => FILTER_VALIDATE_URL,
             'flags'   => FILTER_FLAG_SCHEME_REQUIRED
-        ),
-        'schoolID' => array(
-            'filter'  => FILTER_CALLBACK,
-            'flags'   => "data_schools::isExistingId"
-        ),
-        'courseID' => array(
-            'filter'  => FILTER_CALLBACK,
-            'flags'   => "data_courses::isExistingId"
         )
     );
-    // The u-flag also ensures UTF-8 validity
-    // Pd = Punctuation, Dash
-    // L  = Letter
-    // &#38; is allowed, for encoded &
     
     
     /**
@@ -130,7 +134,7 @@ class data_groups extends items implements data
         'id'             => "Fel format, inte enligt /^[a-z0-9]{5}$/u",
         'schoolId'       => "Matchar inte något existerande värde.",
         'courseId'       => "Matchar inte något existerande värde.",
-        'name'           => "Fel format, inte enligt /^\\p{L}[\\p{L}\\x20\\p{Pd}&#38;]{2,20}$/u",
+        'name'           => "Fel format, inte enligt /^\\p{L}[\\p{L}\\p{Nd}\\p{Pd}&#38;]{2,20}$/u",
         'groupMaxSize'   => "Inte ett heltal mellan 1 och 500",
         'groupStartDate' => "Inte ett datum (YYYY-MM-DD)",
         'groupUrl'       => "Inte en URL. (Den måste inkludera schema.)"
@@ -140,7 +144,7 @@ class data_groups extends items implements data
         'name'           => "För kort (min 2), för långt (max 20), eller otillåtna tecken",
 */
 
-    private $gettable =  array('schoolID', 'courseID', 'groupUrl', 'groupMaxSize', 'groupStartDate');
+    protected $gettable =  array('schoolID', 'courseID', 'groupUrl', 'groupMaxSize', 'groupStartDate');
 
     /**
      * The start of SQL commands to fetch data for this object
@@ -222,9 +226,9 @@ SQL;
             !isset($arr['id'])           ||
             !isset($arr['schoolID'])     ||
             !isset($arr['courseID'])     ||
-             empty($arr['name'])         ||
-             empty($arr['groupMaxSize']) ||
-             empty($arr['groupStartDate']) 
+            !isset($arr['name'])         ||
+            !isset($arr['groupMaxSize']) ||
+            !isset($arr['groupStartDate']) 
            ) {
             trigger_error("Trying to create group object with too little data", E_USER_NOTICE);
             return false;
@@ -258,6 +262,7 @@ SQL;
         $dbh      = keryxDB2_cx::get($dbx);
 
         $stmt     = $dbh->prepare($sql);
+        $stmt->bindParam(':id', $id);
 
         // Endless loop?
         // There are 23 068 672 possible ids
@@ -296,8 +301,11 @@ SQL;
      * Must not be savable
      * Same arguments as the constructor
      */
-    public static function fake($id, $schoolID, $courseID, $name, $groupMaxSize, $groupStartDate, $groupUrl=null)
+    public static function fake(
+        $id='', $schoolID='', $courseID='', $name='', $groupMaxSize='', $groupStartDate='', $groupUrl=''
+    )
     {
+	    $groupStartDate = ( $groupStartDate ) ?: date('Y-M-D');
         $fakeobj = new data_groups($id, $schoolID, $courseID, $name, $groupMaxSize, $groupStartDate, $groupUrl);
         $fakeobj->isFake = true;
         return $fakeobj;
@@ -319,7 +327,7 @@ SQL;
         $stmt->bindParam(':groupID', $this->id);
         $stmt->bindParam(':schoolID', $this->schoolID);
         $stmt->bindParam(':courseID', $this->courseID);
-        $stmt->bindParam(':group_nick_name', $this->name);
+        $stmt->bindParam(':group_nickname', $this->name);
         $stmt->bindParam(':group_max_size', $this->groupMaxSize);
         $stmt->bindParam(':group_start_date', $this->groupStartDate);
         $stmt->bindParam(':group_url', $this->groupUrl);
@@ -373,8 +381,12 @@ SQL;
     }
     
     
-    public static function isExistingId($id, PDO $dbh)
+    public static function isExistingId($id, PDO $dbh=null)
     {
+    	if ( empty($dbh) ) {
+            $dbx = config::get('dbx');
+            $dbh = keryxDB2_cx::get($dbx);
+    	}
         // TODO Validate single prop, before invoking DB
         $sql  = "SELECT count(*) FROM groups where groupID = :id";
         $stmt = $dbh->prepare($sql);
