@@ -18,6 +18,6 @@ $dbh = keryxDB2_cx::get($dbx);
 
 header("Content-type: text/plain; charset=utf-8");
 
-foreach ( $dbh->query("SELECT * FROM users") as $row) {
+foreach ( $dbh->query("SELECT * FROM users ORDER BY USER_SINCE ASC") as $row) {
     echo "{$row['firstname']} {$row['lastname']} <{$row['email']}>\n";
 }

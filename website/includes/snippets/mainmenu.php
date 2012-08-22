@@ -18,8 +18,8 @@ USERDATA;
       <li><a href="edituser.php">Redigera användaruppgifter</a></li>
     </ul>
     <p>
-      En större uppdaterimg pågår just nu. Under tiden den sker
-      kan somliga saker sluta fungera. Vi ber om ursäkt för detta.
+      <small>En större uppdatering pågår just nu. Under tiden den sker
+      kan somliga saker sluta fungera. Vi ber om ursäkt för detta.</small>
     </p>
   </nav>
 

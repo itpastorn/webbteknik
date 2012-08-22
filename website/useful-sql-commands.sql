@@ -174,18 +174,147 @@ CREATE TABLE IF NOT EXISTS `workplaces` (
   KEY `schoolID` (`schoolID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci COMMENT='Where teachers work' AUTO_INCREMENT=1 ;
 
---
--- Restriktioner för dumpade tabeller
---
+-- -------------------------------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `belonging_groups` (
+  `tgID` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(150) COLLATE utf8_swedish_ci NOT NULL,
+  `groupID` varchar(5) COLLATE utf8_swedish_ci NOT NULL,
+  `since` date NOT NULL,
+  PRIMARY KEY (`tgID`),
+  UNIQUE KEY `nodups` (`email`,`groupID`),
+  KEY `email` (`email`,`groupID`),
+  KEY `groupsID` (`groupID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci COMMENT='What groups does a teacher run' AUTO_INCREMENT=9 ;
 
 --
--- Restriktioner för tabell `workplaces`
+-- Dumpning av Data i tabell `belonging_groups`
 --
+
+INSERT INTO `belonging_groups` (`tgID`, `email`, `groupID`, `since`) VALUES
+(3, 'gunther@keryx.se', 'tzdrq', '2012-08-22'),
+(4, 'gunther@keryx.se', 'cpsaf', '2012-08-22'),
+(8, 'info@keryx.se', 'cpsaf', '2012-08-22');
+
+-- --------------------------------------------------------
+
+--
+-- Tabellstruktur `courses`
+--
+
+CREATE TABLE IF NOT EXISTS `courses` (
+  `courseID` varchar(25) COLLATE utf8_swedish_ci NOT NULL,
+  `course_name` varchar(200) COLLATE utf8_swedish_ci NOT NULL,
+  `course_url` varchar(250) COLLATE utf8_swedish_ci DEFAULT NULL,
+  PRIMARY KEY (`courseID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+--
+-- Dumpning av Data i tabell `courses`
+--
+
+INSERT INTO `courses` (`courseID`, `course_name`, `course_url`) VALUES
+('WEBWEB01', 'Webbserverprogrammering 1', 'http://www.skolverket.se/forskola-och-skola/gymnasieutbildning/amnes-och-laroplaner/sok-program-och-amnesplaner/subject.htm?subjectCode=WEB&courseCode=WEBWEB01'),
+('WEBWEU01', 'Webbutveckling 1', 'http://www.skolverket.se/forskola-och-skola/gymnasieutbildning/amnes-och-laroplaner/sok-program-och-amnesplaner/subject.htm?subjectCode=WEB&courseCode=WEBWEU01');
+
+-- --------------------------------------------------------
+
+-- --------------------------------------------------------
+-- 2012-08-22 added tables
+-----------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `groups` (
+  `groupID` varchar(5) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL COMMENT 'Invitation code to group',
+  `schoolID` varchar(6) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
+  `courseID` varchar(10) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL COMMENT 'Code in the national system',
+  `group_nickname` varchar(20) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL COMMENT 'Daily usage ',
+  `group_max_size` mediumint(8) unsigned NOT NULL,
+  `group_start_date` date NOT NULL,
+  `group_url` varchar(150) CHARACTER SET utf8 COLLATE utf8_swedish_ci DEFAULT NULL COMMENT 'E.g. learning platform link',
+  PRIMARY KEY (`groupID`),
+  UNIQUE KEY `nodup` (`schoolID`,`group_nickname`,`group_start_date`),
+  KEY `schoolID` (`schoolID`),
+  KEY `courseID` (`courseID`),
+  KEY `date` (`group_start_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS `courses` (
+  `courseID` varchar(25) COLLATE utf8_swedish_ci NOT NULL,
+  `course_name` varchar(200) COLLATE utf8_swedish_ci NOT NULL,
+  `course_url` varchar(250) COLLATE utf8_swedish_ci DEFAULT NULL,
+  PRIMARY KEY (`courseID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+INSERT INTO `courses` (`courseID`, `course_name`, `course_url`) VALUES
+('WEBWEB01', 'Webbserverprogrammering 1', 'http://www.skolverket.se/forskola-och-skola/gymnasieutbildning/amnes-och-laroplaner/sok-program-och-amnesplaner/subject.htm?subjectCode=WEB&courseCode=WEBWEB01'),
+('WEBWEU01', 'Webbutveckling 1', 'http://www.skolverket.se/forskola-och-skola/gymnasieutbildning/amnes-och-laroplaner/sok-program-och-amnesplaner/subject.htm?subjectCode=WEB&courseCode=WEBWEU01');
+
+CREATE TABLE IF NOT EXISTS `schools` (
+  `schoolID` varchar(6) COLLATE utf8_swedish_ci NOT NULL,
+  `school_name` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
+  `school_place` varchar(50) COLLATE utf8_swedish_ci NOT NULL COMMENT 'Town, county, web, etc',
+  `school_url` varchar(100) COLLATE utf8_swedish_ci NOT NULL COMMENT 'School web page',
+  `numtextbooks` mediumint(11) unsigned NOT NULL DEFAULT '0' COMMENT 'Willl limit total size of all groups',
+  `numworkbooks` mediumint(11) unsigned NOT NULL DEFAULT '0' COMMENT 'Will limit total size of all groups',
+  `numteachguides` smallint(11) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`schoolID`),
+  UNIQUE KEY `nodup` (`school_name`,`school_place`),
+  KEY `numtextbooks` (`numtextbooks`,`numworkbooks`,`numteachguides`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `belonging_groups` (
+  `tgID` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(150) COLLATE utf8_swedish_ci NOT NULL,
+  `groupID` varchar(5) COLLATE utf8_swedish_ci NOT NULL,
+  `since` date NOT NULL,
+  PRIMARY KEY (`tgID`),
+  UNIQUE KEY `nodups` (`email`,`groupID`),
+  KEY `email` (`email`,`groupID`),
+  KEY `groupsID` (`groupID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci COMMENT='What groups does a teacher run' AUTO_INCREMENT=9 ;
+
+CREATE TABLE IF NOT EXISTS `teaching_groups` (
+  `tgID` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(150) COLLATE utf8_swedish_ci NOT NULL,
+  `groupID` varchar(5) COLLATE utf8_swedish_ci NOT NULL,
+  `since` date NOT NULL,
+  PRIMARY KEY (`tgID`),
+  UNIQUE KEY `nodups` (`email`,`groupID`),
+  KEY `email` (`email`,`groupID`),
+  KEY `groupsID` (`groupID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci COMMENT='What groups does a teacher run' AUTO_INCREMENT=7 ;
+
+CREATE TABLE IF NOT EXISTS `workplaces` (
+  `workplaceID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `schoolID` varchar(6) COLLATE utf8_swedish_ci NOT NULL,
+  `email` varchar(150) COLLATE utf8_swedish_ci NOT NULL,
+  `since` date NOT NULL,
+  PRIMARY KEY (`workplaceID`),
+  UNIQUE KEY `nodup` (`schoolID`,`email`),
+  KEY `email` (`email`),
+  KEY `schoolID` (`schoolID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci COMMENT='Where teachers work' AUTO_INCREMENT=42 ;
+
+ALTER TABLE `belonging_groups`
+  ADD CONSTRAINT `belonging_groups_ibfk_1` FOREIGN KEY (`email`) REFERENCES `users` (`email`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `belonging_groups_ibfk_2` FOREIGN KEY (`groupID`) REFERENCES `groups` (`groupID`) ON UPDATE CASCADE;
+
+ALTER TABLE `groups`
+  ADD CONSTRAINT `groups_ibfk_1` FOREIGN KEY (`schoolID`) REFERENCES `schools` (`schoolID`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `groups_ibfk_2` FOREIGN KEY (`courseID`) REFERENCES `courses` (`courseID`) ON UPDATE CASCADE;
+
+ALTER TABLE `teaching_groups`
+  ADD CONSTRAINT `teaching_groups_ibfk_1` FOREIGN KEY (`email`) REFERENCES `users` (`email`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `teaching_groups_ibfk_2` FOREIGN KEY (`groupID`) REFERENCES `groups` (`groupID`) ON UPDATE CASCADE;
+
 ALTER TABLE `workplaces`
-  ADD CONSTRAINT `workplaces_ibfk_2` FOREIGN KEY (`email`) REFERENCES `users` (`email`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `workplaces_ibfk_1` FOREIGN KEY (`schoolID`) REFERENCES `schools` (`schoolID`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `workplaces_ibfk_1` FOREIGN KEY (`schoolID`) REFERENCES `schools` (`schoolID`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `workplaces_ibfk_2` FOREIGN KEY (`email`) REFERENCES `users` (`email`) ON UPDATE CASCADE;
 
+
+-- -----------------------------------------------------------------------
 -- Changelog
+-- -----------------------------------------------------------------------
 
 ALTER TABLE `videos` CHANGE `book` `bookID` VARCHAR( 5 ) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL;
 ALTER TABLE `videos` DROP `section`;
@@ -193,8 +322,8 @@ ALTER TABLE `videos` DROP `section`;
 ALTER TABLE `flashcards` CHANGE `flashcardsID` `flashcardID` MEDIUMINT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT 
 
 ALTER TABLE `userprogress` ADD INDEX ( `status` );
- 
--- Not put to server below
+
+-- 2012-08-22
 
 ALTER TABLE `webbtek_webbtek`.`joblist` ADD INDEX ( `what_to_do` );
 ALTER TABLE `webbtek_webbtek`.`joblist` ADD INDEX ( `where_to_do_it` );
@@ -202,8 +331,4 @@ ALTER TABLE `webbtek_webbtek`.`joblist` ADD INDEX ( `joborder` );
 ALTER TABLE `webbtek_webbtek`.`joblist` ADD INDEX ( `track` );
 ALTER TABLE `webbtek_webbtek`.`joblist` ADD INDEX ( `chapter` );
 
-ALTER TABLE `schools`
-  CHANGE `numtextbooks` `numtextbooks` MEDIUMINT( 11 ) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Willl limit total size of all groups',
-  CHANGE `numworkbooks` `numworkbooks` MEDIUMINT( 11 ) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Will limit total size of all groups',
-  CHANGE `numteachguides` `numteachguides` SMALLINT( 11 ) UNSIGNED NOT NULL DEFAULT '0';
-ALTER TABLE `webbtek_webbtek`.`schools` ADD UNIQUE `nodup` ( `school_name` , `school_place` );
+-- Not put to server below

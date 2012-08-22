@@ -342,7 +342,7 @@ if ( "//" == $baseref ) {
   <script>
      var wtglobal_start_video_at   = <?php
          // 5 seconds repeat to make it a bit easier to catch up
-         if ( isset($progressdata->firstStop) ) { echo $progressdata->firstStop - 5; }
+         if ( isset($progressdata->firstStop) ) { echo number_format($progressdata->firstStop, 0) - 5; }
          else { echo 0; }; ?>;
      var wtglobal_old_progressdata = <?php
          if ( !empty($curvid['progressdata']) ) { echo $curvid['progressdata']; }
