@@ -47,12 +47,12 @@ require 'user.php';
 /**
  * Abstract items-class
  */
-require "../includes/data/items.php";
+require "data/items.php";
 
 /**
  * Data class interface
  */
-require "../includes/data/data.php";
+require "data/data.php";
 
 
 date_default_timezone_set("Europe/Stockholm");

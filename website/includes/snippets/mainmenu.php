@@ -17,5 +17,9 @@ USERDATA;
       <li><a href="flashcards.php">Flaschards (demo)</a></li>
       <li><a href="edituser.php">Redigera användaruppgifter</a></li>
     </ul>
+    <p>
+      En större uppdaterimg pågår just nu. Under tiden den sker
+      kan somliga saker sluta fungera. Vi ber om ursäkt för detta.
+    </p>
   </nav>
 

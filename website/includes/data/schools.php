@@ -123,6 +123,10 @@ class data_schools extends items implements data
         'schoolPlace' => "För kort (min 2), för långt (max 50), eller otillåtna tecken",
         'schoolUrl' => "Inte en URL. (Den måste inkludera schema.)"
 */
+    const SELECT_SQL = "SELECT `schools`.schoolID AS id, school_name AS name, school_place AS schoolPlace,
+    		            school_url AS schoolUrl
+                        FROM schools";
+    
 
     private function __construct($id, $name, $schoolPlace, $schoolUrl)
     {
@@ -133,9 +137,8 @@ class data_schools extends items implements data
     }
     
     public static function loadOne($id, PDO $dbh) {
-        $sql  = <<<SQL
-            SELECT schoolID AS id, school_name AS name, school_place AS schoolPlace, school_url AS schoolUrl
-            FROM schools WHERE schoolID = :id
+        $sql  = self::SELECT_SQL . <<<SQL
+            WHERE schoolID = :id
 SQL;
         $stmt = $dbh->prepare($sql);
         $stmt->bindParam(':id', $id);
@@ -146,16 +149,15 @@ SQL;
         return $stmt->fetch();
     }
     
-    public static function loadAll(PDO $dbh, $sql = false) {
+    public static function loadAll(PDO $dbh, $sql=false, $params=array())
+    {
         if ( !$sql ) {
-        $sql  = <<<SQL
-            SELECT schoolID AS id, school_name AS name, school_place AS schoolPlace, school_url AS schoolUrl
-            FROM schools
+        $sql  = self::SELECT_SQL . <<<SQL
             ORDER BY name
 SQL;
         }
         $stmt = $dbh->prepare($sql);
-        $stmt->execute();
+        $stmt->execute($params);
         $stmt->setFetchMode(
             PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, __CLASS__, array('id', 'name', 'schoolPlace', 'schoolUrl')
         );

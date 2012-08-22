@@ -2,6 +2,8 @@
 /**
  * User administration
  *
+ * @todo Future: Make this a data interface, item-extending class - requires renaming of validate-method
+ * @todo Future: Use when saving user data etc
  */
 
  
@@ -87,7 +89,7 @@ class user
      * @example if ( user::validate(user::TEACHER) ) {}
      * 
      * @param int $req_level The level that the inquiry is about
-     * @param int $userlevel The user's actual level
+     * @param int $userlevel The user's actual level, leave empty for currently logged in user
      */
     public static function validate($req_level, $userlevel = null) {
         if ( empty($userlevel) && isset($_SESSION['userdata']->privileges) ) {
@@ -148,10 +150,60 @@ class user
             )
         );
     }
+    
+    /**
+     * Set a new privilege level for the user
+     * 
+     * @todo Make setPri non static and instantiate user class
+     * 
+     * @param string $user  A iser object (So far only StdClass - rework!!!)
+     * @param int    $level The new level
+     * @param PDO    $dbh   DB-connection
+     */
+    public static function setPrivilege($user, $level, PDO $dbh)
+    {
+    	// Verify acceptable level request
+    	// Admins are set through phpMyAdmin
+    	$level = (int)$level;
+    	switch ( $level ) {
+	    case self::LOGGEDIN :
+	    case self::WEBONLY  :
+	    case self::TEXTBOOK :
+	    case self::WORKBOOK :
+	    case self::TEACHER  :
+            // is ok
+            break;
+        default:
+            trigger_error('Bad level request', E_USER_ERROR);
+           return false;
+    	}
+    	if ( empty($user) ) {
+    	    $email = $_SESSION['user'];
+    	} else {
+    	    $email = $user->email;
+    	}
+        try {
+            $sql = "UPDATE users SET privileges = :privileges, privlevel_since = NOW() WHERE email = :email";
+            $stmt = $dbh->prepare($sql);
+            $stmt->bindParam(':privileges', $level);
+            $stmt->bindParam(':email', $email);
+            $stmt->execute();
+            session_regenerate_id();
+            // Do not do the sesssion stuff if it's not the currently logged in user
+            $_SESSION['userdata']->privileges = $level;
+        }
+        catch (Exception $e) {
+            // TODO Better error handling UPDATE users SET privlevel_since
+            $GLOBALS['FIREPHP']->log("DB failure setting privilege level.");
+            $GLOBALS['FIREPHP']->log($e->getMessage());
+            return false;
+        }
+        return $level;
+    }
 }
 /*
-     *   user::requires(TEACHER)  // restrict page to teachers or better
-     *   user::validate(TEACHER)  // returns true if teacher or better
+     *   user::requires(user::TEACHER)  // restrict page to teachers or better
+     *   user::validate(user::TEACHER)  // returns true if teacher or better
      *   user::email() // returns user email
-     *   user::fullname() // returns user email
+     *   user::fullname() // returns user first + last name
 */

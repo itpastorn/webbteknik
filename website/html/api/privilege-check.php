@@ -52,6 +52,8 @@ if ( empty($_POST['answer']) ) {
 
 // Check answer
 // TODO: Check for downgrades
+// TODO Use user class (make a method of this) - but not the is question correctly answered part
+
 $answer = filter_input(INPUT_POST, 'answer', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
 $stmt = $dbh->prepare("SELECT answer FROM privilege_questions WHERE pqID = :pqID AND answer = :answer");
 $stmt->bindParam(':pqID', $_SESSION['pqID']);
@@ -62,7 +64,7 @@ $isCorrect = array( 'istrue' => (bool)$stmt->fetch());
 if ( $isCorrect['istrue'] ) {
     // Update DB
     try {
-    	$sql = "UPDATE users SET privileges = :privileges, privlevel_since = NOW() WHERE email = :email";
+        $sql = "UPDATE users SET privileges = :privileges, privlevel_since = NOW() WHERE email = :email";
         $stmt = $dbh->prepare($sql);
         $stmt->bindParam(':privileges', $_SESSION['levelrequest']);
         $stmt->bindParam(':email', $_SESSION['user']);
@@ -72,7 +74,7 @@ if ( $isCorrect['istrue'] ) {
     }
     catch (Exception $e) {
         // TODO Better error handling UPDATE users SET privlevel_since
-        $firephp->log("DB failure setting privilege level.");
+        $FIREPHP->log("DB failure setting privilege level.");
         exit($e->getMessage());
     }
 }

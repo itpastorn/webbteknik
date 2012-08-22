@@ -31,7 +31,7 @@ class data_courses extends items implements data
      * 
      * Can be used to help build outside queries for 2nd param of loadAll method
      */
-    const SELECT_SQL = "SELECT courseID AS id, course_name AS name, course_url AS courseUrl FROM courses ";
+    const SELECT_SQL = "SELECT `courses`.courseID AS id, course_name AS name, course_url AS courseUrl FROM courses ";
 
 
     private function __construct($id, $name, $courseUrl)
@@ -41,7 +41,8 @@ class data_courses extends items implements data
         $this->courseUrl  = $courseUrl;
     }
     
-    public static function loadOne($id, PDO $dbh) {
+    public static function loadOne($id, PDO $dbh)
+    {
         $sql  = self::SELECT_SQL . "FROM courses WHERE id = :id";
         $stmt = $dbh->prepare($sql);
         $stmt->bindParam(':id', $id);
@@ -50,11 +51,12 @@ class data_courses extends items implements data
         return $stmt->fetch();
     }
     
-    public static function loadAll(PDO $dbh, $sql=null) {
+    public static function loadAll(PDO $dbh, $sql=false, $params=array())
+    {
         $sql  = self::SELECT_SQL . "ORDER BY name";
         $stmt = $dbh->prepare($sql);
         $stmt->bindParam(':id', $id);
-        $stmt->execute();
+        $stmt->execute($params);
         $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, __CLASS__, array('id', 'name', 'courseUrl'));
         return $stmt->fetchAll();
     }

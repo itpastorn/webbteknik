@@ -37,11 +37,12 @@ interface data
      * 
      * @todo set limits, interval for pagination, etc
      * 
-     * @param object $dbh Instance of PDO
-     * @param string $dbh Custom SQL SELECT-query
+     * @param object $dbh    Instance of PDO
+     * @param string $dbh    Custom SQL SELECT-query
+     * @param array  $params Parameters for prepared statements
      * @return Array of instances of this class
      */
-    public static function loadAll(PDO $dbh, $sql=false);
+    public static function loadAll(PDO $dbh, $sql=false, $params=false);
 
     /**
      * Saving an object

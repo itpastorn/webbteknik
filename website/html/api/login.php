@@ -7,6 +7,8 @@
  * @todo Rework userdata to be an instance of the user class and not StdObject
  * @todo Perhaps always reload userdata from DB on page load to keep DRY?
  * @todo Check that user is not suspended
+ * @todo Log all log-ins in DB (logged in since... logged in n times... )
+ * 
  * @author <gunther@keryx.se>
  */
 

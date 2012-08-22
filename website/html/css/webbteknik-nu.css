@@ -154,7 +154,13 @@ input[disabled] + label {
     width: 50%;
     background-color: #F8F8F8;
 }
-
+/* div within fieldset for additional grouping */
+.subfield {
+    border: 1px solid rgb(0, 175,63);
+    border-radius: 6px;
+    padding: 1em;
+    margin: 1em;
+}
 /* ------------------------------- *\
    $media
 \* ------------------------------- */
@@ -321,7 +327,7 @@ footer {
     margin-top: 2em;
     border-top: 2px ridge lightgreen;
     padding-top: 1em;
-font-size: smaller;
+    font-size: smaller;
 }
 footer ul,
 footer li {

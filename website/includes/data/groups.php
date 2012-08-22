@@ -152,7 +152,7 @@ class data_groups extends items implements data
      * Can be used to help build outside queries for 2nd param of loadAll method
      */
     const SELECT_SQL = "
-              SELECT groupID AS id, schoolID, courseID, group_nickname AS name, group_max_size AS groupMaxSize, 
+              SELECT `groups`.groupID AS id, schoolID, courseID, group_nickname AS name, group_max_size AS groupMaxSize, 
                      group_start_date AS groupStartDate, group_url AS groupUrl
               FROM groups";
 
@@ -203,14 +203,15 @@ SQL;
         return $stmt->fetch();
     }
     
-    public static function loadAll(PDO $dbh, $sql=false) {
+    public static function loadAll(PDO $dbh, $sql=false, $params=array())
+    {
         if ( !$sql ) {
         $sql  = self::SELECT_SQL . <<<SQL
             ORDER BY groupStartDate DESC, schoolID ASC, name
 SQL;
         }
         $stmt = $dbh->prepare($sql);
-        $stmt->execute();
+        $stmt->execute($params);
         self::fetchMode($stmt);
         return $stmt->fetchAll();
     }
@@ -243,6 +244,10 @@ SQL;
             $obj->generateId();
         }
         $obj->validate();
+        // Allow empty URL
+        if ( empty($groupUrl) ) {
+            unset($obj->propertyErrors['groupUrl']); 
+        }
         return $obj;
         
     }    
@@ -305,7 +310,7 @@ SQL;
         $id='', $schoolID='', $courseID='', $name='', $groupMaxSize='', $groupStartDate='', $groupUrl=''
     )
     {
-	    $groupStartDate = ( $groupStartDate ) ?: date('Y-M-D');
+	    $groupStartDate = ( $groupStartDate ) ?: date('Y-m-d');
         $fakeobj = new data_groups($id, $schoolID, $courseID, $name, $groupMaxSize, $groupStartDate, $groupUrl);
         $fakeobj->isFake = true;
         return $fakeobj;
@@ -323,6 +328,8 @@ SQL;
             VALUES (:groupID, :schoolID, :courseID, :group_nickname, :group_max_size, :group_start_date, :group_url)
 SQL;
 
+        // TODO Tomorrow roll this into a transaction
+
         $stmt = $dbh->prepare($sql);
         $stmt->bindParam(':groupID', $this->id);
         $stmt->bindParam(':schoolID', $this->schoolID);
@@ -331,10 +338,18 @@ SQL;
         $stmt->bindParam(':group_max_size', $this->groupMaxSize);
         $stmt->bindParam(':group_start_date', $this->groupStartDate);
         $stmt->bindParam(':group_url', $this->groupUrl);
-        return $stmt->execute();
+        $group = $stmt->execute();
         
+        // When a group is created it must also have a teacher
+        // TODO Investigate pattern if group is created by admin
+        
+        // Only add teacher on group creation....
+        $this->addTeacher($_SESSION['user'], $dbh);
+        
+        // End transaction
+        return $group;
     }
-        
+    
     /**
      * Get the full name (includes place)
      * 
@@ -395,4 +410,86 @@ SQL;
         return $stmt->fetchColumn();
     }
     
+    /**
+     * Check if a user is a member of this group
+     * 
+     * @param string User id (email)
+     * @param PDO    database connection
+     * @return bool
+     */
+    public function isMember($user, PDO $dbh)
+    {
+        $sql  = "SELECT count(*) FROM belonging_groups WHERE email = :user AND groupID = :id";
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam(":user", $user);
+        $stmt->bindParam(":id", $this->id);
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
+    
+    /**
+     * Check if a user is a teacher for this group
+     * 
+     * @param string User id (email)
+     * @param PDO    database connection
+     * @return bool
+     */
+    public function isTeacher($user, PDO $dbh)
+    {
+        $sql  = "SELECT count(*) FROM teaching_groups WHERE email = :user AND groupID = :id";
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam(":user", $user);
+        $stmt->bindParam(":id", $this->id);
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
+    
+    /**
+     * Add member to group (join)
+     * 
+     * @todo Error handling
+     * 
+     * @param string User id (email)
+     * @param PDO    database connection
+     * @return bool
+     */
+    public function addMember($user, PDO $dbh)
+    {
+        $sql  = <<<SQL
+            INSERT INTO belonging_groups ( email, groupID, since ) 
+            VALUES (  :user, :groupID, NOW() )
+SQL;
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam(":user", $user);
+        $stmt->bindParam(":groupID", $this->id);
+        $stmt->execute();
+        return $stmt->rowCount();
+    }
+    
+    /**
+     * Add member to group (join)
+     * 
+     * @todo Error handling
+     * @todo Safety checks: Is teacher
+     * @todo Is member? Remove as member first
+     * 
+     * @param string User id (email)
+     * @param PDO    database connection
+     * @return bool
+     */
+    public function addTeacher($user, PDO $dbh)
+    {
+        $sql  = <<<SQL
+            INSERT INTO teaching_groups ( email, groupID, since ) 
+            VALUES (  :user, :groupID, NOW() )
+SQL;
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam(":user", $user);
+        $stmt->bindParam(":groupID", $this->id);
+        $stmt->execute();
+        return $stmt->rowCount();
+    }
+           
+    // TODO Remove user from group
+    // TODO Remove teacher from group
 }

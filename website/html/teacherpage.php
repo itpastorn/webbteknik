@@ -35,17 +35,17 @@ $FIREPHP->dump('_POST', $_POST);
 /**
  * Groups - the main object type on this page!
  */
-require "../includes/data/groups.php";
+require "data/groups.php";
 
 /**
  * Courses - available courses shall be listed
  */
-require "../includes/data/courses.php";
+require "data/courses.php";
 
 /**
  * Schools - Where the teacher works
  */
-require "../includes/data/schools.php";
+require "data/schools.php";
 
 user::setSessionData();
 
@@ -63,8 +63,9 @@ $dbh = keryxDB2_cx::get($dbx);
 // TODO Show groups
 
 // Variables for group add/modify form
-$g_group_id             = '';
-$g_group_id_msg         = '';
+$g_group_id           = ''; // For update - not yet implemented
+$g_group_id_msg       = '';
+$g_new_group_save_msg = '';
 if ( filter_has_var(INPUT_POST, 'admingroup_form_submitted') ) {
 	
 
@@ -73,7 +74,7 @@ if ( filter_has_var(INPUT_POST, 'admingroup_form_submitted') ) {
         if ( data_groups::isExistingId($g_course_id, $dbh) ) {
             // Updating existing group
             trigger_error("Can not update existing group. Not implemented yet.", E_USER_WARNING);
-            $g_group_msg("Kan ännu inte uppdatera grupper. Funktionen ej implementerad.");
+            $g_group_id_msg("Kan ännu inte uppdatera grupper. Funktionen ej implementerad.");
             
             // Remember to keep groupStartDate away from UPDATE
             // and not show it in form when editin existing group
@@ -81,11 +82,13 @@ if ( filter_has_var(INPUT_POST, 'admingroup_form_submitted') ) {
         }
         // Bad groupID
         trigger_error("No such groupID in DB.", E_USER_WARNING);
-        $g_group_msg("Felaktig grupp angiven, gruppen finns inte");
+        $g_group_id_msg("Felaktig grupp angiven, gruppen finns inte");
     } else {
         $g_group_id = ''; // Reset to string type
     }
+
     $g_school_id = trim(filter_input(INPUT_POST, 'g_school_id', FILTER_SANITIZE_STRIPPED, FILTER_FLAG_STRIP_LOW));
+    // Extract schoolID from longer string
     $g_school_id = data_schools::checkSchoolId($g_school_id, true);
 
 
@@ -267,7 +270,21 @@ HTML;
 // TODO Tomorrow, make it possible to edit school information, if:
 // You're affiliated to that school or you're an admin
 
+// Groups teacher is running
 
+// TODO Historical groups
+
+$sql = data_groups::SELECT_SQL . <<<SQL
+    INNER JOIN teaching_groups AS tg ON (groups.groupID = tg.groupID)
+    WHERE tg.email = :email
+SQL;
+$FIREPHP->log($sql);
+$params = array(':email' => $_SESSION['user']);
+$cur_groups = data_groups::loadALL($dbh, $sql, $params);
+
+$FIREPHP->log($cur_groups);
+
+// TODO Add another teacher option
 
 // Preparing for mod_rewrite, set base-element
 // TODO: Make this generic!
@@ -302,17 +319,25 @@ $pageref = 'teacherpage.php';
 SECNAV;
 ?>
   <h2 id="mygroups">Mina grupper</h2>
-  <h3>Grupp smeknamn (inbjudningskod)</h3>
+<?php
+foreach ($cur_groups as $cgroup ):
+    echo <<<CGROUP
+  <h3>{$cgroup->getName()} ({$cgroup->getId()})</h3>
   <p>
     <strong>Vad som kommer:</strong> Statistik om gruppen som helhet. Min/max/medel i antal gjorda uppgifter.
-    <br />
-    Start- och slutdatum
   </p>
   <ul>
-    <li>Redigera gruppdata</li>
     <li>Visa gruppens framsteg</li>
     <li>Redigera medlemslistan</li>
+    <li>Redigera gruppdata</li>
   </ul>
+  <p class="unobtrusive">
+    Gruppen startade {$cgroup->groupStartDate}
+  </p>  
+
+CGROUP;
+endforeach;
+?>
   <h2 id="admingroup">Skapa ny grupp/redigera grupp</h2>
   <?php 
   if ( empty($workplaces) ):

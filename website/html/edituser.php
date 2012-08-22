@@ -29,14 +29,14 @@ $dbx = config::get('dbx');
 $dbh = keryxDB2_cx::get($dbx);
 
 $userdata = $_SESSION['userdata'];
-$tocagree = true;
+$tosagree = true;
 if ( empty($userdata->user_since) ) {
-    if ( !isset($_POST['tocagree'])) {
-        // User has not agreed to TOC - show them
-        // Agreing to TOC is a non Ajax function
-        $tocagree = false;
+    if ( !isset($_POST['tosagree'])) {
+        // User has not agreed to tos - show them
+        // Agreing to tos is a non Ajax function
+        $tosagree = false;
     } else {
-        // New user, that has agreed to TOC
+        // New user, that has agreed to tos
         $stmt = $dbh->prepare('INSERT INTO users (email, user_since) VALUES (:email, NOW())');
         $stmt->bindParam(":email", $_SESSION['user']);
         $stmt->execute();
@@ -72,6 +72,15 @@ if ( isset($_POST['firstname']) ) {
         $_SESSION['userdata']->lastname  = $names['lastname'];
     }
 }
+
+// Quic and dirty test to see if name is in DB
+$db_name_set = false;
+if ( $userdata->firstname ) {
+    $db_name_set = true;
+}
+// HTML safe - move to class
+$first_name = $userdata->firstname;
+$last_name  = $userdata->lastname;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -85,90 +94,18 @@ if ( isset($_POST['firstname']) ) {
   <h1>webbteknik.nu &ndash; Redigera din användare</h1>
   <?php require "../includes/snippets/mainmenu.php"; ?>
 <?php
-if ( $tocagree ) :
-?>
-  <form action="edituser.php" method="post">
-    <fieldset>
-      <legend>Basfakta</legend>
-      <p>
-        På denna webbplats måste du använda ditt riktiga för- och efternamn.
-        Läs mer på våra <a href="userterms.php" class="nonimplemented">användarvillkor</a>.
-      </p>
-      <p>
-        <label for="firstname">Förnamn:</label>
-        <input type="text" id="firstname" name="firstname" 
-               value="<?php echo htmlspecialchars($userdata->firstname); ?>" required />
-      </p>
-      <p>
-        <label for="lastname">Efternamn:</label>
-        <input type="text" id="lastname" name="lastname"
-               value="<?php echo htmlspecialchars($userdata->lastname); ?>" required />
-      </p>
-      <p>
-        <span class="labeldummysincecssalignmentisnearimpossible"></span>
-        <input type="submit" value="Skicka" />
-      </p>
-    </fieldset>
-  </form>
-  <form action="edituser.php" method="post">
-    <fieldset>
-      <legend>Önskad åtkomst</legend>
-<?php
-    if ( user::validate(user::ADMIN) ):
-?>
-      <p>
-        <strong>Du är redan administratör.</strong>
-      </p>
-<?php
-    endif; // admin
-?>
-      <p>
-        Har du en övningsbok, så ingår alla lärobokens privilegier.
-      </p>
-      <p>
-        <input type="radio" name="priv" value="1" id="guest" <?php echo $checked[1]; ?>>
-        <label for="guest">Inga privilegier alls</label>
-      </p>
-      <p>
-        <input type="radio" name="priv" value="3" id="webonly" disabled <?php echo $checked[3]; ?>>
-        <label for="webonly">Bara webb (kan ännu inte väljas)</label>
-      </p>
-      <p>
-        <input type="radio" name="priv" value="7" id="textbook" <?php echo $checked[7]; ?>>
-        <label for="textbook">Lärobok</label>
-      </p>
-      <p>
-        <input type="radio" name="priv" value="15" id="workbook" <?php echo $checked[15]; ?>>
-        <label for="workbook">Övningsbok (kan ännu inte väljas)</label>
-      </p>
-      <p>
-        <input type="radio" name="priv" value="31" id="teacher" <?php echo $checked[31]; ?>>
-        <label for="teacher">Lärare (kan ännu inte väljas)</label>
-      </p>
-      <input type="hidden" name="origlevel" id="origlevel" value="<?php echo $userdata->privileges; ?>" />
-    </fieldset>
-  </form>
-  <form action="edituser.php" method="post">
-    <fieldset>
-      <legend>Skola och undervisningsgrupp</legend>
-      <p>
-        Här kommer elever med arbetsbok kunna ansluta sig till en undervisningsgrupp.
-        Lärare kommer kunna skapa undervisningsgrupper.
-      </p>
-    </fieldset>
-  </form>
-<?php
-else: // tocagree - not - show TOC
-?>
-  <form action="edituser.php" method="post">
+// Only show terms of service in not agreed upon
+if ( !$tosagree ) :
+    echo <<<TOS
+  <form action="edituser.php" method="post" class="nonajax">
     <fieldset>
       <legend>Skapa användare</legend>
       <p>
         För att använda denna webbplats, så måste du gå med på våra användarvillkor.
       </p>
       <p>
-        <input type="checkbox" id="tocagree" name="tocagree" value="1" required />
-        <label for="tocagree">Jag godkänner villkoren</label>
+        <input type="checkbox" id="tosagree" name="tosagree" value="1" required />
+        <label for="tosagree">Jag godkänner villkoren</label>
       </p>
       <p>
         <input type="submit" value="Skapa användare" />
@@ -177,7 +114,7 @@ else: // tocagree - not - show TOC
     <fieldset>
       <legend>Användarvillkor</legend>
       <p>
-        Lorem ipsum&hellip;
+        denna avdelning är inte helt klar ännu&hellip;
       </p>
       <p>
         I stora drag:
@@ -194,25 +131,115 @@ else: // tocagree - not - show TOC
       </ul>
     </fieldset>
   </form>
-<?php
-endif; // tocagree
+TOS;
+
+else:
+    // show all other forms if TOS-agreement has been made
+    echo <<<BASEFACTS
+ 
+  <form action="edituser.php" method="post">
+    <fieldset>
+      <legend>Basfakta</legend>
+      <p>
+        På denna webbplats måste du använda ditt riktiga för- och efternamn.
+        Läs mer på våra <a href="userterms.php" class="nonimplemented">användarvillkor</a>.
+      </p>
+      <p>
+        <label for="firstname">Förnamn:</label>
+        <input type="text" id="firstname" name="firstname" 
+               value="{$first_name}" required />
+      </p>
+      <p>
+        <label for="lastname">Efternamn:</label>
+        <input type="text" id="lastname" name="lastname"
+               value="{$last_name}" required />
+      </p>
+      <p>
+        <span class="labeldummysincecssalignmentisnearimpossible"></span>
+        <input type="submit" value="Skicka" />
+      </p>
+    </fieldset>
+  </form>
+BASEFACTS;
+
+    if ( $db_name_set ):
+
+        echo <<<EDITUSERFORMSTART
+        
+  <form action="edituser.php#privileges" method="post" id="privileges">
+    <fieldset>
+      <legend>Önskade privilegier</legend>
+
+EDITUSERFORMSTART;
+
+      echo <<<MAYBECODE
+
+      <div id="maybe_got_group_code" class="subfield blocklabels">
+        <p>
+          <input type="radio" id="group_code_set_yes" name="group_code_set">
+          <label for="group_code_set_yes">Jag har en inbjudningskod</label>
+        </p>
+        <p>
+          <input type="radio" id="group_code_set_no" name="group_code_set">
+          <label for="group_code_set_no">Jag har inte någon inbjudningskod</label>
+        </p>
+        <p id="group_code_yes">
+           <label for="my_group_id">Inbjudningskod till en grupp <strong></strong></label>
+           <input type="text" id="my_group_id" name="my_group_id" value="" 
+                  pattern="[0-9a-z]{5}" maxlength="5" required />
+           <input type="submit" value="Anslut mig till gruppen" disabled />
+        </p>
+      </div>
+
+MAYBECODE;
+      echo <<<GNOSTART
+      <div id="group_code_no" class="subfield">
+
+GNOSTART;
+      // nested if 3d level
+      if ( user::validate(user::ADMIN) ):
+          echo <<<ADMINYOU
+      <p>
+        <strong>Du är redan administratör.</strong>
+      </p>
+ADMINYOU;
+
+      endif; // admin
 ?>
-  <p><a href="./">Startsidan</a></p>
+
+        <p>
+          Har du en övningsbok, så ingår alla lärobokens privilegier.
+        </p>
+        <p>
+          <input type="radio" name="priv" value="1" id="guest" <?php echo $checked[1]; ?>>
+          <label for="guest">Inga privilegier alls</label>
+        </p>
+        <p>
+          <input type="radio" name="priv" value="3" id="webonly" disabled <?php echo $checked[3]; ?>>
+          <label for="webonly">Bara webb (kan ännu inte väljas)</label>
+        </p>
+        <p>
+          <input type="radio" name="priv" value="7" id="textbook" <?php echo $checked[7]; ?>>
+          <label for="textbook">Lärobok</label>
+        </p>
+        <p>
+          <input type="radio" name="priv" value="15" id="workbook" <?php echo $checked[15]; ?>>
+          <label for="workbook">Övningsbok (kan ännu inte väljas)</label>
+        </p>
+        <p>
+          <input type="radio" name="priv" value="31" id="teacher" <?php echo $checked[31]; ?>>
+          <label for="teacher">Lärare (kan ännu inte väljas)</label>
+        </p>
+        <input type="hidden" name="origlevel" id="origlevel" value="<?php echo $userdata->privileges; ?>" />
+      </div>
+    </fieldset>
+  </form>
+
 <?php
-if ( user::validate(user::TEXTBOOK) ):
+    endif; // db_name_set
+endif; // show all other forms
 ?>
-  <p>
-    <strong>Test: <a href="videos-test.php">Kolla filmer</strong>
-  </p>
-  <p><a href="statistik.php" class="nonimplemented">Statistiksidan &ndash; se hur långt du kommit</a></p>
-<?php
-endif;
-if ( user::validate(user::TEACHER) ):
-?>
-    <p><a href="sign-in.php?ref=edituser.php">Logga in som en annan användare</a></p>
-<?php
-endif;
-?>
+
   <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
   <script src="script/edituser.js"></script>
 </body>
