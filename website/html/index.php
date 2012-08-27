@@ -54,7 +54,7 @@ $status .= "</ul>\n";
     Hej. Roligt att du är intresserad av
     <a href="http://www.skolportalen.se/laromedel/produkt/J200%204500/Webbutveckling%201%20-%20L%C3%A4robok/">vårt
     läromedel</a>.
-    Just nu arbetar jag (Lars Gunther) på att göra den här webbplatsen användbar.
+    Just nu arbetar jag (Lars Gunther) på att göra den här webbplatsen användbar (sedan ska den bli snyggare).
   </p>
   <p>
     <strong>Om du <a href="http://webbteknik.nu/sign-in.php">registrerar dig</a>, så kommer du
@@ -88,6 +88,16 @@ $status .= "</ul>\n";
     <li>Slides (tänk PowerPoint fast online)</li>
     <li>Utskriftsversioner av material för rollspel</li>
   </ul>
+  <h2>Webbserverprogrammering</h2>
+  <p>
+    Under läsåret kommer jag ta fram ett läromedel i Webbserverprogrammering.
+    Vill du ta del av delar av det innan det är klart, så hör av dig till
+    gunther {at} keryx punkt se. Här kommer ett smakprov:
+  </p>
+  <video class="halfsize" controls tabindex="0">
+    <source type="video/webm" src="media/intro-xampp.webm"></source>
+    <source type="video/mp4" src="media/intro-xampp.mp4"></source>
+  </video>
   <p class="centered sign">Lars Gunther</p>
   <p class="centered">
     <a href="http://www.skolportalen.se/"><img src="img/skolportalen-logo-408-111.png" 
