@@ -226,9 +226,9 @@ SQL;
         $stmt->execute($params);
         self::fetchMode($stmt);
         $groups = $stmt->fetchAll();
+        $i = 0;
         foreach ( $groups as $group ) {
             $group->getUsers($dbh);
-            $groups[] = $group;
         }
         return $groups;
     }

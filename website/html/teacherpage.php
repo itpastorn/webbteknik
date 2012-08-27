@@ -282,8 +282,6 @@ SQL;
 $params = array(':email' => $_SESSION['user']);
 $cur_groups = data_groups::loadALL($dbh, $sql, $params);
 
-$FIREPHP->log($cur_groups);
-
 
 // TODO Add another teacher option
 
