@@ -331,13 +331,58 @@ ALTER TABLE `webbtek_webbtek`.`joblist` ADD INDEX ( `joborder` );
 ALTER TABLE `webbtek_webbtek`.`joblist` ADD INDEX ( `track` );
 ALTER TABLE `webbtek_webbtek`.`joblist` ADD INDEX ( `chapter` );
 
--- Not put to server below
+ALTER TABLE `books` CHANGE `type`
+   `type` ENUM( 'textbook', 'workbook', 'workbookanswers', 'teacherguide', 'none' )
+   CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL COMMENT 'none for dummy no book at all' ;
+
+-- 2012-08-27
+ 
+ALTER TABLE `books` ADD `courseID` VARCHAR( 25 ) NULL ;
+
+ALTER TABLE `books` ADD INDEX ( `courseID` ) ;
+
+ALTER TABLE `videos` CHANGE `bookID` `bookID` VARCHAR( 5 ) CHARACTER SET utf8 COLLATE utf8_swedish_ci NULL ,
+CHANGE `booksectionID` `booksectionID` MEDIUMINT( 8 ) UNSIGNED NULL; 
 
  ALTER TABLE `videos` ADD FOREIGN KEY ( `booksectionID` ) REFERENCES `webbtek_webbtek`.`booksections` (
 `booksectionID`
 ) ON DELETE RESTRICT ON UPDATE CASCADE;
 
+ALTER TABLE `webbtek_webbtek`.`videos` ADD INDEX ( `bookID` ) 
 
+ALTER TABLE `books` CHANGE `isbn` `isbn` VARCHAR( 20 ) CHARACTER SET utf8 COLLATE utf8_swedish_ci NULL;
+
+ALTER TABLE `books` ADD FOREIGN KEY ( `authormail` ) REFERENCES `webbtek_webbtek`.`users` (
+`email`
+) ON DELETE RESTRICT ON UPDATE CASCADE ;
+
+ALTER TABLE `books` ADD FOREIGN KEY ( `courseID` ) REFERENCES `webbtek_webbtek`.`courses` (
+`courseID`
+) ON DELETE RESTRICT ON UPDATE CASCADE ;
+
+INSERT IGNORE INTO `books` (`bookID`, `booktitle`, `author`, `authormail`, `isbn`, `type`, `bookurl`, `courseID`) VALUES
+('ws1', 'Webbserverprogrammering 1 med PHP', 'Lars Gunther', 'gunther@keryx.se', NULL, 'textbook', '', 'WEBWEB01'),
+('wu1', 'Webbutveckling 1', 'Lars Gunther', 'gunther@keryx.se', '978-91-7379-175-5', 'textbook', 'http://www.skolportalen.se/laromedel/produkt/J200%204500/Webbutveckling%201%20-%20L%C3%A4robok/', 'WEBWEU01'),
+('wu1tg', 'Lärarhandledning Webbutveckling 1', 'Lars Gunther', 'gunther@keryx.se', '', 'teacherguide', '', 'WEBWEU01');
+
+INSERT INTO `webbtek_webbtek`.`videos` (`videoname`, `title`, `bookID`, `booksectionID`, `tags`, `order`, `acl`)
+   VALUES ('jsbin-for-teachers', 'Att använda JSBin som lärare', 'wu1tg', NULL, 'jsbin', NULL, '31');
+
+-- Not put to server below
+
+INSERT INTO `webbtek_webbtek`.`books` (
+`bookID` ,
+`booktitle` ,
+`author` ,
+`authormail` ,
+`isbn` ,
+`type` ,
+`bookurl` ,
+`courseID`
+)
+VALUES (
+'wu1tg', 'Lärarhandledning Webbutveckling 1', 'Lars Gunther', 'gunther@keryx.se', '', 'teacherguide', '', 'WEBWEU01'
+);
 
 
 -- Test SQL
@@ -348,7 +393,6 @@ INNER JOIN belonging_groups USING (email)
 INNER JOIN groups USING (groupID)
 INNER JOIN schools USING(schoolID)
 ORDER BY schools.schoolID, groups.group_nickname, users.lastname ASC, users.firstname DESC
-
 
 
 

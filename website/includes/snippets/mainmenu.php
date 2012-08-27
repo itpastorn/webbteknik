@@ -8,6 +8,10 @@ if ( isset($_SESSION['userdata']) ) {
     ({$_SESSION['userdata']->email})
 USERDATA;
 }
+$teacherpage = '';
+if ( user::validate(user::TEACHER ) ) {
+    $teacherpage = '<li><a href="teacherpage.php">Lärarsida</a></li>';
+}
 ?>
     </p>
     <ul>
@@ -16,6 +20,7 @@ USERDATA;
       <li><a href="joblist.php">Arbetsplanering</a></li>
       <li><a href="flashcards.php">Flaschards (demo)</a></li>
       <li><a href="edituser.php">Redigera användaruppgifter</a></li>
+      <?php echo $teacherpage; ?>
     </ul>
     <p>
       <small>En större uppdatering pågår just nu. Under tiden den sker
