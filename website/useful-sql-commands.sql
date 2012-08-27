@@ -332,3 +332,23 @@ ALTER TABLE `webbtek_webbtek`.`joblist` ADD INDEX ( `track` );
 ALTER TABLE `webbtek_webbtek`.`joblist` ADD INDEX ( `chapter` );
 
 -- Not put to server below
+
+ ALTER TABLE `videos` ADD FOREIGN KEY ( `booksectionID` ) REFERENCES `webbtek_webbtek`.`booksections` (
+`booksectionID`
+) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+
+
+
+-- Test SQL
+
+// All users that belong to a group
+SELECT users.*, groups.group_nickname, schools.school_name FROM `users` 
+INNER JOIN belonging_groups USING (email)
+INNER JOIN groups USING (groupID)
+INNER JOIN schools USING(schoolID)
+ORDER BY schools.schoolID, groups.group_nickname, users.lastname ASC, users.firstname DESC
+
+
+
+

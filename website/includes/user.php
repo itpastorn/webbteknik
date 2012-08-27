@@ -207,3 +207,8 @@ class user
      *   user::email() // returns user email
      *   user::fullname() // returns user first + last name
 */
+
+
+// TODO: Lists of users
+// Per groups as students (belonging)
+// Per groups as teachers (teaching)

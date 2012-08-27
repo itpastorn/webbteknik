@@ -154,6 +154,9 @@ else:
         <input type="text" id="lastname" name="lastname"
                value="{$last_name}" required />
       </p>
+	  <p>
+	    Kommer snart: Kontonamn på Github och JSBin (frivilliga uppgifter).
+	  </p>
       <p>
         <span class="labeldummysincecssalignmentisnearimpossible"></span>
         <input type="submit" value="Skicka" />

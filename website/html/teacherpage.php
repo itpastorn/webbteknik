@@ -214,9 +214,10 @@ $sql = <<<SQL
     SELECT schoolID AS id, school_name AS name, school_place AS schoolPlace, school_url AS schoolUrl
     FROM schools
     INNER JOIN workplaces USING ( schoolID)
+    WHERE workplaces.email = :email
     ORDER BY name
 SQL;
-$workplaces = data_schools::loadAll($dbh, $sql);
+$workplaces = data_schools::loadAll($dbh, $sql, array('email' => $_SESSION['user']));
 
 // TODO Pre-select school according to form entry from last subbmit
 $g_schools  = makeSelectElement($workplaces, "", true, array('id' => 'null', 'name' => 'Ej i listan/lägg till'));
@@ -278,11 +279,11 @@ $sql = data_groups::SELECT_SQL . <<<SQL
     INNER JOIN teaching_groups AS tg ON (groups.groupID = tg.groupID)
     WHERE tg.email = :email
 SQL;
-$FIREPHP->log($sql);
 $params = array(':email' => $_SESSION['user']);
 $cur_groups = data_groups::loadALL($dbh, $sql, $params);
 
 $FIREPHP->log($cur_groups);
+
 
 // TODO Add another teacher option
 
@@ -322,7 +323,7 @@ SECNAV;
 <?php
 foreach ($cur_groups as $cgroup ):
     echo <<<CGROUP
-  <h3>{$cgroup->getName()} ({$cgroup->getId()})</h3>
+  <h3>{$cgroup->getName()} ({$cgroup->getId()}) med {$cgroup->numStudents} anslutna elever</h3>
   <p>
     <strong>Vad som kommer:</strong> Statistik om gruppen som helhet. Min/max/medel i antal gjorda uppgifter.
   </p>
@@ -450,7 +451,7 @@ endif;
       </p>
       <p>
         <input type="checkbox" id="s_new_school" name="s_new_school" value="yes" /> 
-        <label for="s_new_school">Skolan finns inte med i listan</label>
+        <label for="s_new_school">Skolan finns inte med i listan (markeras denna kan du lägga till den)</label>
       </p>
       <p>
         <input type="hidden" name="new_workplace_added" value="yes" />
@@ -506,7 +507,8 @@ endif;
         <input type="submit" value="Skicka" />
       </p>
       <p>
-        Adminstratörer måste godkänna att nya skolor läggs till. Detta kan ta ett par dagar.
+        <del>Adminstratörer måste godkänna att nya skolor läggs till. Detta kan ta ett par dagar.</del>
+        <big>Just nu godkänns alla skolor direkt!</big>
         Använd <a href="contact.php" class="nonimplemented">kontaktformuläret</a> om inget hänt inom 48 timmar.
       </p>
 FORMCONTENTS2;

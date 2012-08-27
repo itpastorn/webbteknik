@@ -61,6 +61,16 @@ class data_groups extends items implements data
      * Formatted YYYY-MM-DD
      */
     protected $groupStartDate = null;
+    
+    /**
+     * The list of students that belong to the group (their email)
+     */
+    protected $students = array();
+
+    /**
+     * The total number of students that belong to the group (their email)
+     */
+    protected $numStudents = 0;
 
     
 
@@ -144,7 +154,7 @@ class data_groups extends items implements data
         'name'           => "För kort (min 2), för långt (max 20), eller otillåtna tecken",
 */
 
-    protected $gettable =  array('schoolID', 'courseID', 'groupUrl', 'groupMaxSize', 'groupStartDate');
+    protected $gettable =  array('schoolID', 'courseID', 'groupUrl', 'groupMaxSize', 'groupStartDate', 'students', 'numStudents');
 
     /**
      * The start of SQL commands to fetch data for this object
@@ -176,6 +186,7 @@ class data_groups extends items implements data
         $this->groupMaxSize   = $groupMaxSize;
         $this->groupStartDate = $groupStartDate;
         $this->groupUrl       = $groupUrl;
+        $this->numStudents    = 0; // Will be updated from DB
     }
     
     /**
@@ -200,7 +211,8 @@ SQL;
         $stmt->bindParam(':id', $id);
         $stmt->execute();
         self::fetchMode($stmt);
-        return $stmt->fetch();
+        $group = $stmt->fetch();
+        $group->getUsers($dbh);
     }
     
     public static function loadAll(PDO $dbh, $sql=false, $params=array())
@@ -213,7 +225,34 @@ SQL;
         $stmt = $dbh->prepare($sql);
         $stmt->execute($params);
         self::fetchMode($stmt);
-        return $stmt->fetchAll();
+        $groups = $stmt->fetchAll();
+        foreach ( $groups as $group ) {
+            $group->getUsers($dbh);
+            $groups[] = $group;
+        }
+        return $groups;
+    }
+    
+    /**
+     * Fet all users that belong to the group
+     */
+    private function getUsers (PDO $dbh)
+    {
+    	static $gustmt;
+    	if ( empty($gustmt) ) {
+            // Only make a statement the first time to get better performance    	    
+            $sql = <<<SQL
+                SELECT email FROM belonging_groups WHERE groupID = :gid
+SQL;
+            $gustmt = $dbh->prepare($sql);
+            $GLOBALS['FIREPHP']->log("gustmt prepared");
+    	}
+        $gustmt->bindParam(':gid', $id); // Must be repeted for each method invocation
+    	$id = $this->getId();
+       	$gustmt->execute();
+       	$this->students    = $gustmt->fetchAll(PDO::FETCH_COLUMN);
+       	$this->numStudents = count($this->students);
+        
     }
 
     /**
@@ -273,7 +312,7 @@ SQL;
         // There are 23 068 672 possible ids
         // the probability of hittong a duplicate twice is miniscule beyond reason
         do {
-        	$id = self::generateIdHelp();
+            $id = self::generateIdHelp();
             $fphp->log("The generated groupID pre-DB check is: " . $id);
     
             $stmt->execute();
@@ -310,7 +349,7 @@ SQL;
         $id='', $schoolID='', $courseID='', $name='', $groupMaxSize='', $groupStartDate='', $groupUrl=''
     )
     {
-	    $groupStartDate = ( $groupStartDate ) ?: date('Y-m-d');
+        $groupStartDate = ( $groupStartDate ) ?: date('Y-m-d');
         $fakeobj = new data_groups($id, $schoolID, $courseID, $name, $groupMaxSize, $groupStartDate, $groupUrl);
         $fakeobj->isFake = true;
         return $fakeobj;
@@ -398,10 +437,10 @@ SQL;
     
     public static function isExistingId($id, PDO $dbh=null)
     {
-    	if ( empty($dbh) ) {
+        if ( empty($dbh) ) {
             $dbx = config::get('dbx');
             $dbh = keryxDB2_cx::get($dbx);
-    	}
+        }
         // TODO Validate single prop, before invoking DB
         $sql  = "SELECT count(*) FROM groups where groupID = :id";
         $stmt = $dbh->prepare($sql);
@@ -493,3 +532,34 @@ SQL;
     // TODO Remove user from group
     // TODO Remove teacher from group
 }
+/*
+// The students
+$sql = <<<SQL
+    SELECT users.*, groups.group_nickname, schools.school_name FROM `users` 
+    INNER JOIN belonging_groups USING (email)
+    INNER JOIN groups USING (groupID)
+    INNER JOIN schools USING(schoolID)
+    WHERE group.groupID = :gid
+    ORDER BY schools.schoolID, groups.group_nickname, users.lastname ASC, users.firstname DESC
+SQL;
+// stats
+// All groups stats
+$sql = <<<SQL
+    SELECT schools.school_name, groups.group_nickname, COUNT(*) AS numStudents FROM `users` 
+    INNER JOIN belonging_groups USING (email)
+    INNER JOIN groups USING (groupID)
+    INNER JOIN schools USING(schoolID)
+    GROUP BY groups.groupID
+    ORDER BY numStudents DESC
+SQL;
+
+$stmt = $dbh->prepare($sql);
+$stmt->bindParam('gid', $tempgid);
+foreach ( $cur_groups as $tempgroup ) {
+    $tempgid = $tempgroup->getId();
+    $stmt->execute();
+    $tempgroup->numStudents = $stmt->fetchColumn();
+    // TODO I should not be able to dynamically assign a member variable like this...
+}
+
+*/

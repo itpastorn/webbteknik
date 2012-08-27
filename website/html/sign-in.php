@@ -21,16 +21,18 @@ $ref     = "false"; // Where to be redirected if sign in is ok
 $curuser = "";      // Information about possible logged in user (users may switch login)
 
 if ( user::validate(user::LOGGEDIN) ) {
-    $curuser  = '<p><strong>' . htmlspecialchars($_SESSION['user']) . "</strong> är inloggad</p>";
-    $curuser .= "<ul><li>Logga in på nytt om du vill <strong>byta användare</strong>. (Främst för admins.)</li>";
+    $curuser  = '<p class="important greenfade"><strong>' . htmlspecialchars($_SESSION['user']) . "</strong> är inloggad</p>";
+    $curuser .= "<ul><li>Logga in på nytt om du vill <strong>byta användare</strong>. (Främst för admins.)</li></ul>";
     if ( isset($_GET['nopriv']) ) {
         $note  = "<h2>Du har inte behörighet att gå till sidan</h2>\n";
         $note .= "<p>Det kan bero på att du inte har registrerat bokinköp " .
         		 "eller anslutit dig till en undervisningsgrupp.\n";
         $note .= "Det gör du genom att <a href=\"edituser.php\">redigera dina användardata</a>.</p>\n";
     }
+    $signinheader = "Byt användare";
 } else {
     $note = "<h2>Sidan kräver inloggning</h2>\n";
+    $signinheader = "Logga in";
 }
 if ( isset($_GET['ref']) ) {
     $ref  = '"' . htmlspecialchars($_GET['ref']) . '"';
@@ -47,10 +49,12 @@ if ( isset($_GET['ref']) ) {
 </head>
 <body>
   <h1>webbteknik.nu &ndash; login</h1>
+  <?php require "../includes/snippets/mainmenu.php"; ?>
 <?php
 echo $note;
 echo $curuser;
 ?>
+  <h2><?php echo $signinheader; ?></h2>
   <p class="signinbox">
     Testar din webbläsare. Var god vänta.
   </p>
@@ -75,10 +79,13 @@ echo $curuser;
     <em>Om det är första gången</em> du använder BrowserID, så kommer du alltså behöva
     utföra båda stegen.
   </p>
-  <p>
-  </p>
+  <h2>Instruktionsvideo</h2>
+  <video class="halfsize" controls tabindex="0">
+    <source type="video/webm" src="media/registrera-konto.webm"></source>
+    <source type="video/mp4" src="media/registrera-konto.mp4"></source>
+  </video>
   <hr class="todo" />
-  <h2>Tekniska krav</h2>
+  <h2 id="required_tech_section">Tekniska krav</h2>
   <p>
     På den här webbplatsen används flera nya tekniker. Här ser du om din webbläsare stödjer dem.
   </p>

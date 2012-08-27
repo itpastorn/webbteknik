@@ -91,7 +91,7 @@
         },
     };
     
-    var rtech_table = document.getElementById('required_tech');
+    var rtech_table  = document.getElementById('required_tech');
     for ( var test_tech in required_tech ) {
         if ( required_tech[test_tech].ttest ) {
             var ntr = document.createElement("tr"),
@@ -130,7 +130,8 @@
         signinbox.appendChild(loginlink);
     } else {
         // TODO: move messages to template object
-        signinbox.innerHTML = "Inloggnig ej aktiverad. Din browser uppfyller inte de tekniska kraven. Läs nedan.";
+        signinbox.innerHTML = "Inloggnig ej aktiverad. Din browser uppfyller inte de tekniska kraven. " +
+        		'<a href="#required_tech_section">Läs nedan</a>.';
     }
     
 }());
