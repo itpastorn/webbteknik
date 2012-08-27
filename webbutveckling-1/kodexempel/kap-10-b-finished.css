@@ -1,0 +1,38 @@
+body {
+    margin: auto;
+    width: 500px;
+    background-color: oldlace;
+}
+h1 {
+    text-align: center;
+    font-family: sans-serif;
+}
+div {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+}
+.wrapper {
+    position: relative;
+    width: 100%;
+    height: 500px;
+}
+.alpha {
+    background-color: mediumspringgreen;
+    left: 50px;
+    top: 50px;
+}
+.beta {
+    background-color: blueviolet;
+    left: 50px;
+    top: 50px;
+    -moz-transition: all 2.5s;
+}
+.beta:hover {
+    -moz-transform: scale(0.71) rotate(1.125turn);
+    /* Förväntat värde nedan, men exemplet ovan är roligare med transition */
+    /*
+    -moz-transform: scale(0.71) rotate(45deg);
+    */
+}
+

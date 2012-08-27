@@ -26,13 +26,33 @@ div {
     background-color: blueviolet;
     left: 50px;
     top: 50px;
-    -moz-transition: all 2.5s;
+    -webkit-transition: all 2.5s;
+       -moz-transition: all 2.5s;
+        -ms-transition: all 2.5s;
+         -o-transition: all 2.5s;
+            transition: all 2.5s;
 }
 .beta:hover {
-    -moz-transform: scale(0.71) rotate(1.125turn);
-    /* Förväntat värde nedan, men exemplet ovan är roligare med transition */
+    -webkit-transform: scale(0.71) rotate(1.125turn);
+        -ms-transform: scale(0.71) rotate(1.125turn);
+         -o-transform: scale(0.71) rotate(1.125turn);
+            transform: scale(0.71) rotate(1.125turn);
+    /* 
+	Förväntat värde nedan, men exemplet ovan är roligare ihop med transition 
+	1turn = 360deg = 400grad ≈ 6.2831853rad
+	varv    grader   nygrader  2 pi radianer
+	*/
     /*
-    -moz-transform: scale(0.71) rotate(45 deg);
+    -webkit-transform: scale(0.71) rotate(45deg);
+        -ms-transform: scale(0.71) rotate(45deg);
+         -o-transform: scale(0.71) rotate(45deg);
+            transform: scale(0.71) rotate(45deg);
     */
+}
+.beta:hover {
+    -webkit-transform: scale(0.71) rotate(1.125turn);
+        -ms-transform: scale(0.71) rotate(1.125turn);
+         -o-transform: scale(0.71) rotate(1.125turn);
+            transform: scale(0.71) rotate(1.125turn);
 }
 

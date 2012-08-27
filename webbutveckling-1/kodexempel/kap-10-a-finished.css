@@ -24,18 +24,30 @@ div {
 .alpha {
     background-color: darkolivegreen;
     /* Skriv något här som placerar boxen */
+    left: 50px;
+    top: 50px;
+    z-index: 4;
 }
 .beta {
     background-color: blueviolet;
     /* Skriv något här som placerar boxen */
+    left: 100px;
+    top: 100px;
+    z-index: 3;
 }
 .gamma {
     background-color: darkorange;
     /* Skriv något här som placerar boxen */
+    left: 150px;
+    top: 150px;
+    z-index: 2;
 }
 .delta {
     background-color: hotpink;
     /* Skriv något här som placerar boxen */
+    left: 200px;
+    top: 200px;
+    z-index: 1;
 }
 .ypsilon {
     background-color: royalblue;
@@ -43,4 +55,9 @@ div {
     width: 100px;
     height: 100px;
     /* Skriv något här som placerar boxen */
+    position: fixed;
+    left: 50%;
+    top: 100px;
+    z-index: 5;
 }
+

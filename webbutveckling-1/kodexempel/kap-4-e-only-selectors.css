@@ -1,0 +1,29 @@
+html {
+}
+body {
+    margin: auto; /* bjuds på */
+    width: 500px; /* bjuds på */
+    padding-bottom: 0.1px; /*knep för div margin */
+}
+h1 {
+}
+div {
+    margin: 10px; /* bjuds på */
+    padding: 10px; /* bjuds på */
+}
+#billy {
+}
+#bob {
+}
+.two {
+}
+.two + p {
+}
+.two + p + p {
+}
+#bob > .two + p + p {
+} 
+#bob a {
+}
+#bob > .two > a {
+}
