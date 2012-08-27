@@ -106,7 +106,11 @@ a:active {
 }
 
 :target {
-    -moz-animation: 3s yellowfade;
+    -webkit-animation: 3s yellowfade;
+       -moz-animation: 3s yellowfade;
+        -ms-animation: 3s yellowfade;
+         -o-animation: 3s yellowfade;
+            animation: 3s yellowfade;
 }
 
 strong > strong {
@@ -196,12 +200,28 @@ iframe {
     display: none;
 }
 .yellowfade {
-    -moz-animation: 3s yellowfade;
+    -webkit-animation: 3s yellowfade;
+       -moz-animation: 3s yellowfade;
+        -ms-animation: 3s yellowfade;
+         -o-animation: 3s yellowfade;
+            animation: 3s yellowfade;
 }
 .greenfade {
-    -moz-animation: 5s greenfade;
+    -webkit-animation: 5s greenfade;
+       -moz-animation: 5s greenfade;
+        -ms-animation: 5s greenfade;
+         -o-animation: 5s greenfade;
+            animation: 5s greenfade;
 }
 
+@-webkit-keyframes yellowfade {
+    from {
+        background-color: yellow;
+    }
+    to {
+        background-color: transparent;
+    }
+}
 @-moz-keyframes yellowfade {
     from {
         background-color: yellow;
@@ -210,7 +230,45 @@ iframe {
         background-color: transparent;
     }
 }
+@-ms-keyframes yellowfade {
+    from {
+        background-color: yellow;
+    }
+    to {
+        background-color: transparent;
+    }
+}
+@-o-keyframes yellowfade {
+    from {
+        background-color: yellow;
+    }
+    to {
+        background-color: transparent;
+    }
+}
+@keyframes yellowfade {
+    from {
+        background-color: yellow;
+    }
+    to {
+        background-color: transparent;
+    }
+}
 
+@-webkit-keyframes greenfade {
+    from {
+        background-color: green;
+    }
+    20% {
+        background-color: transparent;
+    }
+    40% {
+        background-color: green;
+    }
+    to {
+        background-color: transparent;
+    }
+}
 @-moz-keyframes greenfade {
     from {
         background-color: green;
@@ -225,8 +283,82 @@ iframe {
         background-color: transparent;
     }
 }
+@-ms-keyframes greenfade {
+    from {
+        background-color: green;
+    }
+    20% {
+        background-color: transparent;
+    }
+    40% {
+        background-color: green;
+    }
+    to {
+        background-color: transparent;
+    }
+}
+@-o-keyframes greenfade {
+    from {
+        background-color: green;
+    }
+    20% {
+        background-color: transparent;
+    }
+    40% {
+        background-color: green;
+    }
+    to {
+        background-color: transparent;
+    }
+}
+@keyframes greenfade {
+    from {
+        background-color: green;
+    }
+    20% {
+        background-color: transparent;
+    }
+    40% {
+        background-color: green;
+    }
+    to {
+        background-color: transparent;
+    }
+}
 
+@-webkit-keyframes redfade {
+    from {
+        background-color: red;
+    }
+    to {
+        background-color: transparent;
+    }
+}
 @-moz-keyframes redfade {
+    from {
+        background-color: red;
+    }
+    to {
+        background-color: transparent;
+    }
+}
+@-ms-keyframes redfade {
+    from {
+        background-color: red;
+    }
+    to {
+        background-color: transparent;
+    }
+}
+@-o-keyframes redfade {
+    from {
+        background-color: red;
+    }
+    to {
+        background-color: transparent;
+    }
+}
+@keyframes redfade {
     from {
         background-color: red;
     }
@@ -245,6 +377,12 @@ iframe {
 .unobtrusive {
     color: #888;
     font-size: smaller;
+}
+.important {
+    font-size: larger;
+    border: 3px double green;
+    padding: 1em;
+    text-align: center;
 }
 .blackborder,
 .blackborder th,
@@ -519,7 +657,7 @@ hr.todo {
 /* ------------------------------- *\
    $TODO
 \* ------------------------------- */
-@media screen and (max-width: 1320px) {
+@media screen and (max-width: 1020px) {
     body {
         width: 720px;
     }
