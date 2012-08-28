@@ -365,8 +365,8 @@ INSERT IGNORE INTO `books` (`bookID`, `booktitle`, `author`, `authormail`, `isbn
 ('wu1', 'Webbutveckling 1', 'Lars Gunther', 'gunther@keryx.se', '978-91-7379-175-5', 'textbook', 'http://www.skolportalen.se/laromedel/produkt/J200%204500/Webbutveckling%201%20-%20L%C3%A4robok/', 'WEBWEU01'),
 ('wu1tg', 'Lärarhandledning Webbutveckling 1', 'Lars Gunther', 'gunther@keryx.se', '', 'teacherguide', '', 'WEBWEU01');
 
-INSERT INTO `webbtek_webbtek`.`videos` (`videoname`, `title`, `bookID`, `booksectionID`, `tags`, `order`, `acl`)
    VALUES ('jsbin-for-teachers', 'Att använda JSBin som lärare', 'wu1tg', NULL, 'jsbin', NULL, '31');
+INSERT INTO `webbtek_webbtek`.`videos` (`videoname`, `title`, `bookID`, `booksectionID`, `tags`, `order`, `acl`)
 
 -- Not put to server below
 

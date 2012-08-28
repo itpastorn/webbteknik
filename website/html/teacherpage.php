@@ -196,34 +196,6 @@ HTML;
     }
 }
 
-
-// SQL injection safe
-
-// Normal/always page view data
-$all_courses   = data_courses::loadAll($dbh);
-$pre_select_g_gourse = ( $new_group->courseID ) ?: 'WEBWEU01';
-$g_course = makeSelectElement($all_courses, $pre_select_g_gourse);
-
-$all_schools   = data_schools::loadAll($dbh);
-$select_school = makeSelectElement($all_schools, "", true);
-// TODO Filter out schools where the teacher already works
-
-
-// Schools where the user works
-$sql = <<<SQL
-    SELECT schoolID AS id, school_name AS name, school_place AS schoolPlace, school_url AS schoolUrl
-    FROM schools
-    INNER JOIN workplaces USING ( schoolID)
-    WHERE workplaces.email = :email
-    ORDER BY name
-SQL;
-$workplaces = data_schools::loadAll($dbh, $sql, array('email' => $_SESSION['user']));
-
-// TODO Pre-select school according to form entry from last subbmit
-$g_schools  = makeSelectElement($workplaces, "", true, array('id' => 'null', 'name' => 'Ej i listan/lägg till'));
-$wp_list    = makeListItems($workplaces, "current_workplaces");
-
-
 $new_school_save_msg = "";
 if ( filter_has_var(INPUT_POST, 'new_school_school_added') ) {
     // TODO Add support for UPDTATING by setting id as a hidden form field
@@ -271,7 +243,33 @@ HTML;
 // TODO Tomorrow, make it possible to edit school information, if:
 // You're affiliated to that school or you're an admin
 
-// Groups teacher is running
+
+// SQL injection safe
+
+// Normal/always page view data
+$all_courses   = data_courses::loadAll($dbh);
+$pre_select_g_gourse = ( $new_group->courseID ) ?: 'WEBWEU01';
+$g_course = makeSelectElement($all_courses, $pre_select_g_gourse);
+
+$all_schools   = data_schools::loadAll($dbh);
+$select_school = makeSelectElement($all_schools, "", true);
+// TODO Filter out schools where the teacher already works
+
+
+// Schools where the user works
+$sql = <<<SQL
+    SELECT schoolID AS id, school_name AS name, school_place AS schoolPlace, school_url AS schoolUrl
+    FROM schools
+    INNER JOIN workplaces USING ( schoolID)
+    WHERE workplaces.email = :email
+    ORDER BY name
+SQL;
+$workplaces = data_schools::loadAll($dbh, $sql, array('email' => $_SESSION['user']));
+
+// TODO Pre-select school according to form entry from last subbmit
+$g_schools  = makeSelectElement($workplaces, "", true, array('id' => 'null', 'name' => 'Ej i listan/lägg till'));
+$wp_list    = makeListItems($workplaces, "current_workplaces");
+
 
 // TODO Historical groups
 
@@ -440,7 +438,7 @@ endif;
       <p>
         <label for="s_school_id">Lägg till plats där du jobbar
           (du måste använda ett färdigt förslag i detta fält)</label>
-        <input type="text" name="s_school_id" id="s_school_id" list="s_school_list" required /> 
+        <input type="text" name="s_school_id" id="s_school_id" list="s_school_list" required autocomplete="off" /> 
           <datalist id="s_school_list">
             <select name="s_school_sel">
               {$select_school}
