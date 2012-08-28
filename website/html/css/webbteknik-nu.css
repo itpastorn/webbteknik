@@ -40,7 +40,20 @@ TODO mobile section
    $Notes
 \* ------------------------------- */
 /*
+Main color #00AF3F = rgb(0, 175,63) = hsl(142, 100%, 34%)
+Analogic color scheme http://colorschemedesigner.com/#2X51Tw0uhw0w0
 
+Darker greens
+  #218345
+  #00722A - very dark
+
+Lighter greens
+  #36D772
+  #61D78D - very light
+
+Main blue = #066F97
+
+Alternative neonish green #7CDC00
 
 
 */
@@ -611,7 +624,7 @@ hr.todo {
     border: 1px solid rgb(0, 175,63);
     border-radius: 4px;
 }
-
+/* Persona buttons in separate CSS */
 
 
 /* ------------------------------- *\

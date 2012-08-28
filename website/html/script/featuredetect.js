@@ -118,14 +118,16 @@
     // Alert user of test results
     var signinbox = document.getElementsByClassName("signinbox")[0];
     if ( required_tech.passed_all_tests ) {
-        var loginlink  = document.createElement("a"),
-            loginimage = document.createElement("img");
-        loginlink.href  = "#";
-        loginlink.title = "Logga in med BrowserID";
-        loginlink.id    = "browserid";
-        loginimage.src = "img/sign-in-green.png";
-        loginimage.alt = 'Logga in';
-        loginlink.appendChild(loginimage);
+        var loginlink = document.createElement("a"),
+            loginspan = document.createElement("span");
+        // Make this: <a href="#" class="persona-button green"><span>Sign in with Persona</span></a>
+        // See http://dev.sawyerhollenshead.com/mozilla/buttons/buttons.html
+        // Alternate layouts: dark and orange
+        loginlink.href      = "#";
+        loginlink.id        = "browserid";
+        loginlink.className = "persona-button green";
+        loginspan.innerHTML = "Logga in med Persona (BrowserID)";
+        loginlink.appendChild(loginspan);
         signinbox.innerHTML = ""; // reset
         signinbox.appendChild(loginlink);
     } else {
@@ -133,7 +135,15 @@
         signinbox.innerHTML = "Inloggnig ej aktiverad. Din browser uppfyller inte de tekniska kraven. " +
         		'<a href="#required_tech_section">Läs nedan</a>.';
     }
-    
+    // Prompt Firefox users to update their browser - ugly temp hack
+    if ( !document.createElement("video").played && window.mozInnerScreenX ) {
+        var nudge = "<p>Din version av Firefox är inte den senaste. " +
+                "För att dra bäst nytta av denna webbplats så uppdatera din webbläsare, " +
+                "annars kommer funktionen som automatiskt sparar vad du sett av en video inte att fungera.</p>";
+        $(".signinbox a").after(nudge);
+        
+    }
+
 }());
 /*
 Switch to Modernizr?

@@ -45,4 +45,5 @@
 	        window.location.href = "./userpage.php";
 	    }
 	}
+	
 }());

@@ -40,7 +40,7 @@ $audience .= urlencode($_SERVER['SERVER_NAME']);
 $data = "assertion={$assertion}&audience={$audience}";
 
 // Do curl
-$url = 'https://browserid.org/verify';
+$url = 'https://verifier.login.persona.org/verify';
 $ch  = curl_init($url);
 curl_setopt($ch, CURLOPT_POST, 1);
 curl_setopt($ch, CURLOPT_POSTFIELDS, $data);

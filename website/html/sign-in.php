@@ -38,13 +38,22 @@ if ( isset($_GET['ref']) ) {
     $ref  = '"' . htmlspecialchars($_GET['ref']) . '"';
 }
 
+// Preparing for mod_rewrite, set base-element
+// TODO: Make this generic!
+$baseref = dirname(htmlspecialchars($_SERVER['SCRIPT_NAME'])) . "/";
+if ( "//" == $baseref ) {
+    $baseref = "/";
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Login - webbteknik.nu</title>
+  <base href="<?php echo $baseref; ?>" />
   <link rel="stylesheet" href="css/webbteknik-nu.css" />
+  <link rel="stylesheet" href="css/persona.css" />
   <link href='http://fonts.googleapis.com/css?family=Handlee' rel='stylesheet' type='text/css'>
 </head>
 <body>
@@ -60,7 +69,7 @@ echo $curuser;
   </p>
   <p>
     För din trygghet och integritet, så använder denna webbplats
-    <a href="https://browserid.org/">BrowserID</a>.
+    <a href="https://browserid.org/">Persona (BrowserID)</a>.
   </p>
   <p>Har du ett BrowserID-konto? Annars, så kommer du först få skaffa det.</p>
   <ol>
@@ -69,14 +78,14 @@ echo $curuser;
     <li>När du gjort det måste du klicka på sign-in knappen ovan en gång till.</li>
   </ol>
   <p>
-    BrowserID är ett
+    Persona (tidigate kallat BrowserID) är ett
     <a lang="en" href="http://en.wikipedia.org/wiki/Single_sign-on">single sign on-system</a>.
     Det används för att <dfn>autentisera</dfn> dig som användare. I framtiden kommer du förhoppningsvis
-    få nytta av ditt BrowserID-konto på fler webbplatser än denna.
+    få nytta av ditt Persona-konto på fler webbplatser än denna.
   </p>
   <p>
     Efter att ha loggat in, så måste du redigera dina användaruppgifter på den här specifika webbplatsen.
-    <em>Om det är första gången</em> du använder BrowserID, så kommer du alltså behöva
+    <em>Om det är första gången</em> du använder Persona, så kommer du alltså behöva
     utföra båda stegen.
   </p>
   <h2>Instruktionsvideo</h2>
@@ -100,9 +109,9 @@ echo $curuser;
       <th>Stöd</th>
     </tr>
   </table>
-  <script src="script/featuredetect.js"></script>
-  <script src="https://browserid.org/include.js" type="text/javascript"></script> 
   <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+  <script src="script/featuredetect.js"></script>
+  <script src="https://login.persona.org/include.js" type="text/javascript"></script> 
   <script>
     "use strict";
     var ref = <?php echo $ref; ?>;
