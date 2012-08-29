@@ -44,6 +44,7 @@ $baseref = dirname(htmlspecialchars($_SERVER['SCRIPT_NAME'])) . "/";
 if ( "//" == $baseref ) {
     $baseref = "/";
 }
+//   <base href="<?php echo $baseref; ? >" />
 
 ?>
 <!DOCTYPE html>
@@ -51,7 +52,6 @@ if ( "//" == $baseref ) {
 <head>
   <meta charset="UTF-8">
   <title>Login - webbteknik.nu</title>
-  <base href="<?php echo $baseref; ?>" />
   <link rel="stylesheet" href="css/webbteknik-nu.css" />
   <link rel="stylesheet" href="css/persona.css" />
   <link href='http://fonts.googleapis.com/css?family=Handlee' rel='stylesheet' type='text/css'>

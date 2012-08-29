@@ -213,6 +213,7 @@ SQL;
         self::fetchMode($stmt);
         $group = $stmt->fetch();
         $group->getUsers($dbh);
+        return $group;
     }
     
     public static function loadAll(PDO $dbh, $sql=false, $params=array())
