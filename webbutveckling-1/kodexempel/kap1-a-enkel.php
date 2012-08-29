@@ -1,11 +1,11 @@
-<?php
+<!--
 /*
  * Enkelt HTML-dokument
  *
  * Skall användas först i kapitel 1
  * Eleven får, men måste inte läsa Wikipedia-artikeln. Den är mest ett exempel på en länk.
  */
-?>
+-->
 <!DOCTYPE html>
 <html lang="sv">
   <head>

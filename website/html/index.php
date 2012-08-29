@@ -17,7 +17,7 @@ $dbx = config::get('dbx');
 // init
 $dbh = keryxDB2_cx::get($dbx);
 
-$stattypes = array('Videos', 'Länkar', 'Uppgifter', 'Flashcards');
+$stattypes = array('Videos', 'Länkar', 'Uppgifter', 'Flashcards', 'Användare', 'Grupper');
 
 $sql = <<<SQL
     SELECT count(videoname) AS num FROM videos
@@ -27,6 +27,10 @@ $sql = <<<SQL
     SELECT count(joblistID) AS num FROM joblist
     UNION
     SELECT count(flashcardID) AS num FROM flashcards
+    UNION 
+    SELECT count(*) AS num FROM users
+    UNION 
+    SELECT count(*) AS num FROM groups
 SQL;
 $status = "<ul>\n";
 $i = 0;
@@ -60,9 +64,6 @@ $status .= "</ul>\n";
     <strong>Om du <a href="http://webbteknik.nu/sign-in.php">registrerar dig</a>, så kommer du
     få meddelande när det sker uppdateringar.</strong> Du kan då också se fler videos.
   </p>
-  <p>
-    Här finns <a href="laxhjalpen-demowebb/">Läxhjälpen &ndash; bokens demowebbplats</a>.
-  </p>
   <h2>Uppdateringsstatus</h2>
   <?php echo $status; ?>
   <h2>Smakprov på en video</h2>
@@ -94,10 +95,13 @@ $status .= "</ul>\n";
     Vill du ta del av delar av det innan det är klart, så hör av dig till
     gunther {at} keryx punkt se. Här kommer ett smakprov:
   </p>
-  <video class="halfsize" controls tabindex="0">
+  <p class="centered">
+    <iframe src="http://www.youtube.com/embed/M7BXMfYbFwg"></iframe>
+  </p>
+  <!--video class="halfsize" controls tabindex="0">
     <source type="video/webm" src="media/intro-xampp.webm"></source>
     <source type="video/mp4" src="media/intro-xampp.mp4"></source>
-  </video>
+  </video -->
   <p class="centered sign">Lars Gunther</p>
   <p class="centered">
     <a href="http://www.skolportalen.se/"><img src="img/skolportalen-logo-408-111.png" 

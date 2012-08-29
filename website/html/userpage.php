@@ -317,7 +317,7 @@ if ( "//" == $baseref ) {
   <p id="vidprogress" class="unobtrusive">Status för denna video: </p>
   <p class="unobtrusive">
      Om sidan strular, vänligen tala om vilken webbläsare du använder (namn + version) samt vad du ser i
-     konsollen<br /> (CTRL + SHIFT + K i Firefox, CTRL + SHIFT + J i Chrome) till gunther@keryx.se
+     konsollen<br /> (CTRL/CMD + SHIFT + K i Firefox, CTRL/CMD + SHIFT + J i Chrome) till gunther@keryx.se
   </p>
   <!-- TODO Clickable progress bar with timeranges converted to graphics -->
   <section id="resource_suggestions">
@@ -326,8 +326,8 @@ if ( "//" == $baseref ) {
       <?php echo $linkhtml; ?>
     </div>
     <div>
-      <h3 class="boxedheader">Resurser 1</h3>
-      <p class="tightparagraph">JSBin testa själv (TODO)</p>
+      <h3 class="boxedheader">Övningsfiler</h3>
+      <p class="tightparagraph"><a href="assignments.php">Temporär sida med övningsfiler</a>.</p>
     </div>
     <div>
       <h3 class="boxedheader">Resurser 2</h3>

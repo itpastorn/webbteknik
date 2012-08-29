@@ -315,6 +315,10 @@ $pageref = 'teacherpage.php';
   </ul>
 SECNAV;
 ?>
+  <h2 id="mygroups">Läxhjälpen</h2>
+  <p>
+    Här finns <a href="laxhjalpen-demowebb/">Läxhjälpen &ndash; bokens demowebbplats</a>.
+  </p>
   <h2 id="mygroups">Mina grupper</h2>
 <?php
 foreach ($cur_groups as $cgroup ):
