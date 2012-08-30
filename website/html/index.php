@@ -65,6 +65,7 @@ $status .= "</ul>\n";
     få meddelande när det sker uppdateringar.</strong> Du kan då också se fler videos.
   </p>
   <h2>Uppdateringsstatus</h2>
+  <p>2012-08-30: Övningsfiler finns nu på sin egen sida.</p>
   <?php echo $status; ?>
   <h2>Smakprov på en video</h2>
   <p class="centered">
