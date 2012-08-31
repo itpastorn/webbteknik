@@ -272,6 +272,13 @@ $baseref = dirname(htmlspecialchars($_SERVER['SCRIPT_NAME'])) . "/";
 if ( "//" == $baseref ) {
     $baseref = "/";
 }
+// Domain sharding of videos
+// TODO Move to config
+$sharding = 'media/';
+if ( 'webbteknik.nu' == $_SERVER['SERVER_NAME']) {
+    $sharding = 'http://bis.webbteknik.nu/media/';
+}
+$FIREPHP->log($_SERVER['SERVER_NAME']);
 ?>
 <!DOCTYPE html>
 <html lang="sv">
@@ -293,8 +300,8 @@ if ( "//" == $baseref ) {
   <div id="videocontainer">
   <?php if ( isset($curvid['videoname']) ): ?>
     <video controls class="halfsize">
-      <source src="media/<?php echo $curvid['videoname']; ?>.webm" type="video/webm" />
-      <source src="media/<?php echo $curvid['videoname']; ?>.mp4" type="video/mp4" />
+      <source src="<?php echo $sharding . $curvid['videoname']; ?>.webm" type="video/webm" />
+      <source src="<?php echo $sharding . $curvid['videoname']; ?>.mp4" type="video/mp4" />
     </video>
   <?php else: ?>
     <div class="video_not_found halfsize">

@@ -365,24 +365,21 @@ INSERT IGNORE INTO `books` (`bookID`, `booktitle`, `author`, `authormail`, `isbn
 ('wu1', 'Webbutveckling 1', 'Lars Gunther', 'gunther@keryx.se', '978-91-7379-175-5', 'textbook', 'http://www.skolportalen.se/laromedel/produkt/J200%204500/Webbutveckling%201%20-%20L%C3%A4robok/', 'WEBWEU01'),
 ('wu1tg', 'Lärarhandledning Webbutveckling 1', 'Lars Gunther', 'gunther@keryx.se', '', 'teacherguide', '', 'WEBWEU01');
 
-   VALUES ('jsbin-for-teachers', 'Att använda JSBin som lärare', 'wu1tg', NULL, 'jsbin', NULL, '31');
-INSERT INTO `webbtek_webbtek`.`videos` (`videoname`, `title`, `bookID`, `booksectionID`, `tags`, `order`, `acl`)
+ALTER TABLE `flashcardsets` CHANGE `section` `section` VARCHAR( 12 ) CHARACTER SET utf8 COLLATE utf8_swedish_ci NULL;
 
 -- Not put to server below
 
-INSERT INTO `webbtek_webbtek`.`books` (
-`bookID` ,
-`booktitle` ,
-`author` ,
-`authormail` ,
-`isbn` ,
-`type` ,
-`bookurl` ,
-`courseID`
-)
-VALUES (
-'wu1tg', 'Lärarhandledning Webbutveckling 1', 'Lars Gunther', 'gunther@keryx.se', '', 'teacherguide', '', 'WEBWEU01'
-);
+ALTER TABLE `webbtek_webbtek`.`flashcards` ADD INDEX ( `setID` );
+ALTER TABLE `flashcards` CHANGE `term` `term` VARCHAR( 25 ) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL ,
+CHANGE `short` `short` VARCHAR( 60 ) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL ,
+CHANGE `long` `long` VARCHAR( 180 ) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL ,
+CHANGE `setID` `setID` VARCHAR( 50 ) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL ;
+
+ALTER TABLE `flashcards` ADD FOREIGN KEY ( `setID` ) REFERENCES `webbtek_webbtek`.`flashcardsets` (
+`setID`
+) ON DELETE RESTRICT ON UPDATE CASCADE ;
+
+ALTER TABLE `flashcardsets` CHANGE `section` `booksectionID` MEDIUMINT( 12 ) UNSIGNED NULL DEFAULT NULL;
 
 
 -- Test SQL
