@@ -52,9 +52,8 @@ if ( "//" == $baseref ) {
 <head>
   <meta charset="UTF-8">
   <title>Login - webbteknik.nu</title>
-  <link rel="stylesheet" href="css/webbteknik-nu.css" />
+  <?php require "../includes/snippets/dochead.php"; ?>
   <link rel="stylesheet" href="css/persona.css" />
-  <link href='http://fonts.googleapis.com/css?family=Handlee' rel='stylesheet' type='text/css'>
 </head>
 <body>
   <h1>webbteknik.nu &ndash; login</h1>

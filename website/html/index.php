@@ -48,8 +48,7 @@ $status .= "</ul>\n";
 <head>
   <meta charset="UTF-8">
   <title>webbteknik.nu</title>
-  <link rel="stylesheet" href="css/webbteknik-nu.css" />
-  <link href='http://fonts.googleapis.com/css?family=Handlee' rel='stylesheet' type='text/css'>
+  <?php require "../includes/snippets/dochead.php"; ?>
 </head>
 <body>
   <h1>webbteknik.nu</h1>

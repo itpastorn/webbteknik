@@ -111,9 +111,7 @@ foreach ( $dbresult as $row ) {
 <head>
   <meta charset="UTF-8">
   <title lang="en">Flashcards</title>
-  <link rel="stylesheet" href="css/webbteknik-nu.css" />
-  <link href='http://fonts.googleapis.com/css?family=Handlee' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="css/flashcards.css" />
+  <?php require "../includes/snippets/dochead.php"; ?>
 </head>
 <body>
   <h1>Flashcards hjälper dig öva in termer</h1>

@@ -299,9 +299,7 @@ $pageref = 'teacherpage.php';
 <head>
   <meta charset="UTF-8">
   <title>Lärarsida - webbteknik.nu</title>
-  <base href="<?php echo $baseref; ?>" />
-  <link rel="stylesheet" href="css/webbteknik-nu.css" />
-  <link href='http://fonts.googleapis.com/css?family=Handlee' rel='stylesheet' type='text/css'>
+  <?php require "../includes/snippets/dochead.php"; ?>
 </head>
 <body class="wide">
   <h1>Lärarsida - webbteknik.nu</h1>
