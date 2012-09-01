@@ -29,6 +29,8 @@ $dbh = keryxDB2_cx::get($dbx);
 
 // Name of video to show
 $video = null;
+// Associated links
+$linkhtml = '';
 
 // No chosen video
 if ( empty($_GET['vidnum']) && empty($_GET['video']) ) {
@@ -112,11 +114,12 @@ if ( $video ) {
     // TODO filter, but prepared statements should catch any SQL-injection attempt
     $sql = <<<SQL
         SELECT v.*, jl.joblistID, bs.section FROM videos AS v
-        INNER JOIN booksections AS bs USING (booksectionID)
+        LEFT JOIN booksections AS bs USING (booksectionID)
         LEFT JOIN joblist AS jl
         ON (v.videoname = jl.where_to_do_it)
         WHERE v.videoname = :video
 SQL;
+    $FIREPHP->log($sql);
     $stmt = $dbh->prepare($sql);
     $stmt->bindParam(':video', $video);
     $stmt->execute();
@@ -185,13 +188,13 @@ if ( $curvid ) {
         $progressdata = json_decode($curvid['progressdata']);
     }
     // Is this the last video?
-    if ( $curvid['order'] == $last ) {
+    if ( $curvid['order'] == $last || empty($curvid['order']) ) {
         $curvid['next'] = "none";
     } else {
         $curvid['next'] = $curvid['order'] + 1;
     }
     // Is this the first video?
-    if ( $curvid['order'] == 1 ) {
+    if ( $curvid['order'] == 1 || empty($curvid['order']) ) {
         $curvid['prev'] = "none";
     } else {
         $curvid['prev'] = $curvid['order'] - 1;
@@ -200,10 +203,10 @@ if ( $curvid ) {
     // Find related links
     // TODO Find a better way to handle lots of links
     $sql = <<<SQL
-       SELECT * FROM links WHERE booksectionID = :booksectionID LIMIT 0,5
+       SELECT * FROM links WHERE videoname = :videoname LIMIT 0,15
 SQL;
     $stmt = $dbh->prepare($sql);
-    $stmt->bindParam(':booksectionID', $curvid['booksectionID']);
+    $stmt->bindParam(':videoname', $curvid['videoname']);
     $stmt->execute();
     $linkhtml = "<ul class=\"tightparagraph\">";
     $linktypes = array(
@@ -229,11 +232,14 @@ LINKHTML;
             $linkhtml .= "Inga matchande länkar till denna video.";
         }
     */
-     $curvid['title'] .= " (Bokavsnitt {$curvid['section']})";
+    if ( $curvid['section'] ) {
+        $curvid['title'] .= " (Bokavsnitt {$curvid['section']})";
+    }
 } else {
     $curvid       = array('title' => 'Video ej funnen');
     $progressdata = "";
     // TODO NOT FOUND header
+    // TODO List of suggestions
 }
 if ( !isset($curvid['status']) ) {
     $curvid['status'] = "unset";

@@ -367,17 +367,57 @@ INSERT IGNORE INTO `books` (`bookID`, `booktitle`, `author`, `authormail`, `isbn
 
 ALTER TABLE `flashcardsets` CHANGE `section` `section` VARCHAR( 12 ) CHARACTER SET utf8 COLLATE utf8_swedish_ci NULL;
 
+ALTER TABLE `joblist`  ADD `bookID` VARCHAR(5) CHARACTER SET utf8 
+  COLLATE utf8_swedish_ci NULL AFTER `track`,  ADD INDEX (`bookID`);
+
+INSERT INTO `webbtek_webbtek`.`books` (
+  `bookID`,`booktitle`, `author`, `authormail`, `isbn`, `type`, `bookurl`, `courseID`
+)
+VALUES (
+    'site', 'Webbplatsen', 'Lars Gunther', 'gunther@keryx.se', NULL , 'none', '', NULL
+);
+UPDATE `joblist` SET `bookID`='wu1';
+
+ALTER TABLE `joblist` ADD FOREIGN KEY ( `bookID` ) REFERENCES `webbtek_webbtek`.`books` (
+`bookID`
+) ON DELETE RESTRICT ON UPDATE CASCADE ;
+
+
+UPDATE `webbtek_webbtek`.`videos` SET `bookID` = 'site' WHERE `videos`.`videoname` = 'registrera-konto';
+
+ALTER TABLE `links` CHANGE `bookID` `bookID` VARCHAR( 10 ) CHARACTER SET utf8 COLLATE utf8_swedish_ci NULL; -- Allow null
+
+ALTER TABLE links MODIFY COLUMN `time_added` INT AFTER `bookID`;
+ALTER TABLE `links` CHANGE `linktype` `linktype` ENUM( 'book', 'ref', 'note', 'tip', 'deep' )
+  CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL; -- UTF-8
+
+ALTER TABLE `links` ADD `videoname` VARCHAR( 20 ) CHARACTER SET utf8
+  COLLATE utf8_swedish_ci NULL COMMENT 'Matches what video' AFTER `bookID` ,
+  ADD INDEX ( `videoname` );
+
+ALTER TABLE `links` CHANGE `time_added` `time_added` DATETIME NULL DEFAULT NULL; -- oops
+UPDATE `links` SET `time_added` = NOW();
+
+ALTER TABLE `links` ADD FOREIGN KEY ( `videoname` ) REFERENCES `webbtek_webbtek`.`videos` (
+`videoname`
+) ON DELETE RESTRICT ON UPDATE CASCADE ;
+
+UPDATE `links` SET videoname = 'wu-lb-1-10' WHERE `booksectionID` > 26;
+UPDATE `webbtek_webbtek`.`links` SET `videoname` = 'kap-1-a-1' WHERE `links`.`linkID` =1;
+UPDATE `webbtek_webbtek`.`links` SET `videoname` = 'thimble' WHERE `links`.`linkID` =221;
+UPDATE `webbtek_webbtek`.`links` SET `videoname` = 'kap-1-a-3' WHERE `links`.`linkID` =2;
+UPDATE `webbtek_webbtek`.`links` SET `videoname` = 'kap-1-a-4' WHERE `links`.`booksectionID` =5;
+
 -- Not put to server below
 
-ALTER TABLE `webbtek_webbtek`.`flashcards` ADD INDEX ( `setID` );
+ALTER TABLE `flashcards` ADD INDEX ( `setID` );
 ALTER TABLE `flashcards` CHANGE `term` `term` VARCHAR( 25 ) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL ,
-CHANGE `short` `short` VARCHAR( 60 ) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL ,
-CHANGE `long` `long` VARCHAR( 180 ) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL ,
-CHANGE `setID` `setID` VARCHAR( 50 ) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL ;
+  CHANGE `short` `short` VARCHAR( 60 ) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL ,
+  CHANGE `long` `long` VARCHAR( 180 ) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL ,
+  CHANGE `setID` `setID` VARCHAR( 50 ) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL ;
 
-ALTER TABLE `flashcards` ADD FOREIGN KEY ( `setID` ) REFERENCES `webbtek_webbtek`.`flashcardsets` (
-`setID`
-) ON DELETE RESTRICT ON UPDATE CASCADE ;
+ALTER TABLE `flashcards` ADD FOREIGN KEY ( `setID` ) REFERENCES `webbtek_webbtek`.`flashcardsets` (`setID`)
+  ON DELETE RESTRICT ON UPDATE CASCADE ;
 
 ALTER TABLE `flashcardsets` CHANGE `section` `booksectionID` MEDIUMINT( 12 ) UNSIGNED NULL DEFAULT NULL;
 

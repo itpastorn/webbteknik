@@ -30,13 +30,21 @@ $dbx = config::get('dbx');
 // init
 $dbh = keryxDB2_cx::get($dbx);
 
+$bookID = filter_input(INPUT_GET, 'book', FILTER_SANITIZE_URL);
+
+if ( empty($bookID) ) {
+    $bookID = 'wu1';
+}
+
 // All jobs, but fast-track first
 $sql = <<<SQL
     SELECT jl.* , v.*
     FROM `joblist` AS jl
     LEFT JOIN videos AS v ON v.videoname = jl.where_to_do_it
+    WHERE jl.bookID = :bookID
     ORDER BY jl.chapter ASC, jl.track ASC, jl.joborder ASC
 SQL;
+
 /*
     SELECT jl.* , v.*, up.percentage_complete, up.status
     LEFT JOIN userprogress AS up ON up.joblistID = jl.joblistID
@@ -53,7 +61,7 @@ SQL;
  */
 
 $stmt = $dbh->prepare($sql);
-// $stmt->bindParam(':email', $_SESSION['user']);
+$stmt->bindParam(':bookID', $bookID);
 $stmt->execute();
 $jobs = $stmt->fetchAll();
 ?>
