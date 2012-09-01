@@ -654,7 +654,7 @@ hr.todo {
 
 .nonimplemented + label::after,
 .nonimplemented::after {
-    content: " (Framtida funktion. Ej klar ÃÂ¤nnu.)";
+    content: " (Framtida funktion. Ej klar ännu.)";
 }
 .nonimplemented {
     opacity: 0.5;

@@ -112,6 +112,7 @@ foreach ( $dbresult as $row ) {
   <meta charset="UTF-8">
   <title lang="en">Flashcards</title>
   <?php require "../includes/snippets/dochead.php"; ?>
+  <link rel="stylesheet" href="css/flashcards.css" />
 </head>
 <body>
   <h1>Flashcards hjälper dig öva in termer</h1>
