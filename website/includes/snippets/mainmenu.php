@@ -23,9 +23,9 @@ if ( user::validate(user::TEACHER ) ) {
       <li><a href="edituser.php">Redigera användaruppgifter</a></li>
       <?php echo $teacherpage; ?>
     </ul>
-    <p>
+    <!--p>
       <small>En större uppdatering pågår just nu. Under tiden den sker
       kan somliga saker sluta fungera. Vi ber om ursäkt för detta.</small>
-    </p>
+    </p-->
   </nav>
 
