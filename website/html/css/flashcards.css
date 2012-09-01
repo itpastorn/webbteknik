@@ -38,7 +38,7 @@
     width: 300px;
     margin: 30px 0;
     padding: 10px;
-    border: 1px solid #333;
+    border: 1px solid #024862;
     border-radius: 5px;
        -moz-backface-visibility: hidden;
     -webkit-backface-visibility: hidden; /* TODO: Investigate why this has no effect */
@@ -55,14 +55,14 @@
     */
     /* TODO: No delay for z-index when 3D transform is not supported */
     font-size: x-large;
-    background-color: #DFFA00;
-    box-shadow: 5px 5px 5px silver;
+    background-color: hsl(86, 79%, 78%);
+    box-shadow: 5px 5px 5px hsl(196, 51%, 79%);
 }
 .flashcards > dt  {
     font-size: xx-large;
     text-align: center;
     line-height: 2;
-    background-color: #FFDF00;
+    background-color: #7CDC00;
 }
 .flashcards >  dd > p {
     font-size: smaller;
