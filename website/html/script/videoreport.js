@@ -36,7 +36,7 @@
     // Joblist must be set in order for report to be usable
     if ( +wtglobal_joblistID < 1 ) {
         console.log("Video has no job list item. Report unavailable");
-        video_progress.html("HUr mycket du sett av denna video lagras inte på servern.");
+        video_progress.html("Hur mycket du sett av denna video lagras inte på servern.");
         return false;
     }
 
