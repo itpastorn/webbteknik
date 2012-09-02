@@ -40,6 +40,7 @@ TODO mobile section
    $Notes
 \* ------------------------------- */
 /*
+OLD
 Main color #00AF3F = rgb(0, 175,63) = hsl(142, 100%, 34%)
 Analogic color scheme http://colorschemedesigner.com/#2X51Tw0uhw0w0
 
@@ -52,9 +53,35 @@ Lighter greens
   #61D78D - very light
 
 Main blue = #066F97
-
 Alternative neonish green #7CDC00
 
+New
+http://colorschemedesigner.com/#2X527w0uhAvCM
+Base coolor - analogic 45 degrees - higher contrast
+Main color hsl(142, 100%, 34%) = rgb(0, 175,65) = #00AF41
+Darker     hsl(142, 100%, 20%)
+Darkdim    hsl(143, 55%, 31%)
+Lighter    hsl(142, 72%, 58%)
+Lightest   hsl(142, 62%, 69%)
+
+Alternative blue
+Base      hsl(215, 84%, 34%)
+Darkdim   hsl(215, 47%, 30%)
+Darkest   hsl(215, 94%, 19%)
+Lighter   hsl(215, 66%, 59%)
+Lightest  hsl(215, 55%, 69%)
+
+Alternative lighgreen
+Base      hsl(75, 100%, 45%)
+Darkdim   hsl(75, 55%, 41%)
+Darkest   hsl(76, 100%, 26%)
+Lighter   hsl(75, 89%, 63%)
+Lightest  hsl(76, 84%, 75%)
+
+Signal colors
+OK green             hsl(142, 100%, 50%)
+Notice - yellowfade  hsl(58, 100%, 47%)
+Error/warning        hsl(10, 100%, 47%)
 
 */
 
@@ -68,7 +95,7 @@ Alternative neonish green #7CDC00
    $defaults
 \* ------------------------------- */
 html {
-    background-color: rgb(0, 175,63);
+    background-color: rgb(0, 175,65);
     background-image: -webkit-linear-gradient(to bottom, hsl(142, 100%, 34%), hsl(142, 100%, 80%));
     background-image:    -moz-linear-gradient(to bottom, hsl(142, 100%, 34%), hsl(142, 100%, 80%));
     background-image:     -ms-linear-gradient(to bottom, hsl(142, 100%, 34%), hsl(142, 100%, 80%));
@@ -79,41 +106,43 @@ html {
 body {
     width: 720px;
     margin: 0.4em auto;
-    padding: 0 30px 10px;
-    background-color: #FFF;
-    font-family: sans-serif;
-    font-size: medium;
+    padding: 1px 30px 10px;
     border-radius: 4px;
-    padding-top: 1px;
+    background-color: #FFF;
+    font: medium/1.3 "Liberation sans", Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+    color: #171717;
 }
 h1 {
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Oswald', "Franklin Gothic Medium", "Franklin Gothic", "ITC Franklin Gothic", Arial, sans-serif;
     letter-spacing: 0.05em;
     text-align: center;
-    color: hsl(207, 100%, 20%);
+    color: hsl(215, 94%, 19%);
     font-size: 2em;
     margin: 0.3em 0;
 }
 h2 {
     font-size: 1.3em;
-    color: hsl(207, 100%, 20%);
+    color: hsl(215, 94%, 19%);
 }
 h3 {
     font-size: 1.15em;
-    color: hsl(207, 100%, 20%);
+    color: hsl(215, 94%, 19%);
 }
 
 a:link {
     /* TODO */
+    color: hsl(215, 84%, 34%);
 }
 a:visited {
     /* TODO */
+    color: hsl(215, 66%, 59%);
 }
-a:focus {
-    /* TODO */
-}
+a:focus,
 a:hover {
     /* TODO */
+    background-color: hsl(215, 94%, 19%);
+    color: #fff;
+    outline: 2px solid hsl(76, 100%, 26%);
 }
 a:active {
     /* TODO */
@@ -137,7 +166,7 @@ strong > strong {
 fieldset {
     margin-top: 1em;
     margin-bottom: 2em;
-    border-color:  rgb(0, 175,63);
+    border-color:  hsl(142, 100%, 34%);
     border-radius: 10px;
 }
 /* So far value only for edituser-page 
@@ -174,7 +203,7 @@ input[disabled] + label {
 }
 /* div within fieldset for additional grouping */
 .subfield {
-    border: 1px solid rgb(0, 175,63);
+    border: 1px solid hsl(142, 100%, 34%);
     border-radius: 6px;
     padding: 1em;
     margin: 1em;
@@ -230,7 +259,7 @@ iframe {
 
 @-webkit-keyframes yellowfade {
     from {
-        background-color: yellow;
+        background-color: hsl(58, 100%, 47%);
     }
     to {
         background-color: transparent;
@@ -238,7 +267,7 @@ iframe {
 }
 @-moz-keyframes yellowfade {
     from {
-        background-color: yellow;
+        background-color: hsl(58, 100%, 47%);
     }
     to {
         background-color: transparent;
@@ -246,7 +275,7 @@ iframe {
 }
 @-ms-keyframes yellowfade {
     from {
-        background-color: yellow;
+        background-color: hsl(58, 100%, 47%);
     }
     to {
         background-color: transparent;
@@ -254,7 +283,7 @@ iframe {
 }
 @-o-keyframes yellowfade {
     from {
-        background-color: yellow;
+        background-color: hsl(58, 100%, 47%);
     }
     to {
         background-color: transparent;
@@ -262,7 +291,7 @@ iframe {
 }
 @keyframes yellowfade {
     from {
-        background-color: yellow;
+        background-color: hsl(58, 100%, 47%);
     }
     to {
         background-color: transparent;
@@ -271,13 +300,13 @@ iframe {
 
 @-webkit-keyframes greenfade {
     from {
-        background-color: green;
+        background-color: hsl(142, 100%, 50%);
     }
     20% {
         background-color: transparent;
     }
     40% {
-        background-color: green;
+        background-color: hsl(142, 100%, 50%);
     }
     to {
         background-color: transparent;
@@ -285,13 +314,13 @@ iframe {
 }
 @-moz-keyframes greenfade {
     from {
-        background-color: green;
+        background-color: hsl(142, 100%, 50%);
     }
     20% {
         background-color: transparent;
     }
     40% {
-        background-color: green;
+        background-color: hsl(142, 100%, 50%);
     }
     to {
         background-color: transparent;
@@ -299,13 +328,13 @@ iframe {
 }
 @-ms-keyframes greenfade {
     from {
-        background-color: green;
+        background-color: hsl(142, 100%, 50%);
     }
     20% {
         background-color: transparent;
     }
     40% {
-        background-color: green;
+        background-color: hsl(142, 100%, 50%);
     }
     to {
         background-color: transparent;
@@ -313,13 +342,13 @@ iframe {
 }
 @-o-keyframes greenfade {
     from {
-        background-color: green;
+        background-color: hsl(142, 100%, 50%);
     }
     20% {
         background-color: transparent;
     }
     40% {
-        background-color: green;
+        background-color: hsl(142, 100%, 50%);
     }
     to {
         background-color: transparent;
@@ -327,13 +356,13 @@ iframe {
 }
 @keyframes greenfade {
     from {
-        background-color: green;
+        background-color: hsl(142, 100%, 50%);
     }
     20% {
         background-color: transparent;
     }
     40% {
-        background-color: green;
+        background-color: hsl(142, 100%, 50%);
     }
     to {
         background-color: transparent;
@@ -342,7 +371,7 @@ iframe {
 
 @-webkit-keyframes redfade {
     from {
-        background-color: red;
+        background-color: hsl(10, 100%, 47%);
     }
     to {
         background-color: transparent;
@@ -350,7 +379,7 @@ iframe {
 }
 @-moz-keyframes redfade {
     from {
-        background-color: red;
+        background-color: hsl(10, 100%, 47%);
     }
     to {
         background-color: transparent;
@@ -358,7 +387,7 @@ iframe {
 }
 @-ms-keyframes redfade {
     from {
-        background-color: red;
+        background-color: hsl(10, 100%, 47%);
     }
     to {
         background-color: transparent;
@@ -366,7 +395,7 @@ iframe {
 }
 @-o-keyframes redfade {
     from {
-        background-color: red;
+        background-color: hsl(10, 100%, 47%);
     }
     to {
         background-color: transparent;
@@ -374,7 +403,7 @@ iframe {
 }
 @keyframes redfade {
     from {
-        background-color: red;
+        background-color: hsl(10, 100%, 47%);
     }
     to {
         background-color: transparent;
@@ -394,7 +423,7 @@ iframe {
 }
 .important {
     font-size: larger;
-    border: 3px double green;
+    border: 3px double hsl(142, 100%, 50%);
     padding: 1em;
     text-align: center;
 }
@@ -405,7 +434,7 @@ iframe {
     border-collapse: collapse;
 }
 .zebra tr:nth-child(odd) {
-    background-color: #DDD;
+    background-color: hsl(76, 84%, 85%);
 }
 /* Headers in boxes need no margin */
 .boxedheader {
@@ -430,7 +459,7 @@ a[href*="w3.org"]:after {
     font-size: 80%;
 }
 .errormsg {
-    color: darkred;
+    color: hsl(10, 100%, 47%);
     font-style: italic;
     -webkit-animation: 2s redfade;
        -moz-animation: 2s redfade;
@@ -439,7 +468,7 @@ a[href*="w3.org"]:after {
             animation: 2s redfade;
 }
 .error {
-    outline: 1px solid red;
+    outline: 1px solid hsl(10, 100%, 47%);
 }
 
 /* ------------------------------- *\
@@ -458,9 +487,10 @@ a[href*="w3.org"]:after {
 .mainmenu {
     padding: 0;
     margin: 0;
+    border-radius: 2px;
     text-align: center;
-    background-color: hsl(196, 51%, 89%);
-    font: 90% 'Oswald', sans-serif;
+    background-color: hsl(215, 55%, 69%);
+    font-family: 'Oswald', "Franklin Gothic Medium", "Franklin Gothic", "ITC Franklin Gothic", Arial, sans-serif;
     letter-spacing: 1px;
 }
 .mainmenu ul {
@@ -478,9 +508,16 @@ a[href*="w3.org"]:after {
     color: black;
     display: block;
 }
+.mainmenu a:link,
+.mainmenu a:visited {
+    text-shadow: 1px 1px 1px hsl(215, 55%, 90%);
+}
 .mainmenu a:focus,
 .mainmenu a:hover {
-    background-color: hsl(86, 79%, 68%);
+    background-color: hsl(75, 89%, 63%);
+    text-shadow: none;
+    /*outline: 2px solid hsl(75, 89%, 63%);*/ /* Mystery space between content and outline */
+    outline: none;
 }
 .userdata a {
     display: inline;
@@ -492,7 +529,7 @@ a[href*="w3.org"]:after {
 
 footer {
     margin-top: 2em;
-    border-top: 2px ridge lightgreen;
+    border-top: 2px ridge hsl(215, 66%, 59%);
     padding-top: 1em;
     font-size: smaller;
 }
@@ -518,20 +555,21 @@ hr.todo {
     border: 1px solid #222;
     border-collapse: collapse;
 }
-.techtests th, .techtests td {
+.techtests th,
+.techtests td {
     border: 1px solid #222;
     border-collapse: collapse;
-    padding: 3px 5px;
+    padding: 4px 5px;
 }
 .techtests th[scope='row'] {
     text-align: left;
     font-weight: normal;
 }
 .tsupported {
-    color: darkgreen;
+    color: hsl(142, 100%, 20%);
 }
 .tunsupported {
-    color: darkred;
+    color: hsl(10, 100%, 47%);
 }
 
 /* ------------------------------- *\
@@ -565,7 +603,7 @@ hr.todo {
     width: 200px;
     min-height: 90px;
     padding: 10px;
-    background-color: #DDD;
+    background-color: hsl(75, 35%, 90%);
     border-radius: 5px; 
     vertical-align: top;
 }
@@ -597,11 +635,11 @@ hr.todo {
     opacity: 0.5;
 }
 .skipped {
-    opacity: 0.8;
-    background-color: #fdf8ed;
+    opacity: 0.75;
 }
-.skipped:nth-child(odd) {
-    background-color: #e0b7b2;
+.zebra .finished:nth-child(odd),
+.zebra .skipped:nth-child(odd) {
+    background-color: hsl(76, 84%, 92%);
 }
 .jobreport tr:hover {
     opacity: 1;
@@ -614,22 +652,13 @@ hr.todo {
 .jobreport button {
     margin: 0 2px;
 }
-/* Show clearly that this is where yoy currentle are */
+/* Show clearly that this is where you currentle are */
 .curstate {
-    outline: 3px solid darkgreen;
+    outline: 3px solid hsl(215, 55%, 69%);
 }
-/*
-.jobreport a:visited {
-    color: pink;
+.finished > td > .curstate {
+    outline: 3px solid hsl(142, 100%, 34%);
 }
-.jobreport a:focus,
-.jobreport a:hover {
-    color: blue;
-}
-.jobreport a:active {
-    color: red;
-}
-*/
 /* ------------------------------- *\
    $files
 \* ------------------------------- */
@@ -646,7 +675,7 @@ hr.todo {
 .signinbox {
     margin: 2em;
     padding: 1em;
-    border: 1px solid rgb(0, 175,63);
+    border: 1px solid hsl(142, 100%, 34%);
     border-radius: 4px;
 }
 /* Persona buttons in separate CSS */
@@ -667,22 +696,24 @@ hr.todo {
     text-decoration: line-through;
 }
 .updated {
-    background-color: yellow;
+    background-color: hsl(58, 100%, 47%);
     /* TODO Fade yellow, add ARIA */
 }
 .updated::after {
     content: " - Databas uppdaterad.";
 }
 .wrong {
-    background-color: hsl(359, 60%, 80%);
-    /* TODO Fade red, add ARIA */
+    outline: 2px solid hsl(359, 60%, 47%);
+    -webkit-animation: 2s redfade;
+       -moz-animation: 2s redfade;
+        -ms-animation: 2s redfade;
+         -o-animation: 2s redfade;
+            animation: 2s redfade;
+    /* TODO add ARIA */
 }
 .wrong::after {
     content: " - Fel svar.";
 }
-
-
-
 
 /* ------------------------------- *\
    $flashcards

@@ -229,40 +229,45 @@
 }
  
 /* ========================================================
- *      Keryx made green button 
+ *      Keryx made green/blue button 
  * ===================================================== */
+.persona-button:link {
+    color: #fff;
+}
+.persona-button:focus,
+.persona-button:hover {
+    outline: none;
+}
 .persona-button.green {
-    background: #39A3CB;
-    background:    -moz-linear-gradient(top, #ee731a, #d03116); /* 25 86 52 - 9 49 22 */
-
-    background: -webkit-linear-gradient(top, hsl(196, 58%, 51%), hsl(185, 35%, 31%));
-    background:    -moz-linear-gradient(top, hsl(196, 58%, 51%), hsl(185, 35%, 31%));
-    background:     -ms-linear-gradient(top, hsl(196, 58%, 51%), hsl(185, 35%, 31%));
-    background:      -o-linear-gradient(top, hsl(196, 58%, 51%), hsl(185, 35%, 31%));
-    background:         linear-gradient(to bottom, hsl(196, 58%, 51%), hsl(185, 35%, 31%));
+    background: hsl(215, 58%, 51%);
+    background: -webkit-linear-gradient(top, hsl(215, 58%, 51%), hsl(202, 35%, 31%));
+    background:    -moz-linear-gradient(top, hsl(215, 58%, 51%), hsl(202, 35%, 31%));
+    background:     -ms-linear-gradient(top, hsl(215, 58%, 51%), hsl(202, 35%, 31%));
+    background:      -o-linear-gradient(top, hsl(215, 58%, 51%), hsl(202, 35%, 31%));
+    background:         linear-gradient(to bottom, hsl(215, 58%, 51%), hsl(202, 35%, 31%));
 }
 .persona-button.green:hover {
-    background: hsl(196, 52%, 43%);
-    background: -webkit-linear-gradient(top, hsl(196, 52%, 43%), hsl(185, 55%, 26%));
-    background:    -moz-linear-gradient(top, hsl(196, 52%, 43%), hsl(185, 55%, 26%));
-    background:     -ms-linear-gradient(top, hsl(196, 52%, 43%), hsl(185, 55%, 26%));
-    background:      -o-linear-gradient(top, hsl(196, 52%, 43%), hsl(185, 55%, 26%));
-    background:         linear-gradient(to bottom, hsl(196, 52%, 43%), hsl(185, 55%, 26%));
+    background: hsl(215, 52%, 43%);
+    background: -webkit-linear-gradient(top, hsl(215, 52%, 43%), hsl(202, 55%, 26%));
+    background:    -moz-linear-gradient(top, hsl(215, 52%, 43%), hsl(202, 55%, 26%));
+    background:     -ms-linear-gradient(top, hsl(215, 52%, 43%), hsl(202, 55%, 26%));
+    background:      -o-linear-gradient(top, hsl(215, 52%, 43%), hsl(202, 55%, 26%));
+    background:         linear-gradient(to bottom, hsl(215, 52%, 43%), hsl(202, 55%, 26%));
 }
 .persona-button.green span:before { /* Icon BG */
-    background: hsl(196, 58%, 66%);
-    background: -webkit-linear-gradient(top, hsl(196, 58%, 66%), hsl(196, 58%, 56%));
-    background:    -moz-linear-gradient(top, hsl(196, 58%, 66%), hsl(196, 58%, 56%));
-    background:     -ms-linear-gradient(top, hsl(196, 58%, 66%), hsl(196, 58%, 56%));
-    background:      -o-linear-gradient(top, hsl(196, 58%, 66%), hsl(196, 58%, 56%));
-    background:         linear-gradient(to bottom, hsl(196, 58%, 66%), hsl(196, 58%, 56%));
+    background: hsl(215, 58%, 66%);
+    background: -webkit-linear-gradient(top, hsl(215, 58%, 66%), hsl(215, 58%, 56%));
+    background:    -moz-linear-gradient(top, hsl(215, 58%, 66%), hsl(215, 58%, 56%));
+    background:     -ms-linear-gradient(top, hsl(215, 58%, 66%), hsl(215, 58%, 56%));
+    background:      -o-linear-gradient(top, hsl(215, 58%, 66%), hsl(215, 58%, 56%));
+    background:         linear-gradient(to bottom, hsl(215, 58%, 66%), hsl(215, 58%, 56%));
 }
 .persona-button.green:before { /* Triangle */
-    background: hsl(196, 58%, 66%);
-    background:    -moz-linear-gradient(-45deg, hsl(196, 58%, 66%), hsl(196, 58%, 56%));
-    background:     -ms-linear-gradient(-45deg, hsl(196, 58%, 66%), hsl(196, 58%, 56%));
-    background:      -o-linear-gradient(-45deg, hsl(196, 58%, 66%), hsl(196, 58%, 56%));
-    background: -webkit-linear-gradient(-45deg, hsl(196, 58%, 66%), hsl(196, 58%, 56%));
-    background: linear-gradient(-45deg, hsl(196, 58%, 56%), hsl(196, 58%, 66%)); /* flipped for updated spec */
+    background: hsl(215, 58%, 66%);
+    background:    -moz-linear-gradient(-45deg, hsl(215, 58%, 66%), hsl(215, 58%, 56%));
+    background:     -ms-linear-gradient(-45deg, hsl(215, 58%, 66%), hsl(215, 58%, 56%));
+    background:      -o-linear-gradient(-45deg, hsl(215, 58%, 66%), hsl(215, 58%, 56%));
+    background: -webkit-linear-gradient(-45deg, hsl(215, 58%, 66%), hsl(215, 58%, 56%));
+    background: linear-gradient(-45deg, hsl(215, 58%, 56%), hsl(215, 58%, 66%)); /* flipped for updated spec */
 }
  

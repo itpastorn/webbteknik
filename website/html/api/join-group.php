@@ -41,6 +41,8 @@ $gid = filter_input(INPUT_POST, 'group_id', FILTER_SANITIZE_STRIPPED, FILTER_FLA
 // TODO The group should not be too old to join....
 
 $group = data_groups::loadOne($gid, $dbh);
+$FIREPHP->log($group);
+
 
 if ( $group ) {
     // Already a member?
