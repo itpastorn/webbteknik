@@ -284,7 +284,6 @@ $sharding = 'media/';
 if ( 'webbteknik.nu' == $_SERVER['SERVER_NAME']) {
     $sharding = 'http://bis.webbteknik.nu/media/';
 }
-$FIREPHP->log($_SERVER['SERVER_NAME']);
 ?>
 <!DOCTYPE html>
 <html lang="sv">

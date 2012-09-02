@@ -74,7 +74,7 @@ html {
     background-image:     -ms-linear-gradient(to bottom, hsl(142, 100%, 34%), hsl(142, 100%, 80%));
     background-image:      -o-linear-gradient(to bottom, hsl(142, 100%, 34%), hsl(142, 100%, 80%));
     background-image:         linear-gradient(to bottom, hsl(142, 100%, 34%), hsl(142, 100%, 80%));
-min-height: 100%; /* Needed for gradients to appear */
+    min-height: 100%; /* Needed for gradients to appear */
 }
 body {
     width: 720px;
@@ -431,7 +431,11 @@ a[href*="w3.org"]:after {
 .errormsg {
     color: darkred;
     font-style: italic;
-    -moz-animation: 2s redfade;
+    -webkit-animation: 2s redfade;
+       -moz-animation: 2s redfade;
+        -ms-animation: 2s redfade;
+         -o-animation: 2s redfade;
+            animation: 2s redfade;
 }
 .error {
     outline: 1px solid red;
@@ -477,8 +481,9 @@ a[href*="w3.org"]:after {
 .mainmenu a:hover {
     background-color: hsl(86, 79%, 68%);
 }
-
-
+.userdata a {
+    display: inline;
+}
 
 /* ------------------------------- *\
    $footer
