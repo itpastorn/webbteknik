@@ -470,6 +470,14 @@ a[href*="w3.org"]:after {
 .error {
     outline: 1px solid hsl(10, 100%, 47%);
 }
+.clearfix:before,
+.clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+.clearfix:after {
+    clear: both;
+}
 
 /* ------------------------------- *\
    $masthead
@@ -590,9 +598,6 @@ hr.todo {
 #videobuttons button {
     width: 149px;
     margin-bottom: 20px;
-}
-#vidprogress {
-    clear: both;
 }
 #resource_suggestions {
     /* */
@@ -726,13 +731,17 @@ hr.todo {
 /* ------------------------------- *\
    $TODO
 \* ------------------------------- */
-@media screen and (max-width: 1020px) {
-    body {
-        width: 720px;
-    }
+@media screen and (max-width: 1080px) {
     .wide {
         width: 90%;
         max-width: 1280px;
+    }
+    #resource_suggestions > div {
+        margin-bottom: 1em; /* When stacked vertically */
+    }
+/*
+    body {
+        width: 890px;
     }
     video.fullsize {
         width: 640px;
@@ -741,6 +750,21 @@ hr.todo {
     video.halfsize {
         width: 320px;
         height: 180px;
+    }
+    */
+}
+@media screen and (max-width: 950px) {
+    .wide {
+        width: 90%;
+        max-width: 1280px;
+    }
+    #videobuttons {
+        clear: both;
+        margin-left: 0;
+        width: 100%;
+    }
+    #resource_suggestions > div {
+        margin-bottom: 1em; /* When stacked vertically */
     }
 }
 

@@ -300,31 +300,33 @@ if ( 'webbteknik.nu' == $_SERVER['SERVER_NAME']) {
     <strong>Tips!</strong> Högerklicka på videon och välj visning i helskärm.
     Videons inbyggda upplösning är 1280 x 720 pixlar.
   </p> 
-  <div id="videocontainer">
-  <?php if ( isset($curvid['videoname']) ): ?>
-    <video controls class="halfsize">
-      <source src="<?php echo $sharding . $curvid['videoname']; ?>.webm" type="video/webm" />
-      <source src="<?php echo $sharding . $curvid['videoname']; ?>.mp4" type="video/mp4" />
-    </video>
-  <?php else: ?>
-    <div class="video_not_found halfsize">
-      <p>Videon du sökte finns inte.</p>
-      <ul>
-        <li>Snart kommer</li>
-        <li>en lista</li>
-        <li>med förslag&hellip;</li><!-- TODO -->
-      </ul>
+  <div class="clearfix">
+    <div id="videocontainer">
+    <?php if ( isset($curvid['videoname']) ): ?>
+      <video controls class="halfsize">
+        <source src="<?php echo $sharding . $curvid['videoname']; ?>.webm" type="video/webm" />
+        <source src="<?php echo $sharding . $curvid['videoname']; ?>.mp4" type="video/mp4" />
+      </video>
+      <p id="vidprogress" class="unobtrusive">Status för denna video: </p>
+    <?php else: ?>
+      <div class="video_not_found halfsize">
+        <p>Videon du sökte finns inte.</p>
+        <ul>
+          <li>Snart kommer</li>
+          <li>en lista</li>
+          <li>med förslag&hellip;</li><!-- TODO -->
+        </ul>
+      </div>
+    <?php endif; ?>
     </div>
-  <?php endif; ?>
+    <div id="videobuttons">
+      <button id="skipvid" disabled>Markera videon <br /> som <b>sedd</b></button>
+      <button id="unskipvid" disabled>Markera videon <br /> som <b>osedd</b></button>
+      <button id="nextunseen" disabled"><b>Första osedda</b> video</button>
+      <button class="prevnextvideo" disabled data-vidnum="<?php echo $curvid['next']; ?>"><b>Nästa</b> video</button>
+      <button class="prevnextvideo" disabled data-vidnum="<?php echo $curvid['prev']; ?>"><b>Föregående</b> video</button>
+    </div>
   </div>
-  <div id="videobuttons">
-    <button id="skipvid" disabled>Markera videon <br /> som <b>sedd</b></button>
-    <button id="unskipvid" disabled>Markera videon <br /> som <b>osedd</b></button>
-    <button id="nextunseen" disabled"><b>Första osedda</b> video</button>
-    <button class="prevnextvideo" disabled data-vidnum="<?php echo $curvid['next']; ?>"><b>Nästa</b> video</button>
-    <button class="prevnextvideo" disabled data-vidnum="<?php echo $curvid['prev']; ?>"><b>Föregående</b> video</button>
-  </div>
-  <p id="vidprogress" class="unobtrusive">Status för denna video: </p>
   <p class="unobtrusive">
      Om sidan strular, vänligen tala om vilken webbläsare du använder (namn + version) samt vad du ser i
      konsollen<br /> (CTRL/CMD + SHIFT + K i Firefox, CTRL/CMD + SHIFT + J i Chrome) till gunther@keryx.se
