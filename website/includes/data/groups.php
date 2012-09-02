@@ -212,7 +212,9 @@ SQL;
         $stmt->execute();
         self::fetchMode($stmt);
         $group = $stmt->fetch();
-        $group->getUsers($dbh);
+        if ( $group) {
+            $group->getUsers($dbh);
+        }
         return $group;
     }
     
