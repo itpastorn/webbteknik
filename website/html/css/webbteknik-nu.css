@@ -87,7 +87,8 @@ body {
     padding-top: 1px;
 }
 h1 {
-    font-family: consolas, monospace;
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 0.05em;
     text-align: center;
     color: hsl(207, 100%, 20%);
     font-size: 2em;
