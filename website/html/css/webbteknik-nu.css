@@ -532,6 +532,21 @@ a[href*="w3.org"]:after {
 }
 
 /* ------------------------------- *\
+   $secnav
+\* ------------------------------- */
+
+.secnav {
+    float: right;
+    width: 20%;
+    margin-left: 5%;
+}
+.secnav button {
+    display: block;
+    margin-bottom: 1em;
+    width: 80%
+}
+
+/* ------------------------------- *\
    $footer
 \* ------------------------------- */
 
@@ -636,6 +651,9 @@ hr.todo {
 .jobreport td {
     padding: 3px 5px;
 }
+.jobreport th:first-child {
+    min-width: 25em;
+}
 .finished {
     opacity: 0.5;
 }
@@ -653,6 +671,11 @@ hr.todo {
 .jobreport a:link {
     /* color: rgb(0, 0, 238); */
     color: rgb(0, 0, 180);
+}
+.jobreport a:focus,
+.jobreport a:hover,
+.jobreport a:active {
+    color: #FFF;
 }
 .jobreport button {
     margin: 0 2px;

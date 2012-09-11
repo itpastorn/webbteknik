@@ -146,7 +146,7 @@ SQL;
     $vidnum = (int)$_GET['vidnum'];
     $sql = <<<SQL
         SELECT v.*, jl.joblistID, bs.section FROM videos AS v
-        INNER JOIN booksections AS bs USING (booksectionID)
+        LEFT JOIN booksections AS bs USING (booksectionID)
         LEFT JOIN joblist AS jl
         ON (v.videoname = jl.where_to_do_it)
         WHERE v.order = :vidnum

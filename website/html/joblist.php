@@ -16,6 +16,8 @@
  * @todo First step: 3 tables: Fast track, slow track, bonus jobs = how to show it to fast track students
  * 
  * @todo Make it possible to provide link to Github/JSBin/etc in status for quick access
+ * 
+ * @todo Must find a way to knit books (text/work/teacherguide) together for SQL. NOW all is 'wu1' in DB
  */
 
 session_start();
@@ -30,10 +32,35 @@ $dbx = config::get('dbx');
 // init
 $dbh = keryxDB2_cx::get($dbx);
 
-$bookID = filter_input(INPUT_GET, 'book', FILTER_SANITIZE_URL);
+$bookID  = filter_input(INPUT_GET, 'book', FILTER_SANITIZE_URL);
+$chapter = filter_input(INPUT_GET, 'c', FILTER_SANITIZE_URL);
 
 if ( empty($bookID) ) {
     $bookID = 'wu1';
+}
+
+if ( empty($chapter) ) {
+    $chapter = 1;
+    // TODO: Find first chapter that has jobs not done 
+}
+
+// All chapters that have jobs in the chosen book
+$sql  = "SELECT DISTINCT chapter FROM `joblist` WHERE bookID = :bookID";
+$stmt = $dbh->prepare($sql);
+$stmt->bindParam(':bookID', $bookID);
+$stmt->execute();
+$list_of_chapters = '';
+while ( $c = $stmt->fetchColumn() ) {
+    $list_of_chapters .= <<<LI
+      <li><a href="{$_SERVER['SCRIPT_NAME']}?book={$bookID}&c={$c}">Kapitel {$c}</a></li>
+
+LI;
+}
+if ( empty($list_of_chapters) ) {
+$list_of_chapters = <<<LIST
+  <li>Boken saknar arbetsuppgifter</li>
+
+LIST;
 }
 
 // All jobs, but fast-track first
@@ -41,9 +68,10 @@ $sql = <<<SQL
     SELECT jl.* , v.*
     FROM `joblist` AS jl
     LEFT JOIN videos AS v ON v.videoname = jl.where_to_do_it
-    WHERE jl.bookID = :bookID
-    ORDER BY jl.chapter ASC, jl.track ASC, jl.joborder ASC
+    WHERE jl.bookID = :bookID AND chapter = :chapter
+    ORDER BY jl.joborder ASC
 SQL;
+//    ORDER BY jl.track ASC, jl.joborder ASC
 
 /*
     SELECT jl.* , v.*, up.percentage_complete, up.status
@@ -62,6 +90,7 @@ SQL;
 
 $stmt = $dbh->prepare($sql);
 $stmt->bindParam(':bookID', $bookID);
+$stmt->bindParam(':chapter', $chapter);
 $stmt->execute();
 $jobs = $stmt->fetchAll();
 ?>
@@ -83,13 +112,28 @@ $jobs = $stmt->fetchAll();
     <em>Preliminär info: Här kommer alla uppgifter och resurser att listas, så att elever kan checka av vad de gjort
     och lärare få en rapport. Videotittande rapporteras av sig självt när man tittar.</em>
   </p>
-  <p id="showhidebuttons">&nbsp;</p><!-- placeholder for show/hide finished jobs -->
-  <table class="jobreport blackborder zebra">
-    <tr>
-      <th>Uppgift</th>
-      <th>Rapporterad status</th>
-      <th>Godkänd</th>
-    </tr>
+  <div class="secnav">
+    <h2>Välj kapitel</h2>
+    <ul>
+      <?php echo $list_of_chapters; ?>
+
+    </ul>
+    <h2>Filtrera tabellen</h2>
+    <p id="showhidebuttons"></p><!-- placeholder for show/hide finished jobs -->
+  </div>
+  <div class="clearfix" role="main">
+    <h2 class="centered">Uppgifter</h2>
+    <?php 
+      if ( empty($jobs) ):
+      echo "Det finns inga uppgifter att visa som matchar urvalet";
+      else:
+    ?>
+    <table class="jobreport blackborder zebra">
+      <tr>
+        <th>Uppgift</th>
+        <th>Rapporterad status</th>
+        <th>Godkänd</th>
+      </tr>
   <?php
     /* 
      * TEMP FIX BAD BAD BAD
@@ -164,9 +208,15 @@ $jobs = $stmt->fetchAll();
     }
     echo "</tr>\n";
   
+    ?>
+    </table>
+  <?php
+      endif;
   ?>
-  </table>
-  <?php require "../includes/snippets/footer.php"; ?>
+    </div>
+  <?php    
+      require "../includes/snippets/footer.php";
+  ?>
   <script src="script/progressreport.js"></script>
 </body>
 </html>
