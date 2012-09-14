@@ -246,6 +246,34 @@ if ( !isset($curvid['status']) ) {
 }
 
 // Flashcards
+// TODO Make object type and do not allow "empty sets"
+$sql = <<<SQL
+    SELECT setID, setname FROM flashcardsets
+    INNER JOIN flashcards USING (setID)
+    WHERE
+      bookID = :bookID
+    AND
+      chapter = :chapter
+    GROUP BY setID
+    ORDER BY booksectionID ASC
+    LIMIT 0,10
+SQL;
+$stmt = $dbh->prepare($sql);
+$stmt->bindParam('bookID', $curvid['bookID']);
+$stmt->bindParam('chapter', $curvid['chapter']);
+$stmt->execute();
+$matching_flashcard_sets = $stmt->fetchAll();
+if ( empty($matching_flashcard_sets) ) {
+    $flashcards = 'Inga flashcards finns till denna video (ännu)';
+} else {
+    $flashcards = '<ul class="tightparagraph">' . "\n";
+    foreach ( $matching_flashcard_sets as $fset ) {
+        $flashcards .= "<li><a href=\"flashcards.php?set={$fset['setID']}\">{$fset['setname']}</a></li>\n";
+    }
+    $flashcards .= "</ul>\n";
+}
+
+
 
 // Next job not done
 $sql = <<<SQL
@@ -343,11 +371,12 @@ if ( 'webbteknik.nu' == $_SERVER['SERVER_NAME']) {
     </div>
     <div>
       <h3 class="boxedheader">Resurser 2</h3>
-      <p class="tightparagraph">TODO (Flashcards, interactive, etc)</p>
+      <?php echo $flashcards; ?>
     </div>
     <div>
       <h3 class="boxedheader">Nästa uppgift</h3>
       <p class="tightparagraph"><?php echo $nextjobbdesc; ?></p>
+      <!-- TODO knappar för att rapportera uppgiften och Ajax som då tar fram nästa -->
     </div>
   </section>
   <?php require "../includes/snippets/footer.php"; ?>

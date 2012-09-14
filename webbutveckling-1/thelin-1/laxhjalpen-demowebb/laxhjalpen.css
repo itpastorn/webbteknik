@@ -1,4 +1,4 @@
-@CHARSET "UTF-8";
+@charset "UTF-8";
 /* http://colorschemedesigner.com/#3321Tw0w0w0w0 */
 /*
 ====================================================
@@ -33,7 +33,7 @@ h1 {
     font-family: 'Merienda One', cursive;
     margin: 0;
     display: inline-block;
-    /* outline: 1px dotted teal; */
+    outline: 3px double teal;
 }
 h1:first-letter {
     color: #00af64;

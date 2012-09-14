@@ -68,10 +68,10 @@ $sql = <<<SQL
     SELECT jl.* , v.*
     FROM `joblist` AS jl
     LEFT JOIN videos AS v ON v.videoname = jl.where_to_do_it
-    WHERE jl.bookID = :bookID AND chapter = :chapter
-    ORDER BY jl.joborder ASC
+    WHERE jl.bookID = :bookID AND jl.chapter = :chapter
+    ORDER BY jl.track ASC, jl.joborder ASC
 SQL;
-//    ORDER BY jl.track ASC, jl.joborder ASC
+//    ORDER BY jl.joborder ASC
 
 /*
     SELECT jl.* , v.*, up.percentage_complete, up.status

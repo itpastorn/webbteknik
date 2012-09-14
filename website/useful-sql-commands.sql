@@ -408,18 +408,39 @@ UPDATE `webbtek_webbtek`.`links` SET `videoname` = 'thimble' WHERE `links`.`link
 UPDATE `webbtek_webbtek`.`links` SET `videoname` = 'kap-1-a-3' WHERE `links`.`linkID` =2;
 UPDATE `webbtek_webbtek`.`links` SET `videoname` = 'kap-1-a-4' WHERE `links`.`booksectionID` =5;
 
--- Not put to server below
+ALTER TABLE `flashcardsets` CHANGE `section` `booksectionID` MEDIUMINT( 8 ) UNSIGNED NULL DEFAULT NULL;
+
+ALTER TABLE `webbtek_webbtek`.`flashcardsets` ADD INDEX ( `booksectionID` );
+
+ALTER TABLE `flashcardsets` ADD FOREIGN KEY ( `booksectionID` ) REFERENCES `webbtek_webbtek`.`booksections` (
+`booksectionID`
+) ON DELETE RESTRICT ON UPDATE CASCADE ;
+
+ALTER TABLE `webbtek_webbtek`.`flashcards` DROP INDEX `term` , ADD INDEX `term` ( `term` ):
 
 ALTER TABLE `flashcards` ADD INDEX ( `setID` );
+
+ALTER TABLE `flashcards` ADD FOREIGN KEY ( `setID` ) REFERENCES `webbtek_webbtek`.`flashcardsets` (`setID`)
+  ON DELETE RESTRICT ON UPDATE CASCADE ;
+
 ALTER TABLE `flashcards` CHANGE `term` `term` VARCHAR( 25 ) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL ,
   CHANGE `short` `short` VARCHAR( 60 ) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL ,
   CHANGE `long` `long` VARCHAR( 180 ) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL ,
   CHANGE `setID` `setID` VARCHAR( 50 ) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL ;
 
-ALTER TABLE `flashcards` ADD FOREIGN KEY ( `setID` ) REFERENCES `webbtek_webbtek`.`flashcardsets` (`setID`)
-  ON DELETE RESTRICT ON UPDATE CASCADE ;
+ALTER TABLE `flashcardsets` CHANGE `book` `bookID` VARCHAR( 5 ) CHARACTER SET utf8 COLLATE utf8_swedish_ci NULL DEFAULT NULL;
+ 
+ALTER TABLE `webbtek_webbtek`.`flashcardsets` ADD INDEX ( `bookID` );
+ALTER TABLE `flashcardsets` ADD FOREIGN KEY ( `bookID` ) REFERENCES `webbtek_webbtek`.`books` (
+`bookID`
+) ON DELETE RESTRICT ON UPDATE CASCADE ;
 
-ALTER TABLE `flashcardsets` CHANGE `section` `booksectionID` MEDIUMINT( 12 ) UNSIGNED NULL DEFAULT NULL;
+ALTER TABLE `videos` ADD `chapter` TINYINT UNSIGNED NULL AFTER `bookID` ,
+ADD INDEX ( `chapter` );
+
+-- Not put to server below
+
+
 
 
 -- Test SQL
