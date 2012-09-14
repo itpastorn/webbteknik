@@ -20,50 +20,29 @@ $dbh = keryxDB2_cx::get($dbx);
 
 header("Content-type: text/plain; charset=utf-8");
 
-$subject = "Webbteknik.nu växer";
+$subject = "Ofullbordad inloggning till webbteknik.nu";
 
 $text = <<<TXT
 
-Hej och välkommen till webbteknik.nu alla nya användare.\r\n
+Detta mejl går till dig som påbörjat en inloggning
+på webbteknik.nu, men som inte fullbordat processen.
 
-(En gång till, nu med tekniskt förtydligande att jag använder UTF-8.)
+Om det beror på att det kändes svårt, så titta gärna
+på instruktionsvideon:
 
-Nu växer ert antal stadigt och det ger mig som utvecklare
-angenäm stress. Bandbredden på webbhotellet sköt i höjden
-och jag behövde köpa mer.
+http://webbteknik.nu/sign-in.php
 
-Under veckan som kommer, så ska jag flytta alla videos till
-ett generösa webbhotell. Därefter kommer hela webbplatsen
-flyttas till det. Det kommer ske en natt när ingen troligen
-är uppkopplad.
+Är det något tekniskt strul, som din lärare inte
+kan hjälpa dig med, så svara på det här mejlet.
 
-Är du *lärare* och saknar befogenhet att skapa grupper
-för dina elever, så hör av dig till gunther@keryx.se
-
-Likaså kan man höra av sig dit om något strular. Akuta fixar försöker
-jag ordna genast. Det finns annars en lång lista av issues på
-https://github.com/itpastorn/webbteknik/issues
-
-Jag betar av dem så fort jag hinner. Än så länge går funktion före 
-form, så det tråkiga utseendet kommer tyvärr bestå någon månad till.
+Har det bara inte blivit av, så tveka inte ;-)
 
 
-Låt mig förklara några saker som kan verka konstiga:
 
-1. Det står 9 videos på startsidan, men 3 av dem gäller inte
-   boken. En är för inloggningen av webbplatsen, en om PHP
-   och XAPP (den finns på startsidan) och en är bara för
-   lärare, men den syns inre alls än....
-
-2. Det kan hända att man måste klicka två gånger på logga in
-   knappen. Jag vet just nu inte varför.
-
-3. Det finns nu en provisorisk sida där övningsfiler kan hämtas.
-   Det finns redan elever som är förbi kapitel ett och det blev bråttom.
-
-Hoppas ni kommer rycka webbteknik är givande!
 
 Lars Gunther
+
+
 TXT;
 
 $headers = "From: webbteknik.nu admin<gunther@keryx.se>\r\n" .
