@@ -141,7 +141,7 @@ echo $list;
     <button id="goto_nextcard">Nästa</button>
   </p>
   <?php require "../includes/snippets/footer.php"; ?>
-  <script src="flashcards.js"></script>
+  <script src="../script/flashcards.js"></script>
   <!-- 
   TODO major items:
   * Support MS and Opera
