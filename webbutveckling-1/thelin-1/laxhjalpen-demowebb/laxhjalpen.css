@@ -33,7 +33,6 @@ h1 {
     font-family: 'Merienda One', cursive;
     margin: 0;
     display: inline-block;
-    outline: 3px double teal;
 }
 h1:first-letter {
     color: #00af64;
