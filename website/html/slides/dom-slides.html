@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <title>Dokumentobjektsmodellen (DOM)</title>
+  <link rel="stylesheet" href="../css/webbteknik-nu.css" />
+  <link href='http://fonts.googleapis.com/css?family=Handlee' rel='stylesheet' />
+  <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' />
+  <link href='../css/slides.css' rel='stylesheet' />
+  <link href='../css/dom-svg.css' rel='stylesheet' />
+  <style>
+  li { margin-bottom: 1em;
+  </style>
+</head>
+<body class="wide">
+<!-- One section is one slide -->
+
+<section>
+    <h1>DOM</h1>
+    <footer>Webbutveckling 1</footer>
+</section>
+
+<section>
+    <p>HTML är text</p>
+    <pre><code class="html">
+&lt;html lang="sv"&gt;
+  &lt;title&gt;test&lt;/title&gt;
+  &lt;p&gt;test&lt;/p&gt;
+&lt;/html&gt;
+    </code></pre>
+</section>
+
+<section>
+    <p>Hur tolkar webbläsaren den</p>
+    <ul class="incremental dimout">
+      <li>Hitta meningsbärande enheter (lexing/tokenization)</li>
+      <li>Bygg en meningsfull struktur (parsing/tree building)</li>
+      <li>Slarvig skriven HTML-kod stökar till processen lite grann</li>
+  </section>
+
+  <section>
+    <ul class="incremental dimout">
+      <li>(<code>document.write()</code> stökar till processen helt enormt!)</li>
+      <li>Applicera CSS-regler (sker parallellt)</li>
+      <li>Kör skript (sker ev. parallellt)</li>
+      <li>Bygg en visuell struktur (style computation)</li>
+      <li>Rita resultatet (painting)</li>
+      <li><a href="http://taligarsiel.com/Projects/howbrowserswork1.htm" lang="en">How browsers work</a></li>
+    </ul>
+  </section>
+
+  <section>
+    <p>DOM = Document Object Model</p>
+    <ul class="incremental dimout">
+      <li>A model for <em>representing</em></li>
+      <li>and <em>interacting</em></li>
+      <li>with <em>objects</em></li>
+      <li>Ett <dfn>träd</dfn> &nbsp;med <dfn>noder</dfn>
+    </ul>
+  </section>
+
+  <section>
+    <svg viewbox="0 0 800 600" class="incremental">
+      <g>
+        <ellipse cx="400" cy="40" rx="75" ry="30" class="elemnode" />
+        <text     x="400"  y="40" dy="0.5ex">html</text>
+      </g>
+
+      <g>
+        <path d="M 346 61 200 120" />
+        <ellipse cx="200" cy="120" rx="75" ry="30" class="elemnode" />
+        <text     x="200"  y="120" dy="0.5ex">head</text>
+      </g>
+      <g>
+        <path d="M 456 61 600 120" />
+        <g id="the_body">
+          <ellipse cx="600" cy="120" rx="75" ry="30" class="elemnode" />
+          <text     x="600"  y="120" dy="0.5ex">body</text>
+        </g>
+      </g>
+
+      <g>
+        <path d="M 167 147 100 200" />
+        <ellipse cx="100" cy="200" rx="75" ry="30" class="elemnode" />
+        <text     x="100"  y="200" dy="0.5ex">meta</text>
+      </g>
+      <g>
+        <path d="M 100 230 100 280" />
+        <ellipse cx="100" cy="280" rx="75" ry="30" class="attrnode" />
+        <text     x="100"  y="280" dy="0.5ex">charset</text>
+      </g>
+
+      <g>
+        <path d="M 233 147 300 200" />
+        <ellipse cx="300" cy="200" rx="75" ry="30" class="elemnode" />
+        <text     x="300"  y="200" dy="0.5ex">title</text>
+      </g>
+      <g>
+        <path d="M 300 230 300 280" />
+        <ellipse cx="300" cy="280" rx="75" ry="30" class="textnode" />
+        <text     x="300"  y="280" dy="0.5ex">#text#</text>
+      </g>
+
+      <g>
+        <path d="M 567 147 500 200" />
+        <g id="the_h1">
+          <ellipse cx="500" cy="200" rx="75" ry="30" class="elemnode" />
+          <text     x="500"  y="200" dy="0.5ex">h1</text>
+        </g>
+        <path d="M 500 230 500 280" />
+        <ellipse cx="500" cy="280" rx="75" ry="30" class="textnode" />
+        <text     x="500"  y="280" dy="0.5ex">#text#</text>
+      </g>
+
+      <g>
+        <path d="M 633 147 700 200" />
+        <g id="the_div">
+          <ellipse cx="700" cy="200" rx="75" ry="30" class="elemnode" />
+          <text     x="700"  y="200" dy="0.5ex">div</text>
+        </g>
+
+        <path d="M 700 230 700 440" />
+        <g id="the_p">
+          <ellipse cx="700" cy="280" rx="75" ry="30" class="elemnode" />
+          <text     x="700"  y="280" dy="0.5ex">p</text>
+        </g>
+
+        <g id="the_em">
+          <ellipse cx="700" cy="360" rx="75" ry="30" class="elemnode" />
+          <text     x="700"  y="360" dy="0.5ex">em</text>
+        </g>
+
+        <ellipse cx="700" cy="440" rx="75" ry="30" class="textnode" />
+        <text     x="700"  y="440" dy="0.5ex">#text#</text>
+
+      </g>
+      <foreignObject x="30" y="330" width="365" height="250">
+        <body xmlns="http://www.w3.org/1999/xhtml">
+<pre class="code">
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;&hellip;&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;&hellip;&lt;/h1&gt;
+    &lt;div&gt;&lt;p&gt;&lt;em&gt;&hellip;&lt;/em&gt;&lt;/p&gt;&lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+        </body>
+      </foreignObject>
+
+      <g>
+        <!-- Dim the rest -->
+        <rect x="0" y="0" width="800" height="600" fill="#fff" opacity="0.5" />
+        <use xlink:href="#the_div" />
+        <ellipse cx="700" cy="200" rx="77" ry="32" class="highlightnode" />
+      </g>
+
+      <g class="flashing">
+        <use xlink:href="#the_body" />
+        <text x="680" y="150" dy="0.5ex" class="relation">parent</text>
+      </g>
+
+      <g class="flashing">
+        <use xlink:href="#the_h1" />
+        <text x="600" y="200" dy="0.5ex" class="relation">sibling</text>
+      </g>
+
+      <g class="flashing">
+        <use xlink:href="#the_p" />
+        <text x="730" y="242" dy="0.5ex" class="relation">child</text>
+      </g>
+
+      <g class="flashing">
+        <use xlink:href="#the_p" />
+        <use xlink:href="#the_em" />
+        <text x="630" y="320" dy="0.5ex" class="relation">descendants</text>
+      </g>
+
+    </svg>
+  
+  </section>
+
+
+<section>
+    <h2>Åtkomst via DOM som <dfn>API</dfn></h2>
+</section>
+<section>
+    <p>Skript</p>
+    <ul class="incremental dimout">
+      <li><code>document.getElementById()</code></li>
+      <li><code>document.getElementsByTagName()</code></li>
+      <li><code>document.getElementsByClassName()</code></li>
+      <li><code>element.children[3]</code></li>
+      <li><code>element.innerHTML = "hej"</code></li>
+    </ul>
+</section>
+
+<div id="progress-bar"></div>
+<script src="../script/slides.js"></script>
+</body>
+</html>
