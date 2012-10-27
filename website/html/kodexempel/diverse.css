@@ -1,0 +1,67 @@
+body {
+    background-color: silver;
+}
+p {
+    font-family: sans-serif;
+}
+.foo {
+    font-size: large;
+}
+.foo {
+    font-size: small;
+    color: darkred;
+}
+
+body {
+    margin: 0;
+}
+
+html {
+    background-color: lime;
+}
+body {
+    margin: auto;
+    width: 600px;
+    background-color: orange;
+}
+
+.left {
+    float: right;
+}
+.elliptic_corners {
+    -webkit-border-radius: 10px / 5px;
+       -moz-border-radius: 10px / 5px;
+            border-radius: 10px / 5px;
+}
+
+h1 {
+    font-family: sans-serif;
+    font-size: 140%;
+    font-weight: bold;
+}
+<style>
+#a {
+    color: green;
+}
+</style>
+<p id="a">Lorem ipsum...</p>
+
+#a > p {
+    /* P-barn till element med id a */
+    color: red;
+}
+#a span {
+    /* Span-avkomlingar till element med id a */
+    color: blue;
+}
+#a > .bb {
+    /* Ett element med klassen bb som är barn till element med id a */
+    color: green;
+}
+#a > .bb + p {
+    /* Ett p-element som är närmast efterföljande syskon till ett element som har klassen bb och i sin tur är barn till id=a */
+    color: black;
+}
+p {
+    font-family: "Helvetica Neue", "Liberation Sans", Calibri, Arial, sans-serif;
+}

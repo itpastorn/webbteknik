@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Clearing and containng floats</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <style>
+    body {
+        width: 600px;
+        margin: auto;
+        font: medium sans-serif;
+    }
+    h2 {
+        clear: both;
+    }
+    div {
+        padding: 10px;
+        border: 2px solid maroon;
+    }
+    .float {
+        float: left;
+        width: 250px;
+        border: 2px solid teal;
+        height: 130px;
+        margin-right: 10px;
+    }
+    .nopad {
+        padding: 0;
+    }
+    .clear {
+        clear: both;
+    }
+    .contain {
+        float: left;
+        width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <h1>Clearing and containing floats</h1>
+
+  <h2 lang="sv">Div med <em>beräknad</em> höjd = 0</h2>
+  <p lang="sv">2px border. Efterföljande text är placerad utanför div-elementet</p>
+  <div class="nopad">
+    <div class="float">
+      <pre>
+.float {
+    float: left;
+    width: 150px;
+    border: 2px solid teal;
+    height: 130px;
+    margin-right: 10px;
+}
+      </pre>
+    </div>
+  </div> 
+  <p lang="la">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris fringilla libero ac magna
+    sodales at interdum leo vestibulum. Curabitur quis vulputate erat. Quisque quam quam,
+    auctor nec sodales mollis, pulvinar nec lorem. Quisque ut erat turpis. Nunc vel faucibus
+    nunc. Morbi sed magna nisi. Nullam feugiat tincidunt sem vitae eleifend.
+  </p>
+
+  <h2 lang="sv">Div med <em>beräknad</em> höjd = 4em</h2>
+  <p lang="sv">
+    2px border. P-text är placerad <em>inuti</em> div-elementet. Dess marginaler bidrar med 1+1 em
+    på höjden.
+  </p>
+  <div class="nopad">
+    <div class="float">
+      <pre>
+.float {
+    float: left;
+    width: 150px;
+    border: 2px solid teal;
+    height: 130px;
+    margin-right: 10px;
+}
+      </pre>
+    </div>
+    <p lang="la">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris fringilla libero.
+    </p>
+  </div> 
+  <br style="clear: both" />
+
+  <h2 lang="sv">Div med padding och äkta höjd = 0</h2>
+  <p lang="sv">Efterföljande text ligger är placerad utanför div-elementet</p>
+  <div>
+    <div class="float">
+      <pre>
+.float {
+    float: left;
+    width: 150px;
+    border: 2px solid teal;
+    height: 130px;
+    margin-right: 10px;
+}
+      </pre>
+    </div>
+  </div> 
+  <p lang="la">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris fringilla libero ac magna
+    sodales at interdum leo vestibulum. Curabitur quis vulputate erat. Quisque quam quam,
+    auctor nec sodales mollis, pulvinar nec lorem. Quisque ut erat turpis. Nunc vel faucibus
+    nunc. Morbi sed magna nisi. Nullam feugiat tincidunt sem vitae eleifend.
+  </p>
+  <h2 lang="sv">Samma fast med clear</h2>
+  <p lang="sv"><strong>Efterföljande</strong> text har <code>clear: both</code></p>
+  <div>
+    <div class="float">
+      <pre>
+.float {
+    float: left;
+    width: 150px;
+    border: 2px solid teal;
+    height: 130px;
+    margin-right: 10px;
+}
+      </pre>
+    </div>
+  </div> 
+  <p lang="la" class="clear">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris fringilla libero ac magna
+    sodales at interdum leo vestibulum. Curabitur quis vulputate erat. Quisque quam quam,
+    auctor nec sodales mollis, pulvinar nec lorem. Quisque ut erat turpis. Nunc vel faucibus
+    nunc. Morbi sed magna nisi. Nullam feugiat tincidunt sem vitae eleifend.
+  </p>
+  <h2 lang="sv">Yttre div har width = 100% och float: left</h2>
+  <p>Float on outer div = <strong>contain</strong> inner div.</p>
+  <div class="contain">
+    <div class="float">
+      <pre>
+.float {
+    float: left;
+    width: 150px;
+    border: 2px solid teal;
+    height: 130px;
+    margin-right: 10px;
+}
+      </pre>
+    </div>
+  </div> 
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris fringilla libero ac magna
+    sodales at interdum leo vestibulum. Curabitur quis vulputate erat. Quisque quam quam,
+    auctor nec sodales mollis, pulvinar nec lorem. Quisque ut erat turpis. Nunc vel faucibus
+    nunc. Morbi sed magna nisi. Nullam feugiat tincidunt sem vitae eleifend.
+  </p>
+</body>
+</html>
+
