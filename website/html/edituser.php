@@ -230,7 +230,7 @@ ADMINYOU;
         </p>
         <p>
           <input type="radio" name="priv" value="31" id="teacher" <?php echo $checked[31]; ?>>
-          <label for="teacher">Lärare (kan ännu inte väljas)</label>
+          <label for="teacher">Lärare (kan ännu inte väljas)</label> <strong>Mejla gunther at keryx punkt se tills detta fixats.</strong>
         </p>
         <input type="hidden" name="origlevel" id="origlevel" value="<?php echo $userdata->privileges; ?>" />
       </div>
