@@ -1,3 +1,6 @@
+RewriteCond %{HTTP_HOST} ^www\.webbteknik\.nu$ [NC]
+RewriteRule ^(.*)$ http://webbteknik.nu/$1 [R=301,L]
+
 AddDefaultCharset utf-8
 
 # http://stackoverflow.com/questions/6987929/preparing-php-application-to-use-with-utf-8
