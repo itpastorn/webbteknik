@@ -23,19 +23,20 @@ Avlägsen framtid
 ## Roller
 
 Länkar
- * Fördjupningslänk: [The 9 Pillars of Successful Web teams](http://www.adaptivepath.com/ideas/nine-pillars-of-successful-web-teams) av Jesse James Garrett, New Riders
+ * 38:deep:[The 9 Pillars of Successful Web teams](http://www.adaptivepath.com/ideas/nine-pillars-of-successful-web-teams): av Jesse James Garrett, New Riders
 
 ## Processen
 
 Länkar
- * Fotnotslänk: Dreamweaver TODO
- * Fotnotslänk: Expression Studio TODO
- * Fotnotslänk: Blue Griffon TODO
+ * 39:ref:[WYSIWYG](http://en.wikipedia.org/wiki/WYSIWYG)
+ * 39:note:[Dreamweaver](http://www.adobe.com/se/products/dreamweaver.html)
+ * 39:note:[Expression Web](http://www.microsoft.com/expression/products/Web_Overview.aspx)
+ * 39:note:[Blue Griffon](http://bluegriffon.org/)
 
 ### Idé, mål, och analys av förutsättningar
 
 Länkar
- * Boklänk: [Web Analytics](http://en.wikipedia.org/wiki/Web_analytics)
+ * 40:book:[Web Analytics](http://en.wikipedia.org/wiki/Web_analytics)
 
 ### Skisser och beställning
 
@@ -44,10 +45,10 @@ Planering
  * Video: Samla på dig en portfolia av designidéer
 
 Länkar
- * Boklänk: [Card Sorting](http://en.wikipedia.org/wiki/Card_sorting)
- * Boklänk: [I Love Wireframes](http://www.flickr.com/groups/ilovewireframes/)
- * Tipslänk: [10 Completely Free Wireframe and Mockup Applications](http://speckyboy.com/2010/01/11/10-completely-free-wireframe-and-mockup-applications/)
- * Tipslänk: [Website Wireframe](http://en.wikipedia.org/wiki/Website_wireframe)
+ * 41:book:[Card Sorting](http://en.wikipedia.org/wiki/Card_sorting)
+ * 41:book:[I Love Wireframes](http://www.flickr.com/groups/ilovewireframes/)
+ * 41:tip:[10 Completely Free Wireframe and Mockup Applications](http://speckyboy.com/2010/01/11/10-completely-free-wireframe-and-mockup-applications/)
+ * 41:tip:[Website Wireframe](http://en.wikipedia.org/wiki/Website_wireframe)
 
 ### Färger och typsnitt
 
@@ -55,7 +56,7 @@ Länkar
 
 Länkar
  * Tipslänk: Stilguide exempel 1 TODO
- * Tipslänk: Stilguide exempel 1 TODO
+ * Tipslänk: Stilguide exempel 2 TODO
 
 ### Prototyp
 ### Första omgång tester
@@ -68,48 +69,45 @@ Länkar
 
 ### En bra editor
 
- * Video: Editorer
-   * Syntax highlight
-   * Radnumrering
-   * Indrag
-   * UTF-8
-
 Länkar
- * Boklänk: [Ace Editor i molnet](http://ace.ajax.org/)
- * TODO: En för varje nämnd produkt på sidan 47
+ * 49:book:[Ace Editor i molnet](http://ace.ajax.org/):wu-lb-2-4-1
+ * 49:ref:[gEdit](http://projects.gnome.org/gedit/):wu-lb-2-4-1
+ * 49:ref:[Notepad++](http://notepad-plus-plus.org/):wu-lb-2-4-1
+ * 49:ref:[TextMate](http://macromates.com/):wu-lb-2-4-1
+ * 49:ref:[Vim](http://www.vim.org/):wu-lb-2-4-1
+ * 49:ref:[Eclipse Web Tools](http://www.eclipse.org/webtools/):wu-lb-2-4-1
+ * 49:ref:[Aptana](http://www.aptana.com/):wu-lb-2-4-1
+ * 49:ref:[Komodo](http://www.activestate.com/komodo-ide):wu-lb-2-4-1
+ * 49:ref:[NetBeans](http://netbeans.org/):wu-lb-2-4-1
+ * 49:ref:[Visual Studio](http://www.microsoft.com/visualstudio/):wu-lb-2-4-1
 
 ### Webbläsare
 
-Länkar
- * TODO En för varje browser
+ * 50:ref:[Firefox](http://www.mozilla.org/sv-SE/firefox/fx/)
+ * 50:ref:[Opera](http://www.opera.com/)
+ * 50:ref:[Chrome](https://www.google.com/intl/sv/chrome/browser/)
+ * 50:ref:[Interner Explorer](http://windows.microsoft.com/sv-SE/internet-explorer/products/ie/home)
+ * 50:ref:[Safari](http://www.apple.com/se/safari/)
 
 ### Utvecklingsverktygen
 
- * Videos om utvecklarverktyg
-   * Inbyggda i Firefox
-   * Web Developer
-   * Firebug
-   * Dragonfly
-   * Chrome Tools
-   * IE 
-     * Aktivera lägen för äldre versioner
-   * Safari
-   * Mobil Firefox på Desktop
-   * Mobil Opera på Desktop
-   * "Remote debugging"
-
-Länkar
- * TODO En för varje verktyg
+ TODO dubblett OK * 51:ref:[Firebug](https://getfirebug.com/):wu-lb-2-4-3
+ * 51:ref:[Firefox inbyggda verktyg](https://developer.mozilla.org/en-US/docs/Tools):wu-lb-2-4-3
+ * 51:ref:[Opera Dragonfly](http://www.opera.com/dragonfly/):wu-lb-2-4-3
+ * 51:ref:[Chrome utvecklarverktyg](https://developers.google.com/chrome-developer-tools/):wu-lb-2-4-3
+ * 51:ref:[IE utvecklarverktyg](http://msdn.microsoft.com/en-us/library/dd565628%28v=vs.85%29.aspx):wu-lb-2-4-3
+ * 51:ref:[Safari utvecklarverktyg](https://developer.apple.com/technologies/safari/developer-tools.html):wu-lb-2-4-3
 
 ### Andra tillägg till Firefox (Video)
 
- * Video: Web Developer i detalj
- * Video: Inline Code Finder och andra tilläg till Firebug
+ * 52:ref:[Firefox Page Inspector inklusive Tilt](https://developer.mozilla.org/en-US/docs/Tools/Page_Inspector):wu-lb-2-4-4
+ * 52:ref:[Firefox Scratchpad](https://developer.mozilla.org/en-US/docs/Tools/Scratchpad):wu-lb-2-4-4
+ * 52:ref:[Firefox Responsive Design View](https://developer.mozilla.org/en-US/docs/Tools/Responsive_Design_View):wu-lb-2-4-4
+ * 52:ref:[Firefox Responsive Web Console](https://developer.mozilla.org/en-US/docs/Tools/Web_Console):wu-lb-2-4-4
+ * 52:ref:[Firefox Graphical Command Line Interface](https://developer.mozilla.org/en-US/docs/Tools/GCLI):wu-lb-2-4-4
+ * 52:ref:[Rainbow](https://addons.mozilla.org/en-US/firefox/addon/rainbow-color-tools/):wu-lb-2-4-4
+ TODO dubblett OK * 52:ref:[Firebug tillägget Validator](https://addons.mozilla.org/en-US/firefox/addon/validator/):wu-lb-2-4-4
 
-Länkar
- * TODO: EN för varje tipsad addon
-
- 
 ### En lokal server
 
 Video om XAMPP
@@ -123,39 +121,46 @@ Länkar
 
  * Video: FireFTP och FileZilla
 
-Länkar
- * TODO: FireFTP och FileZilla
+ * 54:ref:[FileZilla](http://filezilla-project.org/download.php?type=client)
+ * 54:ref:[FireFTP](http://fireftp.mozdev.org/)
 
-### Versionskontroll
+### Versionskontroll (55)
 
- * Video: Git
- * Video: Github (nämn Assembla, Bitbucket och Sourceforge på slutet)
-
-Länkar
- * Referenslänk: Versionskontroll TODO
- * Referenslänk: Github hjälp TODO
- * Referenslänk: [Comparison of open source software hosting facilities](http://en.wikipedia.org/wiki/Comparison_of_open_source_software_hosting_facilities)
-
-### Ärendehantering (issue management)
-
- * Video: Github issues
- * Video: Trac issues
-
-### Projekthantering
-
- * Video: Github milestones
- * Video: Github wikis
-
-### Dela kod, få svar på frågor, bolla idéer
+ * Skriv text om och Github (nämn Assembla, Bitbucket och Sourceforge på slutet)
 
 Länkar
- * Boklänk: pastebin TODO
- * Boklänk: JSFiddle TODO
- * Boklänk: Gist
- * Boklänk: (http://bl.ocks.org/)
- * Tipslänk: http://css-tricks.com/13414-seriously-just-make-a-jsfiddle/
+ * 55:ref:[Revision Control](http://en.wikipedia.org/wiki/Revision_control):git-koncept
+ * 55:deep:[Comparison of open source software hosting facilities](http://en.wikipedia.org/wiki/Comparison_of_open_source_software_hosting_facilities):git-koncept
+ * 55:ref:[GitHub](https://github.com/):git-installation
+ * 55:ref:[Git for Windows](http://code.google.com/p/msysgit/downloads/list?q=full+installer+official+git):git-installation
+ * 55:ref:[Create a repo on GitHub](https://help.github.com/articles/create-a-repo):git-start-using
+ * 55:ref:[Ignoring Files](https://help.github.com/articles/ignoring-files):git-usage
+ * 55:deep:[Git documentation](http://git-scm.com/documentation):git-usage
 
-## Läs mer om processen och verktyg
+### Ärendehantering (issue management) (56)
+
+ * Bonusvideo: GitHub issues
+
+### Projekthantering (57)
+
+ * Bonusvideo: Github milestones
+ * Bonusvideo: Github wikis
+
+### Dela kod, få svar på frågor, bolla idéer (58)
+
+Länkar
+ * 58:book:[Pastebin](http://pastebin.com/)
+ * 58:book:[JSFiddle](http://jsfiddle.net/)
+ * 58:book:[JSBin](http://jsbin.com/)
+ * 58:book:[Gist](https://gist.github.com/)
+ * 58:book:[bl.ocks.org](http://bl.ocks.org/)
+ * 58:tip:[Just make a JSFiddle](http://css-tricks.com/13414-seriously-just-make-a-jsfiddle/)
+
+## Läs mer om processen och verktyg (59)
+
+Länkar utlovade!
+
+De här hör till kapitel 3:
 
 http://www.eutveckling.se/riktlinjer/webb/
 http://beta.webbriktlinjer.se/
