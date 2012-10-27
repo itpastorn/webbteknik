@@ -3,14 +3,15 @@
  * Import links from markdown files
  *
  * Links must be on one line in this format 
- * E.g. 1:ref:[HTML Introduction](https://developer.mozilla.org/en/HTML/Introduction)
- * n.n:   book-section
+ * E.g. 1:ref:[HTML Introduction](https://developer.mozilla.org/en/HTML/Introduction):wu-lb-1-1
+ * n:     book-section (integer)
  * type:  ref=Reference (read to learn more), note=Footnote,book=Booklink, deep="Dig deeper", tip=Tip
  * [text] Markdown link text
  * (url)  Markdown url
+ * vid   Associated video name e.g. wu-lb-4-1-3
  * 
  * Parsed by:
- * preg_match_all("/([0-9\\.]+):([a-z]{3,4}):\\[([^]]+)]\\(([^)]+)\\)/", $file, $links, PREG_SET_ORDER);
+ * preg_match_all("/([0-9]+):([a-z]{3,4}):\\[([^]]+)]\\(([^)]+)\\):([a-z0-9-]+)?/", $file, $links, PREG_SET_ORDER);
  *
  * @author <gunther@keryx.se>
  * @version "Under construction 1"
@@ -31,10 +32,10 @@ $dbx = config::get('dbx');
 // init
 $dbh = keryxDB2_cx::get($dbx);
 
-$file = file_get_contents("/home/gunther/arkiv/workspace/webbteknik/webbutveckling-1/links-kap-1.markdown");
+$file = file_get_contents("/home/gunther/arkiv/workspace/webbteknik/webbutveckling-1/links-kap-2.markdown");
 
 
-$haslinks = preg_match_all("/([0-9\\.]+):([a-z]{3,4}):\\[([^]]+)]\\(([^)]+)\\)/", $file, $links, PREG_SET_ORDER);
+$haslinks = preg_match_all("/([0-9]+):([a-z]{3,4}):\\[([^]]+)]\\(([^)]+)\\):([a-z0-9-]+)?/", $file, $links, PREG_SET_ORDER);
 
 
 /*
@@ -56,19 +57,21 @@ header("Content-type: text/plain; charset=utf-8");
 echo "Number of parsed links in file: " . $haslinks . "\n\n";
 
 $sql = <<<SQL
-    INSERT INTO links (linkID, linktext, linkurl, linktype, section, time_added, bookID)
-    VALUES (null, :linktext, :linkurl, :linktype, :section, NOW(), 'wu1')
+    INSERT INTO links (linkID, linktext, linkurl, linktype, booksectionID, bookID, videoname, time_added)
+    VALUES (null, :linktext, :linkurl, :linktype, :booksectionID, 'wu1', :videoname, NOW())
 SQL;
 $stmt = $dbh->prepare($sql);
 
 $stmt->bindParam(':linktext', $linktext);
 $stmt->bindParam(':linkurl', $linkurl);
 $stmt->bindParam(':linktype', $linktype);
-$stmt->bindParam(':section', $section);
+$stmt->bindParam(':booksectionID', $section);
+$stmt->bindParam(':videoname', $videoname);
 
 $duplicates = 0;
 foreach ( $links as $lnk ) {
-    list($fullmatch, $section, $linktype, $linktext, $linkurl) = $lnk;
+	// $fullmatch is a dummy var just to be able to use list
+    list($fullmatch, $booksectionID, $linktype, $linktext, $linkurl, $videoname) = $lnk;
     try {
         $stmt->execute();
         echo "Added link: {$fullmatch}\n\n";
@@ -84,6 +87,9 @@ foreach ( $links as $lnk ) {
 }
 ob_flush();
 flush();
+
+exit;
+
 echo "Fixing relations - wait\n\n";
 
 // TODO remove booksection and do this directly!
