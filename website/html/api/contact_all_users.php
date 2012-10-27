@@ -20,30 +20,28 @@ $dbh = keryxDB2_cx::get($dbx);
 
 header("Content-type: text/plain; charset=utf-8");
 
-$subject = "Ofullbordad inloggning till webbteknik.nu";
+$subject = "Två videos till för kapitel 5";
 
 $text = <<<TXT
 
-Detta mejl går till dig som påbörjat en inloggning
-på webbteknik.nu, men som inte fullbordat processen.
+Hej alla som använder webbteknik.nu
 
-Om det beror på att det kändes svårt, så titta gärna
-på instruktionsvideon:
-
-http://webbteknik.nu/sign-in.php
-
-Är det något tekniskt strul, som din lärare inte
-kan hjälpa dig med, så svara på det här mejlet.
-
-Har det bara inte blivit av, så tveka inte ;-)
+Jag tänkte kort säga att nu har det kommit upp ett par videos
+ytterligare. Efter att ha haft en del annat att stå i, så har
+jag nu tid att spela in fler, så räkna med att det kommer
+några till inom en vecka.
 
 
-
-
+mvh
 Lars Gunther
 
 
 TXT;
+
+$only_me   = "SELECT * FROM users WHERE email = 'gunther@keryx.se'";
+$all_users = "SELECT * FROM users ORDER BY user_since ASC";
+$teachers  = "SELECT * FROM users WHERE privileges > 30 ORDER BY user_since ASC";
+
 
 $headers = "From: webbteknik.nu admin<gunther@keryx.se>\r\n" .
 		   "Reply-to: Lars Gunther <gunther@keryx.se>\r\n".
@@ -56,7 +54,7 @@ error_reporting(E_ALL);
 ini_set("display_errors", "1");
 echo "UTF-8\n";
 
-foreach ( $dbh->query("SELECT * FROM users ORDER BY user_since ASC") as $row) {
+foreach ( $dbh->query($all_users) as $row) {
 	$to = "{$row['firstname']} {$row['lastname']} <{$row['email']}>";
     if (mail($to, $subject, $text, $headers) ) {
         echo "{$to} kontaktad\n";
