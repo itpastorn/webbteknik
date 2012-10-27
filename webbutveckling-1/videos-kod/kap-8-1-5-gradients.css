@@ -1,0 +1,29 @@
+html {
+}
+body {
+    font-family: sans-serif;
+    width: 1000px;
+    margin: auto;
+    background-color: silver;
+    text-align: center;
+}
+div {
+    width: 80%;
+    height: 100px;
+    margin: 20px auto;
+    outline: 1px solid;
+    background-color: white;
+}
+.g1 {
+    background-image: linear-gradient(yellow, blue);
+
+}
+.g2 {
+}
+.g3 {
+}
+.g4 {
+}
+.g5 {
+}
+    

@@ -1,0 +1,37 @@
+html {
+    min-height: 100%;
+}
+body {
+    font-family: sans-serif;
+    width: 1000px;
+    margin: auto;
+    background-color: silver;
+    background-image: linear-gradient(to top, maroon, silver);
+    text-align: center;
+}
+div {
+    width: 80%;
+    height: 100px;
+    margin: 20px auto;
+    outline: 1px solid;
+    background-color: white;
+}
+.g1 {
+    background-image: linear-gradient(140deg, yellow, blue);
+    /* background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet); */
+}
+.g2 {
+    background-image: linear-gradient(to right, yellow, blue 20%, green);
+}
+.g3 {
+    background-image: linear-gradient(to right, yellow 20%, blue 20%, blue 80%, green 80%);
+}
+.g4 {
+     background-image:
+       linear-gradient(to right, yellow 20%, transparent 20%, transparent 80%, green 80%),
+       linear-gradient(to bottom, yellow 20%, transparent 20%, transparent 80%, green 80%);
+}
+.g5 {
+     background-image: repeating-linear-gradient(to right, blue, yellow 10px, blue 20px);
+}
+    
