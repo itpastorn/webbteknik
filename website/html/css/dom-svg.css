@@ -1,0 +1,61 @@
+@charset "UTF-8";
+
+svg {
+    display: block;
+    width: 720px;
+    height: 540px;
+    margin: 30px auto;
+}
+ellipse {
+    stroke-width: 2;
+}
+.elemnode {
+    fill: lightgreen;
+    stroke: darkgreen;
+}
+.attrnode {
+    fill: pink;
+    stroke: red;
+}
+.textnode {
+    fill: lightblue;
+    stroke: blue;
+}
+.highlightnode {
+    fill: none;
+    stroke: orange;
+    stroke-width: 2;
+}
+g > text {
+    text-anchor: middle;
+}
+path {
+    stroke: #000;
+    stroke-width: 2;
+}
+.code {
+    font-family: consolas, monospace;
+    font-size: 19px;
+    margin: 0;
+}
+.relation {
+    font-size: medium;
+}
+
+/*
+.incremental > * {
+    -moz-transition: opacity 0.5s;
+}
+*/
+
+/* The current item */
+.dimout.incremental > *[aria-selected] { opacity: 1; }
+.incremental > [aria-selected].flashing { opacity: 1; }
+
+
+/* previous items */
+.dimout.incremental > * { opacity: 0.6; }
+.incremental > .flashing { opacity: 0; }
+
+/* next */
+.dimout.incremental > *[aria-selected] ~ * { opacity: 0; } /* repeated for specificity's sake */
