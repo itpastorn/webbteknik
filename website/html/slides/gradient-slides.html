@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <title>Färgtoningar</title>
+  <link rel="stylesheet" href="../css/webbteknik-nu.css" />
+  <link href='http://fonts.googleapis.com/css?family=Handlee' rel='stylesheet' />
+  <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' />
+  <link href='../css/slides.css' rel='stylesheet' />
+  <link href='../css/dom-svg.css' rel='stylesheet' />
+  <style>
+  li { margin-bottom: 1em;
+  </style>
+</head>
+<body class="wide">
+<!-- One section is one slide -->
+
+<section>
+    <h1>Färgtoningar</h1>
+    <p style="background-image: linear-gradient(yellow, blue)">&nbsp;</p>
+</section>
+
+<section>
+    <p>Photoshop/Gimp/...</p>
+    <ul class="incremental dimout">
+      <li>Tidsödande</li>
+      <li>Extra nedladdning</li>
+      <li>Kan inte töjas</li>
+</section>
+
+<section>
+    <p>Webkits ursprungliga förslag</p>
+<pre><code class="css">
+-webkit-gradient(
+    linear,         /* Typ */
+    top left,       /* Start */
+    bottom left,    /* Slut */
+    color-stop(),
+    color-stop()
+)
+</code></pre>
+</section>
+
+<section>
+    <p>Nackdelar</p>
+    <ul class="incremental dimout">
+      <li>Mångordig (verbose)</li>
+      <li>Invecklad, krånglig syntax</li>
+    </ul>
+  </section>
+
+  <section>
+    <p>Förenklad syntax i Firefox</p>
+<pre><code class="css">
+-moz-linear-gradient()
+-moz-radial-gradient()
+-moz-repeating-linear-gradient()
+-moz-repeating-radial-gradient()
+</code></pre>
+  </section>
+
+  <section>
+    <p>Stöd för denna syntax</p>
+    <ul class="incremental dimout">
+      <li>Firefox (-moz-)</li>
+      <li>Safari, Chrome, iOS, Android, etc (-webkit-)</li>
+      <li>Opera 12 (-o-)</li>
+      <li>Internet Explorer 10 (-ms-) &ndash; Onödig!</li>
+    </ul>
+  </section>
+
+  <section>
+    <p>Problem med denna syntax</p>
+    <ul class="incremental dimout">
+      <li>Inte konskevent med annan CSS (vinklar)</li>
+      <li>Utrymme fanns för ytterligare förenkling</li>
+    </ul>
+  </section>
+
+  <section>
+    <p>Den slutliga W3C-syntaxen</p>
+    <ul class="incremental dimout">
+      <li>Firefox 16 (sommaren 2012)</li>
+      <li>Opera 12.1 (sensommar 2012)</li>
+      <li>Internet Explorer 10 (senhöst 2012)</li>
+      <li>Men ännu <em>inte</em> i Webkit (sägs oktober 2012)</li>
+    </ul>
+  </section>
+
+  <section>
+    <p>Länkar</p>
+    <ul class="incremental dimout">
+      <li><a href="http://caniuse.com/#search=gradient">caniuse.com/#search=gradient</a></li>
+      <li><a href="http://www.sitepoint.com/using-unprefixed-css3-gradients-in-modern-browsers/">www.sitepoint.com/using-unprefixed-css3-gradients-in-modern-browsers/</a></li>
+      <li><a href="https://developer.mozilla.org/en-US/docs/CSS/linear-gradient">developer.mozilla.org/en-US/docs/CSS/linear-gradient</a></li>
+      <li><a href="http://lea.verou.me/css3patterns/">lea.verou.me/css3patterns/</a></li>
+    </ul>
+  </section>
+
+      
+
+
+<div id="progress-bar"></div>
+<script src="../script/slides.js"></script>
+</body>
+</html>

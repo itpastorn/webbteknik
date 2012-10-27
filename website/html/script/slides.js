@@ -38,11 +38,10 @@ Dz.setupParams = function() {
 Dz.onkeydown = function(aEvent) {
     // Don't intercept keyboard shortcuts
     if (aEvent.altKey
-        || aEvent.ctrlKey
-        || aEvent.metaKey
-        || aEvent.shiftKey
-    ) {
-        return;
+      || aEvent.ctrlKey
+      || aEvent.metaKey
+      || aEvent.shiftKey) {
+      return;
     }
     if ( aEvent.keyCode == 37 // left arrow
         || aEvent.keyCode == 38 // up arrow
@@ -137,9 +136,9 @@ Dz.onkeydown = function(aEvent) {
   }
 
 
-Dz.getDetails = function(aIdx) {
+Dz.getNotes = function(aIdx) {
     var s = $("section:nth-of-type(" + aIdx + ")");
-    var d = s.$(".details");
+    var d = s.$("[role='note']");
     return d ? d.innerHTML : "";
 }
 
@@ -175,7 +174,7 @@ Dz.onmessage = function(aEvent) {
         this.postMsg(win, "CURSOR", this.idx + "." + this.step);
     }
     if (argv[0] === "GET_NOTES" && argc === 1) {
-        this.postMsg(win, "NOTES", this.getDetails(this.idx));
+        this.postMsg(win, "NOTES", this.getNotes(this.idx));
     }
 }
 
@@ -239,6 +238,7 @@ Dz.toggleContent = function() {
   }
 
   Dz.forward = function() {
+      console.log(this);
     if (this.idx >= this.slides.length &&
         this.step >= this.slides[this.idx - 1].$$('.incremental > *').length) {
         return;
