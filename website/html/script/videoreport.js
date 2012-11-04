@@ -96,6 +96,7 @@
                 }
                 catch (e) {
                     console.log("video_duration and starting point could not be set by fallback");
+                    
                 }
             }
         }
