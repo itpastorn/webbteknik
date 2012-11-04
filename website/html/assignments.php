@@ -97,14 +97,18 @@ if ( "//" == $baseref ) {
       <a href="practice-files/laxhjalpen/om-oss.html">Start av om-oss.html för Läxhjälpen</a>.
     </li>
   </ul>
+  <h3>Kapitel 13</h3>
+  <ul class="filelist">
+    <li>
+      <a href="practice-files/laxhjalpen/kontakt-mall.html">Start av kontakt-mall.html för Läxhjälpen</a>.
+    </li>
+  </ul>
   
   <!-- TODO 
      13A Facit
-     13B startfiler (kontaktformulär)
      
      14B Start av Nivo-slidern, med alla filer, inkl bilder
 
   <?php require "../includes/snippets/footer.php"; ?>
-  <script src="script/videoreport.js"></script>
 </body>
 </html>
