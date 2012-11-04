@@ -1,10 +1,12 @@
 html {
+    min-height: 100%;
 }
 body {
     font-family: sans-serif;
     width: 1000px;
     margin: auto;
     background-color: silver;
+    background-image: linear-gradient(to bottom, silver, fuchsia);
     text-align: center;
 }
 div {
@@ -15,15 +17,19 @@ div {
     background-color: white;
 }
 .g1 {
-    background-image: linear-gradient(yellow, blue);
-
+    background-image: linear-gradient(to top left, yellow, blue);
 }
 .g2 {
+    background-image: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
 }
 .g3 {
+    background-image: linear-gradient(to right, red, green 20%, violet);
 }
 .g4 {
+    background-image: linear-gradient(to right, red, red 20%, transparent 20%),
+                      linear-gradient(to bottom, orange, pink);
 }
 .g5 {
+    background-image: repeating-linear-gradient(to right, red, green 20px, red 40px);
 }
     

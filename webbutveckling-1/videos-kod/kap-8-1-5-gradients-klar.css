@@ -6,7 +6,7 @@ body {
     width: 1000px;
     margin: auto;
     background-color: silver;
-    background-image: linear-gradient(to top, maroon, silver);
+    background-image: linear-gradient(to bottom, silver, fuchsia);
     text-align: center;
 }
 div {
