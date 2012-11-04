@@ -4,7 +4,7 @@
  *
  */
 
-exit("STOP SPAMMING");
+exit("Sluta spamma");
 session_start();
 require_once '../../includes/loadfiles.php';
 
@@ -19,30 +19,53 @@ $dbh = keryxDB2_cx::get($dbx);
 
 header("Content-type: text/plain; charset=utf-8");
 
-$subject = "Strul och nytt på webbteknik.nu";
+$subject = "Videostrul fixat hoppas jag";
 
 echo "Påbörjar utskick\n"; 
 
 $text = <<<TXT
 
-Hej alla som använder webbteknik.nu
+Hej lärare med elever på webbteknik.nu
 
-På sidan arbetsplanering, så syns inte kapitel 9.
-En märklig bugg, som jag jobbar på att lösa.
+Under veckan som gick fick jag några rapporter om att
+videos inte laddade som de skulle. Jag tror att problemet är
+löst nu.
 
-Det ni främst missar är länken till en nyupplagd video om SVG:
+Skriver man
 
-http://webbteknik.nu/userpage.php?video=wu-lb-9-4-4
+www.webbteknik.nu
 
-Sidan med planering för kapitel 9 finns också om man
-skriver dess URL manuellt:
+så ska man bli omdirigerad till
 
-http://webbteknik.nu/joblist.php?book=wu1&c=9
+webbteknik.nu (utan www)
 
-Arbetsplanering för kapitel 11 och framåt saknas ännu i databasen.
+Detta funkade inte. Bara de första kapitlens video funkar med www i adressen.
 
-Men övningsfilen finns för uppgift 13B.
-http://webbteknik.nu/assignments.php
+
+Om det fortfarande strular, så hjälp mig helst åtgärda felet snabbt
+med en detaljerad felrapport:
+
+1. Exakt vilken video är det som inte kan ses?
+
+2. Kolla i konsollen vad som står där.
+
+3. På Chrome, kolla också "Nät". Jag behöver se HTTP-anropen.
+
+
+Elever som skrivit adressen med "www" kan behöva logga in på nytt.
+Inloggningen sker per domän.
+
+
+Snabb och svår teknisk förklaring för den hågade:
+
+Omdirigeringen slutade fungera häromveckan, då servern fick nya default-regler för mod_rewrite
+
+Så här ser regeln ut i min .htaccess-fil, där rad 1 nu har lagts till
+
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^www\.webbteknik\.nu$ [NC]
+RewriteRule ^(.*)$ http://webbteknik.nu/$1 [R=301,L]
+
 
 
 mvh
@@ -67,7 +90,7 @@ error_reporting(E_ALL);
 ini_set("display_errors", "1");
 echo "UTF-8\n";
 
-foreach ( $dbh->query($all_users) as $row) {
+foreach ( $dbh->query($teachers) as $row) {
 	$to = "{$row['firstname']} {$row['lastname']} <{$row['email']}>";
     if (mail($to, $subject, $text, $headers) ) {
         echo "{$to} kontaktad\n";
