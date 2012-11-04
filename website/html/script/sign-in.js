@@ -1,17 +1,30 @@
-(function () {
+(function (win, doc, undefined) {
     "use strict";
 	$("#browserid").click( function () {
-	   navigator.id.get(gotAssertion);
-	   return false;
+	    navigator.id.request({
+	        siteName: "webbteknik.nu"
+	    });
+	    // navigator.id.get(gotAssertion);
+	    return false;
+	});
+	navigator.id.watch({
+	    loggedInUser: undefined,
+	    onlogin: gotAssertion,
+	    onlogout: function () {
+	        console.log("Log out not yet implemented");
+	    }
 	});
 	function gotAssertion(assertion) {
+        console.log("Assertion: " + assertion);
+        console.log("Assertion length: " + assertion.length);
 	    if ( assertion !== null ) {
 	        $.ajax({
 	            type : 'POST',
 	            url  : 'api/login.php',
 	            data : { assertion: assertion },
 	            success : function (userdata, status, xhr) {
-	            	userdata = JSON.parse(userdata);
+	                console.log(userdata);
+                    userdata = JSON.parse(userdata);
 	                if ( userdata.email == null ) {
 	                    // Fail or logout
 	                    // loggedOut();
@@ -21,8 +34,8 @@
 	                }
 	            },
 	            error : function (res, status, xhr) {
-	                res = JSON.parse(res);
-	                alert("Login fel: " +  res.reason);
+	                res = JSON.parse(res.responseText);
+                    console.log("Login fel: " +  res.reason);
 	            }
 	        });
 	    } else {
@@ -46,4 +59,4 @@
 	    }
 	}
 	
-}());
+}(window, window.document));

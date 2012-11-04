@@ -14,6 +14,8 @@
 
 session_start();
 
+header('Content-type: application/json');
+
 /**
  * All needed files
  */
@@ -27,31 +29,52 @@ keryxDB2_cx::get($dbx);
 // Prepare data
 // Ajax (assertion) data sent as POST
 $assertion = filter_input(
-    INPUT_POST, 'assertion', FILTER_SANITIZE_ENCODED, FILTER_FLAG_STRIP_LOW|FILTER_FLAG_STRIP_HIGH
+    INPUT_POST, 'assertion', FILTER_UNSAFE_RAW, FILTER_FLAG_STRIP_LOW|FILTER_FLAG_STRIP_HIGH
 );
 
-if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != "off" ) {
-    $audience = "https://";
-} else {
+$FIREPHP->log('Assertion: ' . $assertion);
+$FIREPHP->log('Assertion length: ' . strlen($assertion));
+
+if (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == "off" ) {
     $audience = "http://";
+} else {
+    $audience = "https://";
 }
 $audience .= urlencode($_SERVER['SERVER_NAME']);
+$FIREPHP->log('audience: ' . $audience);
 
-$data = "assertion={$assertion}&audience={$audience}";
+$data = new StdClass();
+$data->assertion = $assertion;
+$data->audience  = $audience;
 
 // Do curl
 $url = 'https://verifier.login.persona.org/verify';
-$ch  = curl_init($url);
-curl_setopt($ch, CURLOPT_POST, 1);
-curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
+$ch  = curl_init();
+// curl_setopt($ch, CURLOPT_POST, true);
+// curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt_array($ch, array(
+    CURLOPT_URL            => $url,
+    CURLOPT_POST           => true,
+    CURLOPT_POSTFIELDS     => json_encode($data),
+    CURLOPT_HEADER         => false,
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_SSL_VERIFYPEER => false,
+    CURLOPT_FOLLOWLOCATION => false,
+    CURLOPT_HTTPHEADER => array('Content-Type: application/json')
+));
 $response = curl_exec($ch);
 curl_close($ch);
 
 // Check response
+if ( empty($response) ) {
+    $FIREPHP->log('Response is empty - assertion failed');
+    header("HTTP/1.0 401 Authentication is possible but has failed");
+    echo '{"reason" : "Assertion failed, verifying server returned empty content"}';
+    exit;
+}
 $response = json_decode($response);
-//$firephp->log($response);
+$FIREPHP->log('Response decoded: ' . $response);
 /*
 $response->status     - should be "okay"
 $response->email
