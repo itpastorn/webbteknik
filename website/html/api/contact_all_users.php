@@ -4,8 +4,7 @@
  *
  */
 
-exit("Sluta spamma");
-
+exit("STOP SPAMMING");
 session_start();
 require_once '../../includes/loadfiles.php';
 
@@ -20,16 +19,30 @@ $dbh = keryxDB2_cx::get($dbx);
 
 header("Content-type: text/plain; charset=utf-8");
 
-$subject = "Två videos till för kapitel 5";
+$subject = "Strul och nytt på webbteknik.nu";
+
+echo "Påbörjar utskick\n"; 
 
 $text = <<<TXT
 
 Hej alla som använder webbteknik.nu
 
-Jag tänkte kort säga att nu har det kommit upp ett par videos
-ytterligare. Efter att ha haft en del annat att stå i, så har
-jag nu tid att spela in fler, så räkna med att det kommer
-några till inom en vecka.
+På sidan arbetsplanering, så syns inte kapitel 9.
+En märklig bugg, som jag jobbar på att lösa.
+
+Det ni främst missar är länken till en nyupplagd video om SVG:
+
+http://webbteknik.nu/userpage.php?video=wu-lb-9-4-4
+
+Sidan med planering för kapitel 9 finns också om man
+skriver dess URL manuellt:
+
+http://webbteknik.nu/joblist.php?book=wu1&c=9
+
+Arbetsplanering för kapitel 11 och framåt saknas ännu i databasen.
+
+Men övningsfilen finns för uppgift 13B.
+http://webbteknik.nu/assignments.php
 
 
 mvh
