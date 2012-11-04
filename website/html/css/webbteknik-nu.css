@@ -98,7 +98,6 @@ html {
     background-color: rgb(0, 175,65);
     background-image: -webkit-linear-gradient(to bottom, hsl(142, 100%, 34%), hsl(142, 100%, 80%));
     background-image:    -moz-linear-gradient(to bottom, hsl(142, 100%, 34%), hsl(142, 100%, 80%));
-    background-image:     -ms-linear-gradient(to bottom, hsl(142, 100%, 34%), hsl(142, 100%, 80%));
     background-image:      -o-linear-gradient(to bottom, hsl(142, 100%, 34%), hsl(142, 100%, 80%));
     background-image:         linear-gradient(to bottom, hsl(142, 100%, 34%), hsl(142, 100%, 80%));
     min-height: 100%; /* Needed for gradients to appear */
@@ -151,7 +150,6 @@ a:active {
 :target {
     -webkit-animation: 3s yellowfade;
        -moz-animation: 3s yellowfade;
-        -ms-animation: 3s yellowfade;
          -o-animation: 3s yellowfade;
             animation: 3s yellowfade;
 }
@@ -245,14 +243,12 @@ iframe {
 .yellowfade {
     -webkit-animation: 3s yellowfade;
        -moz-animation: 3s yellowfade;
-        -ms-animation: 3s yellowfade;
          -o-animation: 3s yellowfade;
             animation: 3s yellowfade;
 }
 .greenfade {
     -webkit-animation: 5s greenfade;
        -moz-animation: 5s greenfade;
-        -ms-animation: 5s greenfade;
          -o-animation: 5s greenfade;
             animation: 5s greenfade;
 }
@@ -266,14 +262,6 @@ iframe {
     }
 }
 @-moz-keyframes yellowfade {
-    from {
-        background-color: hsl(58, 100%, 47%);
-    }
-    to {
-        background-color: transparent;
-    }
-}
-@-ms-keyframes yellowfade {
     from {
         background-color: hsl(58, 100%, 47%);
     }
@@ -326,20 +314,6 @@ iframe {
         background-color: transparent;
     }
 }
-@-ms-keyframes greenfade {
-    from {
-        background-color: hsl(142, 100%, 50%);
-    }
-    20% {
-        background-color: transparent;
-    }
-    40% {
-        background-color: hsl(142, 100%, 50%);
-    }
-    to {
-        background-color: transparent;
-    }
-}
 @-o-keyframes greenfade {
     from {
         background-color: hsl(142, 100%, 50%);
@@ -378,14 +352,6 @@ iframe {
     }
 }
 @-moz-keyframes redfade {
-    from {
-        background-color: hsl(10, 100%, 47%);
-    }
-    to {
-        background-color: transparent;
-    }
-}
-@-ms-keyframes redfade {
     from {
         background-color: hsl(10, 100%, 47%);
     }
@@ -463,7 +429,6 @@ a[href*="w3.org"]:after {
     font-style: italic;
     -webkit-animation: 2s redfade;
        -moz-animation: 2s redfade;
-        -ms-animation: 2s redfade;
          -o-animation: 2s redfade;
             animation: 2s redfade;
 }
@@ -734,7 +699,6 @@ hr.todo {
     outline: 2px solid hsl(359, 60%, 47%);
     -webkit-animation: 2s redfade;
        -moz-animation: 2s redfade;
-        -ms-animation: 2s redfade;
          -o-animation: 2s redfade;
             animation: 2s redfade;
     /* TODO add ARIA */
