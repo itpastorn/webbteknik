@@ -44,7 +44,7 @@ $audience .= urlencode($_SERVER['SERVER_NAME']);
 $FIREPHP->log('audience: ' . $audience);
 
 $data = new StdClass();
-$data->assertion = $assertion;
+$data->assertion = urlencode($assertion);
 $data->audience  = $audience;
 
 // Do curl
@@ -59,21 +59,27 @@ curl_setopt_array($ch, array(
     CURLOPT_POSTFIELDS     => json_encode($data),
     CURLOPT_HEADER         => false,
     CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_SSL_VERIFYPEER => true,
-    CURLOPT_SSL_VERIFYHOST => 2,
-    CURLOPT_FOLLOWLOCATION => false,
-    CURLOPT_HTTPHEADER => array('Content-Type: application/json')
+    // CURLOPT_SSL_VERIFYPEER => true,
+    // CURLOPT_SSL_VERIFYHOST => 2,
+    // CURLOPT_FOLLOWLOCATION => false,
+    // CURLINFO_HEADER_OUT    => true,
+    // CURLOPT_CAINFO         => '/etc/ssl/certs/ca-bundle.crt', 
+    CURLOPT_HTTPHEADER     => array('Content-Type: application/json')
 ));
 $response = curl_exec($ch);
-curl_close($ch);
 
 // Check response
 if ( empty($response) ) {
+	$info = curl_getinfo($ch);
     $FIREPHP->log('Response is empty - assertion failed');
+    foreach ($info as $ki => $ii) {
+        $FIREPHP->log($ki . " => " . $ii);
+    }
     header("HTTP/1.0 401 Authentication is possible but has failed");
     echo '{"reason" : "Assertion failed, verifying server returned empty content"}';
     exit;
 }
+curl_close($ch);
 $response = json_decode($response);
 $FIREPHP->log('Response decoded: ' . $response);
 /*
