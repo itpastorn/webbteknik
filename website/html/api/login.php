@@ -67,20 +67,23 @@ $response = curl_exec($ch);
 
 // Check response
 if ( empty($response) ) {
-	$info = curl_getinfo($ch);
+    $info = curl_getinfo($ch);
     $FIREPHP->log('Response is empty - assertion failed');
     $FIREPHP->log(curl_error($ch));
     foreach ($info as $ki => $ii) {
-    	if ( is_array($ii) ) {
-    	    $ii = '(array)';
-    	}
-        $FIREPHP->log($ki . " => " . $ii);
+        if ( is_array($ii) ) {
+            $FIREPHP->log($ki . " => array. Size: " . count($ii));
+            foreach ($ii as $ki2 => $ii2) {
+                $FIREPHP->log($ki2 . " => " . $ii2);
+            }
+        } else {
+            $FIREPHP->log($ki . " => " . $ii);
+        }
     }
     header("HTTP/1.0 401 Authentication is possible but has failed");
     echo '{"reason" : "Assertion failed, verifying server returned empty content"}';
     exit;
 }
-curl_close($ch);
 $FIREPHP->log('Response decoded: ' . $response);
 $response = json_decode($response);
 /*
@@ -119,6 +122,20 @@ if ( $response->status === "okay" ) {
 }
 
 // Assertion not OK - Why...?
+$FIREPHP->log(curl_error($ch));
+$info = curl_getinfo($ch);
+foreach ($info as $ki => $ii) {
+    if ( is_array($ii) ) {
+        $FIREPHP->log($ki . " => array. Size: " . count($ii));
+        foreach ($ii as $ki2 => $ii2) {
+            $FIREPHP->log($ki2 . " => " . $ii2);
+        }
+    } else {
+        $FIREPHP->log($ki . " => " . $ii);
+    }
+}
+curl_close($ch);
+
 $userdata             = new StdClass();
 $userdata->email      = null;
 $userdata->privileges = 0;
