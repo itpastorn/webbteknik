@@ -24,7 +24,8 @@
 	            data : { assertion: assertion },
 	            success : function (userdata, status, xhr) {
 	                console.log(userdata);
-                    userdata = JSON.parse(userdata);
+                    // userdata = JSON.parse(userdata);
+	                // Already interpreted as an object
 	                if ( userdata.email == null ) {
 	                    // Fail or logout
 	                    // loggedOut();
@@ -34,7 +35,7 @@
 	                }
 	            },
 	            error : function (res, status, xhr) {
-	                res = JSON.parse(res.responseText);
+	                // res = JSON.parse(res.responseText);
                     console.log("Login fel: " +  res.reason);
 	            }
 	        });

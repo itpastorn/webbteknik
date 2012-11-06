@@ -50,20 +50,17 @@ $data->audience  = $audience;
 // Do curl
 $url = 'https://verifier.login.persona.org/verify';
 $ch  = curl_init();
-// curl_setopt($ch, CURLOPT_POST, true);
-// curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt_array($ch, array(
     CURLOPT_URL            => $url,
     CURLOPT_POST           => true,
     CURLOPT_POSTFIELDS     => json_encode($data),
-    CURLOPT_HEADER         => false,
     CURLOPT_RETURNTRANSFER => true,
-    // CURLOPT_SSL_VERIFYPEER => true,
-    // CURLOPT_SSL_VERIFYHOST => 2,
-    // CURLOPT_FOLLOWLOCATION => false,
-    // CURLINFO_HEADER_OUT    => true,
-    // CURLOPT_CAINFO         => '/etc/ssl/certs/ca-bundle.crt', 
+    CURLOPT_HEADER         => false,
+    CURLOPT_SSL_VERIFYPEER => true,
+    CURLOPT_SSL_VERIFYHOST => 2,
+    CURLOPT_FOLLOWLOCATION => false,
+    CURLINFO_HEADER_OUT    => true,
+    CURLOPT_CAINFO         => '/etc/ssl/certs/ca-bundle.crt', 
     CURLOPT_HTTPHEADER     => array('Content-Type: application/json')
 ));
 $response = curl_exec($ch);
@@ -72,7 +69,11 @@ $response = curl_exec($ch);
 if ( empty($response) ) {
 	$info = curl_getinfo($ch);
     $FIREPHP->log('Response is empty - assertion failed');
+    $FIREPHP->log(curl_error($ch));
     foreach ($info as $ki => $ii) {
+    	if ( is_array($ii) ) {
+    	    $ii = '(array)';
+    	}
         $FIREPHP->log($ki . " => " . $ii);
     }
     header("HTTP/1.0 401 Authentication is possible but has failed");
@@ -80,8 +81,8 @@ if ( empty($response) ) {
     exit;
 }
 curl_close($ch);
-$response = json_decode($response);
 $FIREPHP->log('Response decoded: ' . $response);
+$response = json_decode($response);
 /*
 $response->status     - should be "okay"
 $response->email
@@ -118,7 +119,13 @@ if ( $response->status === "okay" ) {
 }
 
 // Assertion not OK - Why...?
-echo '{"email" : null, "privileges": 0, "reason" : "'. $response->status . '"}';
+$userdata             = new StdClass();
+$userdata->email      = null;
+$userdata->privileges = 0;
+$userdata->reason     = $response->reason;
+$userdata->status     = $response->status;
+
+echo json_encode($userdata);
 
 /*
  * How to register
