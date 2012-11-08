@@ -35,6 +35,7 @@ $assertion = filter_input(
 $FIREPHP->log('Assertion: ' . $assertion);
 $FIREPHP->log('Assertion length: ' . strlen($assertion));
 
+
 if (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == "off" ) {
     $audience = "http://";
 } else {
@@ -44,7 +45,9 @@ $audience .= urlencode($_SERVER['SERVER_NAME']);
 $FIREPHP->log('audience: ' . $audience);
 
 $data = new StdClass();
-$data->assertion = urlencode($assertion);
+// $data->assertion = urlencode($assertion);
+// URL-encoding does not work, it turns the mandatory tilde int %7E which makes the operation fail
+$data->assertion = $assertion;
 $data->audience  = $audience;
 
 // Do curl
