@@ -74,7 +74,7 @@ if ( "//" == $baseref ) {
   <h3>Kapitel 9</h3>
   <ul class="filelist">
     <li>
-      <a href="practice-files/kap-9-b.svg">9A SVG start</a>.<br />
+      <a href="practice-files/kap-9-b.html">9A SVG start</a>.<br />
       <a href="http://jsbin.com/imaquk/2/edit" target="_blank">9A på JSBin (öppnas i ny flik)</a>.
     </li>
   </ul>

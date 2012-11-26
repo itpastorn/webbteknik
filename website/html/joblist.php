@@ -45,11 +45,12 @@ if ( empty($chapter) ) {
 }
 
 // All chapters that have jobs in the chosen book
-$sql  = "SELECT DISTINCT chapter FROM `joblist` WHERE bookID = :bookID";
+$sql  = "SELECT DISTINCT chapter FROM `joblist` WHERE bookID = :bookID ORDER BY chapter";
 $stmt = $dbh->prepare($sql);
 $stmt->bindParam(':bookID', $bookID);
 $stmt->execute();
 $list_of_chapters = '';
+// TODO: Must not break if chapter is 0 or NULL
 while ( $c = $stmt->fetchColumn() ) {
     $list_of_chapters .= <<<LI
       <li><a href="{$_SERVER['SCRIPT_NAME']}?book={$bookID}&c={$c}">Kapitel {$c}</a></li>
