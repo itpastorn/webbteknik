@@ -1,0 +1,36 @@
+    div {
+        height: 500px;
+        width: 900px;
+        margin: auto;
+        background-color: white;
+    }
+    .outer {
+        border: 10px solid black;             /* Påverkr inre div marginal */
+    }
+    .inner {
+        background-color: navajowhite;       /* Gör den synlig - visa i 3D verktyget ("tilt open") att de ligger ovanpå varandra */
+
+        width: 50%;                          /*  1 */
+        height: 50%;                         /*  1 */
+        margin: 10% auto;                    /*  2 */
+        /*outline: 10px solid red;*/         /*  3  Flyttar sig inte - i marginalen, Nämn att den skulle ha täckt intilliggande saker */
+        box-shadow: 0 0 10px 20px navy;      /*  4  Också i marginalen */
+                                             /*  5  Stäng provisoriskt av border på outer med utvecklingsverktyget
+                                                    = marginalen kollapsas -> Yttre div flyttar ner, marginal från inre sticker ut */
+        padding: 50px;                       /*  6  Gör boxen större, men påverkar inte placeringen */
+                                             /*  7  Sätt på border på outer igen */
+        border-width: 30px;                  /*  8  Gör boxen större */
+                                             /*  9  Nämn IE5 och quirks mode - enklare matte... (Du vill ändå inte vara där!) */
+    }
+    * {
+        -moz-box-sizing: border-box;         /* 10 */
+             box-sizing: border-box;         /* 10    Ej i MSIE 6 och 7, Safari <= 5 kräver webkit-prefix */
+    }
+    /* 
+      11. Visa boxarna med min SVG-förklaring
+      12. Inspektera boxarna i utvecklingsverktyget
+      13. Inspektera boxarna i Firebug - se extra info i form av stödlinjer (offset)
+      14. Se offset med MSIE
+      15. Nämn Opera, Chrome och Safari
+    */
+

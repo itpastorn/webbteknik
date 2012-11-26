@@ -1,0 +1,28 @@
+    div {
+        height: 600px;
+        width: 900px;
+        margin: auto;
+        background-color: white;
+        border: 1px solid black;             /* 3 + 4=bort + 7=åter förklarar "kollapsande" marginaler */
+        /* padding: 0.01px; */               /* 4 + 5=bort          förklarar "kollapsande" marginaler */
+        /* outline: 10px solid red; */       /* 6                   Inga kollapsanade marginaler, men inre diven sticker ut */
+    }
+    .inner {
+        width: 50%;                          /*  1 */
+        height: 50%;                         /*  1 */
+        /*outline: 10px solid red;*/         /*  2 + 11=bort  Nämn att den skulle ha täckt intilliggande saker */
+        margin: 10% auto;                    /*  2b + 2c=auto */
+        padding: 50px;                       /* 8 */
+        border-width: 30px;                  /* 9 */
+        box-shadow: 20px 20px 20px navy;     /* 10 - steg för steg (skugga utanför boxen, men inom outline (I Firefox) */
+        -moz-box-sizing: border-box;         /* 11 */         
+             box-sizing: border-box;         /* 11    Ej i MSIE 6 och 7, Safari <= 5 kräver webkit-prefix */
+    }
+    /* 
+      12. Visa boxarna med min SVG-förklaring
+      13. Inspektera boxarna i 3D (Firefox) - man ser hur boxarna ligger ovanpå varandra
+      14. Inspektera boxarna i utvecklingsverktyget
+      15. Inspektera boxarna i Firebug - se extra info i form av stödlinjer (offset)
+      16. Nämn Opera, Chrome, Safari och MSIE (offset)
+    */
+

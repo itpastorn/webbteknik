@@ -1,0 +1,45 @@
+body {
+    width: 1000px;
+    min-height: 650px;
+    margin: auto;
+    font-family: "Liberation sans", Calibri, "Helvtica Neue", helvetica, arial, sans-serif;
+    background-color: hsl(142, 91%, 36%);
+}
+h1 {
+    text-align: center;
+}
+/* Det som gås igenom börjar här */
+div {
+    height: 500px;
+    width: 900px;
+    margin: auto;
+    background-color: white;
+}
+.outer {
+    border: 10px solid black;             /* Påverkar inre div marginal */
+}
+.inner {
+    background-color: navajowhite;       /* Gör den synlig */
+    width: 50%;
+    height: 50%;
+    margin: 10% auto;
+    /* outline: 10px solid red; */
+    box-shadow: 0 0 10px 20px navy;
+    padding: 50px;
+    border: 30px dotted darkgreen;
+}
+* {
+    -moz-box-sizing: border-box;
+         box-sizing: border-box;
+}
+/* IE 5 hade border-box
+Quirks mode
+Standards compliance mode
+DOCTYPE avgör
+*/
+
+
+
+
+
+

@@ -1,0 +1,35 @@
+html {
+    background-color: maroon;
+}
+body {
+    width: 1000px;
+    min-height: 650px;
+    margin: 2em auto;
+    font-family: "Liberation sans", Calibri, "Helvtica Neue", helvetica, arial, sans-serif;
+    background-color: navajowhite;
+}
+h1 {
+    text-align: center;
+    margin: 0;
+    height: 34px;
+    padding: 8px;
+}
+div {
+    height: 550px;
+    width: 900px;
+    margin: auto;
+    background-color: white;
+    background-image: url(maroon-dot.svg), url(navy-dot.svg);
+    background-repeat: no-repeat, repeat-x;
+    background-position: center, bottom;
+    background-size: 25%, auto;
+}
+ul {
+    padding: 2em;
+}
+li {
+    margin: 1em 2em;
+    font-size: xx-large;
+    list-style-image: url(maroon-arrow.svg);
+}
+

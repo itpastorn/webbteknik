@@ -1,0 +1,50 @@
+html {
+    background-color: maroon;
+}
+body {
+    width: 1000px;
+    min-height: 650px;
+    margin: auto;
+    font-family: "Liberation sans", Calibri, "Helvtica Neue", helvetica, arial, sans-serif;
+    background-color: navajowhite;
+}
+h1 {
+    text-align: center;
+    margin: 0;
+    height: 34px;
+    padding: 8px;
+}
+div {
+    height: 600px;
+    width: 900px;
+    margin: auto;
+    background-color: white;
+    /* Infoga här */
+    background-image: url(maroon-dot.svg), url(navy-dot.png);
+    background-repeat: no-repeat, repeat-x;
+    background-position: center, top left;
+    background-size: contain, auto;
+}
+ul {
+    padding: 2em;
+}
+li {
+    margin: 1em 2em;
+    font-size: xx-large;
+    /* Infoga här */
+    list-style-type: circle; /* disc, square, hebrew*/
+    list-style-image: url(maroon-arrow.svg);
+}
+/*
+  Förklara snabbt startvärdena
+  url(maroon-dot.png)
+  repeat
+  position center, top left, bottom right, bottom center, procent, (pixlar)
+  (Pong-spel? Background-image är fel teknik)
+  repeat ihop med positon
+  Kortformen (9.3.3)
+  Multipla bilder
+  
+  Ta bort bakgrund - ta fram listan
+  
+*/
