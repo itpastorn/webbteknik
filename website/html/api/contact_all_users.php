@@ -25,22 +25,32 @@ echo "Påbörjar utskick\n";
 
 $text = <<<TXT
 
-Hej alla som använder webbteknik.nu
+Hej alla lärare på webbteknik.nu
 
-Under natten så uppstod ett tekniskt strul på servern som jag hoppas ska vara åtgärdat nu.
+Jag får frågor om CD:n som hör till lärarhandledningen.
 
-Jag har kommunicerat med webbhotellet och hoppas inom några dagar fixa detta, så att det inte
-kan återupprepas.
+Jag har blivit försenad med den och ber om ursäkt. Mina
+första planer var att göra ett antal interaktiva demos
+till varje kapitel, men det tar helt enkelt för lång tid.
 
-Några nya filmer har kommit upp. Ni når dem via kapitel 9 och 10 i arbetsplaneringen.
+Det har också känts mer akut att åtgärda webbplatsen och göra 
+fler videofilmer till den. Nu är det över 700 användare (kul) och
+det innebär att varje uppdatering måste göras med stor försiktighet.
 
-Inloggningen ska förhoppningsvis vara enklare nu. Webbplatsen ska komma ihåg era inloggningar,
-så länge som ni är inloggad på Persona-systemet. Utloggningsfunktion, som efterlysts
-av somliga, är på G.
+Här kommer dock ett par saker som gjorts, fast några av er har sett
+dem förut:
 
-Skulle något nu strula, så hör av er. Som vanligt underlättas min felsökning om 
-ni berättar vilken webbläsare ni använder och vad som syns i konsollen när ni försöker
-göra något.
+http://webbteknik.nu/interactive/box-models.html
+http://webbteknik.nu/interactive/color-wheel.html
+
+
+Jag tar gärna emot tips på vad ni önskar se rent konkret
+som slides (typ PowerPoint).
+
+
+Titelskärmen för videon om SVG blev fel. Den säger att det är
+för bokavsnitt 1.0 och 1.1... Jag kommer vara på 
+"fel" dator ett par dagar, så detta fixas först i slutet på veckan.
 
 
 mvh
@@ -65,7 +75,7 @@ error_reporting(E_ALL);
 ini_set("display_errors", "1");
 echo "UTF-8\n";
 
-foreach ( $dbh->query($all_users) as $row) {
+foreach ( $dbh->query($teachers) as $row) {
 	$to = "{$row['firstname']} {$row['lastname']} <{$row['email']}>";
     if (mail($to, $subject, $text, $headers) ) {
         echo "{$to} kontaktad\n";
