@@ -63,7 +63,7 @@ curl_setopt_array($ch, array(
     CURLOPT_SSL_VERIFYHOST => 2,
     CURLOPT_FOLLOWLOCATION => false,
     CURLINFO_HEADER_OUT    => true,
-    CURLOPT_CAINFO         => '/etc/ssl/certs/ca-bundle.crt', 
+    /* CURLOPT_CAINFO         => '/etc/ssl/certs/ca-bundle.crt', */ 
     CURLOPT_HTTPHEADER     => array('Content-Type: application/json')
 ));
 $response = curl_exec($ch);
@@ -120,6 +120,7 @@ if ( $response->status === "okay" ) {
     }
     $_SESSION['user']     = $response->email;
     $_SESSION['userdata'] = $userdata;
+    $FIREPHP->log($_SESSION);
     echo json_encode($_SESSION['userdata']); // Send to receiving script
     exit;
 }

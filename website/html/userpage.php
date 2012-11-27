@@ -16,6 +16,7 @@
  */
 
 session_start();
+
 require_once '../includes/loadfiles.php';
 
 user::setSessionData();

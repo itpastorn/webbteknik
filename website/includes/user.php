@@ -13,38 +13,38 @@
 class user
 {
     // Constant used for bit based checks
-    /**
-     * Constant to reoresent non anonymous users, but with no account
-     */
     const LOGGEDIN = 1;
     /**
-     * Constant to represent users without a book, but with access to web materials
+     * Constant to represent non anonymous users, but with no account
      */
     const WEBONLY  = 3;
     /**
-     * Constant to represent users with a textbook
+     * Constant to represent users without a book, but with access to web materials
      */
     const TEXTBOOK = 7;
     /**
-     * Constant to represent users with a workbook
+     * Constant to represent users with a textbook
      */
     const WORKBOOK = 15;
     /**
-     * Constant to represent teachers
+     * Constant to represent users with a workbook
      */
     const TEACHER  = 31;
     /**
-     * Constant to represent admins (may add material)
+     * Constant to represent teachers
      */
     const ADMIN    = 63;
     /**
-     * Constant to represent superusers (me and JE)
+     * Constant to represent admins (may add material)
      */
     const SUPER    = 127;
     /**
-     * Constant to represent impossible level of authority, for tests
+     * Constant to represent superusers (me and JE)
      */
     const HYPER    = 255;
+    /**
+     * Constant to represent impossible level of authority, for tests
+     */
     
     /**
      * Extract session variables from JSON if they do not exist
@@ -54,6 +54,23 @@ class user
      */
     public static function setSessionData()
     {
+    	// URGENT message because of session breakage at Nexcess
+    	if ( empty($_SESSION) ) {
+    		header("Status: 500 Server error");
+    	    echo <<<MSG
+<!DOCTYPE html>
+<title>SERVER ERROR</title>
+<h1>SERVER ERROR</h1>
+<p><big><b>
+Webbplatsen ligger för närvarande nere.
+Serverfel gör att sessionsdata inte lagras på servern.
+Jag kommunicerar med webbhotellet och kommer meddela alla så
+fort detta åtgärdats. Tyvärr ligger felet utom min kontroll.
+<br><br>
+Lars Gunther
+MSG;
+    	}
+    	
         if ( isset($_SESSION['userdata']->email) ) {
             return true;
         }
@@ -92,9 +109,11 @@ class user
      * @param int $userlevel The user's actual level, leave empty for currently logged in user
      */
     public static function validate($req_level, $userlevel = null) {
+    	global $FIREPHP;
         if ( empty($userlevel) && isset($_SESSION['userdata']->privileges) ) {
             $userlevel = $_SESSION['userdata']->privileges;
         }
+    	// var_dump($SESSION); exit;
         return ($req_level & $userlevel) >= $req_level;
     }
     
