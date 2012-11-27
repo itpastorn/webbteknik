@@ -8,6 +8,8 @@
  */
 
 session_start();
+$_SESSION['not_empty'] = 1;
+
 require_once '../includes/loadfiles.php';
 
 user::setSessionData();

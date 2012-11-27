@@ -8,6 +8,7 @@
  */
 
 session_start();
+$_SESSION['not_empty'] = 1;
 
 /**
  * All needed files
