@@ -1,6 +1,6 @@
 <?php
 /**
- * Class definition for videos
+ * Class definition for flashcards
  * 
  * @author <gunther@keryx.se>
  * @version "Under construction 1"
@@ -10,17 +10,17 @@
  */
 
 /**
- * videos
+ * flashcards
  *
- * Videos available on the web site
+ * flashcards available on the web site
  */
-class data_videos extends items implements data
+class data_flashcards extends items implements data
 {
 
     /**
-     * The video url
+     * The flashcard url
      */
-    protected $videoUrl = null;
+    protected $flashcardUrl = null;
     
     /**
      * The start of SQL commands to fetch data for this object
@@ -28,21 +28,20 @@ class data_videos extends items implements data
      * Can be used to help build outside queries for 2nd param of loadAll method
      */
     const SELECT_SQL = <<<SQL
-        SELECT vid.videoname AS id, vid.title AS name, vid.bookID, books.booktitle, vid.chapter, bs.section AS bs_section, bs.title as bs_title
-        FROM videos AS vid
+        SELECT fs.setID AS id, fs.setname AS name, fs.bookID, fs.chapter, books.booktitle, bs.section AS bs_section, bs.title as bs_title
+        FROM flashcardsets AS fs
+        LEFT JOIN books ON (fs.bookID = books.bookID)
         LEFT JOIN booksections AS bs USING (booksectionID)
-        LEFT JOIN books ON (vid.bookID = books.bookID)
-        WHERE vid.acl < :privileges
-        ORDER BY ISNULL(vid.bookID) DESC, vid.bookID DESC, ISNULL(booksectionID), bs.sortorder
+        INNER JOIN flashcards ON (fs.setID = flashcards.setID)
+        GROUP BY fs.setID
+        ORDER BY ISNULL(fs.bookID) ASC, fs.bookID DESC, ISNULL(booksectionID), bs.sortorder
 SQL;
 
 
-    private function __construct($id, $name, $videoUrl)
+    private function __construct($id, $name, $flashcardUrl)
     {
         $this->id   = $id;
         $this->name = $name;
-        // $this->videoUrl  = 'fff' . $videoUrl2; // 'userpage.php?video=' . $name;
-        // $this->testing = "hej";
     }
     
     // Malfunctioning - using wrong SQL
@@ -73,7 +72,7 @@ SQL;
      */
     public function getUrl()
     {
-        return 'userpage/video/' . $this->id . '/';
+        return 'flashcards/' . $this->id . '/';
     }
     
     public static function isExistingId($id, PDO $dbh=null)
@@ -83,7 +82,7 @@ SQL;
             $dbh = keryxDB2_cx::get($dbx);
         }
         // TODO Validate single prop, before invoking DB
-        $sql  = "SELECT count(*) FROM videos where videoID = :id";
+        $sql  = "SELECT count(*) FROM flashcards where flashcardID = :id";
         $stmt = $dbh->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
@@ -91,7 +90,7 @@ SQL;
     }
 
     /**
-     * A function that lists all videos in a table
+     * A function that lists all flashcards in a table
      * 
      * If there is an URL, the item will contain a link
      * 
@@ -103,7 +102,7 @@ SQL;
     	$cur_book   = null;
     	$firstbook  = true;
         $tableHTML  = "<table class=\"resourcelisting blackborder zebra\">";
-        $tableHTML .= "<caption>Alla videofilmer</caption>\n";
+        $tableHTML .= "<caption>Alla flashcards</caption>\n";
         foreach ( $list as $item ) {
 
             $list_item = htmlspecialchars($item->getName());
@@ -122,14 +121,17 @@ SQL;
 	                $tableHTML .= "</tbody>\n";
 	            }
             	$cur_book   = $item->bookID;
+            	if ( empty($item->booktitle) ) {
+            	    $item->booktitle = "annat";
+            	}
                 $tableHTML .= <<<THEAD
                     <thead>
                       <tr>
-                        <th colspan="2">Videos till {$item->booktitle}</th>
+                        <th colspan="2">Flashcards till {$item->booktitle}</th>
                       </tr>
                       <tr>
                         <th>
-                          Videonamn
+                          flashcardnamn
                         </th>
                         <th>
                           Boksektion

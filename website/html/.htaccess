@@ -21,9 +21,10 @@ RewriteRule resources$          resources/             [R=301,NC,L]
 RewriteRule resources/([^/]+)$  resources/$1/          [R=301,NC,L]
 RewriteRule resources/(.*)/$    resources.php?what=$1  [NC,L]
 
-RewriteRule flashcards$             flashcards/            [R=301,NC,L]
-RewriteRule flashcards/$            flashcards.php         [NC,L]
-RewriteRule flashcards/set/(.*)$    flashcards.php?set=$1  [NC,L]
+RewriteRule flashcards$             resources/flashcards/   [R=301,NC,L]
+RewriteRule flashcards/$            resources/flashcards/   [R=301,NC,L]
+RewriteRule flashcards/([^/]+)$     flashcards/$1/          [R=301,NC,L]
+RewriteRule flashcards/(.*)/$       flashcards.php?set=$1   [NC,L]
 
 RewriteRule joblist$     joblist/     [R=301,NC,L]
 RewriteRule joblist/$    joblist.php  [NC,L]

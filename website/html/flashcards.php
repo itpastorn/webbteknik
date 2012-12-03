@@ -21,58 +21,13 @@ $dbh = keryxDB2_cx::get($dbx);
  * I flera set....?
  * 
  */
-/*
-$dbresult = array(
-    array(
-        'term'  => 'GPU',
-        'short' => 'Graphics Processing Unit',
-        'long'  => 'Grafikprocessor som gör att datorn kan rita komplexa 2D och 3D mönster, fonter (text) och genomskinliga effekter mycket snabbt.'
-    ),
-    array(
-        'term'  => 'RAM',
-        'short' => 'Random Access Memory',
-        'long'  => 'Datorns arbetsminne/ primärminne. Mycket snabb. Flyktigt dvs när strömmen bryts tappas informationen. 1-16 GB på moderna datorer.'
-    ),
-    array(
-        'term'  => 'CPU',
-        'short' => 'Central Processing Unit',
-        'long'  => 'Processorn. Utför beräkningar och kontrollerar dataflöden. Datorns <q>motor.</q>'
-    ),
-    array(
-        'term'  => 'USB',
-        'short' => 'Universal Serial Bus',
-        'long'  => 'Gränssnitt (kontakt) för att ansluta kringutrustning som mus, tangentbord, lagringsenheter, skrivare och mobiltelefoner.'
-    ),
-    array(
-        'term'  => 'SSD',
-        'short' => 'Solid State Drive',
-        'long'  => 'Flashminnesbaserad hårddisk, som har lägre latens (väntetid) än magnetiska diskar och drar mindre ström.'
-    ),
-    array(
-        'term'  => 'GUI',
-        'short' => 'Graphical User Interface',
-        'long'  => 'Användarmiljö som bygger på muspekare, ikoner, fönster och menyer.',
-    ),
-    array(
-        'term'  => 'CLI',
-        'short' => 'Command Line Interface',
-        'long'  => 'Användarmiljö som bygger på att kommandon skrivs i en texbaserad konsoll/terminal.'
-    )
-);
-$sql  = "INSERT INTO flashcards VALUES (NULL, :term, :short, :long, 'test')";
-$stmt = $dbh->prepare($sql);
-$stmt->bindParam(":term", $term);
-$stmt->bindParam(":short", $short);
-$stmt->bindParam(":long", $long);
 
-foreach ( $dbresult as $row ) {
-    list($term, $short, $long) = array($row['term'], $row['short'], $row['long']);
-    $stmt->execute();
-}
-exit;
-*/
-
-$sql  = "SELECT * FROM flashcards WHERE setID = :set";
+$sql  = <<<SQL
+    SELECT fc.*, fs.*, books.booktitle FROM flashcards AS fc
+    NATURAL JOIN flashcardsets AS fs
+    LEFT JOIN books ON ( fs.bookID = books.bookID )
+    WHERE fc.setID = :set
+SQL;
 if ( empty($_GET['norand']) ) {
 	$sql .= " ORDER BY RAND()";
 } else {
@@ -87,7 +42,7 @@ $stmt->execute();
 $dbresult = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $list = '';
-$i = 0;
+$i    = 0;
 foreach ( $dbresult as $row ) {
     if ( $i === 0 ) {
     	$class = ' class="activecard"';
@@ -103,6 +58,19 @@ foreach ( $dbresult as $row ) {
     }
     $list .= "</dd>\n";
     $i++;
+}
+
+if ( 0 == $i ) {
+    // empty set
+    $setinfo = "Tomt set = inga sådana flashcards finns.";
+    $list    = '';
+} else {
+	if (  empty($row['booktitle']) ) {
+	    $btitle = "";
+	} else {
+	    $btitle = " för boken {$row['booktitle']}";
+	}
+    $setinfo = "{$row['setname']}{$btitle}";
 }
 
 // Preparing for mod_rewrite, set base-element
@@ -123,6 +91,7 @@ if ( "//" == $baseref ) {
 <body>
   <h1>Flashcards hjälper dig öva in termer</h1>
   <?php require "../includes/snippets/mainmenu.php"; ?>
+  <h2><?php echo $setinfo; ?></h2>
   <div class="usertip" data-tipname="explainFlashcards">
     <p>Klicka på kortet för att vända det eller tryck på mellanslagstangenten.</p>
     <p>Kräver  Firefox 10 eller senare, Chrome eller Safari.</p>
@@ -145,6 +114,9 @@ echo $list;
     <button id="goto_prevcard" disabled>Föregående</button>
     <span id="curnum">1</span>/<span id="totnum"><?php echo count($dbresult); ?></span>
     <button id="goto_nextcard">Nästa</button>
+  </p>
+  <p>
+    <a href="resources/flashcards/">Alla flashcards</a>
   </p>
   <?php require "../includes/snippets/footer.php"; ?>
   <script src="./script/flashcards.js"></script>

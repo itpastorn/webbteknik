@@ -33,9 +33,9 @@ if ( "//" == $baseref ) {
 
 // Type of resource
 $r_types =  array(
-    'links' => 'länkar',
-    'videos' => 'videos'
-    // 'flashcards', etc
+    'flashcards' => 'flashcards',
+    'links'      => 'länkar',
+    'videos'      => 'videos'
 );
 
 $c_type = filter_input(INPUT_GET, 'what', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
@@ -50,11 +50,29 @@ if ( empty($r_types[$c_type]) ) {
    
 }
 
-require "data/videos.php";
+// @improv - smarter paradign than switch
+switch ( $c_type ) {
+	case "flashcards":
+        include "data/flashcards.php";
+        $resources      = data_flashcards::loadAll($dbh, false, array('privileges' => $_SESSION['userdata']->privileges));
+        $resource_table = data_flashcards::makeTable($resources);
+        break;
+	case "links":
+        include "data/links.php";
+        $resources      = data_links::loadAll($dbh, false, array('privileges' => $_SESSION['userdata']->privileges));
+        $resource_table = data_links::makeTable($resources);
+        break;
+	case "videos":
+        include "data/videos.php";
+        $resources      = data_videos::loadAll($dbh, false, array('privileges' => $_SESSION['userdata']->privileges));
+        $resource_table = data_videos::makeTable($resources);
+        break;
+    default:
+        exit("You really never, ever should see this error...");
+    
+}
 
 
-$resources   = data_videos::loadAll($dbh, false, array('privileges' => $_SESSION['userdata']->privileges));
-$video_table = data_videos::makeTable($resources);
 
 // Preparing for mod_rewrite, set base-element
 // TODO: Make this generic!
@@ -77,7 +95,7 @@ if ( "//" == $baseref ) {
   <?php require "../includes/snippets/mainmenu.php"; ?>
 
 <?php
-echo $video_table;
+echo $resource_table;
 ?>
 
   <?php require "../includes/snippets/footer.php"; ?>

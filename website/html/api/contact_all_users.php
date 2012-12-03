@@ -38,6 +38,13 @@ Det finns några filmer som inte dyker upp om man bläddrar med föregående
 och nästa knapparna. Dessa kommer man alltså åt via denna nya sida (eller
 via sidan Arbetsplanering).
 
+Dessutom finns det en sida där alla hittills gjorda set med flashcards
+visas:
+
+http://webbteknik.nu/resources/flashcards/
+
+Där finns också några set som kan användas för kursen Datorteknik 1.
+
 Nu är också alla länkar förenklade. Det borde ni egentligen inte
 märka utom genom att webbläsaren markerar sidor ni redan besökt
 som obesökta (med länkens färg).
