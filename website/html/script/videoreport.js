@@ -7,17 +7,14 @@
 
     // Next unseen video button
     $("#nextunseen").removeAttr("disabled").on('click', function () {
-        // Remove all get-params from current location
-        var current_href = win.location.href.match(/([^?]*)(\?.*)*/)[1]
-        win.location.href = current_href;
+        win.location.href = "userpage/";
     });
 
     // Goto previous and next
     $(".prevnextvideo:not([data-vidnum='none'])").removeAttr("disabled").on('click', function () {
         var show_video_number = $(this).data('vidnum');
-        // Remove all get-params from current location
-        var current_href = win.location.href.match(/([^?]*)(\?.*)*/)[1]
-        win.location.href = current_href + "?vidnum=" + show_video_number;
+        var bookid            = $(this).data('bookid');
+        win.location.href = "userpage/" + bookid + "/vidnum/" + show_video_number;
     });
     
     var vid = doc.querySelector("#videocontainer video");
@@ -357,6 +354,9 @@
             send_video_report();
             video_reporting = false;
             
+            $('#unskipvid').removeAttr("disabled");
+            video_progress.html("Status för denna video: " + status_string["skipped"]);
+            
             // Load next video = page reload minus parameters
             // win.location.reload();
     };
@@ -377,6 +377,7 @@
             
             // Re-register event listener
             $('#skipvid').removeAttr("disabled").on('click', manual_skip);
+            video_progress.html("Status för denna video: " + status_string["unset"]);
         });
     }
     

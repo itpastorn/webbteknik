@@ -8,7 +8,7 @@
  * @package webbteknik.nu
  * 
  * @todo ACL to videos based on privileges and what book it is related to
- * @todo Make generic resource page
+ * @todo Add support for other books than "wu1"
  * 
  * @todo Remove order from videos table in DB and use joblist instead
  * 
@@ -142,8 +142,8 @@ SQL;
     }
     
 } elseif (isset($_GET['vidnum']) ) {
-    // TODO: Change to use job number, video table should not have any suggested order
     // Problem with that is that we can not do+/- 1 to get previous and next
+    // TODO Add parameter for what book one has chosen
     $vidnum = (int)$_GET['vidnum'];
     $sql = <<<SQL
         SELECT v.*, jl.joblistID, bs.section FROM videos AS v
@@ -352,8 +352,8 @@ if ( 'webbteknik.nu' == $_SERVER['SERVER_NAME']) {
       <button id="skipvid" disabled>Markera videon <br /> som <b>sedd</b></button>
       <button id="unskipvid" disabled>Markera videon <br /> som <b>osedd</b></button>
       <button id="nextunseen" disabled"><b>Första osedda</b> video</button>
-      <button class="prevnextvideo" disabled data-vidnum="<?php echo $curvid['next']; ?>"><b>Nästa</b> video</button>
-      <button class="prevnextvideo" disabled data-vidnum="<?php echo $curvid['prev']; ?>"><b>Föregående</b> video</button>
+      <button class="prevnextvideo" disabled data-bookID="<?php echo $curvid['bookID']; ?>" data-vidnum="<?php echo $curvid['next']; ?>"><b>Nästa</b> video</button>
+      <button class="prevnextvideo" disabled data-bookID="<?php echo $curvid['bookID']; ?>" data-vidnum="<?php echo $curvid['prev']; ?>"><b>Föregående</b> video</button>
     </div>
   </div>
   <p class="unobtrusive">

@@ -13,9 +13,6 @@
       <li><a href="http://www.skolportalen.se/">Skolportalen</a></li>
       <!-- toggle explanations on -->
     </ul>
-    <pre>
-      <?php var_dump($_GET); var_dump($_SERVER); ?>
-    </pre>
   </footer>
   <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
   <script src="script/common.js"></script>
