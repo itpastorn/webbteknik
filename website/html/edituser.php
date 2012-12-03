@@ -81,6 +81,13 @@ if ( $userdata->firstname ) {
 // HTML safe - move to class
 $first_name = $userdata->firstname;
 $last_name  = $userdata->lastname;
+
+// Preparing for mod_rewrite, set base-element
+// TODO: Make this generic!
+$baseref = dirname(htmlspecialchars($_SERVER['SCRIPT_NAME'])) . "/";
+if ( "//" == $baseref ) {
+    $baseref = "/";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

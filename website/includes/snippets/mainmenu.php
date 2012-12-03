@@ -21,14 +21,14 @@ if ( isset($_SESSION['userdata']) ) {
 	    $lastname = $_SESSION['userdata']->lastname;
 	}
     $userdata = <<<USERDATA
-    <a href="edituser.php" title="Redigera användaruppgifter" class="{$userlink_class}">
+    <a href="edituser/" title="Redigera användaruppgifter" class="{$userlink_class}">
       {$firstname} {$lastname} ({$_SESSION['userdata']->email})
     </a>
 USERDATA;
 }
 $teacherpage = '';
 if ( user::validate(user::TEACHER ) ) {
-    $teacherpage = '<li><a href="teacherpage.php">Lärarsida</a></li>';
+    $teacherpage = '<li><a href="teacherpage/">Lärarsida</a></li>';
 }
 ?>
 
@@ -40,10 +40,11 @@ echo $userdata;
     </p>
     <ul>
       <li><a href="./">Startsidan</a></li>
-      <li><a href="userpage.php">Arbetssida</a></li>
-      <li><a href="joblist.php">Arbetsplanering</a></li>
-      <li><a href="assignments.php">Övningsuppgifter</a></li>
-      <li><a href="flashcards.php">Flaschards (demo)</a></li>
+      <li><a href="userpage/">Arbetssida</a></li>
+      <li><a href="joblist/">Arbetsplanering</a></li>
+      <li><a href="resources/videos/">Videos</a></li>
+      <li><a href="assignments/">Övningsuppgifter</a></li>
+      <li><a href="flashcards/">Flaschards (demo)</a></li>
       <?php echo $teacherpage; ?>
     </ul>
     <!--p>

@@ -8,17 +8,42 @@ RewriteRule ^(.*)$ http://webbteknik.nu/$1 [R=301,L]
 RewriteCond %{HTTP_HOST} ^wt.book$ [NC]
 RewriteBase /website/html
 
-RewriteRule userpage$                    userpage/                      [R=301,NC,L]
-RewriteRule userpage/$                   userpage.php                   [NC,L]
-RewriteRule userpage/(.*)/vidnum/(.*)$   userpage.php?book=$1&vidnum=$2 [NC,L]
-RewriteRule userpage/video/(.*)$         userpage.php?video=$1          [NC,L]
+# All URL:s should end with a trailing slash
 
-RewriteRule resources$         resources/             [R=301,NC,L]
-RewriteRule resources/(.*)$    resources.php?what=$1  [NC,L]
+RewriteRule userpage$                      userpage/                      [R=301,NC,L]
+RewriteRule userpage/$                     userpage.php                   [NC,L]
+RewriteRule userpage/(.*)/vidnum/([^/]+)$  userpage/$1/vidnum/$2/         [R=301,NC,L]
+RewriteRule userpage/(.*)/vidnum/(.*)/$    userpage.php?book=$1&vidnum=$2 [NC,L]
+RewriteRule userpage/video/([^/]+)$        userpage/video/$1/             [R=301,NC,L]
+RewriteRule userpage/video/(.*)/$          userpage.php?video=$1          [NC,L]
+
+RewriteRule resources$          resources/             [R=301,NC,L]
+RewriteRule resources/([^/]+)$  resources/$1/          [R=301,NC,L]
+RewriteRule resources/(.*)/$    resources.php?what=$1  [NC,L]
 
 RewriteRule flashcards$             flashcards/            [R=301,NC,L]
-RewriteRule flashcards/set=(.*)$    flashcards.php?set=$1  [NC,L]
+RewriteRule flashcards/$            flashcards.php         [NC,L]
+RewriteRule flashcards/set/(.*)$    flashcards.php?set=$1  [NC,L]
 
+RewriteRule joblist$     joblist/     [R=301,NC,L]
+RewriteRule joblist/$    joblist.php  [NC,L]
+
+RewriteRule joblist$                    joblist/                   [R=301,NC,L]
+RewriteRule joblist/$                   joblist.php                [NC,L]
+RewriteRule joblist/(.+)/([0-9]+)$      joblist/$1/$2/             [R=301,NC,L]
+RewriteRule joblist/(.+)/([0-9]+)/$     joblist.php?book=$1&c=$2   [NC,L]
+
+RewriteRule assignments$     assignments/     [R=301,NC,L]
+RewriteRule assignments/$    assignments.php  [NC,L]
+
+RewriteRule edituser$     edituser/     [R=301,NC,L]
+RewriteRule edituser/$    edituser.php  [NC,L]
+
+RewriteRule sign-in$     sign-in/     [R=301,NC,L]
+RewriteRule sign-in/$    sign-in.php  [NC,L]
+
+RewriteRule teacherpage$     teacherpage/     [R=301,NC,L]
+RewriteRule teacherpage/$    teacherpage.php  [NC,L]
 
 
 # Notes

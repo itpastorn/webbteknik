@@ -53,7 +53,7 @@ $list_of_chapters = '';
 // TODO: Must not break if chapter is 0 or NULL
 while ( $c = $stmt->fetchColumn() ) {
     $list_of_chapters .= <<<LI
-      <li><a href="{$_SERVER['SCRIPT_NAME']}?book={$bookID}&c={$c}">Kapitel {$c}</a></li>
+      <li><a href="joblist/{$bookID}/{$c}/">Kapitel {$c}</a></li>
 
 LI;
 }
@@ -94,6 +94,14 @@ $stmt->bindParam(':bookID', $bookID);
 $stmt->bindParam(':chapter', $chapter);
 $stmt->execute();
 $jobs = $stmt->fetchAll();
+
+// Preparing for mod_rewrite, set base-element
+// TODO: Make this generic!
+$baseref = dirname(htmlspecialchars($_SERVER['SCRIPT_NAME'])) . "/";
+if ( "//" == $baseref ) {
+    $baseref = "/";
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="sv">
@@ -173,7 +181,7 @@ $jobs = $stmt->fetchAll();
         echo "<td>";
         if ( $curjob['what_to_do'] == 'video' ) {
             // echo "<script>console.log('{$curjob['joblistID']} : {$curjob['percentage_complete']}')</script>\n";
-            echo 'Video: <a href="userpage.php?video=' . $curjob['where_to_do_it'] . '">';
+            echo 'Video: <a href="userpage/video/' . $curjob['where_to_do_it'] . '/">';
             echo $curjob['title'] . '</a>';
         } else {
             // Self contained info about task in DB

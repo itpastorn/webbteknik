@@ -74,7 +74,7 @@ SQL;
      */
     public function getUrl()
     {
-        return 'userpage.php?video=' . $this->id;
+        return 'userpage/video/' . $this->id;
     }
     
     public static function isExistingId($id, PDO $dbh=null)

@@ -269,7 +269,7 @@ if ( empty($matching_flashcard_sets) ) {
 } else {
     $flashcards = '<ul class="tightparagraph">' . "\n";
     foreach ( $matching_flashcard_sets as $fset ) {
-        $flashcards .= "<li><a href=\"flashcards.php?set={$fset['setID']}\">{$fset['setname']}</a></li>\n";
+        $flashcards .= "<li><a href=\"flashcards/set/{$fset['setID']}/\">{$fset['setname']}</a></li>\n";
     }
     $flashcards .= "</ul>\n";
 }

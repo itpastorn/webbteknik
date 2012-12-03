@@ -14,7 +14,7 @@
     $(".prevnextvideo:not([data-vidnum='none'])").removeAttr("disabled").on('click', function () {
         var show_video_number = $(this).data('vidnum');
         var bookid            = $(this).data('bookid');
-        win.location.href = "userpage/" + bookid + "/vidnum/" + show_video_number;
+        win.location.href = "userpage/" + bookid + "/vidnum/" + show_video_number + "/";
     });
     
     var vid = doc.querySelector("#videocontainer video");
