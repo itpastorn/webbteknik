@@ -1,60 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>RGB colors</title>
-  <style>
-    body {
-        width: 720px;
-        margin: auto;
-        font-family: sans-serif;
-        text-align: center;
-    }
-    svg {
-        margin-top: 2em;
-        background-color: #000;
-        border-radius: 10px;
-    }
-    circle {
-        stroke-width: 1;
-        fill: none;
-    }
-    #red {
-        fill: rgb(255, 0, 0);
-    }
-    #green {
-        fill: rgb(0, 255, 0);
-    }
-    #blue {
-        fill: rgb(0, 0, 255);
-    }
-    .mitt {
-        stroke: black;
-    }
-    .cross {
-        stroke: purple;
-    }
-    path {
-        stroke: transparent;
-    }
-    label {
-        display: inline-block;
-        width: 7em;
-        text-align: right;
-        padding-right: 1em;
-    }
-  </style>
+<meta charset="utf-8" />
+<title>RGB colors</title>
+<style>
+body {
+    width: 720px;
+    margin: auto;
+    font-family: sans-serif;
+    text-align: center;
+}
+
+svg {
+    margin-top: 2em;
+    background-color: #000;
+    border-radius: 10px;
+}
+
+circle {
+    stroke-width: 1;
+    fill: none;
+}
+
+#red {
+    fill: rgb(255, 0, 0);
+}
+
+#green {
+    fill: rgb(0, 255, 0);
+}
+
+#blue {
+    fill: rgb(0, 0, 255);
+}
+
+.mitt {
+    stroke: black;
+}
+
+.cross {
+    stroke: purple;
+}
+
+path {
+    stroke: transparent;
+}
+
+label {
+    display: inline-block;
+    width: 7em;
+    text-align: right;
+    padding-right: 1em;
+}
+</style>
 </head>
 <body>
   <h1>RGB colors</h1>
   <svg viewbox="0 0 600 587" width="720" height="706">
     <defs>
     </defs>
-    <circle id="red"   cx="210" cy="210" r="202" />
+    <circle id="red" cx="210" cy="210" r="202" />
     <circle id="green" cx="390" cy="210" r="202" />
-    <circle id="blue"  cx="300" cy="377" r="202" />
+    <circle id="blue" cx="300" cy="377" r="202" />
     <!-- hide artefacts from the circles -->
-    <polygon points="110,400 40,190 280,32 320,32 560,190 490,400 320,490 280,490"  fill="black" />
+    <polygon
+      points="110,400 40,190 280,32 320,32 560,190 490,400 320,490 280,490"
+      fill="black" />
     <!-- circles to aim when drawing paths -->
     <!--
     <circle class="mitt"  cx="210" cy="210" r="2" />
@@ -67,19 +78,32 @@
     <circle class="cross"  cx="500" cy="377" r="2" />
     <circle class="cross"  cx="300" cy="388.5" r="2" />
     -->
-    <path id="rgb" d="M 300,388.5 A 200 200 1 0 1 190,206 A 200 200 1 0 1 410,206 A 200 200 1 0 1 300,388.5" fill="rgb(255, 255, 255)" />
+    <path id="rgb"
+      d="M 300,388.5 A 200 200 1 0 1 190,206 A 200 200 1 0 1 410,206 A 200 200 1 0 1 300,388.5"
+      fill="rgb(255, 255, 255)" />
 
-    <path id="rb"  d="M 300,388.5 A 200 200 1 0 1 100,377 A 200 200 1 0 1 190,206 A 200 200 1 0 0 300,388.5" fill="rgb(255, 0, 255)" />
-    <path id="gb"  d="M 300,388.5 A 200 200 1 0 0 500,377 A 200 200 1 0 0 410,206 A 200 200 1 0 1 300,388.5" fill="rgb(0, 255, 255)" />
-    <path id="rg"  d="M 300,31.5  A 200 200 1 0 0 190,206 A 200 200 1 0 1 410,206 A 200 200 1 0 0 300,31.5" fill="rgb(255, 255, 0)" />
+    <path id="rb"
+      d="M 300,388.5 A 200 200 1 0 1 100,377 A 200 200 1 0 1 190,206 A 200 200 1 0 0 300,388.5"
+      fill="rgb(255, 0, 255)" />
+    <path id="gb"
+      d="M 300,388.5 A 200 200 1 0 0 500,377 A 200 200 1 0 0 410,206 A 200 200 1 0 1 300,388.5"
+      fill="rgb(0, 255, 255)" />
+    <path id="rg"
+      d="M 300,31.5  A 200 200 1 0 0 190,206 A 200 200 1 0 1 410,206 A 200 200 1 0 0 300,31.5"
+      fill="rgb(255, 255, 0)" />
 
-    <path id="b" d="M 300,388.5 A 200 200 1 0 1 100,377  A 200 200 1 0 0 500,377 A 200 200 1 0 1 300,388.5" fill="rgb(0, 0, 255)" />
-    <path id="r" d="M 100,377   A 200 200 1 0 1 300,31.5 A 200 200 1 0 0 190,206 A 200 200 1 0 0 100,377" fill="rgb(255, 0, 0)" />
-    <path id="g" d="M 500,377   A 200 200 1 0 0 300,31.5 A 210 210 1 0 1 410,206 A 200 200 1 0 1 500,377" fill="rgb(0, 255, 0)" />
+    <path id="b"
+      d="M 300,388.5 A 200 200 1 0 1 100,377  A 200 200 1 0 0 500,377 A 200 200 1 0 1 300,388.5"
+      fill="rgb(0, 0, 255)" />
+    <path id="r"
+      d="M 100,377   A 200 200 1 0 1 300,31.5 A 200 200 1 0 0 190,206 A 200 200 1 0 0 100,377"
+      fill="rgb(255, 0, 0)" />
+    <path id="g"
+      d="M 500,377   A 200 200 1 0 0 300,31.5 A 210 210 1 0 1 410,206 A 200 200 1 0 1 500,377"
+      fill="rgb(0, 255, 0)" />
   </svg>
-  <p id="sliders_0">
-    If JavaScript had been enabled you would see 3 sliders (TODO) here.
-  </p>
+  <p id="sliders_0">If JavaScript had been enabled you would see 3 sliders
+    (TODO) here.</p>
   <p id="sliders_1"></p>
   <p id="sliders_2"></p>
   <script>

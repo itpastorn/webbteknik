@@ -1,95 +1,102 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-  <meta charset="utf-8" />
-  <title>CSS box models</title>
-  <style>
-    body {
-        width: 600px;
-        margin: auto;
-        text-align: center;
-        font-family: sans-serif;
-    }
-    .explain {
-        text-align: left;
-    }
-    rect {
-        fill: none;
-        stroke: silver;
-        stroke-width: 1;
-    }
-    line {
-        stroke: maroon;
-        stroke-width: 5;
-        marker-start: url("#start_triangle");
-        marker-end:   url("#end_triangle");
-    }
-    marker {
-        fill: maroon;
-    }
-    text {
-        text-anchor : middle;
-        dominant-baseline: middle;
-        font-size: 26px;
-    }
-    .wh {
-        font-size: 32px;
-        text-anchor: start;
-    }
-    #modelname {
-        text-anchor: end;
-        font-style: italic;
-    }
-    #marginbox {
-        fill: lightcyan;
-    }
-    #borderbox {
-        fill: deepskyblue;
-    }
-    #paddingbox {
-        fill: lavender;
-    }
-    #contentbox {
-        fill: azure;
-    }
-    button {
-        margin: 0 3px;
-    }
-  </style>
+<meta charset="utf-8" />
+<title>CSS box models</title>
+<style>
+body {
+    width: 600px;
+    margin: auto;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+.explain {
+    text-align: left;
+}
+
+rect {
+    fill: none;
+    stroke: silver;
+    stroke-width: 1;
+}
+
+line {
+    stroke: maroon;
+    stroke-width: 5;
+    marker-start: url("#start_triangle");
+    marker-end: url("#end_triangle");
+}
+
+marker {
+    fill: maroon;
+}
+
+text {
+    text-anchor: middle;
+    dominant-baseline: middle;
+    font-size: 26px;
+}
+
+.wh {
+    font-size: 32px;
+    text-anchor: start;
+}
+
+#modelname {
+    text-anchor: end;
+    font-style: italic;
+}
+
+#marginbox {
+    fill: lightcyan;
+}
+
+#borderbox {
+    fill: deepskyblue;
+}
+
+#paddingbox {
+    fill: lavender;
+}
+
+#contentbox {
+    fill: azure;
+}
+
+button {
+    margin: 0 3px;
+}
+</style>
 </head>
 <body>
   <h1>CSS box models</h1>
-  <p class="explain">An illustration of the various <a href="https://developer.mozilla.org/En/CSS/Box-sizing">box-sizing</a> 
-  models that exist in CSS as well as the IE5 (quirks) model.</p>
+  <p class="explain">
+    An illustration of the various <a
+      href="https://developer.mozilla.org/En/CSS/Box-sizing">box-sizing</a>
+    models that exist in CSS as well as the IE5 (quirks) model.
+  </p>
   <div id="container">
-    <svg
-       id="svg"
-       xmlns:xlink="http://www.w3.org/1999/xlink"
-       width="600"
-       height="420"
-       viewbox="0 0 1000 700">
+    <svg id="svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="600"
+      height="420" viewbox="0 0 1000 700">
       <defs>
-        <marker id="start_triangle" viewBox="0 0 10 10" refX="6" refY="5" 
-          markerUnits="strokeWidth"
-          markerWidth="4" markerHeight="3"
-          orient="auto">
+        <marker id="start_triangle" viewBox="0 0 10 10" refX="6" refY="5"
+        markerUnits="strokeWidth" markerWidth="4" markerHeight="3" orient="auto">
           <path id="triangle" d="M 10 0 L 0 5 L 10 10 z" />
         </marker>
-        <marker id="end_triangle" viewBox="0 0 10 10" refX="3" refY="5" 
-          markerUnits="strokeWidth"
-          markerWidth="4" markerHeight="3"
-          orient="auto">
+        <marker id="end_triangle" viewBox="0 0 10 10" refX="3" refY="5"
+        markerUnits="strokeWidth" markerWidth="4" markerHeight="3" orient="auto">
           <path d="M 0 0 L 10 5 L 0 10 z" />
         </marker>
       </defs>
-      <rect id="marginbox"  x="50"  y="50"  width="900" height="600"></rect>
-      <rect id="borderbox"  x="100" y="100" width="800" height="500" />
+      <rect id="marginbox" x="50" y="50" width="900" height="600"></rect>
+      <rect id="borderbox" x="100" y="100" width="800" height="500" />
       <rect id="paddingbox" x="150" y="150" width="700" height="400" />
       <rect id="contentbox" x="200" y="200" width="600" height="300" />
-      <text id="margintext"  x="500" y="75">Margin</text>
-      <text id="bordertext"  x="500" y="125">Border</text>
+      <text id="margintext" x="500" y="75">Margin</text>
+      <text id="bordertext" x="500" y="125">Border</text>
       <text id="paddingtext" x="500" y="175">Padding</text>
-      <text id="contentext"  x="500" y="350">Content</text>
+      <text id="contentext" x="500" y="350">Content</text>
     </svg>
     <p id="buttons">This interactive demonstration requires JavaScript.</p>
   </div>
@@ -172,7 +179,7 @@
     // TODO: Animate transitions
 
   }());
-  </script>   
+  </script>
 </body>
 </html>
 

@@ -1,62 +1,66 @@
 <!DOCTYPE html>
 <html lang="sv">
- <head>
-  <meta charset="utf-8" />
-  <title>Inriktnings- och kursval, NE inför åk 2 (gäller 2012)</title>
-  <link href="inr-val.css" rel="stylesheet" />
- </head>
- <body class="valsida">
-   <h1>Inriktnings- och kursval, NE inför åk 2 (gäller 2012)</h1>
-   <form action="val.php" method="post">
-   <fieldset id="inriktningar">
-   <legend>Välj inriktning</legend>
-   <p>Ändrar du detta val nollställs allt och du börjar om från början.</p>
-  </fieldset>
-  <fieldset>
-    <legend>Vill du läsa Matematik 4 och Fysik 2? (Högskole- och civilingenjör)</legend>
-    <p><small>(Högskoleingenjör kräver Fy2, men inte Ma4.)</small></p>
-    <p>
-      <button id="mafyja" class="jaknapp">Ja</button>
-      <button id="mafynej" class="nejknapp">Nej</button>
-    </p>
-  </fieldset>
-  <fieldset>
-    <legend>Vill du ha möjlighet att bli gymnasieingenjör?</legend>
-     <p>
-       <button id="te4ja" class="jaknapp">Ja</button>
-       <button id="te4nej" class="nejknapp">Nej</button>
-    </p>
-  </fieldset>
-  <fieldset id="paket1">
-    <legend>Välj ett av dessa paket (paket 1)</legend>
-    <!-- Stuff inserted by JS here -->
-  </fieldset>
-  <fieldset id="paket2">
-    <legend>Välj ett av dessa paket (paket 2)</legend>
-    <!-- Stuff inserted by JS here -->
-  </fieldset>
-  <fieldset id="pinfo">
-    <legend>Identifikation och kommentarer</legend>
-    <p>
-      <label for="pkod">Personlig kod</label>
-      <input type="text" id="pkod" name="pkod" placeholder="Skriv din kod här" maxlength="4" />
-      <input type="hidden" name="verified_pkod" id="verified_pkod" value="" />
-    </p>
-    <p id="show_name_ajax">&hellip;</p>
-    <p>
-      <label for="kommentar">Skriv eventuell kommentar här</label>
-      <textarea id="kommentar" name="kommentar" maxlength="500"></textarea>
-    </p>
-  </fieldset>
-  <fieldset>
-    <legend>Klar att skicka</legend>
-    <p>
-      <input id="klar" name="klar" type="checkbox"> <label for="klar">Jag har tänkt igenom och är klar att skicka in mitt val.</label>
-    </p>
-    <p>
-      <input type="submit" id="skicka" value="Skicka (kan ej ångras)" disabled>
-    </p>
-  </fieldset>
+<head>
+<meta charset="utf-8" />
+<title>Inriktnings- och kursval, NE inför åk 2 (gäller 2012)</title>
+<link href="inr-val.css" rel="stylesheet" />
+</head>
+<body class="valsida">
+  <h1>Inriktnings- och kursval, NE inför åk 2 (gäller 2012)</h1>
+  <form action="val.php" method="post">
+    <fieldset id="inriktningar">
+      <legend>Välj inriktning</legend>
+      <p>Ändrar du detta val nollställs allt och du börjar om från början.</p>
+    </fieldset>
+    <fieldset>
+      <legend>Vill du läsa Matematik 4 och Fysik 2? (Högskole- och
+        civilingenjör)</legend>
+      <p>
+        <small>(Högskoleingenjör kräver Fy2, men inte Ma4.)</small>
+      </p>
+      <p>
+        <button id="mafyja" class="jaknapp">Ja</button>
+        <button id="mafynej" class="nejknapp">Nej</button>
+      </p>
+    </fieldset>
+    <fieldset>
+      <legend>Vill du ha möjlighet att bli gymnasieingenjör?</legend>
+      <p>
+        <button id="te4ja" class="jaknapp">Ja</button>
+        <button id="te4nej" class="nejknapp">Nej</button>
+      </p>
+    </fieldset>
+    <fieldset id="paket1">
+      <legend>Välj ett av dessa paket (paket 1)</legend>
+      <!-- Stuff inserted by JS here -->
+    </fieldset>
+    <fieldset id="paket2">
+      <legend>Välj ett av dessa paket (paket 2)</legend>
+      <!-- Stuff inserted by JS here -->
+    </fieldset>
+    <fieldset id="pinfo">
+      <legend>Identifikation och kommentarer</legend>
+      <p>
+        <label for="pkod">Personlig kod</label> <input type="text" id="pkod"
+          name="pkod" placeholder="Skriv din kod här" maxlength="4" /> <input
+          type="hidden" name="verified_pkod" id="verified_pkod" value="" />
+      </p>
+      <p id="show_name_ajax">&hellip;</p>
+      <p>
+        <label for="kommentar">Skriv eventuell kommentar här</label>
+        <textarea id="kommentar" name="kommentar" maxlength="500"></textarea>
+      </p>
+    </fieldset>
+    <fieldset>
+      <legend>Klar att skicka</legend>
+      <p>
+        <input id="klar" name="klar" type="checkbox"> <label for="klar">Jag
+          har tänkt igenom och är klar att skicka in mitt val.</label>
+      </p>
+      <p>
+        <input type="submit" id="skicka" value="Skicka (kan ej ångras)" disabled>
+      </p>
+    </fieldset>
   </form>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
   <script src="inriktningar-och-paket.js"></script>

@@ -1,56 +1,68 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=400, initial-scale=1">
-  <title>Klocka i SVG</title>
-  <style>
-    body {
-        margin: auto;
-        width: 810px;
-        font-family: sans-serif;
-        text-align: center;
-    }
-    svg {
-    }
-    circle#outer {
-        fill: none;
-        stroke: black;
-        stroke-width: 1;
-    }
-    line#hours {
-    }
-    line#minutes {
-    }
-    line#seconds {
-        stroke: #333;
-        stroke-width: 2;
-        stroke-linecap: round;
-    }
-    line#showcos, line#showsin {
-        stroke: #999;
-        stroke-width: 1;
-    }
-    text {
-        text-align: left;
-        font-size: 30%;
-    }
-    path {
-        stroke: #999;
-        stroke-width: 0.5;
-        fill: rgba(170,170,170,0.3);
-    }
-    #analog {
-        font: large monospace;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=400, initial-scale=1">
+<title>Klocka i SVG</title>
+<style>
+body {
+    margin: auto;
+    width: 810px;
+    font-family: sans-serif;
+    text-align: center;
+}
+
+svg {
+    
+}
+
+circle#outer {
+    fill: none;
+    stroke: black;
+    stroke-width: 1;
+}
+
+line#hours {
+    
+}
+
+line#minutes {
+    
+}
+
+line#seconds {
+    stroke: #333;
+    stroke-width: 2;
+    stroke-linecap: round;
+}
+
+line#showcos,line#showsin {
+    stroke: #999;
+    stroke-width: 1;
+}
+
+text {
+    text-align: left;
+    font-size: 30%;
+}
+
+path {
+    stroke: #999;
+    stroke-width: 0.5;
+    fill: rgba(170, 170, 170, 0.3);
+}
+
+#analog {
+    font: large monospace;
+}
+</style>
 </head>
 <body>
   <h1>Princip för klocka i SVG med radie=100</h1>
   <svg width="802" height="802" viewbox="0,0,202,202" id="urtavla">
     <g id="theclock" transform="translate(101, 101)">
     <circle id="outer" cx="0" cy="0" r="100" />
-    <line id="seconds" x1="0" y1="0" x2="200" y2="-200"/>
+    <line id="seconds" x1="0" y1="0" x2="200" y2="-200" />
     <line id="showcos" />
     <line id="showsin" />
     <text id="cosval"></text>

@@ -1,34 +1,42 @@
 svg {
     border: 1px solid maroon;
 }
+
 circle {
     stroke: grey;
     fill: none;
 }
+
 path {
     stroke: black;
     stroke-width: 1;
 }
+
 .one {
-    fill:lime;
+    fill: lime;
 }
+
 .two {
-    fill:orange;
+    fill: orange;
 }
+
 .three {
-    fill:teal;
+    fill: teal;
 }
+
 .four {
-    fill:silver;
+    fill: silver;
 }
+
 .five {
     fill: yellow;
 }
+
 line {
     stroke: black;
 }
+
 text {
     text-anchor: middle;
     font-size: 10px;
 }
-

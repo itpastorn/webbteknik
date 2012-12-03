@@ -15,4 +15,10 @@
 	<natures>
 		<nature>net.sourceforge.phpeclipse.phpnature</nature>
 	</natures>
+	<variableList>
+		<variable>
+			<name>inludesdir</name>
+			<value>file:/home/gunther/arkiv/workspace/webbteknik/website/includes</value>
+		</variable>
+	</variableList>
 </projectDescription>

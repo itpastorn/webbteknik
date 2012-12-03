@@ -1,57 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>CSS terminology</title>
-  <style>
+<meta charset="UTF-8">
+<title>CSS terminology</title>
+<style>
 body {
     width: 800px;
     margin: auto;
     font: medium sans-serif;
 }
+
 .active {
     background-color: navajowhite;
 }
+
 pre {
     font: bolder large consolas, monospace;
     width: 60%;
     float: left;
 }
+
 #btns {
     line-height: 2.2;
 }
+
 .rule {
     width: 44ch;
     display: block;
 }
-  </style>
+</style>
 </head>
 <body>
   <h1>CSS terminology</h1>
   <p>Click on the button to activate matching parts in the code.</p>
   <!-- whitespace at end of lines needed -->
-  <pre><code>
-<span class="rule"><span class="selector">.foobar</span> <span class="declaration_block">{ 
+  <pre>
+    <code>
+<span class="rule"><span class="selector">.foobar</span> <span
+        class="declaration_block">{ 
                                            
-    <span class="declaration"><span class="property">width</span>: <span class="value">70<span class="unit">%</span></span>;</span>                            
+    <span class="declaration"><span class="property">width</span>: <span
+            class="value">70<span class="unit">%</span></span>;</span>                            
                                            
-    <span class="declaration"><span class="property">border-width</span>: <span class="value">2<span class="unit">px</span></span>;</span>                     
+    <span class="declaration"><span class="property">border-width</span>: <span
+            class="value">2<span class="unit">px</span></span>;</span>                     
                                            
-    <span class="declaration"><span class="property">margin</span>: <span class="value"><span class="keyword">auto</span></span>;</span>                          
+    <span class="declaration"><span class="property">margin</span>: <span
+            class="value"><span class="keyword">auto</span></span>;</span>                          
                                            
-    <span class="declaration"><span class="property">font</span>: <span class="value"><span class="keyword">bolder</span> <span class="keyword">large</span> consolas, <span class="keyword">monospace</span></span>;</span>
+    <span class="declaration"><span class="property">font</span>: <span
+            class="value"><span class="keyword">bolder</span> <span
+              class="keyword">large</span> consolas, <span class="keyword">monospace</span></span>;</span>
                                            
 } </span></span>
-  </code></pre>
+  </code>
+  </pre>
   <p id="btns">
-    <button id="a_rule">Rule</button><br />
+    <button id="a_rule">Rule</button>
+    <br />
     <button id="a_selector">Selector</button>
-    <button id="a_declaration_block">Declaration Block</button><br />
-    <button id="a_declaration">Declaration</button><br />
+    <button id="a_declaration_block">Declaration Block</button>
+    <br />
+    <button id="a_declaration">Declaration</button>
+    <br />
     <button id="a_property">Property</button>
-    <button id="a_value">Value</button><br />
+    <button id="a_value">Value</button>
+    <br />
     <button id="a_keyword">Keyword</button>
-    <button id="a_unit">Unit</button><br />
+    <button id="a_unit">Unit</button>
+    <br />
     <button id="a_clear">Clear highlights</button>
   </p>
   <script>
