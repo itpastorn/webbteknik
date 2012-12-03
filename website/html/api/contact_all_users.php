@@ -19,38 +19,46 @@ $dbh = keryxDB2_cx::get($dbx);
 
 header("Content-type: text/plain; charset=utf-8");
 
-$subject = "Videostrul fixat hoppas jag";
+$subject = "Videolista och enklare länkar";
 
 echo "Påbörjar utskick\n"; 
 
 $text = <<<TXT
 
-Hej alla lärare på webbteknik.nu
+Hej återigen all på webbteknik.nu
 
-Jag får frågor om CD:n som hör till lärarhandledningen.
+Det finns nu en ny sida där alla filmer visas i en tabell.
 
-Jag har blivit försenad med den och ber om ursäkt. Mina
-första planer var att göra ett antal interaktiva demos
-till varje kapitel, men det tar helt enkelt för lång tid.
+http://webbteknik.nu/resources/videos/
 
-Det har också känts mer akut att åtgärda webbplatsen och göra 
-fler videofilmer till den. Nu är det över 700 användare (kul) och
-det innebär att varje uppdatering måste göras med stor försiktighet.
+En länk finns till denna sida i menyn. Dock ser man inte statusrapporten
+(om man sett filmen), som via Arbetsplaneringssidan.
 
-Här kommer dock ett par saker som gjorts, fast några av er har sett
-dem förut:
+Det finns några filmer som inte dyker upp om man bläddrar med föregående
+och nästa knapparna. Dessa kommer man alltså åt via denna nya sida (eller
+via sidan Arbetsplanering).
 
-http://webbteknik.nu/interactive/box-models.html
-http://webbteknik.nu/interactive/color-wheel.html
+Nu är också alla länkar förenklade. Det borde ni egentligen inte
+märka utom genom att webbläsaren markerar sidor ni redan besökt
+som obesökta (med länkens färg).
 
+Alla gamla URL:er fortsätter dock fungera.
 
-Jag tar gärna emot tips på vad ni önskar se rent konkret
-som slides (typ PowerPoint).
+Exempel på gamla URL:er
+http://webbteknik.nu/assignments.php
+http://webbteknik.nu/userpage.php?video=kap-1-a-1
+http://webbteknik.nu/userpage.php?vidnum=11
+http://webbteknik.nu/joblist.php?book=wu1&c=3
 
+Vad de nu heter
+http://webbteknik.nu/assignments/
+http://webbteknik.nu/userpage/video/kap-1-a-1/
+http://webbteknik.nu/userpage/wu1/vidnum/11/
+http://webbteknik.nu/joblist/wu1/3/
 
-Titelskärmen för videon om SVG blev fel. Den säger att det är
-för bokavsnitt 1.0 och 1.1... Jag kommer vara på 
-"fel" dator ett par dagar, så detta fixas först i slutet på veckan.
+Den tekniska förklaringen är att jag gömmer GET-parametrarna
+med hjälp av rewrite-regler. Sådant får man lära sig i kursen
+Webbutveckling 1 (mot slutet).
 
 
 mvh
