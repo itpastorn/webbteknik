@@ -164,7 +164,7 @@ HTML;
  * @param array  $list      An array of objects that use the data interface
  * @return string HTML-code
  */
-function makeListItems($list, $name, $extra=false)
+function makeListItems($list, $name=null, $extra=false)
 {
     $list_items = "";
     foreach ( $list as $item ) {

@@ -28,6 +28,8 @@ Pages
     $index       Rules for the start page (page specific or exceptions)
     $userpage    Rules for userpage.php (page specific or exceptions)
     $joblist     Job list page
+    $files       Practice files
+    $resources   Resource listings
     $signin      Sign in page
 Effects
     $flashcards  Flashcards page
@@ -443,7 +445,9 @@ a[href*="w3.org"]:after {
 .clearfix:after {
     clear: both;
 }
-
+.spacedlist > li {
+    margin-top: 0.5em;
+}
 /* ------------------------------- *\
    $masthead
 \* ------------------------------- */
@@ -659,7 +663,30 @@ hr.todo {
     margin-top: 1em;
     line-height: 1.5em;
 }
-
+/* ------------------------------- *\
+   $resources
+\* ------------------------------- */
+.resourcelisting {
+    margin: 2em auto 0;
+}
+.resourcelisting > caption {
+    font-size: x-large;
+    padding: 5px;
+}
+.resourcelisting thead tr:first-child {
+    background-color: hsl(215, 55%, 69%);
+    font-size: larger;
+}
+.resourcelisting thead tr:first-child > th {
+    padding: 8px;
+}
+.resourcelisting th,
+.resourcelisting td {
+    padding: 3px 5px;
+}
+.resourcelisting th:first-child {
+    min-width: 25em;
+}
 
 /* ------------------------------- *\
    $signin
