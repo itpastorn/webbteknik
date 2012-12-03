@@ -5,10 +5,14 @@ RewriteEngine On
 RewriteCond %{HTTP_HOST} ^www\.webbteknik\.nu$ [NC]
 RewriteRule ^(.*)$ http://webbteknik.nu/$1 [R=301,L]
 
-RewriteCond %{HTTP_HOST} ^wt.book$ [NC]
-RewriteBase /website/html
+#RewriteCond %{HTTP_HOST} ^wt\.book$ [NC]
+#RewriteBase /website/html
+RewriteBase /
 
 # All URL:s should end with a trailing slash
+
+RewriteRule sign-in$     sign-in/     [R=301,NC,L]
+RewriteRule sign-in/$    sign-in.php  [NC,L]
 
 RewriteRule userpage$                      userpage/                      [R=301,NC,L]
 RewriteRule userpage/$                     userpage.php                   [NC,L]
@@ -39,9 +43,6 @@ RewriteRule assignments/$    assignments.php  [NC,L]
 
 RewriteRule edituser$     edituser/     [R=301,NC,L]
 RewriteRule edituser/$    edituser.php  [NC,L]
-
-RewriteRule sign-in$     sign-in/     [R=301,NC,L]
-RewriteRule sign-in/$    sign-in.php  [NC,L]
 
 RewriteRule teacherpage$     teacherpage/     [R=301,NC,L]
 RewriteRule teacherpage/$    teacherpage.php  [NC,L]

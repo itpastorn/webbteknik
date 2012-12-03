@@ -95,7 +95,12 @@ MSG;
             return true;
         }
         // Access violation
-        header("Location: sign-in.php?nopriv=1&ref=" . $_SERVER['PHP_SELF']);
+        if ( "wt.book" == $_SERVER['SERVER_NAME']) {
+            $pathextra = "/website/html/";
+        } else {
+            $pathextra = "/";
+        }
+        header("Location: {$pathextra}sign-in.php?nopriv=1&ref=" . urlencode($_SERVER['REQUEST_URI']));
         exit;
         
     }
