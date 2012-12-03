@@ -1,22 +1,38 @@
+AddDefaultCharset utf-8
+Options +FollowSymlinks -MultiViews
+
 RewriteEngine On
 RewriteCond %{HTTP_HOST} ^www\.webbteknik\.nu$ [NC]
 RewriteRule ^(.*)$ http://webbteknik.nu/$1 [R=301,L]
 
-AddDefaultCharset utf-8
+RewriteCond %{HTTP_HOST} ^wt.book$ [NC]
+RewriteBase /website/html
 
-# http://stackoverflow.com/questions/6987929/preparing-php-application-to-use-with-utf-8
+RewriteRule userpage$                    userpage/                      [R=301,NC,L]
+RewriteRule userpage/$                   userpage.php                   [NC,L]
+RewriteRule userpage/(.*)/vidnum/(.*)$   userpage.php?book=$1&vidnum=$2 [NC,L]
+RewriteRule userpage/video/(.*)$         userpage.php?video=$1          [NC,L]
 
-# TODO Prevent hotlinking and direct access to videos
+RewriteRule resources$         resources/             [R=301,NC,L]
+RewriteRule resources/(.*)$    resources.php?what=$1  [NC,L]
 
-Options +FollowSymlinks
-RewriteEngine on
-RewriteRule video/(.*)$ userpage.php?video=$1 [NC,L]
+RewriteRule flashcards$             flashcards/            [R=301,NC,L]
+RewriteRule flashcards/set=(.*)$    flashcards.php?set=$1  [NC,L]
 
-# The idea
-# - Logged in users should be directed to userpage.php?video=xyz
-# - Non-logged in users should be directed to videopage.php?video=xyz
+
 
 # Notes
 # HTTP_HOST
 # REQUEST_URI
 # SCRIPT_NAME
+
+# TODO Prevent hotlinking and direct access to videos
+
+# Links
+# http://stackoverflow.com/questions/13675553/unwanted-default-rewrite-alias/13683376#13683376
+# http://www.the-art-of-web.com/system/rewrite/1/
+# http://www.the-art-of-web.com/system/duplicate-content/
+
+# http://stackoverflow.com/questions/6987929/preparing-php-application-to-use-with-utf-8
+
+# Firefox caches redirects (sic!) http://kb.mozillazine.org/Browser.cache.check_doc_frequency
