@@ -15,28 +15,25 @@
 ## CSS för att skapa ellipser (runda hörn)
 
  * Video
- * Referenslänk: [Box Shadow op MDN](https://developer.mozilla.org/en/CSS/box-shadow)
+ * 130:ref:[box-shadow](https://developer.mozilla.org/en/CSS/box-shadow):wu-lb-5-4
 
 ## Tyspnitt
 
- * Video
+ * 131:ref:[Google Web Fonts](http://www.google.com/webfonts):wu-lb-5-4
 
-## Webbfonter (fördjupning)
-
- * Länkar TODO
 
 ## Första bokstaven i en annan färg
 
  * Video
- * Referenslänk first-child TODO
+ * 132:ref:[first-child](https://developer.mozilla.org/en-US/docs/CSS/:first-child):null
 
 ## Bilden
 
  * Video
  
-## Läs mer
+## Organisation av CSS-koden
 
- * Länkar, etc
+ * 134:deep:[How should I organize the contents of my CSS files(s)?](http://stackoverflow.com/questions/146106/how-should-i-organize-the-contents-of-my-css-files):null
 
 
 Plus övningar med experimenterande runt desigen:

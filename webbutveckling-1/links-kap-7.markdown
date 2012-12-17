@@ -1,83 +1,83 @@
-# Kapitel 7: HTML historik och teori
+# Kapitel 7:HTML historik och teori
 
- * Fotnot: [WorldWideWeb = Den första webbläsaren](http://en.wikipedia.org/wiki/WorldWideWeb)
- * Fotnot: [History of the World Wide Web](http://en.wikipedia.org/wiki/History_of_the_World_Wide\_Web)
- * Fotnot: [Timeline of Web Browsers](http://en.wikipedia.org/wiki/Timeline_of_web_browsers)
+ * 161:note:[WorldWideWeb = Den första webbläsaren](http://en.wikipedia.org/wiki/WorldWideWeb):null
+ * 161:note:[History of the World Wide Web](http://en.wikipedia.org/wiki/History_of_the_World_Wide\_Web):null
+ * 161:note:[Timeline of Web Browsers](http://en.wikipedia.org/wiki/Timeline_of_web_browsers):null
 
 ###  HTML under pionjärtiden
 
- * Fotnot: [HTML 1.0](http://www.w3.org/History/19921103-hypertext/hypertext/WWW/MarkUp/MarkUp.html)
- * Fotnot: [Mosaic](http://en.wikipedia.org/wiki/Mosaic_%28web_browser%29)
- * Fotnot: TUI TODO
- * Fotnot: GUI TODO
+ * 162:note:[HTML 1.0](http://www.w3.org/History/19921103-hypertext/hypertext/WWW/MarkUp/MarkUp.html):null
+ * 162:note:[Mosaic](http://en.wikipedia.org/wiki/Mosaic_%28web_browser%29):null
+ * 162:note:[Text based user interface](http://en.wikipedia.org/wiki/Text-based_user_interface):null
+ * 162:note:[Graphical user interface](http://en.wikipedia.org/wiki/Graphical_user_interface):null
 
-Övning: eLinks  och Lynx TODO
+Övning:eLinks  och Lynx TODO
 
 ###  Utveckling under browserkriget
 
- * Fördjupningslänk: [Webbläsarkriget](http://en.wikipedia.org/wiki/Browser_wars)
- * Fotnot: Netscape TODO
- * Fördjupningslänk: Applets TODO + någon som förklarar varför de är dåliga
- * Fotnot: MSIE TODO
- * Fotnot: ActiveX TODO
- * Fotnot: Common Language Runtime TODO
- * Fotnot: [HTML 2.0](http://www.w3.org/MarkUp/html-spec/html-spec_toc.html)
- * Fotnot: [HTML 3.0](http://www.w3.org/MarkUp/html3/)
- * Fotnot: [HTML 3.2](http://www.w3.org/TR/REC-html32)
+ * 163:deep:[Webbläsarkriget](http://en.wikipedia.org/wiki/Browser_wars):null
+ * 163:note:[Netscape Navigator](http://en.wikipedia.org/wiki/Netscape_Navigator):null
+ * 163:note:[Applet](http://en.wikipedia.org/wiki/Applet):null
+
+
+ * 163:note:[Internet Explorer](http://en.wikipedia.org/wiki/Internet_explorer):null
+ * 163:note:[Active X](http://en.wikipedia.org/wiki/Active_x):null
+ * 163:note:[Common Language Runtime](http://en.wikipedia.org/wiki/Common_Language_Runtime):null
+ * 163:note:[HTML 2.0](http://www.w3.org/MarkUp/html-spec/html-spec_toc.html):null
+ * 163:note:[HTML 3.0](http://www.w3.org/MarkUp/html3/):null
+ * 163:note:[HTML 3.2](http://www.w3.org/TR/REC-html32):null
 
 ### CSS föds och HTML 4 skapas
 
- * Fotnot: [spacer gif TODO
- * Fotnot: [Creating Killer Web Sites TODO
- * Fotnot: [HTML 4.01 http://www.w3.org/TR/html401/
- * Referenslänk: [Strikt, transitional och frameset](http://reference.sitepoint.com/html/doctypes) Förklarar också vad en doctype består av och switchningen.
+ * 164:note:[Spacer GIF](http://en.wikipedia.org/wiki/Spacer_GIF):null
+ * 164:note:[HTML 4.01](http://www.w3.org/TR/html401/):null
+ * 164:ref:[Strikt, transitional och frameset](http://reference.sitepoint.com/html/doctypes):null Förklarar också vad en doctype består av och switchningen.
 
 ###  XML
 
- * Referenslänk: XML TODO
- * Fördjupningslänk: XML på Wikipedia TODO
- * Fördjupningslänk: Drakoniska felhanteringen TODO
+ * 165:note:[XML](http://www.w3.org/TR/xml/):null
+ * 165:deep:[Draconian error handling history](http://www.w3.org/html/wg/wiki/DraconianErrorHandling):null
 
 ###  XHTML
 
- * Referenslänk: XHTML 1.0 TODO
- * Referenslänk: XHTML 1.1 TODO
- * Fotnot: Ruby annoteringar TODO
- * Fotnot: Referenslänk: XHTML 2.0 TODO
-
+ * 166:note:[XHTML 1.0](http://www.w3.org/TR/xhtml1/):null
+ * 166:note:[XHTML 1.1](http://www.w3.org/TR/xhtml11/):null
+ * 167:note:[ruby i HTML](https://developer.mozilla.org/en-US/docs/HTML/Element/ruby):null
+ * 166:note:[XHTML 2](http://www.w3.org/TR/xhtml2/):null
+ 
 ###  Standardiseringsprocessen
 
- * Fördjupningslänk: [W3C Recommendation track](http://www.w3.org/2010/Talks/0119-next-web-plh/w3c_track.xhtml)
+ * 167:deep:[W3C Recommendation track](http://www.w3.org/2010/Talks/0119-next-web-plh/w3c_track.xhtml):null
 
-###  Äkta XHTML
+### Äkta XHTML
 
- * Boklänk: [HTML kontra XHTML](http://wiki.whatwg.org/wiki/HTML_vs._XHTML)
- * Referenslänk: [HTML and XHTML Frequently Answered Questions](http://www.w3.org/MarkUp/2004/xhtml-faq#advantages)
- * Referenslänk: [HTML kontra XHTML](http://reference.sitepoint.com/html/html-vs-xhtml)
- * Referenslänk: SVG TODO
- * Referenslänk: MathML TODO
- * Fotnot: Semantiska webben TODO
- * Fotnot: XForms TODO
+ * 168:book:[HTML kontra XHTML](http://wiki.whatwg.org/wiki/HTML_vs._XHTML):null
+ * 168:ref:[HTML and XHTML Frequently Answered Questions](http://www.w3.org/MarkUp/2004/xhtml-faq#advantages):null
+ * 168:ref:[HTML kontra XHTML](http://reference.sitepoint.com/html/html-vs-xhtml):null
+ * 168:note:[SVG Working Group page](http://www.w3.org/Graphics/SVG/):null
+ * 168:note:[MathML Working Group](http://www.w3.org/Math/):null
+ * 168:note:[Semantic Web Activity](http://www.w3.org/2001/sw/):null
+ * 168:note:[XForms 2.0](http://www.w3.org/MarkUp/Forms/wiki/XForms_2.0):null
 
 ###  HTML5
 
- * Fördjupningslänk: [WhatWG](http://en.wikipedia.org/wiki/Whatwg)
- * Fotnot: Web Forms 2.0 TODO
- * Fotnot: Web Applications 1.0 TODO
- * Fotnot: HTML5 WG TODO
- * Boklänk: [Alla webbtekniker](http://platform.html5.org/)
- * Referenslänk: [HTML5: Edition for Web Authors](http://www.w3.org/TR/2011/WD-html5-author-20110809/Overview.html)
- * Referenslänk: [Meet NEWT: New Exciting Web Technologies](http://www.brucelawson.co.uk/2010/meet-newt-new-exciting-web-technologies/)
- * Referenslänk: http://html5.org/
+ * 169:Boklänk:[Alla webbtekniker](http://platform.html5.org/):null
+ * 169:ref:[HTML5:Edition for Web Authors](http://www.w3.org/TR/html5-author/):null
+ * 169:ref:[Meet NEWT:New Exciting Web Technologies](http://www.brucelawson.co.uk/2010/meet-newt-new-exciting-web-technologies/):null
+ * 169:ref:[html5.org](http://html5.org/):null
+ * 169:deep:[WhatWG](http://en.wikipedia.org/wiki/Whatwg):null
+ * 169:note:[Web Forms 2.0](http://www.whatwg.org/specs/web-forms/current-work/):null
+ * 169:note:[Web Applications 1.0](http://www.whatwg.org/specs/web-apps/2005-09-01/):null
+ * 169:note:[HTML WG](http://www.w3.org/html/):null
 
 ###  Versionslös HTML
 
- * Fotnot: https://developer.mozilla.org/en/HTML/Element/center
- * Fotnot: https://developer.mozilla.org/en/HTML/Element/iframe
- * Fotnot: https://developer.mozilla.org/en/HTML/Element/embed
- * Fotnot: https://developer.mozilla.org/en/HTML/Element/marquee
- * Fotnot: [On SGML and HTML (föråldrat)](http://www.w3.org/TR/html401/intro/sgmltut.html)
- * Fotnot: [Position Paper for the W3C Workshop on Web Applications and Compound Documents (nedröstades av W3C)](http://www.w3.org/2004/04/webapps-cdf-ws/papers/opera.html)
+ * 170:note:[The center element (usch!)](https://developer.mozilla.org/en/HTML/Element/center):null
+ * 170:note:[The iframe element](https://developer.mozilla.org/en/HTML/Element/iframe):null
+ * 170:note:[The embed element (usch!)](https://developer.mozilla.org/en/HTML/Element/embed):null
+ * 170:note:[The marquee element (usch!)](https://developer.mozilla.org/en/HTML/Element/marquee):null
+ * 170:note:[On SGML and HTML (föråldrat):null](http://www.w3.org/TR/html401/intro/sgmltut.html):null
+ * 170:note:[Position Paper for the W3C Workshop... (nedröstades av W3C):null](http://www.w3.org/2004/04/webapps-cdf-ws/papers/opera.html):null
 
 ## Kompatibilitetslägen
 
@@ -87,48 +87,50 @@ Errata
 
  1. switching -> sniffing
 
- * Referenslänk: [Doctype Sniffing](http://reference.sitepoint.com/css/doctypesniffing)
- * Referenslänk: [Render Mode](http://www.ericmeyeroncss.com/bonus/render-mode.html) av CSS gurun Eric Meyer
- * Referenslänk: [Quirksmode](http://www.quirksmode.org/css/quirksmode.html) av browserexperten PPK
- * Referenslänk: [Mozilla Quirks Mode Behavior](https://developer.mozilla.org/en/Mozilla_Quirks_Mode_Behavior) Vad som påverkas av quirksläget i Firefox (som andra sedan försökt härma)
- * Fördjupningslänk: [Quirks Mode Living Draft](http://simon.html5.org/specs/quirks-mode#the-:active-and-:hover-quirk) Utkast för att standardisera quirks mode i alla webbläsare.
- * Fotnot: [What happens in Quirks Mode](http://www.cs.tut.fi/~jkorpela/quirks-mode.html) Grundforskning a Jukka Korpela
- * Fotnot: [Activating Browser Modes with Doctype](http://hsivonen.iki.fi/doctype/] Noggrann forskning av Henri Sivonen
+ * 172:ref:[Doctype Sniffing](http://reference.sitepoint.com/css/doctypesniffing):null
+ * 172:ref:[Render Mode av Eric Meyer](http://www.ericmeyeroncss.com/bonus/render-mode.html):null av CSS gurun Eric Meyer
+ * 172:ref:[Quirksmode av PPK](http://www.quirksmode.org/css/quirksmode.html):null av browserexperten PPK
+ * 172:ref:[Mozilla Quirks Mode Behavior](https://developer.mozilla.org/en/Mozilla_Quirks_Mode_Behavior):null Vad som påverkas av quirksläget i Firefox (som andra sedan försökt härma):null
+ * 172:deep:[Quirks Mode Living Draft](http://simon.html5.org/specs/quirks-mode#the-:active-and-:hover-quirk):null Utkast för att standardisera quirks mode i alla webbläsare.
+ * 172:note:[What happens in Quirks Mode](http://www.cs.tut.fi/~jkorpela/quirks-mode.html):null Grundforskning a Jukka Korpela
+ * 172:note:[Activating Browser Modes with Doctype](http://hsivonen.iki.fi/doctype/):null Noggrann forskning av Henri Sivonen
  
 ### CSS-hack
 
 ### Internet Explorers olika lägen
 
- * [Defining Document Compatibility](http://msdn.microsoft.com/en-us/library/cc288325%28v=vs.85%29.aspx) on MSDN
- * [Beyond Doctype](http://www.alistapart.com/articles/beyonddoctype) on Compatibility in IE on A List Apart
+ * 174:note:[Defining Document Compatibility](http://msdn.microsoft.com/en-us/library/cc288325%28v=vs.85%29.aspx):null on MSDN
+ * 174:deep:[Beyond Doctype](http://www.alistapart.com/articles/beyonddoctype):null on Compatibility in IE on A List Apart
 
 ## HTML-element
 
- * Fördjupningslänk: [Text Level Semantics](http://www.w3.org/TR/html5/text-level-semantics.html) HTML5 specifikationens genomgång
+ * 175:deep:[Text Level Semantics](http://www.w3.org/TR/html5/text-level-semantics.html):null HTML5 specifikationens genomgång
 
 ### \<em>
 
- * Referenslänk: [Elementet em](https://developer.mozilla.org/en/HTML/Element/em)
+ * 176:ref:[The em element](https://developer.mozilla.org/en/HTML/Element/em):null
 
 ### \<strong>
 
- * Referenslänk: [Elementet strong](https://developer.mozilla.org/en/HTML/Element/strong)
+ * 177:ref:[The strong element](https://developer.mozilla.org/en/HTML/Element/strong):null
 
 ### \<i>
 
- * Referenslänk: [Elementet i](https://developer.mozilla.org/en/HTML/Element/i)
+ * 178:ref:[The i element](https://developer.mozilla.org/en/HTML/Element/i):null
 
 ### \<b>
 
- * Referenslänk: [Elementet b](https://developer.mozilla.org/en/HTML/Element/b)
+ * 179:ref:[The b element](https://developer.mozilla.org/en/HTML/Element/b):null
 
 ### \<abbr>
 
- * Referenslänk: [Elementet abbr](https://developer.mozilla.org/en/HTML/Element/abbr)
+ * 180:ref:[The abbr elelemnt](https://developer.mozilla.org/en/HTML/Element/abbr):null
 
 ### \<time>
 
- * Referenslänk: [Elementet time](https://developer.mozilla.org/en/HTML/Element/time)
+ * 181:ref:[The time element](https://developer.mozilla.org/en/HTML/Element/time):null
+ * 182:book:[The best of <time>s](http://www.brucelawson.co.uk/2012/best-of-time/):null
+ * 182:ref:[The time Element](http://www.w3.org/TR/html5-author/the-time-element.html#the-time-element):null
 
 ## Förkortade attribut
 
@@ -136,26 +138,23 @@ Errata
 
 ### \<base />
 
- * Referenslänk: [Elementet base](https://developer.mozilla.org/en/HTML/Element/base)
+ * 184:ref:[The base elelement](https://developer.mozilla.org/en/HTML/Element/base):null
 
 ### \<br />
 
- * Referenslänk: [Elementet br](https://developer.mozilla.org/en/HTML/Element/br)
+ * 185:ref:[the br element](https://developer.mozilla.org/en/HTML/Element/br):null
 
 ### \<hr />
 
- * Referenslänk: [Elementet hr](https://developer.mozilla.org/en/HTML/Element/hr)
+ * 186:ref:[The hr element](https://developer.mozilla.org/en/HTML/Element/hr):null
 
-## Element som skapas av sig självt (implicita element)
+## Element som skapas av sig självt (implicita element):null
 
-## Element som stängs av andra element (implicit stängning)
+## Element som stängs av andra element (implicit stängning):null
 
-## HTML5:s innehållsmodell (content model) (fördjupning)
+## HTML5:s innehållsmodell (content model):null (fördjupning):null
 
- * Referenslänk: [HTML5 Content categories](https://developer.mozilla.org/en/HTML/Content_categories)
- * Referenslänk: [HTML5 Content model](http://www.w3.org/TR/html5/content-models.html) W3C dokumentet
+ * 189:ref:[HTML5 Content categories](https://developer.mozilla.org/en/HTML/Content_categories):null
+ * 189:ref:[HTML5 Content model](http://www.w3.org/TR/html5/content-models.html):null W3C dokumentet
 
-## Något mer om doctypes (överkurs på webbplatsen)
-
-## Sammanfattning
 

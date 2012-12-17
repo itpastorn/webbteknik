@@ -1,26 +1,28 @@
-# Kapitel 3: Vad är en bra webbplats?
+# Kapitel 3: Vad är en bra webbplats? (60)
 
-## En lättunderhållen webbplats
-### Skriv luftig kod
-### Använd konsekventa indrag
-### Använd konsekventa namn
-### Skriv kommentarer
+ * 60:tip:[Vägledning för webbutveckling](http://www.webbriktlinjer.se/):null
+ * 60:tip:[Principerna bakom vägledningen](http://www.webbriktlinjer.se/principer):null
+ * 60:tip:[Vägledning för webbutveckling på Facebook](https://www.facebook.com/groups/webbriktlinjer/):null
 
-## Vill du ha hjälp av andra? Chanserna ökar om din kod är lättläst!
+## En lättunderhållen webbplats (61)
+### Skriv luftig kod (62)
+### Använd konsekventa indrag (63)
+### Använd konsekventa namn (64)
+### Skriv kommentarer (65)
 
-## Progressiv förbättring
-### Börja med semantisk HTML-kod
+## Vill du ha hjälp av andra? Chanserna ökar om din kod är lättläst! (67)
 
- * Boklänk: CSS Naked Day TODO
+## Progressiv förbättring (68)
+### Börja med semantisk HTML-kod (69)
 
-### Använd CSS för gradvis förbättring
-### Skapa allt med JavaScript som kräver JavaScript
-### Kapacitetsdetektering
 
-## Varningssignaler - Vad utmärker (tekniskt) dåliga webbplatser
+
+### Använd CSS för gradvis förbättring (70)
+### Skapa allt med JavaScript som kräver JavaScript (71)
+### Kapacitetsdetektering (72)
+
+## Varningssignaler - Vad utmärker (tekniskt) dåliga webbplatser (73)
 
 ## Arbetsboken
-### Fler tips
- 
- * Tipslänk: Vägledningen Att bara läsa rubrikerna gör dig bättre!
 
+ 

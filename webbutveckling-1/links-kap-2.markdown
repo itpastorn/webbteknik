@@ -158,13 +158,9 @@ Länkar
 
 ## Läs mer om processen och verktyg (59)
 
-Länkar utlovade!
+TODO: Länkar utlovade!
 
 De här hör till kapitel 3:
-
-http://www.eutveckling.se/riktlinjer/webb/
-http://beta.webbriktlinjer.se/
-http://beta.webbriktlinjer.se/vl2011/principer
 
 
 ## Övningar

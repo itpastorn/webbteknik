@@ -1,112 +1,106 @@
-# Kapitel 4: Grundläggande HTML och CSS
+# Kapitel 4:Grundläggande HTML och CSS
 
-## HTML-terminologi
+## HTML-terminologi (75)
 
 Länkar
- * Referenslänk: TODO Tommys terminologi-genomgång på Sitepoint
- * Referenslänk: [HTML Element](http://en.wikipedia.org/wiki/HTML_element)
- * Fotnot: [Whitespace](http://en.wikipedia.org/wiki/Whitespace_%28programming_language%29)
- * Fotnot: [Void/tomt element](http://www.w3.org/TR/html-markup/spec.html#void-element)
+ * 75:ref:[HTML Element](http://en.wikipedia.org/wiki/HTML_element):null
+ * 75:ref:[HTML @ WebPlatform](http://docs.webplatform.org/wiki/html):null
+ * 75:note:[Whitespace](http://en.wikipedia.org/wiki/Whitespace_%28programming_language%29):null
+ * 75:note:[Void/tomt element](http://www.w3.org/TR/html-markup/spec.html#void-element):null
 
 ## CSS-terminologi
 
 Länkar
- * Referenslänk: [CSS Syntax](http://reference.sitepoint.com/css/syntax)
+ * 76:ref:[CSS Syntax](http://reference.sitepoint.com/css/syntax):wu-lb-4-2
 
 ## Block- och inline-element
 
 Länkar
- * Referenslänk: [Block Level Elements](https://developer.mozilla.org/en/HTML/Block-level_elements)
- * Referenslänk: [Inline Elements](https://developer.mozilla.org/en/HTML/Inline_elements)
+ * 77:ref:[Block Level Elements](https://developer.mozilla.org/en/HTML/Block-level_elements):null
+ * 77:ref:[Inline Elements](https://developer.mozilla.org/en/HTML/Inline_elements):null
 
 ## <!-- kommentarer i HTML -->
 
 Länkar
- * Referenslänk: [The Importance of Correct HTML Commenting](https://developer.mozilla.org/en/The_Importance_of_Correct_HTML_Commenting)
+ * 78:ref:[The Importance of Correct HTML Commenting](https://developer.mozilla.org/en/The_Importance_of_Correct_HTML_Commenting):null
 
-## Några HTML element och attribut
+## Några HTML element
 
 ### \<html>
 
 Länkar
- * Referenslänk: [The html-element](https://developer.mozilla.org/en/HTML/Element/html)
-
-TODO för alla dessa: Sitepoints länk också
+ * 80:ref:[The html-element](https://developer.mozilla.org/en/HTML/Element/html):null
 
 ### \<head>
 
- * Referenslänk: https://developer.mozilla.org/en/HTML/Element/head
+ * 81:ref:[The head element](https://developer.mozilla.org/en/HTML/Element/head):null
 
 ### \<body>
 
- * Referenslänk: https://developer.mozilla.org/en/HTML/Element/body
+ * 82:ref:[The body element](https://developer.mozilla.org/en/HTML/Element/body):null
  
- * Övning: Testa följande kombination...
-
 ### \<meta charset=”utf-8” />
 
- * Referenslänk: https://developer.mozilla.org/en/HTML/Element/meta TODO Fixa mer precis
- * Referenslänk: http://reference.sitepoint.com/html/meta/http-equiv
+ * 83:ref:[The meta element](https://developer.mozilla.org/en/HTML/Element/meta):null
+ * 83:ref:[Deklarera teckenkodning i HTML](http://www.w3.org/International/questions/qa-html-encoding-declarations):null
+ * 83:deep:[The http-equiv attribute](http://reference.sitepoint.com/html/meta/http-equiv):null
 
 ### \<title>
 
- * Referenslänk: https://developer.mozilla.org/en/HTML/Element/title
+ * 84:ref:[The title element](https://developer.mozilla.org/en/HTML/Element/title):null
 
 ### Rubriker (blockelement)
 
- * Referenslänk: [Rubriker](https://developer.mozilla.org/en/HTML/Element/Heading_Elements)
+ * 85:ref:[Heading elements](https://developer.mozilla.org/en/HTML/Element/Heading_Elements):null
 
 ### \<p> (blockelement)
 
- * Referenslänk: https://developer.mozilla.org/en/HTML/Element/p
+ * 86:ref:[The p element](https://developer.mozilla.org/en/HTML/Element/p):null
 
 ### \<a href="url"> (inline-element)
 
- * Referenslänk: https://developer.mozilla.org/en/HTML/Element/a
+ * 87:ref:[The a element](https://developer.mozilla.org/en/HTML/Element/a):null
 
 ### \<img src=".." alt="" /> (inline-element)
 
- * Referenslänk: https://developer.mozilla.org/en/HTML/Element/img
+ * 88:ref:[The img element](https://developer.mozilla.org/en/HTML/Element/img):null
 
 ### \<div> (blockelement)
 
- * Referenslänk: https://developer.mozilla.org/en/HTML/Element/div
+ * 89:ref:[The div element](https://developer.mozilla.org/en/HTML/Element/div):null
 
 ### \<span> (inline-element)
 
- * Referenslänk: https://developer.mozilla.org/en/HTML/Element/span
+ * 90:ref:[The span element](https://developer.mozilla.org/en/HTML/Element/span):null
 
 ## Vanliga HTML-attribut
 
- * Referenslänk: http://reference.sitepoint.com/html/core-attributes
+ * 91:ref:[Core attributes](http://reference.sitepoint.com/html/core-attributes):null
 
 ### Attributet lang
 
- * Fotnot: [Avstavning](https://developer.mozilla.org/en/CSS/hyphens)
- * Tipslänk: [Jättebra demo av lang-attributets betydelse med JAWS](http://www.youtube.com/watch?v=0-zrRixNw_A&NR=1)
+ * 92:note:[Hyphens (avstavning)](https://developer.mozilla.org/en/CSS/hyphens):null
+ * 92:tip:[Demo av lang-attributets betydelse med talsyntes](http://www.youtube.com/watch?v=0-zrRixNw_A&NR=1):null
 
 ### Attributet class
 
- * Fördjupningslänk: OOCSS (Nicole S) TODO
+ * Fördjupningslänk:OOCSS (Nicole S) TODO
 
 ### Attributet id
 ### Attributet title
 ### Attributet style
-### Attributet dir
+### Attributet dir (97)
 
 ## Några CSS-selektorer
 
- * Referenslänk: [Selektorer](https://developer.mozilla.org/en/CSS/Getting_Started/Selectors)
+ * 98:ref:[Selektorer](https://developer.mozilla.org/en/CSS/Getting_Started/Selectors):wu-lb-4-7
 
 ### Typselektorn
 ### Id-selektorn
 ### Klasselektorn
 ### Barn- och angränsande syskon- och avkomlingsselektorerna
 
-## Några CSS-egenskaper
-
- * Video: (Hur göra? Tänd och släck eller ändra i utvecklingsverktyget)
- * Video: (Hur göra? JSFiddle)
+## Några CSS-egenskaper (103)
 
 ### color
 ### Färgvärden
@@ -116,33 +110,33 @@ TODO för alla dessa: Sitepoints länk också
 
 ### Font-size
 
- * Referenslänk: https://developer.mozilla.org/en/CSS/font-size
+ * 108:ref:[font-size](https://developer.mozilla.org/en/CSS/font-size):null
 
 ### Font-weight
 
- * Referenslänk: https://developer.mozilla.org/en/CSS/font-weight
+ * 109:ref:[font-weight](https://developer.mozilla.org/en/CSS/font-weight):null
 
 ### Text-align
 
- * Referenslänk: https://developer.mozilla.org/en/CSS/text-align
+ * 110:ref:[text-align](https://developer.mozilla.org/en/CSS/text-align):null
 
 ### Text-decoration
 
- * Referenslänk: https://developer.mozilla.org/en/CSS/text-decoration
- * Referenslänk: https://developer.mozilla.org/en/CSS/text-decoration-line
- * Referenslänk: https://developer.mozilla.org/en/CSS/text-decoration-color
- * Referenslänk: https://developer.mozilla.org/en/CSS/text-decoration-style
+ * 111:ref:[text-decoration](https://developer.mozilla.org/en/CSS/text-decoration):null
+ * 111:ref:[text-decoration-line](https://developer.mozilla.org/en/CSS/text-decoration-line):null
+ * 111:ref:[text-decoration-color](https://developer.mozilla.org/en/CSS/text-decoration-color):null
+ * 111:ref:text-decoration-style](https://developer.mozilla.org/en/CSS/text-decoration-style):null
 
 ### Border
 
- * Referenslänk: https://developer.mozilla.org/en/CSS/border
- * Referenslänk: https://developer.mozilla.org/en/CSS/border-style
- * Referenslänk: https://developer.mozilla.org/en/CSS/border-color
- * Referenslänk: https://developer.mozilla.org/en/CSS/border-width
+ * 112:ref:[border](https://developer.mozilla.org/en/CSS/border):null
+ * 112:ref:[border-style](https://developer.mozilla.org/en/CSS/border-style):null
+ * 112:ref:[border-color](https://developer.mozilla.org/en/CSS/border-color):null
+ * 112:ref:[border-width](https://developer.mozilla.org/en/CSS/border-width):null
 
 ### Border-radius
 
- * Referenslänk: https://developer.mozilla.org/en/CSS/border-radius
+ * 113:ref:[border-radius](https://developer.mozilla.org/en/CSS/border-radius):null
 
 ## Extern CSS
 
@@ -156,36 +150,32 @@ TODO för alla dessa: Sitepoints länk också
 ### HTML validatorer
 ### Validering av CSS
 
- * Referenslänk: [CSS validatorn på W3C](http://jigsaw.w3.org/css-validator/)
+ * 117:ref:[CSS validatorn på W3C](http://jigsaw.w3.org/css-validator/):null
+ * 117:ref:[How to Validate CSS3](http://www.impressivewebs.com/css3-validation/):null
 
 ### Felkonsollen
 ### Lintning av HTML
 
- * Referenslänk: [HTML Lint tool](http://lint.brihten.com/html/help)
+ * 119:ref:[HTML Lint tool](http://lint.brihten.com/html/help):null
 
 ### Lintning av JavaScript
 
- * Referenslänk: TODO Länk till "The Good Parts" boken
- * Referenslänk: [JSHint](http://jshint.com/)
- * Fotnot: [JSLint](http://jslint.com/)
+ * 120:ref:[Crockford förklarar The Good Parts](http://www.youtube.com/watch?v=hQVTIJBZook):null
+ * 120:ref:[JSHint](http://jshint.com/)
+ * 120:note:[JSLint](http://jslint.com/)
 
 ### Lintning av CSS (fördjupning)
+
+ * 121:ref:[CSS Lint tool](http://csslint.net/):null
+
 ### Kontroll av tillgänglighet
 ### Netrelations Inspector (fördjupning)
+
+ * 123:ref:[Netrelations inspector](http://inspector.netrelations.se/):null
+
 ## Inget kan ersätta manuella kontroller och tester med riktiga användare
 
 ## Sammanfattning
 
 
- * Referenslänk: [HTML Lint tool](http://lint.brihten.com/html/help)
-
-
- * Referenslänk: TODO Länk till "The Good Parts" boken
- * Referenslänk: [JSHint](http://jshint.com/)
- * Fotnot: [JSLint](http://jslint.com/)
-
-http://www.impressivewebs.com/css3-validation/
-http://csslint.net/
-http://inspector.netrelations.se/
-http://www.firefoxmastery.com/firefox/introducing-the-firefox-error-console/
 
