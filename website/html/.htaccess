@@ -1,3 +1,6 @@
+# php_value session.save_path /home/gunther/arkiv/workspace/webbteknik/website/sessiondata
+php_value session.save_path /webbteknik.nu/sessiondata
+
 AddDefaultCharset utf-8
 Options +FollowSymlinks -MultiViews
 
@@ -5,8 +8,7 @@ RewriteEngine On
 RewriteCond %{HTTP_HOST} ^www\.webbteknik\.nu$ [NC]
 RewriteRule ^(.*)$ http://webbteknik.nu/$1 [R=301,L]
 
-#RewriteCond %{HTTP_HOST} ^wt\.book$ [NC]
-#RewriteBase /website/html
+# RewriteBase /website/html
 RewriteBase /
 
 # All URL:s should end with a trailing slash

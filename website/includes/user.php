@@ -55,7 +55,7 @@ class user
     public static function setSessionData()
     {
     	// URGENT message because of session breakage at Nexcess
-    	if ( empty($_SESSION) ) {
+    	if ( empty($_SESSION) && false) {
     		header("Status: 500 Server error");
     	    echo <<<MSG
 <!DOCTYPE html>

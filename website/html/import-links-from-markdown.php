@@ -32,11 +32,17 @@ $dbx = config::get('dbx');
 // init
 $dbh = keryxDB2_cx::get($dbx);
 
-$file = file_get_contents("/home/gunther/arkiv/workspace/webbteknik/webbutveckling-1/links-kap-2.markdown");
-
+$bookID  = 'wu1';
+$chapter = 8;
+$file    = file_get_contents("/home/gunther/arkiv/workspace/webbteknik/webbutveckling-1/links-kap-{$chapter}.markdown");
 
 $haslinks = preg_match_all("/([0-9]+):([a-z]{3,4}):\\[([^]]+)]\\(([^)]+)\\):([a-z0-9-]+)?/", $file, $links, PREG_SET_ORDER);
 
+/*
+echo "<pre>";
+var_dump($links); 
+exit;
+*/
 
 /*
 Produces an array where each item is an array like this one
@@ -57,21 +63,26 @@ header("Content-type: text/plain; charset=utf-8");
 echo "Number of parsed links in file: " . $haslinks . "\n\n";
 
 $sql = <<<SQL
-    INSERT INTO links (linkID, linktext, linkurl, linktype, booksectionID, bookID, videoname, time_added)
-    VALUES (null, :linktext, :linkurl, :linktype, :booksectionID, 'wu1', :videoname, NOW())
+    INSERT INTO links (linkID, linktext, linkurl, linktype, booksectionID, bookID, chapter, videoname, time_added)
+    VALUES (null, :linktext, :linkurl, :linktype, :booksectionID, :bookID, :chapter, :videoname, NOW())
 SQL;
 $stmt = $dbh->prepare($sql);
 
 $stmt->bindParam(':linktext', $linktext);
 $stmt->bindParam(':linkurl', $linkurl);
 $stmt->bindParam(':linktype', $linktype);
-$stmt->bindParam(':booksectionID', $section);
+$stmt->bindParam(':booksectionID', $booksectionID);
+$stmt->bindParam(':bookID', $bookID);
+$stmt->bindParam(':chapter', $chapter);
 $stmt->bindParam(':videoname', $videoname);
 
 $duplicates = 0;
 foreach ( $links as $lnk ) {
 	// $fullmatch is a dummy var just to be able to use list
     list($fullmatch, $booksectionID, $linktype, $linktext, $linkurl, $videoname) = $lnk;
+    if ( "null" == $videoname ) {
+        $videoname = null;
+    }
     try {
         $stmt->execute();
         echo "Added link: {$fullmatch}\n\n";

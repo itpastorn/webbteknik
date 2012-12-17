@@ -4,7 +4,7 @@
  *
  */
 
-exit("Sluta spamma");
+// exit("Sluta spamma");
 session_start();
 require_once '../../includes/loadfiles.php';
 
@@ -19,56 +19,37 @@ $dbh = keryxDB2_cx::get($dbx);
 
 header("Content-type: text/plain; charset=utf-8");
 
-$subject = "Videolista och enklare länkar";
+$subject = "God jul från webbteknik.nu";
 
 echo "Påbörjar utskick\n"; 
 
 $text = <<<TXT
 
-Hej återigen all på webbteknik.nu
+Det är bara några dagar kvar tills terminsslut. Jag kommer dock fortsätta
+jobba med fler filmer under lovet.
 
-Det finns nu en ny sida där alla filmer visas i en tabell.
+Inatt har jag lagt upp filmen som presenterar hur man kan göra layout, till
+kapitel 11. Det blev en lite längre film, i stället för ett par kortare. Man kan titta 
+i omgångar.
 
-http://webbteknik.nu/resources/videos/
+http://webbteknik.nu/userpage/video/wu-lb-11/
 
-En länk finns till denna sida i menyn. Dock ser man inte statusrapporten
-(om man sett filmen), som via Arbetsplaneringssidan.
+Jag visar inte bara float i filmen, utan också CSS-tabeller och flexbox,
+som precis i dagarna har börjat kunna testas med den färdiga syntaxen.
 
-Det finns några filmer som inte dyker upp om man bläddrar med föregående
-och nästa knapparna. Dessa kommer man alltså åt via denna nya sida (eller
-via sidan Arbetsplanering).
-
-Dessutom finns det en sida där alla hittills gjorda set med flashcards
-visas:
-
-http://webbteknik.nu/resources/flashcards/
-
-Där finns också några set som kan användas för kursen Datorteknik 1.
-
-Nu är också alla länkar förenklade. Det borde ni egentligen inte
-märka utom genom att webbläsaren markerar sidor ni redan besökt
-som obesökta (med länkens färg).
-
-Alla gamla URL:er fortsätter dock fungera.
-
-Exempel på gamla URL:er
-http://webbteknik.nu/assignments.php
-http://webbteknik.nu/userpage.php?video=kap-1-a-1
-http://webbteknik.nu/userpage.php?vidnum=11
-http://webbteknik.nu/joblist.php?book=wu1&c=3
-
-Vad de nu heter
-http://webbteknik.nu/assignments/
-http://webbteknik.nu/userpage/video/kap-1-a-1/
-http://webbteknik.nu/userpage/wu1/vidnum/11/
-http://webbteknik.nu/joblist/wu1/3/
-
-Den tekniska förklaringen är att jag gömmer GET-parametrarna
-med hjälp av rewrite-regler. Sådant får man lära sig i kursen
-Webbutveckling 1 (mot slutet).
+Jag följer inte koden till lächjälpen exakt, utan visar i videon mer hur det fungerar
+i princip och varför koden skrivs på ett visst sätt.
 
 
-mvh
+Nu finns det också tips på lite läsning under lovet. Länkarna till kapitel 1-8 har
+kommit upp:
+
+http://webbteknik.nu/resources/links/
+
+
+Och inte minst vill jag önska er alla drygt 700 användare en riktigt god jul!
+
+
 Lars Gunther
 
 

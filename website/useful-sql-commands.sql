@@ -438,6 +438,10 @@ ALTER TABLE `flashcardsets` ADD FOREIGN KEY ( `bookID` ) REFERENCES `webbtek_web
 ALTER TABLE `videos` ADD `chapter` TINYINT UNSIGNED NULL AFTER `bookID` ,
 ADD INDEX ( `chapter` );
 
+ALTER TABLE `links` ADD `chapter` TINYINT UNSIGNED NULL AFTER `bookID` ,
+ADD INDEX ( `chapter` );
+UPDATE `links` SET `chapter`=1 WHERE booksectionID < 35 AND `booksectionID` IS NOT NULL;
+
 -- Not put to server below
 
 

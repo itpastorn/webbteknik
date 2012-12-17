@@ -44,6 +44,7 @@ echo $userdata;
       <li><a href="joblist/">Arbetsplanering</a></li>
       <li><a href="resources/videos/">Videos</a></li>
       <li><a href="assignments/">Övningsuppgifter</a></li>
+      <li><a href="resources/links/">Länkar</a></li>
       <li><a href="resources/flashcards/">Flaschards</a></li>
       <?php echo $teacherpage; ?>
     </ul>

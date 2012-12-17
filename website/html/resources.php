@@ -2,7 +2,17 @@
 /**
  * Resources, page controler
  * 
+ * Should handle links in format
+ *  /resources                            mandatory
+ *            /type                       mandatory
+ *                 /bookID                optional
+ *                        /chapter/       optional, but requires bookID first
+ *                                 #type  Filter by type, using JavaScript
+ * 
  * @todo If a teacher has logged in, show links to finished solutions and "half way" solutions
+ * 
+ * @todo Allow filtering based on book and chapter - and linktype
+ * @todo Explain resources, linktypes, etc
  * 
  * @author <gunther@keryx.se>
  * @version "Under construction 1"
@@ -23,13 +33,6 @@ $dbx = config::get('dbx');
 // init
 $dbh = keryxDB2_cx::get($dbx);
 
-
-// Preparing for mod_rewrite, set base-element
-// TODO: Make this generic!
-$baseref = dirname(htmlspecialchars($_SERVER['SCRIPT_NAME'])) . "/";
-if ( "//" == $baseref ) {
-    $baseref = "/";
-}
 
 // Type of resource
 $r_types =  array(
@@ -59,7 +62,8 @@ switch ( $c_type ) {
         break;
 	case "links":
         include "data/links.php";
-        $resources      = data_links::loadAll($dbh, false, array('privileges' => $_SESSION['userdata']->privileges));
+        // TODO: Filter accotding to book from GET-param
+        $resources      = data_links::loadAll($dbh, false, array('bookID' => 'wu1'));
         $resource_table = data_links::makeTable($resources);
         break;
 	case "videos":
