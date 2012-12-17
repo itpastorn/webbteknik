@@ -1,0 +1,127 @@
+@charset "utf-8";
+html {
+    background-color: hsl(142, 91%, 36%);
+}
+body {
+    width: 1000px;
+    margin: auto;
+    font-family: "Liberation sans", Calibri, "Helvtica Neue", helvetica, arial, sans-serif;
+    background-color: hsl(142, 62%, 69%);
+}
+header, footer {
+    background-color: hsl(215, 55%, 69%);
+    text-align: center;
+    padding: 1px;
+}
+nav {
+    background-color: hsl(76, 100%, 26%);
+    padding: 0.5em;
+}
+div[role="main"] {
+    background-color: hsl(76, 84%, 75%);
+    padding: 0.5em;
+}
+
+/* CSS table rules */
+.table .wrapper {
+    display: table; /* Onödig, men gör det tydligt */
+}
+.table nav {
+    display: table-cell;
+    width: 20%;
+}
+.table div[role="main"] {
+    display: table-cell;
+    width: 80%;
+}
+
+/* Flex rules */
+.flex .wrapper {
+    display: flex;
+    flex-direction: row-reverse;
+}
+.flex nav {
+    flex: 0 1 20%;
+}
+.flex div[role="main"] {
+    flex: 0 1 auto;
+}
+
+/* Float rules */
+.float .wrapper {
+    background-image: linear-gradient(
+        to right,
+        hsl(76, 100%, 26%) 0%,
+        hsl(76, 100%, 26%) 20%,
+        hsl(76, 84%, 75%) 20% );
+    float: left; /* Contain */
+}
+.float nav {
+    float: left;
+    width: 20%;
+    background: transparent;
+}
+.float div[role="main"] {
+    background: transparent;
+    margin-left: 20%;
+}
+.float footer {
+    clear: both;
+}
+
+/* Inline-block rules */
+.ib .wrapper {
+    background-image: linear-gradient(to right, hsl(76, 100%, 26%) 0%, hsl(76, 100%, 26%) 20%, hsl(76, 84%, 75%) 20% );
+}
+.ib nav {
+    display: inline-block;
+    width: 20%;
+    background: transparent;
+}
+.ib div[role="main"] {
+    display: inline-block;
+    width: 75%;
+    vertical-align: top;
+    background: transparent;
+}
+
+
+
+
+
+
+/* Helper rules below - not part of demo */
+div[role="main"] > p {
+    opacity: 0.5;
+}
+button {
+    margin-left: 1em;
+}
+button {
+    opacity: 0.5;
+}
+.par1 .par2,
+.par1 .par3,
+.par1 .par5 {
+    display: none;
+}
+.par2 .par3,
+.par2 .par5 {
+    display: none;
+}
+.par3 .par5 {
+    display: none;
+}
+
+.table #table,
+.flex #flex,
+.float #float,
+.ib #ib,
+.par1 #par1,
+.par2 #par2,
+.par3 #par3,
+.par5 #par5 {
+    opacity: 1;
+}
+
+
