@@ -15,5 +15,6 @@
     </ul>
   </footer>
   <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+  <script src="https://login.persona.org/include.js" type="text/javascript"></script> 
   <script src="script/common.js"></script>
   

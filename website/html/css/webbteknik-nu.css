@@ -472,29 +472,15 @@ a[href*="wikipedia.org"]:after {
 /* ------------------------------- *\
    $primarynav
 \* ------------------------------- */
-.userdata {
-    margin: 0;
-    text-align: right;
-    font-size: x-small;
-}
 .mainmenu {
-    padding: 2px;
+    position: relative;
+    padding: 1.2em 2px 2px;
     margin: 0;
     border-radius: 2px;
     text-align: center;
     background-color: hsl(215, 55%, 69%);
     font-family: 'Oswald', "Franklin Gothic Medium", "Franklin Gothic", "ITC Franklin Gothic", Arial, sans-serif;
     letter-spacing: 1px;
-}
-.mainmenu ul {
-    margin: 0.2em 0;
-}
-.mainmenu li {
-    display: inline-block;
-    margin: 0;
-    padding: 2px 5px;
-    min-width: 150px;
-    text-transform: uppercase;
 }
 .mainmenu a {
     text-decoration: none;
@@ -512,8 +498,52 @@ a[href*="wikipedia.org"]:after {
     /*outline: 2px solid hsl(75, 89%, 63%);*/ /* Mystery space between content and outline */
     outline: none;
 }
+
+.userdata {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 185px;
+    margin: 0;
+    text-align: right;
+    font-size: x-small;
+}
+.userdata:hover {
+    background-color: hsl(215, 55%, 82%);
+    outline: 2px solid hsl(75, 88%, 63%);
+}
 .userdata a {
-    display: inline;
+    display: block;
+}
+.usermenu {
+    background-color: hsl(215, 55%, 82%);
+    height: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    transition: height 0.3s;
+}
+.userdata:hover > .usermenu {
+    height: 5em;
+}
+.usermenu > li {
+    display: block;
+    margin: 0;
+}
+.usermenu > li > a {
+    display: block;
+    padding: 0.5em 0;
+}
+
+.primarymenu {
+    margin: 0.2em 0;
+}
+.primarymenu > li {
+    display: inline-block;
+    margin: 0;
+    padding: 2px 5px;
+    min-width: 150px;
+    text-transform: uppercase;
 }
 
 /* ------------------------------- *\

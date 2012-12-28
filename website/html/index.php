@@ -62,7 +62,7 @@ $status .= "</ul>\n";
     Just nu arbetar jag (Lars Gunther) på att göra den här webbplatsen användbar (sedan ska den bli snyggare).
   </p>
   <p>
-    <strong>Om du <a href="http://webbteknik.nu/sign-in.php">registrerar dig</a>, så kommer du
+    <strong>Om du <a href="./sign-in.php">registrerar dig</a>, så kommer du
     få meddelande när det sker uppdateringar.</strong> Du kan då också se fler videos.
   </p>
   <h2>Uppdateringsstatus</h2>

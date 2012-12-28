@@ -1,0 +1,69 @@
+php_value session.save_path /home/gunther/arkiv/workspace/webbteknik/website/sessiondata
+# php_value session.save_path /webbteknik.nu/sessiondata
+
+AddDefaultCharset utf-8
+Options +FollowSymlinks -MultiViews
+
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^www\.webbteknik\.nu$ [NC]
+RewriteRule ^(.*)$ http://webbteknik.nu/$1 [R=301,L]
+
+RewriteBase /website/html
+# RewriteBase /
+
+# All URL:s should end with a trailing slash
+
+RewriteRule sign-in$     sign-in/     [R=301,NC,L]
+RewriteRule sign-in/$    sign-in.php  [NC,L]
+
+RewriteRule userpage$                      userpage/                      [R=301,NC,L]
+RewriteRule userpage/$                     userpage.php                   [NC,L]
+RewriteRule userpage/(.*)/vidnum/([^/]+)$  userpage/$1/vidnum/$2/         [R=301,NC,L]
+RewriteRule userpage/(.*)/vidnum/(.*)/$    userpage.php?book=$1&vidnum=$2 [NC,L]
+RewriteRule userpage/video/([^/]+)$        userpage/video/$1/             [R=301,NC,L]
+RewriteRule userpage/video/(.*)/$          userpage.php?video=$1          [NC,L]
+
+RewriteRule resources$                           resources/                                  [R=301,NC,L]
+RewriteRule resources/([^/]+)$                   resources/$1/                               [R=301,NC,L]
+RewriteRule resources/([^/]+)/$                  resources.php?what=$1                       [NC,L]
+RewriteRule resources/([^/]+)/([^/]+)/$          resources.php?what=$1=bookID=$2             [NC,L]
+RewriteRule resources/([^/]+)/([^/]+)/([^/]+)/$  resources.php?what=$1&bookID=$2&chapter=$3  [NC,L]
+
+RewriteRule flashcards$             resources/flashcards/   [R=301,NC,L]
+RewriteRule flashcards/$            resources/flashcards/   [R=301,NC,L]
+RewriteRule flashcards/([^/]+)$     flashcards/$1/          [R=301,NC,L]
+RewriteRule flashcards/(.*)/$       flashcards.php?set=$1   [NC,L]
+
+RewriteRule joblist$     joblist/     [R=301,NC,L]
+RewriteRule joblist/$    joblist.php  [NC,L]
+
+RewriteRule joblist$                    joblist/                   [R=301,NC,L]
+RewriteRule joblist/$                   joblist.php                [NC,L]
+RewriteRule joblist/(.+)/([0-9]+)$      joblist/$1/$2/             [R=301,NC,L]
+RewriteRule joblist/(.+)/([0-9]+)/$     joblist.php?book=$1&c=$2   [NC,L]
+
+RewriteRule assignments$     assignments/     [R=301,NC,L]
+RewriteRule assignments/$    assignments.php  [NC,L]
+
+RewriteRule edituser$     edituser/     [R=301,NC,L]
+RewriteRule edituser/$    edituser.php  [NC,L]
+
+RewriteRule teacherpage$     teacherpage/     [R=301,NC,L]
+RewriteRule teacherpage/$    teacherpage.php  [NC,L]
+
+
+# Notes
+# HTTP_HOST
+# REQUEST_URI
+# SCRIPT_NAME
+
+# TODO Prevent hotlinking and direct access to videos
+
+# Links
+# http://stackoverflow.com/questions/13675553/unwanted-default-rewrite-alias/13683376#13683376
+# http://www.the-art-of-web.com/system/rewrite/1/
+# http://www.the-art-of-web.com/system/duplicate-content/
+
+# http://stackoverflow.com/questions/6987929/preparing-php-application-to-use-with-utf-8
+
+# Firefox caches redirects (sic!) http://kb.mozillazine.org/Browser.cache.check_doc_frequency

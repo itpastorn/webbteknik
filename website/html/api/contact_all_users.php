@@ -4,7 +4,7 @@
  *
  */
 
-// exit("Sluta spamma");
+exit("Sluta spamma");
 session_start();
 require_once '../../includes/loadfiles.php';
 
@@ -19,35 +19,47 @@ $dbh = keryxDB2_cx::get($dbx);
 
 header("Content-type: text/plain; charset=utf-8");
 
-$subject = "God jul från webbteknik.nu";
+$subject = "God jul lärare på webbteknik.nu";
 
 echo "Påbörjar utskick\n"; 
 
 $text = <<<TXT
 
-Det är bara några dagar kvar tills terminsslut. Jag kommer dock fortsätta
-jobba med fler filmer under lovet.
+Hej alla ni lärare som använder mitt material.
 
-Inatt har jag lagt upp filmen som presenterar hur man kan göra layout, till
-kapitel 11. Det blev en lite längre film, i stället för ett par kortare. Man kan titta 
-i omgångar.
+Låt mig börja med att be om ursäkt för alla förseningar med CD:n.
 
-http://webbteknik.nu/userpage/video/wu-lb-11/
+En tanke är att all kod som används till videofilmerna ska vara med
+och när filmerna dröjer, så dröjer också CD:n.
 
-Jag visar inte bara float i filmen, utan också CSS-tabeller och flexbox,
-som precis i dagarna har börjat kunna testas med den färdiga syntaxen.
+Ni kan titta på koden här för alla klara filmer:
 
-Jag följer inte koden till lächjälpen exakt, utan visar i videon mer hur det fungerar
-i princip och varför koden skrivs på ett visst sätt.
+https://github.com/itpastorn/webbteknik/tree/master/webbutveckling-1/videos-kod
+
+Klicka på ett filnamn och klicka sedan på knappen "raw", så kan ni hämta er egen kopia.
 
 
-Nu finns det också tips på lite läsning under lovet. Länkarna till kapitel 1-8 har
-kommit upp:
+Jag förstår frustrationen över att saker drar ut på tiden. Jag är nog mest frusterad av
+oss alla över detta!
 
-http://webbteknik.nu/resources/links/
+När vårterminen drar igång, så är min förhoppning att resterande filmer ska vara gjorda.
 
 
-Och inte minst vill jag önska er alla drygt 700 användare en riktigt god jul!
+Jag har i min mailbox ett litet antal oavslutade supportärenden. Någon har bett om hjälp,
+och då mötts av följdfrågor från min sida. Men sedan har det blivit tyst. Jag antar att
+problemen då löst sig.
+
+Det vanligaste strulet är med inloggningen. Som ni kanske märkt är tekniken nu
+enklare, då webbläsaren kommer ihåg att man är inloggad. Men när detta inte är fallet
+så säger några användare att man måste klicka flera gånger. Jag har väldigt svårt
+att rekonstruera problemet. Troligen har det att göra med känslighet för latens.
+
+Ju mer tekniska detaljer jag får kring ett problem, desto enklare är det för mig att
+åtgärda dem, så försök hjälpa era elever med detta. En beskrivning som "jag kan inte logga in"
+eller "jag ser inte filmen" ger mig ingen vägledning alls.
+
+
+I övrigt önskar jag också er GOD JUL!
 
 
 Lars Gunther
@@ -71,7 +83,7 @@ error_reporting(E_ALL);
 ini_set("display_errors", "1");
 echo "UTF-8\n";
 
-foreach ( $dbh->query($all_users) as $row) {
+foreach ( $dbh->query($teachers) as $row) {
 	$to = "{$row['firstname']} {$row['lastname']} <{$row['email']}>";
     if (mail($to, $subject, $text, $headers) ) {
         echo "{$to} kontaktad\n";
