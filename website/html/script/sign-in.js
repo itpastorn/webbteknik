@@ -11,7 +11,7 @@
         loggedInUser: undefined,
         onlogin: gotAssertion,
         onlogout: function () {
-            console.log("Log out not yet implemented");
+            console.log("Log out not yet implemented for the watch event");
         }
     });
     function gotAssertion(assertion) {
@@ -52,6 +52,7 @@
         // New users should be directed to edit page
         if ( +userdata.privileges < 3 ) {
             window.location.href="edituser.php";
+            return true; // Function is finished
         }
         // What URL are you on? Special? Stay. Otherwise load personal start page.
         if ( window.ref ) {
