@@ -1,0 +1,56 @@
+@charset "utf-8";
+html {
+    background-color: hsl(142, 91%, 36%);
+}
+body {
+    width: 1180px;
+    margin: auto;
+    font-family: "Liberation sans", Calibri, "Helvtica Neue", helvetica, arial, sans-serif;
+    background-color: hsl(142, 62%, 85%);
+}
+h1 {
+    text-align: center;
+}
+
+svg {
+    display: block;
+    margin: auto;
+}
+
+.fe rect {
+    stroke-width: 6;
+    stroke: #000;
+    fill: #fff;
+
+}
+.ss rect {
+    stroke-width: 2;
+    stroke: #000;
+    fill: #fff;
+
+}
+.generated rect,
+.generated path {
+    stroke-width: 2;
+    stroke: #000;
+    fill: #fff;
+
+}
+svg text {
+    font-family: sans-serif;
+    text-anchor: middle;
+    fill: #000;
+    font-size: 12.8;
+}
+.sent rect, 
+.sent path{
+    fill: #e5e5e5;
+
+}
+path,
+line,
+polyline {
+     stroke-width: 2;
+     stroke: #000;
+     fill: none;
+}
