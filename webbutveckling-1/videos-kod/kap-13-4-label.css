@@ -1,0 +1,42 @@
+@charset "utf-8";
+html {
+    background-color: hsl(142, 91%, 36%);
+}
+body {
+    width: 1000px;
+    margin: auto;
+    font-family: "Liberation sans", Calibri, "Helvtica Neue", helvetica, arial, sans-serif;
+    background-color: hsl(142, 62%, 85%);
+}
+h1 {
+    text-align: center;
+}
+div[role="main"] {
+    background-color: hsl(76, 84%, 75%);
+    padding: 0.5em;
+}
+label {
+    display: inline-block;
+    text-align: right;
+    width: 120px;
+    padding-right: 5px;
+}
+input[type="submit"] {
+    margin-left: 125px;
+}
+input + label {
+    display: inline;
+    text-align: left;
+}
+@font-face {
+    font-family: space;
+    src: url(data:application/x-font-woff;charset=utf-8;base64,d09GRk9UVE8AAAOYAAsAAAAABUwAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABDRkYgAAABCAAAAIQAAACQ1P+0gUZGVE0AAAGMAAAAGgAAABxjhaFsR0RFRgAAAagAAAAbAAAAIAAvAARPUy8yAAABxAAAAEsAAABgP9zcNGNtYXAAAAIQAAAAOgAAAUrgERK3aGVhZAAAAkwAAAAuAAAANvsbcvdoaGVhAAACfAAAAB0AAAAkBBD942htdHgAAAKcAAAACAAAAAgAAAAAbWF4cAAAAqQAAAAGAAAABgACUABuYW1lAAACrAAAAN4AAAGJ242MgnBvc3QAAAOMAAAADAAAACAAAwAAeJw9zUEKwjAQRuF/kkhKDa2WKgqjZ8gJXHoBj+CqSJtNK3gCkdnmsLMQFEHdvdX3CM6BiIrunPqUBpAB4aBsdGd14yRYCW5fYntqXiL/CF4umnWcMa41AwvGbcnwjEcD+zEK1FhPQ3eMMX7x3wOgOwyRmVc6umfW7CtpZSWhfANCyyLweJxjYGBgZACCk535hiD6zD9JWRgNAEIVBfQAAHicY2BkYGDgA2IJBhBgYmCEQhYwjwEABFUANAB4nGNgZvzCOIGBlYGD0YcxjYGBwR1Kf2WQZGhhYGBiYGVmgAMBBJMhIM01hcHhA8MHBsYH/x8w6DE+YFBoYGBghCtQAEJGAGqIDSIAeJxjYGBgZoBgGQZGBhBwAfIYwXwWBg0gzQakGRmYGBg+MPz/D1IAoQUYoeqBgJGNAcEZoQAAbecGtwAAeJxjYGRgYADiTz08rvH8Nl8ZuJkYQODMP0lZBP3/ARMD4wMgl4MBLA0AIQUKSgAAeJxjYGRgYHzw/wGDHgMQ/GNgAnIZUAETAG2yA/MAAAAAAAAAAAAAAAAAUAAAAgAAeJx1jjFOAzEQRd8mmyAUhKgQpQsKml3ZVqocYEVNkT6KrNVKSSw5SZOD0HIESo7BATgCl+DHcUMRSyM/f/+ZP8Ad71ScT8UND4VH4pfCY545Fa6lfxaeMOO78FT6r5xVfSvlPnedeSR+KjzmFVu4lv5ReMIjX4Wn0n8YWBPZqiI7GNZxG6PgjUDPkQ0rkp6hP25Wgi77DvlOcgQMnlZphoXq/7yL5pnT4HQ3KpuJLu4OXUx9ML61ZmFKssjPG+cbb51c19ZbKjix1/8lxuUVWIa0HzTEtfZq7x+jCTpIAAB4nGNgZsALAAB9AAQ=) format('woff');
+    /* http://nimbupani.com/markup-free-icon-fonts-with-unicode-range.html */
+}
+fieldset > p {
+    font-family: space;
+}
+label,
+input {
+    font-family: "Liberation sans", Calibri, "Helvtica Neue", helvetica, arial, sans-serif;
+}

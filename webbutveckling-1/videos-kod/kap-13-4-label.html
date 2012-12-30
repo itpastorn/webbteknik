@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="sv" class="par1">
+  <head>
+    <meta charset="utf-8" />
+    <title>13.4 - Label-elementet</title>
+    <meta name="description" content="Webbteknik 1, Avsnitt 13.4 videokod" />
+    <link rel="stylesheet" href="kap-13-4-label.css" />
+  </head>
+  <body>
+    <h1>Label-elementet</h1>
+    <form method="post" action="login.php">
+      <fieldset>
+        <legend>Inloggning</legend>
+        <p>
+          <label for="un">Användarnamn</label>
+          <input type="text" name="username" id="un" required placeholder="foo@bar.com" />
+        </p>
+        <p>
+          <label for="pw">Lösenord</label>
+          <input type="password" name="password" id="pw" required />
+        </p>
+        <p>
+          <input type="submit" value="Logga in" />
+        </p>
+      </fieldset>
+      <fieldset>
+        <legend>Favoritfärg</legend>
+        <p>
+          <input type="radio" name="favcolor" id="red">
+          <label for="red">Röd</label>
+        </p>
+        <p>
+          <input type="radio" name="favcolor" id="green">
+          <label for="green">Grön</label>
+        </p>
+        <p>
+          <input type="radio" name="favcolor" id="blue">
+          <label for="blue">Blå</label>
+        </p>
+      </fieldset>
+    </form>
+  </body>
+</html>
+
