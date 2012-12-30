@@ -1,36 +1,34 @@
 <?php
 /**
- * This is a contact form handling script to be used with WaSP Interact courses in web design
+ * Skript som hanterar data från ett kontaktformulär för nybörjarkurser i webbteknik
  *
- * How to use:
+ * Hur använda:
  *
  * Make a template, as a suggestion called "contact-template.html" and put it in a directory
- * not accessible from the web (For security reasons templates should exist outside of the web root.)
+ * Gör en mall, förslagsvis kallad "contact-template.html" och placera den i en katalog
+ * BREDVID webbroten. (Av säkerhetsskäl bör mallar inte finnas i webbroten.)
  *
- * The template should be a straight html file and encoded using UTF-8 or US-ASCII. A simple example is provided.
- * Within that template you may put php variables, which MUST be enclosed in brackets.
- * Default values for these variables can be set below.
+ * Mallen ska vara en HTML-fil, kodad i UTF-8.
+ * I mallen placerar du php-variabler, som MÅSTE vara omgivna av måsvingar.
+ * Standardvärden för dessa variabler sätts i filen "config.php".
  *
- * For most form field in the form there will be two variables: One will be the value, one will be any
- * extra messages, like "required" or error messages.
+ * De flesta formulärfält kommer ha två variabler. Den ena kommer vara värdet, den andra är för
+ * extra meddelanden till användaren, som att ett fält är obligatoriskt eller ett felmeddelande.
  *
- * The form can be reduced to just two fields (subject and message) and a submit button.
- * These are always required and the form will not send e-mails if they are missing.
+ * Formuläret kan reduceras till bara två fält (ämne och meddelande) och en submitknapp.
+ * Dessa krävs alltid och utan värde för dem så skickas inga meddelanden vidare.
  *
- * In order to practice more stuff it may contain more fields, as in the example.
- * If there is an "mcategory" field, it must be in the form of radio buttons.
- * The user may modify the settings below to require more fields.
+ * För att öva på mer avancerade formulär, så kan man lägga till fler fält,
+ * exempelvis svarsmejladress, för- och efternamn på den som skickar meddelandet,
  *
- * One field, with the name attribute value "get_in_touch", may be included, but has no value carrying PHP variables
- * attached. It is simply used to practice the use of a checkbox.
+ * När ett meddelande har skickats, så används en mall för en tack-sida ("success-template.html").
+ * Om mallarna ges andra namn, så behöver det anges också i skriptet.
  *
- * After a successful submission of the form, a "thank you" template will be used ("success-template.html").
- * The user may chose alternative names for the templates in the preferences.
+ * Detta skript har skrivits för pedagogisk användning. Det har inte optimerats programmeingsmässigt
+ * eller kontrollerats för användning på produktionswebbplatser. (Det är dock bättre än vad som visas 
+ * på många så kallade "tutorials" på nätet.)
  *
- * This script has been written to highlight pedagogic values. It has not been tested on production sites.
- * It does not use optimal algorithms or patterns for use outside of a teaching situation.
- *
- * @author Lars Gunther on behalf of WaSP Interact
+ * @author Lars Gunther
  * @licence Creative Commons Attribution-Share Alike 3.0 Unported {@link http://creativecommons.org/licenses/by-sa/3.0/}
  *
  * @todo Support placeholder attributes from HTML5
@@ -54,8 +52,8 @@ session_start();
 header('Content-type: text/html; charset=UTF-8');
 
 // Check that we are at least on PHP 5.2
-if ( phpversion() < '5.2' ) {
-    trigger_error('The server is running a version of PHP that is too old. 5.2+ is required.');
+if ( phpversion() < '5.3' ) {
+    trigger_error('The server is running a version of PHP that is too old. 5.3+ is required.');
     $has_config_errors = true;
 }
 
@@ -63,7 +61,7 @@ if ( phpversion() < '5.2' ) {
 
 $has_config_errors = false;
 
-if ( array_diff($required_fields, array("uname", "umail", "mcategory")) ) {
+if ( array_diff($required_fields, array("uname", "umail") ) ) {
     trigger_error('Forbidden value in $required_fields.', E_USER_NOTICE);
     $has_config_errors = true;
 }
@@ -103,13 +101,8 @@ $uname_extra     = in_array('uname', $required_fields)     ? $required_msg    : 
 $umail_extra     = in_array('umail', $required_fields)     ? $required_msg    : "";
 $msubject_extra  = in_array('msubject', $required_fields)  ? $required_msg    : "";
 $mmessage_extra  = in_array('mmessage', $required_fields)  ? $required_msg    : "";
-$mcategory_extra = in_array('mcategory', $required_fields) ? $required_choice : "";
 
-// variables to indicate if a radiobutton is selected
-$mcat_complaint_checked  = "";
-$mcat_suggestion_checked = "";
-$mcat_other_checked      = "";
-// And the same for the checkbox
+// Always init empty
 $get_in_touch_checked = "";
 
 // Store suggested message text to enable test of changed value
@@ -180,7 +173,7 @@ if ( ! empty($_POST) ) {
     if ( isset($still_unsafe['get_in_touch']) && $still_unsafe['get_in_touch'] !== 'yes' ) {
         // This is a checkbox field
         // If it has been tampered with or if the form returns bad values we simply stop executing
-        echo "<h1>Bad data from checlbox field</h1>\n";
+        echo "<h1>Bad data from checkbox field</h1>\n";
         echo "<p>This is due to a configuration error or due to tempering with the form as such.</p>";
         exit;
     }
@@ -195,8 +188,7 @@ if ( ! empty($_POST) ) {
 
     // Check for possible errors in the user's real name
     $testing = isset($still_unsafe['uname']) ? $still_unsafe['uname'] : null;
-    // Note. The line above is PHP <= 5.2 syntax and could be rewritten in PHP 5.3+ as
-    // $testing = isset($still_unsafe['uname']) ?: null;
+    // Note. The line above is using the new PHP 5.3 syntax for ternary operators
     // The idea is to assign null when undefined, so we do not have to handle that case for all following checks
     if ( in_array('uname', $required_fields) && mb_strlen($testing, 'utf-8') < 2 ) {
         // No value at all or too short
@@ -210,7 +202,7 @@ if ( ! empty($_POST) ) {
         $error_fields[] = 'uname';
     }
 
-    $testing = isset($still_unsafe['umail']) ? $still_unsafe['umail'] : null;
+    $testing = isset($still_unsafe['umail']) ?: null;
     if ( empty($testing) && in_array('umail', $required_fields) ) {
         // No value at all, but it is required
         $error_fields[] = 'umail';
@@ -223,7 +215,7 @@ if ( ! empty($_POST) ) {
     // Now please let me restate that the testing methodology is quite repetitive and not effecient
     // It is - as said- kept this way for pedagogical purposes
 
-    $testing = isset($still_unsafe['msubject']) ? $still_unsafe['msubject'] : null;
+    $testing = isset($still_unsafe['msubject']) ?: null;
     if ( in_array('msubject', $required_fields) && mb_strlen($testing, 'utf-8') < 5 ) {
         // No value at all or too short
         $error_fields[] = 'msubject';
@@ -238,7 +230,7 @@ if ( ! empty($_POST) ) {
     // Message rules are very similar to msubject rules so we do get some code duplication
     // that could be abstracted into a function or better usage of the filter extension
     // (Still kept for pedagogic purposes...)
-    $testing = isset($still_unsafe['mmessage']) ? $still_unsafe['mmessage'] : null;
+    $testing = isset($still_unsafe['mmessage']) ?: null;
     if ( in_array('mmessage', $required_fields) && mb_strlen($testing, 'utf-8') < 25 ) {
         // No value at all or too short
         $error_fields[] = 'mmessage';
@@ -253,16 +245,6 @@ if ( ! empty($_POST) ) {
     } elseif ( levenshtein($testing, $placeholder_mmessage) < 10 ) {
         // Levenshtein is used to make sure that the message has substantially changed from the placeholder one
         $error_fields[] = 'mmessage';
-    }
-
-    $testing = isset($still_unsafe['mcategory']) ? $still_unsafe['mcategory'] : null;
-    if (
-        in_array('mcategory', $required_fields) && empty($testing)
-        OR
-        ! in_array($testing, array(null, 'complaint', 'suggestion', 'other'))
-    ) {
-        // No value set but it is required or wrong value set
-        $error_fields[] = 'mcategory';
     }
 
     // Activate error messages and log to console
@@ -282,9 +264,6 @@ if ( ! empty($_POST) ) {
         // The first values are safe for usage in e-mail, since they have been filtered and can not contain
         // data that acts as SMTP-headers
         $smtpsafe_subject = $still_unsafe['msubject'];
-        if ( ! empty($still_unsafe['mcategory']) ) {
-            $smtpsafe_subject .= ' (' . $localized_categories[$still_unsafe['mcategory']] . ')';
-        }
 
         if ( empty($still_unsafe['uname']) ) {
             $smtpsafe_replyto = "";
@@ -314,11 +293,11 @@ if ( ! empty($_POST) ) {
 
     }
 
-    // In PHP 5.3 we could use the shorthand syntax, but this script is 5.2 in min-version
     $still_unsafe['uname']    = isset($still_unsafe['uname'])    ? $still_unsafe['uname']    : '';
     $still_unsafe['umail']    = isset($still_unsafe['umail'])    ? $still_unsafe['umail']    : '';
     $still_unsafe['msubject'] = isset($still_unsafe['msubject']) ? $still_unsafe['msubject'] : '';
     $still_unsafe['mmessage'] = isset($still_unsafe['mmessage']) ? $still_unsafe['mmessage'] : '';
+
     // The following 4 values are user submitted and thus may contain HTML, JavaScript, etc.
     // Before usage on re-shown contact page or on the success page we therefore need to escape them
     // before they can be considered totally safe for such usage
@@ -366,20 +345,33 @@ if ( $use_form_template ) {
 
 $template = file_get_contents($template);
 
-$template = str_replace('{$uname}', $uname, $template);
-$template = str_replace('{$umail}', $umail, $template);
-$template = str_replace('{$uname_extra}', $uname_extra, $template);
-$template = str_replace('{$umail_extra}', $umail_extra, $template);
-$template = str_replace('{$msubject}', $msubject, $template);
-$template = str_replace('{$mmessage}', $mmessage, $template);
-$template = str_replace('{$msubject_extra}', $msubject_extra, $template);
-$template = str_replace('{$mmessage_extra}', $mmessage_extra, $template);
-$template = str_replace('{$mcategory_extra}', $mcategory_extra, $template);
-$template = str_replace('{$mcat_complaint_checked}', $mcat_complaint_checked, $template);
-$template = str_replace('{$mcat_suggestion_checked}', $mcat_suggestion_checked, $template);
-$template = str_replace('{$mcat_other_checked}', $mcat_other_checked, $template);
-$template = str_replace('{$get_in_touch_checked}', $get_in_touch_checked, $template);
-$template = str_replace('{$random_string}', $_SESSION['prevent_multiple_submits'], $template);
+$template = str_replace(
+    array(
+        '{$uname}',
+        '{$umail}',
+        '{$uname_extra}',
+        '{$umail_extra}',
+        '{$msubject}',
+        '{$mmessage}',
+        '{$msubject_extra}',
+        '{$mmessage_extra}',
+        '{$get_in_touch_checked}',
+        '{$random_string}',
+    ),
+    array(
+        $uname,
+        $umail,
+        $uname_extra,
+        $umail_extra,
+        $msubject,
+        $mmessage,
+        $msubject_extra,
+        $mmessage_extra,
+        $get_in_touch_checked,
+        $_SESSION['prevent_multiple_submits']
+    ),
+    $template
+);
 
 
 // Display the page
