@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <title>Kontaktformulärhantering</title>
+  <link rel="stylesheet" href="../css/webbteknik-nu.css" />
+  <link href='http://fonts.googleapis.com/css?family=Handlee' rel='stylesheet' />
+  <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' />
+  <link href='../css/slides.css' rel='stylesheet' />
+  <link href='./contact-form-architecture.css' rel='stylesheet' />
+  <style>
+  li { margin-bottom: 1em;
+  </style>
+</head>
+<body class="wide">
+<!-- One section is one slide -->
+
+<section>
+    <h1>Arkitektur för kontaktformulär</h1>
+    <footer>Webbutveckling 1</footer>
+</section>
+
+<section>
+<svg width="1120" height="540" viewBox="35 75 1125 545" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g id="user">
+    <path style="fill: #417dcf" d="M 48.53 340.37 L 49.90,341.74 L 43.83,350.67 L 43.83,354.10 L 51.89,358.92 L 54.63,358.24 L 60.04,347.22 L 62.07,348.59 L 80.99,310.80 L 80.9901,365.8 L 85.0361,365.8 L 62.0672,444.169 L 65.4596,446.939 L 53.944,448.993 L 46.5055,454.502 L 46.5055,460.664 L 81.6748,460.664 L 82.3284,455.186 L 81.6748,451.047 L 85.7208,450.362 L 105.329,389.174 L 124.936,450.362 L 128.982,451.047 L 128.298,455.871 L 129.667,460.664 L 164.089,460.664 L 164.089,454.502 L 156.682,448.993 L 145.166,446.939 L 147.905,444.169 L 125.59,365.8 L 129.667,365.8 L 129.667,310.805 L 147.905,349.305 L 149.928,347.22 L 155.313,358.237 L 158.705,358.922 L 166.828,354.098 L 166.828,350.674 L 160.728,341.742 L 162.097,340.373 L 133.028,281.923 L 116.128,281.923 L 110.713,276.414 L 97.8901,276.414 L 93.1593,281.923 L 77.6288,281.923 L 48.5285,340.373z"/>
+    <path style="fill: #417dcf" d="M 108.69 240 L 101.282,240 L 97.8901,240.654 L 92.4746,245.478 L 91.7899,250.302 L 91.7899,256.464 L 91.1363,259.234 L 91.1363,261.973 L 94.4976,274.329 L 97.8901,277.784 L 105.329,279.153 L 112.082,277.784 L 115.444,274.329 L 118.151,266.081 L 119.521,261.973 L 119.521,259.234 L 118.151,256.464 L 118.151,250.302 L 117.498,245.478 L 112.082,240.654 L 108.69,240z"/>
+  </g>
+  <g id="recipient">
+    <path style="fill: #417dcf" d="M 1036.33 338.247 L 1039.08,338.913 L 1034.27,348.036 L 1034.27,351.552 L 1040.48,355.037 L 1043.23,354.34 L 1048.71,343.157 L 1050.8,344.551 L 1059.07,324.974 L 1070.1,306.063 L 1073.52,322.884 L 1059.74,398.403 L 1072.82,398.403 L 1069.37,438.919 L 1063.89,445.952 L 1055.62,448.74 L 1048.05,452.192 L 1048.05,458.496 L 1063.16,458.496 L 1074.21,453.618 L 1072.82,458.496 L 1078.33,458.496 L 1081.09,452.921 L 1081.09,443.829 L 1085.93,426.343 L 1090.75,398.403 L 1098.99,398.403 L 1103.83,426.343 L 1108.68,443.133 L 1108.68,452.921 L 1111.44,458.496 L 1116.92,458.496 L 1114.86,453.618 L 1126.58,458.496 L 1141.72,458.496 L 1141.72,452.192 L 1134.15,448.74 L 1125.85,445.952 L 1120.37,438.919 L 1116.22,398.403 L 1130,398.403 L 1116.22,322.884 L 1119.67,306.063 L 1130.7,324.974 L 1138.3,345.248 L 1140.33,343.157 L 1145.84,354.34 L 1148.59,355.037 L 1155.44,351.552 L 1155.44,348.036 L 1150.65,338.913 L 1153.44,338.913 L 1140.99,315.883 L 1127.24,287.214 L 1123.09,280.879 L 1117.61,278.851 L 1103.14,276.729 L 1099.71,269 L 1085.93,269 L 1085.24,276.729 L 1072.09,278.851 L 1066.64,280.879 L 1063.16,285.821 L 1048.05,317.308 L 1036.33,338.247z"/>
+    <path style="fill: #417dcf" d="M 1101.08 234.059 L 1098.99,233.362 L 1094.9,232.697 L 1092.78,232.697 L 1089.36,233.362 L 1086.6,234.059 L 1083.88,235.485 L 1082.45,237.575 L 1081.09,240.331 L 1079.69,243.879 L 1079.06,246.635 L 1079.06,250.183 L 1078.33,252.971 L 1076.97,259.275 L 1078.33,263.456 L 1077.63,266.244 L 1076.97,269.76 L 1075.61,272.548 L 1074.91,273.91 L 1076.24,275.335 L 1079.06,276.032 L 1081.09,275.335 L 1082.45,275.335 L 1086.6,276.729 L 1087.3,273.91 L 1087.3,271.819 L 1087.3,269.76 L 1088.66,271.819 L 1089.36,273.213 L 1090.75,273.213 L 1092.78,273.91 L 1094.9,274.638 L 1096.96,273.91 L 1097.62,273.91 L 1099.71,273.213 L 1099.71,271.819 L 1101.08,270.393 L 1101.08,273.91 L 1101.77,276.032 L 1101.77,276.729 L 1103.83,276.729 L 1106.53,276.729 L 1108.68,275.335 L 1110.67,273.213 L 1112.07,271.819 L 1111.44,269 L 1110.67,267.638 L 1111.44,263.456 L 1112.07,257.849 L 1112.07,253.668 L 1110.67,250.183 L 1110.67,245.241 L 1110.04,242.485 L 1108.68,238.272 L 1106.53,236.878 L 1104.53,235.485 L 1103.14,234.756 L 1101.08,235.485 L 1101.08,234.059z"/>
+  </g>
+  <g class="incremental"><!-- anropar -->
+    <g>
+      <path d="M 549,147 A 262,262 0 0 0 115,281"/>
+      <polyline points="540,145 550,148 547,138 "/>
+      <text x="360" y="100">anropar</text>
+    </g>
+    <g>
+      <text style="font-size:1.5rem;" x="210" y="348">HTTP</text>
+    </g>
+  </g>
+  <g id="controler" class="ss incremental">
+    <g>
+      <rect x="494" y="151" width="209" height="115"/>
+      <line x1="514" y1="151" x2="514" y2="266"/>
+      <line x1="683" y1="151" x2="683" y2="266"/>
+      <text x="598" y="212.5">Controler</text>
+    </g>
+  </g>
+  <g id="mallar" class="fe incremental">
+    <g>
+      <rect x="518" y="412" width="156" height="71"/>
+      <text x="596" y="452">Mallar</text>
+      <line x1="596" y1="409" x2="597" y2="278"/>
+      <polygon points="602.418,278.019 597.502,267.977 592.419,277.935 "/>
+      <polygon points="602.418,278.019 597.502,267.977 592.419,277.935 "/>
+    </g>
+  </g>
+  <g id="config" class="fe incremental">
+    <g>
+      <rect x="710" y="412" width="156" height="71"/>
+      <text x="788" y="452">Konfigurering </text>
+      <line x1="758" y1="412" x2="651" y2="276"/>
+      <polygon points="655,272.5 645,268 647,279 "/>
+    </g>
+  </g>
+  <g class="incremental flashing">
+    <text x="660" y="380">require()</text>
+  </g>
+  <g class="incremental"><!-- skapar linjen -->
+    <g>
+      <line x1="493" y1="190" x2="403.5" y2="174"/>
+      <polyline points="412,170.2 401.2,173.4 410.2,180 "/>
+      <text x="448" y="170">skapar</text>
+    </g>
+  </g>
+  <g id="html" class="generated sent incremental">
+    <g>
+      <rect x="263" y="133" width="136" height="80"/>
+      <text x="331" y="177">HTML</text>
+      <line x1="263" y1="173" x2="147" y2="300"/>
+      <polyline points="149,291 146,302 156,298"/>
+    </g>
+  </g>
+  <g id="post" class="generated sent incremental">
+    <g>
+      <path d="M 263,243 L 399,243 L 399,310 C 328.5,280 328.5,340 263,310z"/>
+      <text x="331" y="273.7">POST-data</text>
+      <line x1="130" y1="337" x2="260" y2="303"/>
+      <polyline points="254,310 262,302 252,300"/>
+    </g>
+  </g>
+  <g class="incremental"><!-- bearbetar linjen -->
+    <g>
+      <line x1="399" y1="264" x2="489" y2="240.5"/>
+      <polyline points="483,248 491,240 480,238"/>
+      <text x="448" y="284.99">bearbetar</text>
+    </g>
+  </g>
+  <g id="css" class="fe sent incremental dimout">
+    <g>
+      <rect x="345" y="370" width="110" height="65"/>
+      <text x="400" y="408">CSS</text>
+      <line x1="345" y1="403" x2="135" y2="350"/>
+      <polyline points="143,347 132.5,349 141,356"/>
+    </g>
+  </g>
+  <g id="javascript" class="fe sent incremental dimout">
+    <g>
+      <rect x="345" y="460" width="110" height="65"/>
+      <text x="400" y="498">JavaScript</text>
+      <line x1="345" y1="492" x2="134" y2="359"/>
+      <polyline points="143,359 132,358 138,367"/>
+    </g>
+  </g>
+  <g id="images" class="fe sent incremental dimout">
+    <g>
+      <rect x="345" y="550" width="110" height="65"/>
+      <text x="400" y="588">Bilder</text>
+      <line x1="346" y1="574.29" x2="133.535" y2="367.095"/>
+      <polyline points="142.584,368.936 131.934,365.534 135.602,376.095 "/>
+    </g>
+  </g>
+  <g id="mail" class="generated sent incremental">
+    <g>
+      <path d="M 780,160 L 950,160 L 950,240 C 865,195 865,295 780,240z"/>
+      <text x="865.5" y="199">Mejl</text>
+      <line x1="703" y1="209" x2="768" y2="209"/>
+      <polygon points="768,214 778,209 768,204 "/>
+    </g>
+    <g><!-- mejl-linjen -->
+      <line x1="890" y1="230" x2="1026" y2="332"/>
+      <polygon points="1022,336 1033,338 1029,328"/>
+    </g>
+    <text style="font-size:1.5rem;" x="866" y="295">SMTP</text>
+  </g>
+  <g id="static" class="domain incremental">
+    <g>
+      <path d="M 300,330 l 200,0 l 0,288 l -200,0z" />
+      <text x="400" y="360">Statisk data</text> 
+    </g>
+  </g>
+  <g id="static" class="domain incremental">
+    <g>
+      <path d="M 233,100 l 750,0 l 0,175 l -230,0 l 0,-140 l -320,0 l 0,90 l -200,0z" />
+      <text x="608" y="125">Dynamisk data</text> 
+    </g>
+  </g>
+  <!-- legend -->
+  <text style="text-anchor:start;">
+    <tspan x="800" y="560">Grå bakrund = skickas</tspan>
+    <tspan x="800" y="585">Vit bakgrund = Kod som körs på servern</tspan>
+    <tspan x="800" y="610">Tjock kantlinje = Front end</tspan>
+  </text>
+</svg>
+
+</section>
+
+<div id="progress-bar"></div>
+<script src="../script/slides.js"></script>
+</body>
+</html>

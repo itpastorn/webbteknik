@@ -1,20 +1,23 @@
 @charset "utf-8";
+/*
 html {
     background-color: hsl(142, 91%, 36%);
 }
 body {
     width: 1180px;
-    margin: auto;
+    margin: 1em auto;
+    padding: 0.1px 0 1em;
     font-family: "Liberation sans", Calibri, "Helvtica Neue", helvetica, arial, sans-serif;
     background-color: hsl(142, 62%, 85%);
 }
 h1 {
     text-align: center;
 }
-
+*/
 svg {
     display: block;
     margin: auto;
+    width: 99%;
 }
 
 .fe rect {
@@ -40,7 +43,7 @@ svg text {
     font-family: sans-serif;
     text-anchor: middle;
     fill: #000;
-    font-size: 12.8;
+    font-size: 1.1rem;
 }
 .sent rect, 
 .sent path{
@@ -54,3 +57,22 @@ polyline {
      stroke: #000;
      fill: none;
 }
+.domain path {
+    opacity: 0.6;
+    fill: #D0F26F;
+}
+.domain text {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+/* The current item */
+.dimout.incremental > *[aria-selected] { opacity: 1; }
+.incremental > [aria-selected].flashing { opacity: 1; }
+
+
+/* previous items */
+.dimout.incremental > * { opacity: 0.6; }
+.incremental > .flashing { opacity: 0; }
+
+/* next */
+.dimout.incremental > *[aria-selected] ~ * { opacity: 0; } /* repeated for specificity's sake */
