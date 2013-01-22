@@ -1,0 +1,27 @@
+Manus
+- Visa färdig sida - zoom - MeasureIt
+- Sid 198
+- CSS - jag har en egen fil för denna video
+- Google-fonten
+- Lägg på lite innehåll för att kolla spalterna
+- Sid 199: 11.3
+- Sid 200: 11.3.2
+
+
+Manus om float
+- Vad är float
+- Faux columns
+- Contain float
+- Clear float
+
+Bonusvideo:
+- Struktur på CSS-filen
+  + Grundstilregler
+  + Återanvändningsbara stilregler
+  + Stilregler per siddel för hela webbplatsen (meny, header, footer, etc)
+  + Stilregler per sida
+
+- Högerspalten
+- Article - ska kunna fungera självständigt
+- Figure + figcaption -> Bild med text (inte alt-text)
+- CSS

@@ -102,6 +102,15 @@ if ( "//" == $baseref ) {
     <li>
       <a href="practice-files/laxhjalpen/kontakt-mall.html">Start av kontakt-mall.html för Läxhjälpen</a>.
     </li>
+    <li>
+      <a href="practice-files/laxhjalpen/skickat-mall.html">Skickat-mall.html för Läxhjälpen</a>.
+    </li>
+    <li>
+      <a href="practice-files/laxhjalpen/contact.php-tabort-allt-efter-php">contact.php för Läxhjälpen</a>.
+    </li>
+    <li>
+      <a href="practice-files/laxhjalpen/config.php-tabort-allt-efter-php">config.php för Läxhjälpen</a>.
+    </li>
   </ul>
   
   <!-- TODO 
