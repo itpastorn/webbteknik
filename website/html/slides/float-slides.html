@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <title>Float</title>
+  <link rel="stylesheet" href="../css/webbteknik-nu.css" />
+  <link href='http://fonts.googleapis.com/css?family=Handlee' rel='stylesheet' />
+  <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' />
+  <link href='../css/slides.css' rel='stylesheet' />
+  <link href='./float-slides.css' rel='stylesheet' />
+</head>
+<body class="wide">
+<!-- One section is one slide -->
+
+<section>
+  <h1>Float</h1>
+  <p class="intro"><strong>X</strong> på röd bakgrund markerar var i texten det "flytande" elementet finns.</p>
+    <footer>Webbutveckling 1</footer>
+</section>
+
+<section>
+  <h3>Float i löpande text</h3>
+  <p lang="la">
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris fringilla libero ac magna sodales at interdum leo vestibulum. Curabitur quis vulputate erat. <span></span><strong>x</strong> Quisque quam quam, auctor nec sodales mollis, pulvinar nec lorem. Quisque ut erat turpis. Nunc vel faucibus nunc. Morbi sed magna nisi. Nullam feugiat tincidunt sem vitae eleifend. Cras massa nulla, condimentum congue faucibus non, condimentum nec nisi. Proin pulvinar gravida blandit. In hac habitasse platea dictumst. Mauris nec eros tellus, id tempus mi.
+  </p>
+</section>
+
+<section>
+  <p>Display: block sätts automatiskt på alla element som <q>flyter</q></p>
+</section>
+
+<section>
+  <h3>Float sist i löpande text som påverkar två stycken</h3>
+  <p lang="la">
+Ut eget ligula eros. Vivamus eget nibh nisl. Pellentesque a pretium enim. Praesent vel tincidunt mauris. Phasellus eu convallis ligula. Nunc eros sapien, lacinia non vestibulum a, vulputate et nisl. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in nibh ut odio tincidunt tincidunt vitae id massa. Nunc feugiat sodales scelerisque. Nullam nec ligula sed nibh vestibulum porttitor at at nunc. Nulla ante quam, fringilla eget luctus ut, facilisis nec est.<span></span><strong>x</strong>
+  </p>
+  <p lang="la">
+Morbi pulvinar arcu ut velit sodales tincidunt. Curabitur blandit, orci dictum fringilla gravida, urna erat mollis dolor, ac luctus purus ante eget purus. Mauris vehicula faucibus magna non gravida. Nunc sagittis lectus sit amet quam congue gravida. Integer scelerisque feugiat massa vitae faucibus. 
+  </p>
+</section>
+
+<section>
+  <p>Ursprungligt ändamål:</p>
+  <p>Bilder</p>
+</section>
+
+<section>
+  <h3>Flera float i löpande text</h3>
+  <p lang="la">
+Curabitur rhoncus tincidunt elementum. Vivamus a dolor nunc. Sed dapibus suscipit enim, vel ornare tellus feugiat nec. Fusce sagittis enim vitae ante laoreet ut pharetra nisi semper. Proin eget arcu ut nibh tincidunt suscipit <span></span><strong>x</strong> scelerisque quis enim. Donec eros nunc, accumsan quis rutrum et, dapibus eu nisi. Cras fringilla placerat cursus. Proin <span></span><strong>x</strong> tincidunt <span></span><strong>x</strong> facilisis <span></span><strong>x</strong> ipsum ut auctor. Phasellus sit amet nunc a sem convallis tristique.
+  </p>
+  <p lang="la">
+Etiam id metus mauris. Etiam vel eros ut metus dignissim dapibus eget ac sem. Aliquam scelerisque quam nunc, et feugiat erat. Cras id dolor eleifend ante fringilla consequat sit amet et metus. Proin commodo vulputate porta. 
+  </p>
+</section>
+
+<section>
+ <h3>Ännu fler float i löpande text</h3>
+  <p lang="la">
+<span></span><strong>x</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit.<span></span><strong>x</strong>  Mauris nunc elit, consequat eu iaculis ac, ultricies nec est.<span></span><strong>x</strong> Aliquam porta, magna sed faucibus laoreet, sapien urna volutpat ipsum,<span></span><strong>x</strong> non vehicula augue mi eget ante.<span></span><strong>x</strong>  Curabitur mollis condimentum risus nec pulvinar.<span></span><strong>x</strong> Ut placerat porta justo sed dapibus. Quisque neque metus, ornare quis auctor at,<span></span><strong>x</strong> porttitor aliquet lacus. <span></span><strong>x</strong> Integer vestibulum eros malesuada lacus ullamcorper quis <span></span><strong>x</strong> aliquet velit aliquam. 
+  </p>
+</section>
+
+<section>
+  <p>Texten kan inte flyta på båda sidor</p>
+</section>
+
+<section>
+  <p>(Ännu...)</p>
+  <p><a href="http://ie.microsoft.com/testdrive/html5/positionedfloats/default.html">Positioned
+  floats. Bara IE 10+.</a></p>
+  <p>Mer kraft: CSS regions, shapes, exclusions&hellip;</p>
+</section>
+
+<section>
+  <h3>Float med marginaler först i löpande text</h3>
+  <p lang="la">
+<span class="margin"></span><strong>x</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nunc elit, consequat eu iaculis ac, ultricies nec est. Aliquam porta, magna sed faucibus laoreet, sapien urna volutpat ipsum, non vehicula augue mi eget ante. Curabitur mollis condimentum risus nec pulvinar. Ut placerat porta justo sed dapibus. Quisque neque metus, ornare quis auctor at, porttitor aliquet lacus. Integer vestibulum eros malesuada lacus ullamcorper quis aliquet velit aliquam. Etiam id metus mauris. Etiam vel eros ut metus dignissim dapibus eget ac sem. Aliquam scelerisque quam nunc, et feugiat erat. 
+  </p>
+</section>
+
+<section>
+  <h3>Float höger med marginaler först i löpande text</h3>
+<p lang="la">
+<span class="right"></span><strong>x</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nunc elit, consequat eu iaculis ac, ultricies nec est. Aliquam porta, magna sed faucibus laoreet, sapien urna volutpat ipsum, non vehicula augue mi eget ante. Curabitur mollis condimentum risus nec pulvinar. Ut placerat porta justo sed dapibus. Quisque neque metus, ornare quis auctor at, porttitor aliquet lacus. Integer vestibulum eros malesuada lacus ullamcorper quis aliquet velit aliquam. Etiam id metus mauris. Etiam vel eros ut metus dignissim dapibus eget ac sem. Aliquam scelerisque quam nunc, et feugiat erat. 
+  </p>
+</section>
+
+<section>
+  <h3>Wrapper med <q lang="en">faux columns</q> och float före text med margin</h3>
+  <div class="faux">
+    <p lang="la"><span class="margin"></p>
+    <p class="sp" lang="la">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nunc elit, consequat eu iaculis ac, ultricies nec est. Aliquam porta, magna sed faucibus laoreet, sapien urna volutpat ipsum, non vehicula augue mi eget ante. Curabitur mollis condimentum risus nec pulvinar. Ut placerat porta justo sed dapibus. Quisque neque metus, ornare quis auctor at, porttitor aliquet lacus.  Integer vestibulum eros malesuada lacus ullamcorper quis aliquet velit aliquam. Etiam id metus mauris. Etiam vel eros ut metus dignissim dapibus eget ac sem. Aliquam scelerisque quam nunc, et feugiat erat.
+    </p>
+  </div>
+</section>
+
+<section>
+  <h2>Clearing floats</h2>
+</section>
+
+<section>
+  <h3>Div med <em>beräknad</em> höjd = 0 och
+  2px border. Efterföljande text är placerad utanför div-elementet.</h3>
+  <div class="nopad bordered">
+    <div class="float">
+      <pre>
+.float {
+    float: left;
+    width: 150px;
+    border: 2px solid teal;
+    height: 130px;
+    margin-right: 10px;
+}
+      </pre>
+    </div>
+  </div> 
+  <p lang="la">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris fringilla libero ac magna
+    sodales at interdum leo vestibulum. Curabitur quis vulputate erat. Quisque quam quam,
+    auctor nec sodales mollis, pulvinar nec lorem. Quisque ut erat turpis. Nunc vel faucibus
+    nunc. Morbi sed magna nisi. Nullam feugiat tincidunt sem vitae eleifend. Curabitur mollis
+    condimentum risus nec pulvinar. Ut placerat porta justo sed dapibus. Quisque neque metus,
+    ornare quis auctor at, porttitor aliquet lacus.  Integer vestibulum eros malesuada lacus
+    ullamcorper quis aliquet velit aliquam. Etiam id metus mauris. Etiam vel eros ut metus
+    dignissim dapibus eget ac sem. Aliquam scelerisque quam nunc, et feugiat erat.
+  </p>
+</section>
+
+<section>
+  <h3>Div med <em>beräknad</em> höjd = 4em och
+  2px border. </h3>
+  <div class="nopad bordered">
+    <div class="float">
+      <pre>
+.float {
+    float: left;
+    width: 150px;
+    border: 2px solid teal;
+    height: 130px;
+    margin-right: 10px;
+}
+      </pre>
+    </div>
+    <p lang="la">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris fringilla libero ac magna
+    sodales
+    </p>
+  </div> 
+  <p lang="la">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris fringilla libero ac magna
+    sodales at interdum leo vestibulum. Curabitur quis vulputate erat. Quisque quam quam,
+    auctor nec sodales mollis, pulvinar nec lorem. Quisque ut erat turpis. Nunc vel faucibus
+    nunc. Morbi sed magna nisi. Nullam feugiat tincidunt sem vitae eleifend. Curabitur mollis
+    condimentum risus nec pulvinar. Ut placerat porta justo sed dapibus. Quisque neque metus,
+    ornare quis auctor at, porttitor aliquet lacus.  Integer vestibulum eros malesuada lacus
+    ullamcorper quis aliquet velit aliquam. Etiam id metus mauris. Etiam vel eros ut metus
+    dignissim dapibus eget ac sem. Aliquam scelerisque quam nunc, et feugiat erat.
+  </p>
+</section>
+
+<section>
+  <h3>Div med <em>0</em> höjd men <em>padding</em></h3>
+  <div class="bordered">
+    <div class="float">
+      <pre>
+.float {
+    float: left;
+    width: 150px;
+    border: 2px solid teal;
+    height: 130px;
+    margin-right: 10px;
+}
+      </pre>
+    </div>
+  </div> 
+  <p lang="la">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris fringilla libero ac magna
+    sodales at interdum leo vestibulum. Curabitur quis vulputate erat. Quisque quam quam,
+    auctor nec sodales mollis, pulvinar nec lorem. Quisque ut erat turpis. Nunc vel faucibus
+    nunc. Morbi sed magna nisi. Nullam feugiat tincidunt sem vitae eleifend. Curabitur mollis
+    condimentum risus nec pulvinar. Ut placerat porta justo sed dapibus. Quisque neque metus,
+    ornare quis auctor at, porttitor aliquet lacus.  Integer vestibulum eros malesuada lacus
+    ullamcorper quis aliquet velit aliquam. Etiam id metus mauris. Etiam vel eros ut metus
+    dignissim dapibus eget ac sem. Aliquam scelerisque quam nunc, et feugiat erat.
+  </p>
+</section>
+
+<section>
+  <h3>Samma, men <em>clear: both</em> på efterföljande stycke</h3>
+  <div class="bordered">
+    <div class="float">
+      <pre>
+.float {
+    float: left;
+    width: 150px;
+    border: 2px solid teal;
+    height: 130px;
+    margin-right: 10px;
+}
+      </pre>
+    </div>
+  </div> 
+  <p lang="la" class="clear">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris fringilla libero ac magna
+    sodales at interdum leo vestibulum. Curabitur quis vulputate erat. Quisque quam quam,
+    auctor nec sodales mollis, pulvinar nec lorem. Quisque ut erat turpis. Nunc vel faucibus
+    nunc. Morbi sed magna nisi. Nullam feugiat tincidunt sem vitae eleifend. Curabitur mollis
+    condimentum risus nec pulvinar. Ut placerat porta justo sed dapibus. Quisque neque metus,
+    ornare quis auctor at, porttitor aliquet lacus.  Integer vestibulum eros malesuada lacus
+    ullamcorper quis aliquet velit aliquam. Etiam id metus mauris. Etiam vel eros ut metus
+    dignissim dapibus eget ac sem. Aliquam scelerisque quam nunc, et feugiat erat.
+  </p>
+</section>
+
+<section>
+  <h2>Containing floats</h2>
+</section>
+
+<section>
+  <h3>Div med <em>0</em> höjd och <em>padding</em></h3>
+  <div class="bordered">
+    <div class="float">
+      <pre>
+.float {
+    float: left;
+    width: 150px;
+    border: 2px solid teal;
+    height: 130px;
+    margin-right: 10px;
+}
+      </pre>
+    </div>
+  </div> 
+  <p lang="la">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris fringilla libero ac magna
+    sodales at interdum leo vestibulum. Curabitur quis vulputate erat. Quisque quam quam,
+    auctor nec sodales mollis, pulvinar nec lorem. Quisque ut erat turpis. Nunc vel faucibus
+    nunc. Morbi sed magna nisi. Nullam feugiat tincidunt sem vitae eleifend. Curabitur mollis
+    condimentum risus nec pulvinar. Ut placerat porta justo sed dapibus. Quisque neque metus,
+    ornare quis auctor at, porttitor aliquet lacus.  Integer vestibulum eros malesuada lacus
+    ullamcorper quis aliquet velit aliquam. Etiam id metus mauris. Etiam vel eros ut metus
+    dignissim dapibus eget ac sem. Aliquam scelerisque quam nunc, et feugiat erat.
+  </p>
+</section>
+
+<section>
+  <h3>Float + width: 100% på yttre div</em></h3>
+  <div class="bordered contain">
+    <div class="float">
+      <pre>
+.float {
+    float: left;
+    width: 150px;
+    border: 2px solid teal;
+    height: 130px;
+    margin-right: 10px;
+}
+      </pre>
+    </div>
+  </div> 
+  <p lang="la">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris fringilla libero ac magna
+    sodales at interdum leo vestibulum. Curabitur quis vulputate erat. Quisque quam quam,
+    auctor nec sodales mollis, pulvinar nec lorem. Quisque ut erat turpis. Nunc vel faucibus
+    nunc. Morbi sed magna nisi. Nullam feugiat tincidunt sem vitae eleifend. Curabitur mollis
+    condimentum risus nec pulvinar. Ut placerat porta justo sed dapibus. Quisque neque metus,
+    ornare quis auctor at, porttitor aliquet lacus.  Integer vestibulum eros malesuada lacus
+    ullamcorper quis aliquet velit aliquam. Etiam id metus mauris. Etiam vel eros ut metus
+    dignissim dapibus eget ac sem. Aliquam scelerisque quam nunc, et feugiat erat.
+  </p>
+</section>
+
+<section>
+  <p>Ett vanligare sätt: <em>clearfix</em></p>
+  <p>Sök på <q>clearfix display table</q> för modernast möjliga sätt</p>
+</section>
+
+
+<div id="progress-bar"></div>
+<script src="../script/slides.js"></script>
+</body>
+</html>

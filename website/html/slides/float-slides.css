@@ -1,0 +1,68 @@
+/* reset from slides */
+h3 {
+    margin: 80px 20px;
+    text-align: center;
+}
+section {
+    padding: 0 20px;
+}
+/* BEGIN */
+p[lang="la"] {
+    font-family: AcidIII, sans-serif;
+    color: rgba(0, 0, 0, 0.7);
+    font-size: 16px;
+    margin: 16px 0;
+}
+p[lang="la"] > span {
+    float: left;
+    width: 100px;
+    height: 70px;
+    margin: 1px;
+    border: 5px solid #024862;
+}
+p[lang="la"] > .margin {
+    margin: 0 20px 20px 0;
+}
+p[lang="la"] > .right {
+    float: right;
+    margin: 0 0 20px 20px;
+}
+p[lang="la"].sp {
+    margin-left: 130px;
+}
+.faux {
+    background-image: linear-gradient(to right, #61D78D, #61D78D 110px, #39A3CB 110px, #39A3CB); 
+}
+strong {
+    outline: 3px solid red;
+    background-color: red;
+}
+.intro {
+    font-size: large;
+}
+.float {
+    float: left;
+    width: 250px;
+    border: 2px solid #39A3CB;
+    height: 130px;
+    margin-right: 10px;
+}
+.float pre {
+    margin: 0;
+    font-size: 14px;
+}
+.bordered {
+    padding: 16px;
+    border: 2px solid #00722A;
+}
+.nopad {
+    padding: 0;
+}
+.clear {
+    clear: both;
+}
+.contain {
+    float: left;
+    width: 100%;
+}
+
