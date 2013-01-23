@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8" />
+  <title>Enkel float demo</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <style>
+    body {
+        width: 600px;
+        margin: auto;
+        font: medium sans-serif;
+    }
+    p[lang="la"] {
+        font-family: AcidIII, sans-serif;
+        color: rgba(0, 0, 0, 0.7);
+    }
+    span {
+        float: left;
+        width: 80px;
+        height: 60px;
+        margin: 1px;
+        border: 5px solid maroon;
+    }
+    h2 {
+        clear: both;
+    }
+    .margin {
+        margin: 0 10px 10px 0;
+    }
+    .right {
+        float: right;
+        margin: 0 0 10px 10px;
+    }
+    .sp {
+        margin-left: 100px;
+    }
+    .faux {
+        background-image: linear-gradient(to right, lime, lime 90px, pink 90px, pink); 
+    }
+    strong {
+        outline: 3px solid red;
+        background-color: red;
+    }
+    .intro {
+        font-size: large;
+    }
+  </style>
+</head>
+<body>
+  <h1>Enkel float demo</h1>
+  <p class="intro">X på röd bakgrund markerar var i texten det "flytande" elementet finns.</p>
+  <h2>Float i löpande text</h2>
+  <p>
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris fringilla libero ac magna sodales at interdum leo vestibulum. Curabitur quis vulputate erat. <span></span><strong>x</strong> Quisque quam quam, auctor nec sodales mollis, pulvinar nec lorem. Quisque ut erat turpis. Nunc vel faucibus nunc. Morbi sed magna nisi. Nullam feugiat tincidunt sem vitae eleifend. Cras massa nulla, condimentum congue faucibus non, condimentum nec nisi. Proin pulvinar gravida blandit. In hac habitasse platea dictumst. Mauris nec eros tellus, id tempus mi.
+  </p>
+  <h2>Float sist i löpande text som påverkar två stycken</h2>
+<p>
+Ut eget ligula eros. Vivamus eget nibh nisl. Pellentesque a pretium enim. Praesent vel tincidunt mauris. Phasellus eu convallis ligula. Nunc eros sapien, lacinia non vestibulum a, vulputate et nisl. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in nibh ut odio tincidunt tincidunt vitae id massa. Nunc feugiat sodales scelerisque. Nullam nec ligula sed nibh vestibulum porttitor at at nunc. Nulla ante quam, fringilla eget luctus ut, facilisis nec est.<span></span><strong>x</strong>
+  </p>
+  <p>
+Morbi pulvinar arcu ut velit sodales tincidunt. Curabitur blandit, orci dictum fringilla gravida, urna erat mollis dolor, ac luctus purus ante eget purus. Mauris vehicula faucibus magna non gravida. Nunc sagittis lectus sit amet quam congue gravida. Integer scelerisque feugiat massa vitae faucibus. 
+  </p>
+  <h2>Flera float i löpande text</h2>
+  <p>
+Curabitur rhoncus tincidunt elementum. Vivamus a dolor nunc. Sed dapibus suscipit enim, vel ornare tellus feugiat nec. Fusce sagittis enim vitae ante laoreet ut pharetra nisi semper. Proin eget arcu ut nibh tincidunt suscipit <span></span><strong>x</strong> scelerisque quis enim. Donec eros nunc, accumsan quis rutrum et, dapibus eu nisi. Cras fringilla placerat cursus. Proin <span></span><strong>x</strong> tincidunt <span></span><strong>x</strong> facilisis <span></span><strong>x</strong> ipsum ut auctor. Phasellus sit amet nunc a sem convallis tristique.
+  </p>
+  <p>
+Etiam id metus mauris. Etiam vel eros ut metus dignissim dapibus eget ac sem. Aliquam scelerisque quam nunc, et feugiat erat. Cras id dolor eleifend ante fringilla consequat sit amet et metus. Proin commodo vulputate porta. 
+  </p>
+ <h2>Ännu fler float i löpande text</h2>
+  <p>
+<span></span><strong>x</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit.<span></span><strong>x</strong>  Mauris nunc elit, consequat eu iaculis ac, ultricies nec est.<span></span><strong>x</strong> Aliquam porta, magna sed faucibus laoreet, sapien urna volutpat ipsum,<span></span><strong>x</strong> non vehicula augue mi eget ante.<span></span><strong>x</strong>  Curabitur mollis condimentum risus nec pulvinar.<span></span><strong>x</strong> Ut placerat porta justo sed dapibus. Quisque neque metus, ornare quis auctor at,<span></span><strong>x</strong> porttitor aliquet lacus. <span></span><strong>x</strong> Integer vestibulum eros malesuada lacus ullamcorper quis <span></span><strong>x</strong> aliquet velit aliquam. 
+  </p>
+  <h2>Float med marginaler först i löpande text</h2>
+  <p>
+<span class="margin"></span><strong>x</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nunc elit, consequat eu iaculis ac, ultricies nec est. Aliquam porta, magna sed faucibus laoreet, sapien urna volutpat ipsum, non vehicula augue mi eget ante. Curabitur mollis condimentum risus nec pulvinar. Ut placerat porta justo sed dapibus. Quisque neque metus, ornare quis auctor at, porttitor aliquet lacus. Integer vestibulum eros malesuada lacus ullamcorper quis aliquet velit aliquam. 
+  </p>
+
+  <h2>Float höger med marginaler först i löpande text</h2>
+<p>
+<span class="right"></span><strong>x</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nunc elit, consequat eu iaculis ac, ultricies nec est. Aliquam porta, magna sed faucibus laoreet, sapien urna volutpat ipsum, non vehicula augue mi eget ante. Curabitur mollis condimentum risus nec pulvinar. Ut placerat porta justo sed dapibus. Quisque neque metus, ornare quis auctor at, porttitor aliquet lacus. Integer vestibulum eros malesuada lacus ullamcorper quis aliquet velit aliquam. 
+  </p>
+
+  <h2>Wrapper med <q lang="en">faux columns</q> och float före text med margin</h2>
+  <div class="faux">
+    <p><span class="margin"></p>
+    <p class="sp">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nunc elit, consequat eu iaculis ac, ultricies nec est. Aliquam porta, magna sed faucibus laoreet, sapien urna volutpat ipsum, non vehicula augue mi eget ante. Curabitur mollis condimentum risus nec pulvinar. Ut placerat porta justo sed dapibus. Quisque neque metus, ornare quis auctor at, porttitor aliquet lacus.
+    </p>
+  </div>
+</body>
+</html>
+
