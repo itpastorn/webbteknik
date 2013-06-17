@@ -4,7 +4,7 @@
  *
  */
 
-exit("Sluta spamma");
+//exit("Sluta spamma");
 session_start();
 require_once '../../includes/loadfiles.php';
 
@@ -19,23 +19,38 @@ $dbh = keryxDB2_cx::get($dbx);
 
 header("Content-type: text/plain; charset=utf-8");
 
-$subject = "Alla videos till kapitel 13 klara";
+$subject = "DVD-skivans innehåll klart";
 
 echo "Påbörjar utskick\n"; 
 
 $text = <<<TXT
 
-Hej
+Hej lärare
 
-God fortsättning.
+Den som väntar för länge väntar på nåot gott, hoppas jag.
 
-Jag hann inte riktigt göra alla videos
-klart över jullovet, men fem nya blev det.
+Jag har nu lämnat över det som hittills är klart för att vi ska
+få ut DVD-skivan till er. Jag har tingats dra ner på ambitionerna,
+enligt parollen hellre något bra idag, än något perfekt aldrig.
 
-Nu är alla videos till kapitel 13 klara och dessutom
-finns övningsfilerna för att integrera formuläret med PHP.
+Jag hoppas skivan kommer bli till nytta!
 
-http://webbteknik.nu/assignments/
+# Kommentarer till lärar-DVD #
+
+Skivan har följande kataloger:
+
+ * boken-kodexempel      Här finns HTML- och CSS-kod från boken
+   * advanced            Extra kodexempel. Här finns också ineraktiva demos.
+ * css	                 Denna är till för slide-systemet. Kan ignoreras.
+ * laxhjalpen-demowebb   Den färdiga läxhjälpen-webbplatsen
+ * media                 Alla filmer i mp4- och webm-format
+ * practice-files        Filer att ge eleverna när de gör uppgifter i övningsboken
+ * script                Denna är till för slide-systemet. Kan ignoreras.
+ * slides                Webbteknikbaserade slides (tänk PowerPoint)
+ * videos-kod            Kod som jag använt när jag gjort videofilmerna
+
+Allt detta finns inte än, men kommer att finnas, också på [webbplatsen](http://webbteknik.nu/).
+
 
 
 Lars Gunther
@@ -59,7 +74,7 @@ error_reporting(E_ALL);
 ini_set("display_errors", "1");
 echo "UTF-8\n";
 
-foreach ( $dbh->query($all_users) as $row) {
+foreach ( $dbh->query($teachers) as $row) {
 	$to = "{$row['firstname']} {$row['lastname']} <{$row['email']}>";
     if (mail($to, $subject, $text, $headers) ) {
         echo "{$to} kontaktad\n";
