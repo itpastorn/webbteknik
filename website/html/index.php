@@ -55,16 +55,14 @@ $status .= "</ul>\n";
 <body>
   <h1>webbteknik.nu</h1>
   <?php require "../includes/snippets/mainmenu.php"; ?>
-  <p>
-    Hej. Roligt att du är intresserad av
-    <a href="http://www.skolportalen.se/laromedel/produkt/J200%204500/Webbutveckling%201%20-%20L%C3%A4robok/">vårt
-    läromedel</a>.
-    Just nu arbetar jag (Lars Gunther) på att göra den här webbplatsen användbar (sedan ska den bli snyggare).
+  <p class="newsflash">
+    Nu kan du hämta <a href="webbserverprogrammering-provkapitel.pdf">provkapitel för
+    boken Webbserverprogrammering 1</a> som ska komma ut i Augusti. I provkapitlen ingår
+    en installationsguide för PHP och ett antal exempel som hjälper dig komma igång att
+    testa webbserverprogrammering. Dessutom ser du vad som är planerat att ingå i boken
+    i övrigt.
   </p>
-  <p>
-    <strong>Om du <a href="./sign-in.php">registrerar dig</a>, så kommer du
-    få meddelande när det sker uppdateringar.</strong> Du kan då också se fler videos.
-  </p>
+
   <h2>Uppdateringsstatus</h2>
   <p>2012-08-30: Övningsfiler finns nu på sin egen sida.</p>
   <?php echo $status; ?>

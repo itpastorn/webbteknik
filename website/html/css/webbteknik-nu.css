@@ -466,6 +466,16 @@ a[href*="wikipedia.org"]:after {
     font-family: 'Oswald', "Franklin Gothic Medium", "Franklin Gothic", "ITC Franklin Gothic", Arial, sans-serif;
     letter-spacing: 1px;
 }
+.mainmenu ul {
+    margin: 0.2em 0;
+}
+.mainmenu li {
+    display: inline-block;
+    margin: 0;
+    padding: 2px 5px;
+    min-width: 150px;
+    text-transform: uppercase;
+} 
 .mainmenu a {
     text-decoration: none;
     color: black;
@@ -598,7 +608,14 @@ hr.todo {
    $index
 \* ------------------------------- */
 
-
+.newsflash {
+    margin: 2em;
+    font-size: larger;
+    border: 1px solid green;
+    padding: 1em;
+    border-radius: 5px;
+}
+}
 /* ------------------------------- *\
    $userpage
 \* ------------------------------- */
@@ -840,6 +857,7 @@ CSS Code style tips: http://csswizardry.com/2012/04/my-html-css-coding-style/
 
 /* ----------------------------------------------------------------------------------
 
-Watch this space for easter eggs
+Den förste som hittar detta meddelande per stad och skickar sin snigelpostadress till gunther at keryx punkt se
+kommer få en tjuga med posten!
 
 ------------------------------------------------------------------------------------ */
