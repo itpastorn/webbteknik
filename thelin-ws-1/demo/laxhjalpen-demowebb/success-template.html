@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Demo of contact form for WaSP Interact</title>
+  <style type="text/css">
+    body {
+        width: 50em;
+        margin: auto;
+        font-family: sans-serif;
+    }
+    fieldset {
+        margin: 1em 0;
+    }
+    #userdata p, #messagedata p {
+        position: relative;
+        
+    }
+    #userdata label {
+        float: left;
+        width: 13em;
+    }
+    #messagedata label {
+        float: left;
+        width: 8em;
+    }
+    .error {
+        color: red;
+        font-size: small;
+    }
+    #userdata .error, #messagedata .error {
+        position: absolute;
+        left: 31em;
+    }
+    input[type="text"] {
+        width: 12em;
+        font-size: 14px;
+    }
+    #messagedata input, textarea {
+        width: 17em;
+        font-size: 14px;
+    }
+    textarea {
+        height: 5em;
+    }
+    #submitbutton {
+        text-align: center;
+    }
+    dt {
+        margin: 1em 0;
+        font-weight: bold;
+    }
+    .message {
+        white-space: pre;
+    }
+  </style>
+</head>
+<body>
+  <h1>Thank you for contacting us. (The form has been submitted.)</h1>
+  <dl>
+    <dt>From (name):</dt>
+    <dd>{$uname}</dd>
+    <dt>Reply-to email:</dt>
+    <dd>{$umail}</dd>
+    <dt>Subject:</dt>
+    <dd>{$msubject}</dd>
+    <dt>Message:</dt>
+    <dd class="message">{$mmessage}</dd>
+  </dl>
+</body>
+</html>

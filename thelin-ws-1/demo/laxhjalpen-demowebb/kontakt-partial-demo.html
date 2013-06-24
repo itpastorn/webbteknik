@@ -1,0 +1,36 @@
+<form action="contact.php" method="post">
+  <fieldset>
+    <legend>Vem är du?</legend>
+    <p>
+      <label for="uname">Namn:
+        <strong class="required" title="Obligatorisk uppgift">*</strong>
+      </label>
+      <input type="text" name="uname" id="uname" required placeholder="Förnamn Efternamn" />
+    </p>
+    <p>
+      <label for="umail">Mejladress:
+        <strong class="required" title="Obligatorisk uppgift">*</strong>
+      </label>
+      <input type="email" name="umail" id="umail" required placeholder="foo@bar.com" />
+    </p>
+  </fieldset>
+  <fieldset>
+    <legend>Meddelande</legend>
+    <p>
+      <label for="msubject">Ärende:
+        <strong class="required" title="Obligatorisk uppgift">*</strong>
+      </label>
+      <input type="text" id="msubject" name="msubject" required placeholder="Minst 5 tecken"/>
+    </p>
+    <p>
+      <label for="mmessage">Text:
+        <strong class="required" title="Obligatorisk uppgift">*</strong>
+      </label>
+      <textarea id="mmessage" name="mmessage" required placeholder="Skriv ditt meddelande. Minst 25 tecken."></textarea>
+    </p>
+  </fieldset>
+  <fieldset>
+    <input type="submit" value="Skicka" />
+  </fieldset>
+</form>
+

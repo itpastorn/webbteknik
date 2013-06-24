@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Demo of contact form for WaSP Interact</title>
+  <style type="text/css">
+    body {
+        width: 50em;
+        margin: auto;
+        font-family: sans-serif;
+    }
+    fieldset {
+        margin: 1em 0;
+    }
+    #userdata p, #messagedata p {
+        position: relative;
+        
+    }
+    #userdata label {
+        float: left;
+        width: 13em;
+    }
+    #messagedata label {
+        float: left;
+        width: 8em;
+    }
+    .required {
+        font-size: small;
+    }
+    .error {
+        color: red;
+        font-size: small;
+    }
+    #userdata .required, #messagedata .required, #userdata .error, #messagedata .error {
+        position: absolute;
+        left: 31em;
+    }
+    input[type="text"] {
+        width: 12em;
+        font-size: 14px;
+    }
+    #messagedata input, textarea {
+        width: 17em;
+        font-size: 14px;
+    }
+    textarea {
+        height: 8em;
+    }
+    #submitbutton {
+        text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Demo of contact form for WaSP Interact</h1>
+  <p>This is an example of a template to be used with the contact.php script for form handling.</p>
+  <p>
+    A student may read this source code in order to see how to put PHP generated data into the form
+    and what values name attributes are supposed to have. Class names, order of elements, etc, may be
+    altered. However, attribute names and PHP-variable names must remain the same. The PHP script will
+    automatically add selected and/or checked attributes to the checkbox and radiobuttons, should the user
+    wish to keep them.
+  </p>
+  <p><strong>This is a demo only. Actual usage of this at this location is disabled. No recipient will read your messages.</strong></p>
+  <form action="contact.php" method="post">
+    <fieldset id="userdata">
+      <legend>Who are you?</legend>
+      <p>
+        <label for="uname">Your name:{$uname_extra}</label>
+        <input type="text" name="uname" id="uname" value="{$uname}" />
+      </p>
+      <p>
+        <label for="umail">Your e-mail address:{$umail_extra}</label>
+        <input type="text" name="umail" id="umail" value="{$umail}" />
+      </p>
+      <p>
+        <label for="get_in_touch">Get in touch with me, please.</label>
+        <input type="checkbox" value="yes" id="get_in_touch" name="get_in_touch" {$get_in_touch_checked} />
+      </p>
+    </fieldset>
+    <fieldset id="messagedata">
+      <legend>Your message:</legend>
+      <p>
+        <label for="msubject">Subject:{$msubject_extra}</label>
+        <input type="text" id="msubject" name="msubject" value="{$msubject}" />
+      </p>
+      <p>
+        <label for="mmessage">Message:{$mmessage_extra}</label>
+        <textarea id="mmessage" name="mmessage">{$mmessage}</textarea>
+      </p>
+    </fieldset>
+    <fieldset id="metadata">
+      <legend>Type of communication:</legend>
+      {$mcategory_extra}
+      <!-- 
+        Only 3 values are allowed by the checking script: complaint, suggestion, other.
+        If you mess this up users will get very confusing error messages!
+        The three variables exist in order to keep selection if form is shown again after some failure
+       -->
+      <p>
+        <input type="radio" name="mcategory" id="mcat_complaint" value="complaint" {$mcat_complaint_checked} />
+        <label for="mcat_complaint">Complaint</label>
+      </p>
+      <p>
+        <input type="radio" name="mcategory" id="mcat_suggestion" value="suggestion" {$mcat_suggestion_checked} />
+        <label for="mcat_suggestion">Suggestion</label>
+      </p>
+      <p>
+        <input type="radio" name="mcategory" id="mcat_other" value="other" {$mcat_other_checked} />
+        <label for="mcat_other">Other</label>
+      </p>
+    </fieldset>
+    <fieldset id="submitbutton">
+      <input type="submit"/>
+      <!--
+        The following field is used to prevent multiple submits. If removed it will be considered a configuration error.  
+       -->
+       <input type="hidden" name="prevent_multiple_submits" value="{$random_string}" />
+    </fieldset>
+  </form>
+</body>
+</html>
