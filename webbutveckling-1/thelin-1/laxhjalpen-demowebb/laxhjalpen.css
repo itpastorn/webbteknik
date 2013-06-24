@@ -31,8 +31,8 @@ header {
 }
 h1 {
     font-family: 'Merienda One', cursive;
-    margin: 0;
     display: inline-block;
+    margin: 0;
 }
 h1:first-letter {
     color: #00af64;
@@ -86,7 +86,7 @@ Start page rules
     width: 235px;
     height: 198px;
 }
-.startpage > header h1 {
+.startpage h1 {
     font-size: 500%;
     vertical-align: 53%;
 }

@@ -11,8 +11,8 @@ section, header, footer {
 .startpage > header {
     text-align: center;
 }
-.startpage > header > h1 {
-    font-size: 500%;           /* Massiv rubrik */
+.startpage h1 {
+    font-size: 500%;           /* Massiv rubrik på startsidan */
 }
 .startpage > header > p.tagline {
     font-size: 120%;
