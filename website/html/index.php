@@ -62,9 +62,12 @@ $status .= "</ul>\n";
     testa webbserverprogrammering. Dessutom ser du vad som är planerat att ingå i boken
     i övrigt.
   </p>
-
+  <h2>Errata</h2>
+  <p>
+    Nu finns det
+    <a href="j200-4500-utg-1-errata.pdf">errata till första upplagan av Läroboken Webbutveckling 1</a>.
+  </p>
   <h2>Uppdateringsstatus</h2>
-  <p>2012-08-30: Övningsfiler finns nu på sin egen sida.</p>
   <?php echo $status; ?>
   <h2>Smakprov på en video</h2>
   <p class="centered">

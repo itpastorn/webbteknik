@@ -82,9 +82,9 @@ Error/warning        hsl(10, 100%, 47%)
 \* ------------------------------- */
 html {
     background-color: rgb(0, 175,65);
-    background-image: -webkit-linear-gradient(to bottom, hsl(142, 100%, 34%), hsl(142, 100%, 80%));
-    background-image:    -moz-linear-gradient(to bottom, hsl(142, 100%, 34%), hsl(142, 100%, 80%));
-    background-image:      -o-linear-gradient(to bottom, hsl(142, 100%, 34%), hsl(142, 100%, 80%));
+    background-image: -webkit-linear-gradient(top      , hsl(142, 100%, 34%), hsl(142, 100%, 80%));
+    background-image:    -moz-linear-gradient(top      , hsl(142, 100%, 34%), hsl(142, 100%, 80%));
+    background-image:      -o-linear-gradient(top      , hsl(142, 100%, 34%), hsl(142, 100%, 80%));
     background-image:         linear-gradient(to bottom, hsl(142, 100%, 34%), hsl(142, 100%, 80%));
     min-height: 100%; /* Needed for gradients to appear */
 }
