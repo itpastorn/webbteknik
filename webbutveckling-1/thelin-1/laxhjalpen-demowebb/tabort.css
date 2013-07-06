@@ -1,6 +1,0 @@
-h1 {
-    font-size: 500%;
-}
-h1::first-letter {
-    color: red;
-}
