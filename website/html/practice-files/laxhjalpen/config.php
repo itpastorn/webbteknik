@@ -14,6 +14,7 @@
  *
  * Lämna blank för att förhindra att din mejlbox spammas under testning
  * Måste ha ett värde för att kontaktformuläret ska fungera på riktigt
+ * Bara en mejladress här. (INTE: "foo bar" <foo.bar@example.com>)
  * @var string
  */
 $recipient = "";
@@ -147,7 +148,7 @@ $success_template = "ÄNDRA HÄR/skickat-mall.html";
  * @var string
  */
 $mail_template = <<<'MT'
-Meddelande från kontaktsidan.
+Meddelande från Läxhälpens kontaktsida
 
 Ärende: "{$smtpsafe_subject}"
 
