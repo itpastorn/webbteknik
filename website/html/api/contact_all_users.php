@@ -30,7 +30,7 @@ Hej lärare
 Den som väntar för länge väntar på något gott, hoppas jag.
 
 Jag har nu lämnat över det som hittills är klart för att vi ska
-få ut DVD-skivan till er. Jag har tingats dra ner på ambitionerna,
+få ut DVD-skivan till er. Jag har tvingats dra ner på ambitionerna,
 enligt parollen hellre något bra idag, än något perfekt aldrig.
 
 Jag hoppas skivan kommer bli till nytta!
