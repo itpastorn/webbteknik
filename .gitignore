@@ -8,4 +8,5 @@ pop-admins.php
 *.ods
 website/sessiondata
 *\keryxIncludes.ep
+*.zip
 

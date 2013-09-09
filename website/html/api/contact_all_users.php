@@ -4,7 +4,7 @@
  *
  */
 
-//exit("Sluta spamma");
+exit("Sluta spamma");
 session_start();
 require_once '../../includes/loadfiles.php';
 
@@ -27,7 +27,7 @@ $text = <<<TXT
 
 Hej lärare
 
-Den som väntar för länge väntar på nåot gott, hoppas jag.
+Den som väntar för länge väntar på något gott, hoppas jag.
 
 Jag har nu lämnat över det som hittills är klart för att vi ska
 få ut DVD-skivan till er. Jag har tingats dra ner på ambitionerna,
