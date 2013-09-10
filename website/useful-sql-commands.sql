@@ -442,19 +442,49 @@ ALTER TABLE `links` ADD `chapter` TINYINT UNSIGNED NULL AFTER `bookID` ,
 ADD INDEX ( `chapter` );
 UPDATE `links` SET `chapter`=1 WHERE booksectionID < 35 AND `booksectionID` IS NOT NULL;
 
+ALTER TABLE `privilege_questions` ADD `bookID` VARCHAR( 5 ) NOT NULL AFTER `privileges` ,
+ADD INDEX ( `bookID` );
+UPDATE `webbtek_webbtek`.`privilege_questions` SET `bookID` = 'wu1';
+ALTER TABLE `privilege_questions` ADD FOREIGN KEY ( `bookID` ) REFERENCES `webbtek_webbtek`.`books` (
+`bookID`
+) ON DELETE RESTRICT ON UPDATE CASCADE ;
+
+INSERT INTO `webbtek_webbtek`.`privilege_questions` (`pqID`, `question`, `answer`, `privileges`, `bookID`, `times_used`)
+VALUES (null, 'I första stycket i avsnitt 1 i Läroboken Webbserverprogrammering 1 med PHP, vad är det första markerade ordet?', 'körmiljö', '7', 'ws1', '0'),
+       (null, 'I första stycket i avsnitt 1.2 i Läroboken Webbserverprogrammering 1 med PHP, vad är det första markerade ordet?', 'XAMPP', '7', 'ws1', '0');
+
 -- Not put to server below
 
+CREATE TABLE IF NOT EXISTS `access_control` (
+  `aclID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `email` varchar(150) COLLATE utf8_swedish_ci NOT NULL,
+  `bookID` varchar(5) COLLATE utf8_swedish_ci NOT NULL,
+  `since` datetime NOT NULL,
+  PRIMARY KEY (`aclID`),
+  UNIQUE KEY `nodup` (`email`,`bookID`),
+  KEY `bookID` (`bookID`),
+  KEY `email` (`email`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=1 ;
+ALTER TABLE `access_control`
+  ADD CONSTRAINT `access_control_ibfk_1` FOREIGN KEY (`email`) REFERENCES `users` (`email`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `access_control_ibfk_2` FOREIGN KEY (`bookID`) REFERENCES `books` (`bookID`) ON UPDATE CASCADE;
 
+ALTER TABLE `belonging_groups` CHANGE `tgID` `bgID` INT( 11 ) NOT NULL AUTO_INCREMENT;
 
 
 -- Test SQL
 
-// All users that belong to a group
+-- All users that belong to a group
 SELECT users.*, groups.group_nickname, schools.school_name FROM `users` 
 INNER JOIN belonging_groups USING (email)
 INNER JOIN groups USING (groupID)
 INNER JOIN schools USING(schoolID)
 ORDER BY schools.schoolID, groups.group_nickname, users.lastname ASC, users.firstname DESC
 
-
+-- Access Control via group
+SELECT bg.*, groups.group_nickname, schools.school_name FROM `belonging_groups` AS bg
+INNER JOIN groups ON (bg.groupID = groups.groupID)
+INNER JOIN books ON (groups.courseID = books.courseID)
+INNER JOIN schools ON (groups.schoolID = schools.schoolID)
+WHERE bg.email = :email AND books.bookID = :bookID
 

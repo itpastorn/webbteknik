@@ -3,7 +3,7 @@
  * Primary navigation for the site
  */
 
-$userdata       = '';
+$userlink       = '';
 $userlink_class = '';
 if ( isset($_SESSION['userdata']) ) {
 	if ( empty($_SESSION['userdata']->firstname) ) {
@@ -20,13 +20,13 @@ if ( isset($_SESSION['userdata']) ) {
 	} else {
 	    $lastname = $_SESSION['userdata']->lastname;
 	}
-    $userdata = <<<USERDATA
+    $userlink = <<<USERDATA
       <a href="#" title="Redigera användaruppgifter/logga ut" class="{$userlink_class} noclick">
         {$firstname} {$lastname} ({$_SESSION['userdata']->email})
       </a>
       <ul class="usermenu">
         <li><a href="edituser/">Redigera användaruppgifter</a></li>
-        <li><a href="#" id="logoutbutton">Logga ut</a></li>
+        <li><a href="logout.php" id="logoutbutton">Logga ut</a></li>
       </ul>
 
 USERDATA;
@@ -40,7 +40,7 @@ if ( user::validate(user::TEACHER ) ) {
   <nav class="mainmenu">
     <div class="userdata">
 <?php
-echo $userdata;
+echo $userlink;
 ?>
     </div>
     <ul class="primarymenu">

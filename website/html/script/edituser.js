@@ -6,15 +6,14 @@
     
     // User sets his/her name
     
-    
-    
-    
 
     // Privilege level - user has bought a book!
     // Original level
     var origlevel = +$("#origlevel").val();
     console.log("Current level: " + origlevel);
+
     // Disable lower levels
+    /*
     if ( win.location.hash !== "#testmode" ) {
         $("input[name='priv']").each( function () {
             if ( +$(this).val() <= origlevel ) {
@@ -22,6 +21,7 @@
             }
         });
     }
+    */
     
     // Has got course invite?
     $("#group_code_yes").hide();
@@ -75,7 +75,7 @@
         
     });
 
-    $("input[name='priv']").click( function () {
+    $("#group_code_no input").click( function () {
         // Unless user has set first- and lastname, this is verboten
 
         // TODO: Make the same check server side
@@ -83,52 +83,40 @@
             alert("Du måste ange ditt namn först");
             return false;
         }
+        // If unchecking, do nothing
+        if ( !this.checked ) {
+            return true;
+        }
         
+        var clicked_checkbox = this;
+        
+        // 2013-09-09: Changing to use bookID instead
+
         // User chooses a privilege-level. Ajax to verify.
-        var levelrequest = +$(this).val();
-        console.log("Levelrequest: "  + levelrequest);
-        
-        // Check for dumb downgrades (inputs should be disabled though)
-        // TODO: This shall not be a way to pretend that contract has been renewed
-        if ( levelrequest <= origlevel ) {
-            var dumb = confirm("Vill du verkligen nedgradera din behörighet?");
-            if ( dumb !== true ) {
-                return false;
-            } else if ( win.location.hash !== "#testmode" ) {
-                alert("Nej, nu pratar du i nattmössan!");
-                return false;
-            }
-        }
-        
-        if ( levelrequest === 1 ) {
-            return true; // No privileges = OK
-        }
-        if ( levelrequest === 3 ) {
-            alert("Ej klar funktion.");
-            return false; // Not implemented yet
-        }
-        if ( levelrequest > 31 ) {
-            alert("Ej klar funktion. Skicka ett mejl till gunther@keryx.se.");
-            return false; // Not implemented yet
-        }
+        var bookID       = $(this).val();
+        console.log("BookID: " + bookID);
+
         $.ajax({
             type : 'POST',
             url  : 'api/privilege-check.php',
-            data : { level: levelrequest },
+            data : { bookID: bookID },
             success : function (cquestion, status, xhr) {
                 cquestion = JSON.parse(cquestion);
                 if ( !cquestion.question ) {
                     if ( cquestion.error === "unavailable" ) {
-                        console.log("Ej implementerad nivå.");
-                        alert("Nivån kan ännu inte väljas. Utvecklingsarbete pågår!");
-                        $("input[value='" + origlevel + "']").attr("checked", "checked"); // 1 (av 3) förekomster
+                        console.log("Felaktigt bokval.");
+                        alert("Boken kan ännu inte väljas.");
+                        return false;
+                    } else if ( cquestion.error === "bad call") {
+                        console.log("Fel data skickade.");
+                        alert("Tekniskt fel. Kontakta admin.");
                         return false;
                     }
                 }
                 var canswer = prompt(cquestion.question);
                 console.log(canswer);
                 if ( canswer !== "" && canswer !== null ) {
-                    var msgLabel = $("input[name='priv']:checked").parent();
+                    var msgLabel = $(clicked_checkbox).parent();
                     $.ajax({
                         type: 'POST',
                         url: 'api/privilege-check.php',
@@ -136,28 +124,39 @@
                         success: function (verified, status, xhr) {
                             // Correctly answered question?
                             verified = JSON.parse(verified);
-                            if ( verified.istrue === true ) {
-                                origlevel = levelrequest;
-                                console.log("Behörighet given på nivå " + origlevel);
-                                $("input[name='priv']:checked").attr("disabled", "disabled");
+                            if ( verified.duplicate === true ) {
+                                console.log("Duplicate entry in DB");
+                                msgLabel.removeClass("wrong");
+                                $(clicked_checkbox).attr("disabled", "disabled");
+                                alert("Du har redan åtkomst till den boken");
+                                return false;
+                            } else if ( verified.istrue === true ) {
+                            	if ( verified.newlevel ) {
+                                    console.log("Behörighet given på nivå " + verified.newlevel);
+                            	}
+                                $(clicked_checkbox).attr("disabled", "disabled");
                                 msgLabel.removeClass("wrong").addClass("updated");
                                 return true;
-                            } else {
-                                //
+                            } else if (verified.istrue === false) {
+                                // Explicitly false
                                 console.log("Fel svar!");
                                 msgLabel.removeClass("updated").addClass("wrong");
-                                $("input[value='" + origlevel + "']").attr("checked", "checked");; // 2 (av 3) förekomster
+                                $(clicked_checkbox).removeAttr("checked");
+                                return false;
+                            } else {
+                                // Technical problem
+                                alert("Tekniskt fel uppstod. Meddela admin. Bifoga gärna dump från konsollen.");
                                 return false;
                             }
                         },
                         error: function (errorMsg, status, xhr) {
-                            //
-                            console.log("Fel med Ajax-kommunikation när svaret skulle kollas.");
+                            alert("Tekniskt fel med Ajax-kommunikation när svaret skulle kontrolleras.");
+                            console.log("errorMsg: " + errorMsg);
                             return false;
                         }
                     });
                 } else {
-                    $("input[value='" + origlevel + "']").attr("checked", "checked");; // 3 (av 3) förekomster
+                    $(clicked_checkbox).removeAttr("checked");
                     return false;
                 }
             },

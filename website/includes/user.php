@@ -12,39 +12,39 @@
  */
 class user
 {
-    // Constant used for bit based checks
-    const LOGGEDIN = 1;
+    // Constants used for bit based checks
     /**
      * Constant to represent non anonymous users, but with no account
      */
-    const WEBONLY  = 3;
+    const LOGGEDIN = 1;
     /**
      * Constant to represent users without a book, but with access to web materials
      */
-    const TEXTBOOK = 7;
+    const WEBONLY  = 3;
     /**
      * Constant to represent users with a textbook
      */
-    const WORKBOOK = 15;
+    const TEXTBOOK = 7;
     /**
      * Constant to represent users with a workbook
      */
-    const TEACHER  = 31;
+    const WORKBOOK = 15;
     /**
      * Constant to represent teachers
      */
-    const ADMIN    = 63;
+    const TEACHER  = 31;
     /**
      * Constant to represent admins (may add material)
      */
-    const SUPER    = 127;
+    const ADMIN    = 63;
     /**
      * Constant to represent superusers (me and JE)
      */
-    const HYPER    = 255;
+    const SUPER    = 127;
     /**
      * Constant to represent impossible level of authority, for tests
      */
+    const HYPER    = 255;
     
     /**
      * Extract session variables from JSON if they do not exist
@@ -114,11 +114,11 @@ MSG;
      * @param int $userlevel The user's actual level, leave empty for currently logged in user
      */
     public static function validate($req_level, $userlevel = null) {
-    	global $FIREPHP;
+    	// global $FIREPHP;
         if ( empty($userlevel) && isset($_SESSION['userdata']->privileges) ) {
             $userlevel = $_SESSION['userdata']->privileges;
         }
-    	// var_dump($SESSION); exit;
+    	// Bitwise check
         return ($req_level & $userlevel) >= $req_level;
     }
     
@@ -178,14 +178,22 @@ MSG;
     /**
      * Set a new privilege level for the user
      * 
-     * @todo Make setPri non static and instantiate user class
+     * @todo Make setPriv non static and instantiate user class
      * 
-     * @param string $user  A iser object (So far only StdClass - rework!!!)
-     * @param int    $level The new level
-     * @param PDO    $dbh   DB-connection
+     * @param string $user      A user object (So far only StdClass - rework!!!)
+     * @param int    $level     The new level
+     * @param PDO    $dbh       DB-connection
+     * @return mixed The level that was set or false on failure
      */
-    public static function setPrivilege($user, $level, PDO $dbh)
+    public static function setPrivilege(StdClass $user, $level, PDO $dbh)
     {
+    	// Check for properties since we are using StdClass
+    	if ( empty($user->email) ) {
+            trigger_error('Param $user must have an email property in ' . __CLASS__ . '->' . __METHOD__, E_USER_ERROR);
+            return false;
+    	} else {
+    	    $email = $user->email;
+    	}
     	// Verify acceptable level request
     	// Admins are set through phpMyAdmin
     	$level = (int)$level;
@@ -199,12 +207,7 @@ MSG;
             break;
         default:
             trigger_error('Bad level request', E_USER_ERROR);
-           return false;
-    	}
-    	if ( empty($user) ) {
-    	    $email = $_SESSION['user'];
-    	} else {
-    	    $email = $user->email;
+            return false;
     	}
         try {
             $sql = "UPDATE users SET privileges = :privileges, privlevel_since = NOW() WHERE email = :email";
@@ -214,10 +217,12 @@ MSG;
             $stmt->execute();
             session_regenerate_id();
             // Do not do the sesssion stuff if it's not the currently logged in user
-            $_SESSION['userdata']->privileges = $level;
+            if ( $user == $_SESSION['userdata'] ) {
+                $_SESSION['userdata']->privileges = $level;
+            }
         }
         catch (Exception $e) {
-            // TODO Better error handling UPDATE users SET privlevel_since
+            // TODO Better error handling
             $GLOBALS['FIREPHP']->log("DB failure setting privilege level.");
             $GLOBALS['FIREPHP']->log($e->getMessage());
             return false;

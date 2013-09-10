@@ -25,26 +25,29 @@ $dbx = config::get('dbx');
 // init
 $dbh = keryxDB2_cx::get($dbx);
 
-if ( empty($_POST['level']) && empty($_POST['answer'])) {
+if ( empty($_POST['bookID']) && empty($_POST['answer'])) {
     // error - Bad call
-    var_dump($_POST);
-    exit("error"); // TODO http-heads, etc
+    exit('{"error": "bad call"}'); // TODO http-heads, etc
 }
 
 // Send question
 if ( empty($_POST['answer']) ) {
-    $levelrequest = filter_input(INPUT_POST, 'level', FILTER_SANITIZE_NUMBER_INT);
-    $stmt = $dbh->prepare(
-        "SELECT pqID, question FROM privilege_questions WHERE privileges = :levelrequest ORDER BY RAND() LIMIT 0,1"
-    );
-    $stmt->bindParam(':levelrequest', $levelrequest);
+    $bookrequest  = filter_input(INPUT_POST, 'bookID', FILTER_UNSAFE_RAW, FILTER_FLAG_STRIP_LOW);
+    $stmt = $dbh->prepare(<<<SQL
+        SELECT pqID, question
+        FROM privilege_questions
+        WHERE bookID = :bookID
+        ORDER BY RAND() LIMIT 0,1
+SQL
+);
+    $stmt->bindParam(':bookID', $bookrequest);
     $stmt->execute();
-    $question         = $stmt->fetch();
+    $question = $stmt->fetch();
     if ( empty($question) ) {
         echo '{"error": "unavailable"}';
         exit;
     }
-    $_SESSION['levelrequest'] = $levelrequest;
+    $_SESSION['levelrequest'] = 7;
     $_SESSION['pqID']         = $question['pqID']; // Use when testing answer to avoid manipulation
     echo json_encode($question);
     exit;
@@ -55,30 +58,46 @@ if ( empty($_POST['answer']) ) {
 // TODO Use user class (make a method of this) - but not the is question correctly answered part
 
 $answer = filter_input(INPUT_POST, 'answer', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
-$stmt = $dbh->prepare("SELECT answer FROM privilege_questions WHERE pqID = :pqID AND answer = :answer");
+$stmt = $dbh->prepare("SELECT answer, bookID FROM privilege_questions WHERE pqID = :pqID AND answer = :answer");
 $stmt->bindParam(':pqID', $_SESSION['pqID']);
 $stmt->bindParam(':answer', $answer);
 $stmt->execute();
 unset($_SESSION['pqID']);
-$isCorrect = array( 'istrue' => (bool)$stmt->fetch());
-if ( $isCorrect['istrue'] ) {
+$question_data = $stmt->fetch();
+$return_data = array( 'istrue' => (bool)$question_data);
+if ( $return_data['istrue'] ) {
     // Update DB
     try {
-        $sql = "UPDATE users SET privileges = :privileges, privlevel_since = NOW() WHERE email = :email";
-        $stmt = $dbh->prepare($sql);
-        $stmt->bindParam(':privileges', $_SESSION['levelrequest']);
-        $stmt->bindParam(':email', $_SESSION['user']);
-        $stmt->execute();
-        $_SESSION['userdata']->privileges = (int)$_SESSION['levelrequest'];
-        unset($_SESSION['levelrequest']);
+        // Never downgrade
+        $setlevel = $_SESSION['userdata']->privileges;
+        if ( $_SESSION['userdata']->privileges < $_SESSION['levelrequest'] ) {
+            $setlevel = user::setPrivilege($_SESSION['userdata'], $_SESSION['levelrequest'], $dbh);
+            $return_data['newlevel'] = $setlevel;
+        }
+        if ( !$setlevel ) {
+        	// Something has gone wrong - abort
+        	throw new Exception("Privilege level could no be set.");
+        }
+        // Update ACL
+        $acl_set = acl::set($_SESSION['user'], $question_data['bookID'], $dbh);
+        $FIREPHP->log($acl_set);
     }
     catch (Exception $e) {
-        // TODO Better error handling UPDATE users SET privlevel_since
-        $FIREPHP->log("DB failure setting privilege level.");
-        exit($e->getMessage());
+        $errorMsg = new StdClass();
+        $errorMsg->eMsg  = $e->getMessage();
+        $errorMsg->eCode = $e->getCode();
+        echo json_encode($errorMsg);
+        // Trace should not be sent to receiving script
+        $errorMsg->eTrace = $e->getTraceAsString();
+        $FIREPHP->log($errorMsg);
+        exit;
+    }
+    $return_data['duplicate'] = false;
+    if ( $acl_set === "duplicate" ) {
+        $return_data['duplicate'] = true;
     }
 }
 
-echo json_encode($isCorrect);
+echo json_encode($return_data);
 exit;
 

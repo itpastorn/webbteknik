@@ -54,6 +54,10 @@ require "data/items.php";
  */
 require "data/data.php";
 
+/**
+ * Access control list
+ */
+require 'acl.php';
 
 date_default_timezone_set("Europe/Stockholm");
 $CURRENT_LOCALE = setlocale(LC_ALL, "sv_SE", "Swedish", "sve");

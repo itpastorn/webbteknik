@@ -16,17 +16,13 @@ require_once '../includes/loadfiles.php';
 
 user::requires(user::LOGGEDIN);
 
-// Current privileges
-$checked[1]  = "";
-$checked[3]  = "";
-$checked[7]  = "";
-$checked[15] = "";
-$checked[31] = "";
-
 // Database settings and connection
 $dbx = config::get('dbx');
 // init
 $dbh = keryxDB2_cx::get($dbx);
+
+// Current privileges
+$current_privileges = acl::getList($_SESSION['user'], $dbh);
 
 $userdata = $_SESSION['userdata'];
 $tosagree = true;
@@ -40,8 +36,12 @@ if ( empty($userdata->user_since) ) {
         $stmt = $dbh->prepare('INSERT INTO users (email, user_since) VALUES (:email, NOW())');
         $stmt->bindParam(":email", $_SESSION['user']);
         $stmt->execute();
+
+        // FIXME next line
         $checked[1] = "checked";
-        $_SESSION['userdata']->user_since = strftime("%F %H:%M:%s");
+
+        $userdata->user_since             = strftime("%F %H:%M:%s");
+        $_SESSION['userdata']->user_since = $userdata->user_since;
     }
 } else {
     // Reload userdata to keep sync with DB if changed by admin
@@ -53,8 +53,9 @@ if ( empty($userdata->user_since) ) {
     $stmt->execute();
     $userdata = $stmt->fetch(PDO::FETCH_OBJ);
     $_SESSION['userdata'] = $userdata;
+
+    // FIXME next line
     $checked[$userdata->privileges] = "checked";
-    //var_dump($userdata);
 }
 // If new name has been submitted
 if ( isset($_POST['firstname']) ) {
@@ -81,6 +82,18 @@ if ( $userdata->firstname ) {
 // HTML safe - move to class
 $first_name = $userdata->firstname;
 $last_name  = $userdata->lastname;
+
+// What books have privilege questions?
+$stmt = $dbh->query(<<<SQL
+      SELECT DISTINCT pq.bookID, bk.booktitle FROM privilege_questions AS pq
+      NATURAL JOIN books AS bk
+      ORDER BY bk.courseID DESC
+SQL
+);
+$books = $stmt->fetchAll();
+
+$hasalready['wu1'] = "";
+$hasalready['ws1'] = "";
 
 // Preparing for mod_rewrite, set base-element
 // TODO: Make this generic!
@@ -186,7 +199,7 @@ EDITUSERFORMSTART;
       <div id="maybe_got_group_code" class="subfield blocklabels">
         <p>
           <input type="radio" id="group_code_set_yes" name="group_code_set">
-          <label for="group_code_set_yes">Jag har en inbjudningskod</label>
+          <label for="group_code_set_yes">Jag har en inbjudningskod till en grupp</label>
         </p>
         <p>
           <input type="radio" id="group_code_set_no" name="group_code_set">
@@ -209,35 +222,45 @@ GNOSTART;
       if ( user::validate(user::ADMIN) ):
           echo <<<ADMINYOU
       <p>
-        <strong>Du är redan administratör.</strong>
+        <strong>Du är redan administratör!</strong>
       </p>
+
 ADMINYOU;
+      elseif ( user::validate(user::TEACHER) ):
+          echo <<<TEACHERYOU
+      <p>
+        <strong>Du har redan lärabehörighet!</strong>
+      </p>
 
-      endif; // admin
+TEACHERYOU;
+       else:
+           echo <<<QUESTION
+        <p>
+          <b>Vad vill du få tillgång till?</b>
+        </p>
+
+QUESTION;
+           foreach ( $books as $bk ) :
+               if ( in_array($bk['bookID'], $current_privileges) ) {
+               	   echo <<<TEXT
+        <p>
+          Du har tillgång till <i>{$bk['booktitle']}</i>.
+        </p>
+
+TEXT;
+               } else {
+                   echo <<<INPUT
+        <p>
+          <input type="checkbox" name="bookID" value="{$bk['bookID']}" id="textbook_{$bk['bookID']}" autocomplete="off" />
+          <label for="textbook_{$bk['bookID']}">{$bk['booktitle']}</label>
+        </p>
+
+INPUT;
+               }
+          endforeach;
 ?>
-
         <p>
-          Har du en övningsbok, så ingår alla lärobokens privilegier.
-        </p>
-        <p>
-          <input type="radio" name="priv" value="1" id="guest" <?php echo $checked[1]; ?>>
-          <label for="guest">Inga privilegier alls</label>
-        </p>
-        <p>
-          <input type="radio" name="priv" value="3" id="webonly" disabled <?php echo $checked[3]; ?>>
-          <label for="webonly">Bara webb (kan ännu inte väljas)</label>
-        </p>
-        <p>
-          <input type="radio" name="priv" value="7" id="textbook" <?php echo $checked[7]; ?>>
-          <label for="textbook">Lärobok</label>
-        </p>
-        <p>
-          <input type="radio" name="priv" value="15" id="workbook" <?php echo $checked[15]; ?>>
-          <label for="workbook">Övningsbok (kan ännu inte väljas)</label>
-        </p>
-        <p>
-          <input type="radio" name="priv" value="31" id="teacher" <?php echo $checked[31]; ?>>
-          <label for="teacher">Lärare (kan ännu inte väljas)</label> <strong>Mejla gunther at keryx punkt se tills detta fixats.</strong>
+          Lärarbehörighet (inkluderar båda böckerna): Mejla gunther at keryx punkt se.</strong>
         </p>
         <input type="hidden" name="origlevel" id="origlevel" value="<?php echo $userdata->privileges; ?>" />
       </div>
@@ -245,6 +268,7 @@ ADMINYOU;
   </form>
 
 <?php
+      endif; // admin or teacher
     endif; // db_name_set
 endif; // show all other forms
 ?>
@@ -253,7 +277,3 @@ endif; // show all other forms
   <script src="script/edituser.js"></script>
 </body>
 </html>
-<!--
-Om man går neråt: Vill du verkligen nedgradera...?
-Automatisk nedgradering om man inte förnyar prenumerationen....
--->
