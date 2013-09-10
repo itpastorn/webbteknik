@@ -1,19 +1,25 @@
 (function (win, doc, undefined) {
     "use strict";
+
     $("#browserid").click( function () {
         navigator.id.request({
             siteName: "webbteknik.nu"
         });
-        // navigator.id.get(gotAssertion);
         return false;
     });
-    navigator.id.watch({
-        loggedInUser: undefined,
-        onlogin: gotAssertion,
-        onlogout: function () {
-            console.log("Log out not yet implemented for the watch event");
-        }
+
+    $("#logoutbutton").on('click', function (e) {
+        console.log("Attempting logout"); // Fires
+        navigator.id.logout();
+        e.preventDefault();
     });
+
+    navigator.id.watch({
+        loggedInUser: null,
+        onlogin: gotAssertion,
+        onlogout: loggedOut
+    });
+
     function gotAssertion(assertion) {
         console.log("Assertion: " + assertion);
         console.log("Assertion length: " + assertion.length);
@@ -24,8 +30,6 @@
                 data : { assertion: assertion },
                 success : function (userdata, status, xhr) {
                     console.log(userdata);
-                    // userdata = JSON.parse(userdata);
-                    // Already interpreted as an object
                     if ( userdata.email == null ) {
                         // Fail or logout
                         // loggedOut();
@@ -35,15 +39,16 @@
                     }
                 },
                 error : function (res, status, xhr) {
-                    // res = JSON.parse(res.responseText);
                     console.log("Login fel: " +  res.reason);
+                    navigator.id.logout();
                 }
             });
         } else {
-            // loggedOut();
+            navgator.id.logout();
             console.log("Assertion was null - loggedOut()");
         }
     }
+
     // Runs if assertion has been verified as OK
     // Which also means that $_SESSION has been set and DB updated with login data
     function loggedIn(userdata) {
@@ -63,5 +68,23 @@
             window.location.href = "./userpage.php";
         }
     }
+    
+    // Logout
+    function loggedOut() {
+        console.log("Watching log out event"); // Does not fire
+        $.ajax({
+            type : 'POST',
+            url  : 'api/logout.php',
+            success : function (res, status, xhr) {
+                console.log(res);
+                window.location.href = "./";
+            },
+            error : function (res, status, xhr) {
+                console.log(res);
+                alert("Logout fungerade inte. Ajaxfel.");
+            }
+        });
+    }
+    
 
 }(window, window.document));

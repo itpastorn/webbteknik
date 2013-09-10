@@ -65,27 +65,5 @@
     
     // Pure JS-links = buttons
     $(".noclick").on('click', function () { return false});
-    $("#logoutbutton").on('click', function (e) {
-        e.preventDefault();
-        navigator.id.logout();
-        window.setTimeout(function () {
-        	window.location.href = "logout.php";
-        }, 200);
-        
-        /*
-        $.ajax({
-            type : 'POST',
-            url  : 'api/logout.php',
-            success : function (res, status, xhr) {
-                navigator.id.logout();
-                console.log(res);
-                window.location.href = "./";
-            },
-            error : function (res, status, xhr) {
-                alert("Logout fungerade inte. Ajaxfel.");
-            }
-        });
-        */
-    });
     
 }(window, window.document));
