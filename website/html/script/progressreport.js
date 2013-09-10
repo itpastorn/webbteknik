@@ -9,12 +9,13 @@
 (function (win, doc, undefined) {
     "use strict";
     $('table td:nth-child(2):not(.job_is_video)').each( function () {
+        var curstate;
         var cell  = $(this),
             jobid = cell.data('jobid');
         
         // What is the present state of this task
         if ( $(cell).parent().hasClass("begun") ) {
-            var curstate = "begun";
+            curstate = "begun";
         } else if ( $(cell).parent().hasClass("finished") ) {
             curstate = "finished";
         } else if ( $(cell).parent().hasClass("skipped") ) {
@@ -78,7 +79,7 @@
     var send_progressreport = function (jobid, status) {
         console.log("Sending report: jobid=" + jobid + ", status=" + status);
         $.post('./api/progressreport.php', { "jobid": jobid, "status": status }, reportSuccessCallback);
-    }
+    };
 
     function reportSuccessCallback(serverdata) {
         console.log("Server status message was: " + serverdata);

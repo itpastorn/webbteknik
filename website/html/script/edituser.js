@@ -131,9 +131,9 @@
                                 alert("Du har redan åtkomst till den boken");
                                 return false;
                             } else if ( verified.istrue === true ) {
-                            	if ( verified.newlevel ) {
+                                if ( verified.newlevel ) {
                                     console.log("Behörighet given på nivå " + verified.newlevel);
-                            	}
+                                }
                                 $(clicked_checkbox).attr("disabled", "disabled");
                                 msgLabel.removeClass("wrong").addClass("updated");
                                 return true;

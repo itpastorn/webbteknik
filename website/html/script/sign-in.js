@@ -17,7 +17,7 @@
     navigator.id.watch({
         loggedInUser: undefined,
         onlogin: gotAssertion,
-        onlogout: function () { console.log("logout fired")}
+        onlogout: function () { console.log("logout fired")};
         //onlogout: loggedOut
     });
 
@@ -46,7 +46,7 @@
             });
         } else {
             console.log("Assertion was null - loggedOut()");
-            navgator.id.logout();
+            navigator.id.logout();
         }
     }
 

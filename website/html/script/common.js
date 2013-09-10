@@ -13,7 +13,7 @@
 
         $(hidetipsbtn).on('click', function () {
             hide_user_tip(tipname, $(this).parent());
-        })
+        });
         
         this.appendChild(hidetipsbtn);
         
@@ -61,9 +61,9 @@
     }
 
     // Disable links to not yet implemented features
-    $(".nonimplemented").on('click', function () { return false});
+    $(".nonimplemented").on('click', function () { return false; });
     
     // Pure JS-links = buttons
-    $(".noclick").on('click', function () { return false});
+    $(".noclick").on('click', function () { return false; });
     
 }(window, window.document));
