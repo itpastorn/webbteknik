@@ -25,32 +25,44 @@ echo "Påbörjar utskick\n";
 
 $text = <<<TXT
 
-Hej lärare
+Hej nya och gamla lärare på webbteknik.nu
 
-Den som väntar för länge väntar på något gott, hoppas jag.
+Välkomna till ett nytt läsår. Lite snabb information om vad som hänt sedan sist.
 
-Jag har nu lämnat över det som hittills är klart för att vi ska
-få ut DVD-skivan till er. Jag har tvingats dra ner på ambitionerna,
-enligt parollen hellre något bra idag, än något perfekt aldrig.
+1. För den som eventuellt missat det så har jag skrivit klart läroboken
+   Webbserverprogrammering 1. Läs om den på http://keryx.se/blogg-72
 
-Jag hoppas skivan kommer bli till nytta!
+2. Än så länge finns det inga videos till den nya boken. Elever som är nya
+   i systemet kan behöva en förklaring att de inte ska titta på de befintliga
+   filmerna.
 
-# Kommentarer till lärar-DVD #
+   Så här ser min planering ut:
+   
+   * Skriva klart övningsboken (ca en vecka + några dagar för tryckeriet
+     om inget dyker upp).
 
-Skivan har följande kataloger:
+   * Göra några videos. Kom gärna med önskemål på vilka moment som behöver
+     kompletteras på detta vis.
+   
+   * Skriva klart Lärarhandledningen. Återigen tar jag gärna emot tips på
+     vad som kan ingå. Responsen på lärarhandledningen till Webbutveckling 1
+     har varit god, men jag tar gärna emot konkreta förbättringsförslag.
 
- * boken-kodexempel      Här finns HTML- och CSS-kod från boken
-   * advanced            Extra kodexempel. Här finns också ineraktiva demos.
- * css	                 Denna är till för slide-systemet. Kan ignoreras.
- * laxhjalpen-demowebb   Den färdiga läxhjälpen-webbplatsen
- * media                 Alla filmer i mp4- och webm-format
- * practice-files        Filer att ge eleverna när de gör uppgifter i övningsboken
- * script                Denna är till för slide-systemet. Kan ignoreras.
- * slides                Webbteknikbaserade slides (tänk PowerPoint)
- * videos-kod            Kod som jag använt när jag gjort videofilmerna
+3.  Webbplatsen har inte fått den kärlek jag utlovat under året. Flyttar
+    (pluralis), nytt jobb och andra saker har kommit emellan. Här kommer några
+    råd under tiden:
+    
+    * Skapa nya grupper för det nya läsåret. De ni använde förra året
+      kommer att avaktiveras.
+      
+      HAR NI REDAN GIVIT ELEVERNA EN KOD TILL EN BEFINTLIG GAMMAL GRUPP
+      SÅ FORTSÄTT ANVÄNDA DEN. Jag kommer fixa det på annat sätt. 
 
-Allt detta finns inte än, men kommer att finnas, också på [webbplatsen](http://webbteknik.nu/).
+    * Jag har två gamla elever som driver en webbfirma idag. De ska förbättra den
+      grafiska designen åt mig, så att jag kan koncentrera mig på innehållet.
 
+4. Vill du att ditt lärakonto ska vara vilande under året så mejla mig på
+   gunther@keryx.se. (Liksom för alla andra sorters frågor.)
 
 
 Lars Gunther
