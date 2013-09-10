@@ -4,7 +4,7 @@
  *
  */
 
-//exit("Sluta spamma");
+exit("Sluta spamma");
 session_start();
 require_once '../../includes/loadfiles.php';
 
