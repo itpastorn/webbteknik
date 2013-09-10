@@ -17,7 +17,7 @@
     navigator.id.watch({
         loggedInUser: undefined,
         onlogin: gotAssertion,
-        onlogout: function () { console.log("logout fired")};
+        onlogout: function () { console.log("logout fired")}
         //onlogout: loggedOut
     });
 
