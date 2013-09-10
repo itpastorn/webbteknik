@@ -4,7 +4,7 @@
  *
  */
 
-exit("Sluta spamma");
+//exit("Sluta spamma");
 session_start();
 require_once '../../includes/loadfiles.php';
 
@@ -29,6 +29,11 @@ Hej nya och gamla lärare på webbteknik.nu
 
 Välkomna till ett nytt läsår. Lite snabb information om vad som hänt sedan sist.
 
+JUST NU LIGGER SERVERN SOM HAR ALLA VIDEOS NERE! Jag har kontaktat webbhotellet
+och deras tjänster är utsatta för en DDOS-attack. Förhoppningsvis är det löst
+inom några timmar. (Resten av systemet ligger på ett annat webbhotell.)
+
+
 1. För den som eventuellt missat det så har jag skrivit klart läroboken
    Webbserverprogrammering 1. Läs om den på http://keryx.se/blogg-72
 
@@ -38,11 +43,14 @@ Välkomna till ett nytt läsår. Lite snabb information om vad som hänt sedan s
 
    Så här ser min planering ut:
    
-   * Skriva klart övningsboken (ca en vecka + några dagar för tryckeriet
+   * Göra ett antal tekniska uppdateringar på webblatsen som behövs för att
+     kunna hantera två olika kurser.
+
+   * Skriva klart nya övningsboken (ca en vecka + några dagar för tryckeriet
      om inget dyker upp).
 
-   * Göra några videos. Kom gärna med önskemål på vilka moment som behöver
-     kompletteras på detta vis.
+   * Göra några videos om PHP. Kom gärna med önskemål på vilka moment som behöver
+     kompletteras på detta vis utöver vad som står i boken.
    
    * Skriva klart Lärarhandledningen. Återigen tar jag gärna emot tips på
      vad som kan ingå. Responsen på lärarhandledningen till Webbutveckling 1
