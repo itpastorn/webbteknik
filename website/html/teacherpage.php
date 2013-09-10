@@ -421,22 +421,28 @@ endif;
   <form action="{$pageref}#my_schools_form" method="post" id="my_schools_form">
     <fieldset class="blocklabels">
       <legend>Skolor där du jobbar</legend>
+      <div class="explanation">
+        Just nu kan endast admin ändra på skolors namn, eller ta bort en lärare från en skola.
+        Har ni gjort en liten felstavning, så registrera ingen ny skola. Det kan åtgärdas i sinom tid.
+        Mejla gunther@keryx.se om något behöver åtgärdas.
+      </div>
       <p>
         Du är registrerade som lärare på följande skolor:
       </p>
       <ul>
         {$wp_list}
       </ul>
-      <p>
-        Just nu kan endast admin ändra på skolors namn, eller ta bort en lärare från en skola.
-        Har ni gjort en liten felstavning, så registrera ingen ny skola. Det kan åtgärdas i sinom tid.
-      </p>
     </fieldset>
   </form>
   <form action="{$pageref}#add_workplace_form" method="post" id="add_workplace_form">
     <fieldset class="blocklabels">
-      <legend>Lägg till ny arbetsplats</legend>
+      <legend>Lägg till ny arbetsplats (koppla ihop dig med en skola)</legend>
       {$new_workplace_save_msg}
+      <div class="explanation">
+        Om inte din skola redan finns med i systemet så börja med att bock för <q>Skolan finns inte med i listan</q>.
+        Då visas ytterligare ett formulär som ska användas först. Men om någon annan lärare på din skola redan gjort
+        detta moment så kan du börja skriva din skolas namn i fältet till vänster.
+      </div>
       <p>
         <label for="s_school_id">Lägg till plats där du jobbar
           (du måste använda ett färdigt förslag i detta fält)</label>
@@ -449,7 +455,7 @@ endif;
       </p>
       <p>
         <input type="checkbox" id="s_new_school" name="s_new_school" value="yes" /> 
-        <label for="s_new_school">Skolan finns inte med i listan (markeras denna kan du lägga till den)</label>
+        <label for="s_new_school">Skolan finns inte i listan (markeras denna kan du lägga till den)</label>
       </p>
       <p>
         <input type="hidden" name="new_workplace_added" value="yes" />
@@ -505,10 +511,10 @@ endif;
         <input type="submit" value="Skicka" />
       </p>
       <p>
-        <del>Adminstratörer måste godkänna att nya skolor läggs till. Detta kan ta ett par dagar.</del>
+        <!--<del>Adminstratörer måste godkänna att nya skolor läggs till. Detta kan ta ett par dagar.</del>
         <big>Just nu godkänns alla skolor direkt!</big>
         Använd <a href="contact.php" class="nonimplemented">kontaktformuläret</a> om inget hänt inom 48 timmar.
-      </p>
+      </p>-->
 FORMCONTENTS2;
 ?>
     </fieldset>
