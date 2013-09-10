@@ -192,6 +192,13 @@ input[disabled] + label {
     padding: 1em;
     margin: 1em;
 }
+.explanation {
+    float: right;
+    width: 40%;
+    margin-top: 1em;
+    font-size: 95%;
+    padding-right: 20px;
+}
 /* ------------------------------- *\
    $media
 \* ------------------------------- */
