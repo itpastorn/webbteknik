@@ -17,7 +17,8 @@
     navigator.id.watch({
         loggedInUser: undefined,
         onlogin: gotAssertion,
-        onlogout: loggedOut
+        onlogout: function () { console.log("logout fired")}
+        //onlogout: loggedOut
     });
 
     function gotAssertion(assertion) {
@@ -44,8 +45,8 @@
                 }
             });
         } else {
-            navgator.id.logout();
             console.log("Assertion was null - loggedOut()");
+            navgator.id.logout();
         }
     }
 
@@ -74,7 +75,7 @@
         console.log("Watching log out event"); // Does not fire
         $.ajax({
             type : 'POST',
-            url  : 'api/logout.php',
+            url  : 'logout.php',
             success : function (res, status, xhr) {
                 console.log(res);
                 window.location.href = "./";

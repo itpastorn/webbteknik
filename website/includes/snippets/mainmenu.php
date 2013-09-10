@@ -26,7 +26,7 @@ if ( isset($_SESSION['userdata']) ) {
       </a>
       <ul class="usermenu">
         <li><a href="edituser/">Redigera användaruppgifter</a></li>
-        <li><a href="logout.php" id="logoutbutton">Logga ut</a></li>
+        <!--li><a href="logout.php" id="logoutbutton">Logga ut</a></li-->
       </ul>
 
 USERDATA;
