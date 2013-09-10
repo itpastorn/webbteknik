@@ -19,7 +19,7 @@
         
         var teststring = new RegExp(tipname + '=no',"g");
         if ( doc.cookie.match(teststring) ) {
-            hide_user_tip(tipname, $('.usertip:[data-tipname=' + tipname + ']'));
+            hide_user_tip(tipname, $('.usertip[data-tipname="' + tipname + '"]'));
         }
     });
     
