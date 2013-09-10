@@ -15,7 +15,7 @@
     });
 
     navigator.id.watch({
-        loggedInUser: null,
+        loggedInUser: undefined,
         onlogin: gotAssertion,
         onlogout: loggedOut
     });
