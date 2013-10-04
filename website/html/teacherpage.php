@@ -523,17 +523,18 @@ FORMCONTENTS2;
   <script>
 (function (win, doc, undefined) {  
     if ( win.location.hash !== "#new_school_form") {
-        $("#new_school_form").hide().data("hidden", "hidden");
+        $("#new_school_form").hide().removeClass("yellowfade");
         // Remove checked set by browser history
         $("#s_new_school").removeAttr("checked");
     }
     
     $("#s_new_school").on("click", function () {
-        if ( $(this).attr("checked") ) {
-            $("#new_school_form").data("hidden" ,"").show().get()[0].scrollIntoView(false);
+        // Add class yellowfade when opening = check to see if open
+        if ( !$("#new_school_form").hasClass("yellowfade") ) {
+            $("#new_school_form").show().addClass("yellowfade").get()[0].scrollIntoView(false);
             $("#new_school_school_name").focus();
         } else {
-            $("#new_school_form").data("hidden" ,"hidden").hide();
+            $("#new_school_form").hide().removeClass("yellowfade");
         }
     });
     
@@ -568,7 +569,7 @@ FORMCONTENTS2;
                 $("#new_school_school_name").val() + ", " + $("#new_school_school_place").val() + " (" + schoolid + ")"
             );
             // Hide the form we no longer need
-            $("#new_school_form").hide().data("hidden", "hidden");
+            $("#new_school_form").hide().removeClass("yellowfade");
             // Focus attention on the form we are going to use
             $("#add_workplace_form").get()[0].scrollIntoView(true);
             win.location.hash = "add_workplace_form";
