@@ -477,8 +477,11 @@ a[href*="wikipedia.org"]:after {
     font-family: 'Oswald', "Franklin Gothic Medium", "Franklin Gothic", "ITC Franklin Gothic", Arial, sans-serif;
     letter-spacing: 1px;
 }
-.mainmenu ul {
+.primarymenu {
     margin: 0.2em 0;
+}
+.primarymenu.extramargin {
+    margin-top: 0.4em;
 }
 .mainmenu li {
     display: inline-block;
@@ -538,10 +541,6 @@ a[href*="wikipedia.org"]:after {
 .usermenu > li > a {
     display: block;
     padding: 0.5em 0;
-}
-
-.primarymenu {
-    margin: 0.2em 0;
 }
 .primarymenu > li {
     display: inline-block;

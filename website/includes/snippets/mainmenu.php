@@ -20,9 +20,11 @@ if ( isset($_SESSION['userdata']) ) {
 	} else {
 	    $lastname = $_SESSION['userdata']->lastname;
 	}
-    $book_status = '';
+    $book_status  = '';
+    $extra_height = '';
     if ( isset($_SESSION['currentbook']) ) {
-        $book_status = '<br />Bok:' . $_SESSION['currentbook'];
+        $book_status  = '<br />Bok: ' . $_SESSION['currentbook'];
+        $extra_margin = 'extramargin';
     }
     $userlink = <<<USERDATA
       <a href="#" title="Redigera användaruppgifter/logga ut" class="{$userlink_class} noclick">
@@ -45,9 +47,9 @@ if ( user::validate(user::TEACHER ) ) {
     <div class="userdata">
 <?php
 echo $userlink;
-?>
+echo <<<RESTOFMENU
     </div>
-    <ul class="primarymenu">
+    <ul class="primarymenu {$extra_margin}">
       <li><a href="./">Startsidan</a></li>
       <li><a href="userpage/">Arbetssida</a></li>
       <li><a href="joblist/">Arbetsplanering</a></li>
@@ -55,7 +57,7 @@ echo $userlink;
       <li><a href="assignments/">Övningsuppgifter</a></li>
       <li><a href="resources/links/">Länkar</a></li>
       <li><a href="resources/flashcards/">Flaschards</a></li>
-      <?php echo $teacherpage; ?>
+      {$teacherpage}
     </ul>
     <!--p>
       <small>En större uppdatering pågår just nu. Under tiden den sker
@@ -63,3 +65,4 @@ echo $userlink;
     </p-->
   </nav>
 
+RESTOFMENU;
