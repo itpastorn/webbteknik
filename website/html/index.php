@@ -12,12 +12,12 @@ $_SESSION['not_empty'] = 1;
 
 require_once '../includes/loadfiles.php';
 
-user::setSessionData();
-
 // Database settings and connection
 $dbx = config::get('dbx');
 // init
 $dbh = keryxDB2_cx::get($dbx);
+
+user::setSessionData();
 
 $stattypes = array('Videos', 'Länkar', 'Uppgifter', 'Flashcards', 'Användare', 'Grupper');
 

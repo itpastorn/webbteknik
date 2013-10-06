@@ -26,16 +26,16 @@ class data_videos extends items implements data
      * The start of SQL commands to fetch data for this object
      * 
      * Can be used to help build outside queries for 2nd param of loadAll method
+     * FIXME This sort will only work as long as there only are 2 books
      */
     const SELECT_SQL = <<<SQL
         SELECT vid.videoname AS id, vid.title AS name, vid.bookID, books.booktitle, vid.chapter, bs.section AS bs_section, bs.title as bs_title
         FROM videos AS vid
         LEFT JOIN booksections AS bs USING (booksectionID)
         LEFT JOIN books ON (vid.bookID = books.bookID)
-        WHERE vid.acl < :privileges
-        ORDER BY ISNULL(vid.bookID) DESC, vid.bookID DESC, ISNULL(booksectionID), bs.sortorder
+        WHERE ( vid.acl <= :privileges  AND books.bookID LIKE :bookID ) OR vid.acl <= 3
+        ORDER BY FIELD(vid.bookID, :bookID, 'git', 'site', :otherbook), ISNULL(vid.bookID) DESC, ISNULL(booksectionID), bs.sortorder
 SQL;
-
 
     private function __construct($id, $name, $videoUrl)
     {
@@ -60,8 +60,14 @@ SQL;
     {
         $sql  = self::SELECT_SQL;
         $stmt = $dbh->prepare($sql);
+        $GLOBALS['FIREPHP']->log($params['privileges']);
         $stmt->bindParam(':privileges', $params['privileges']);
-        $stmt->execute($params);
+        $bookID = "{$_SESSION['currentbook']}%"; // Search using like
+        $stmt->bindParam(':bookID', $bookID);
+        // FIXME This sort will only work as long as there only are 2 books
+        $otherbook = ( $_SESSION['currentbook'] === 'wu1' ) ? 'ws1' : 'wu1';
+        $stmt->bindParam(':otherbook', $otherbook);
+        $stmt->execute();
         $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, __CLASS__, array('id', 'name', 'bs_section'));
         return $stmt->fetchAll();
     }

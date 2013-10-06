@@ -55,7 +55,7 @@
                 answer = JSON.parse(answer);
                 switch (answer.result) {
                 case "joined":
-                    feedback.html("Du är nu ansluten till gruppen. <a href='userpage.php'>Börja jobba</a>").addClass("greenfade");
+                    feedback.html("Du är nu ansluten till gruppen. <a href='edituser.php'>Ladda om sidan</a>").addClass("greenfade");
                     break;
                 case "ismember":
                     feedback.html("Du är redan med i den gruppen.").addClass("yellowfade");
@@ -136,6 +136,9 @@
                                 }
                                 $(clicked_checkbox).attr("disabled", "disabled");
                                 msgLabel.removeClass("wrong").addClass("updated");
+                                window.setTimeout( function () {
+                                	window.location.reload();
+                                }, 2000);
                                 return true;
                             } else if (verified.istrue === false) {
                                 // Explicitly false

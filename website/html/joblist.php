@@ -23,20 +23,27 @@
 session_start();
 require_once '../includes/loadfiles.php';
 
-user::setSessionData();
-
-user::requires(user::TEXTBOOK);
-
 // Database settings and connection
 $dbx = config::get('dbx');
 // init
 $dbh = keryxDB2_cx::get($dbx);
 
+user::setSessionData();
+
+user::requires(user::TEXTBOOK);
+
 $bookID  = filter_input(INPUT_GET, 'book', FILTER_SANITIZE_URL);
 $chapter = filter_input(INPUT_GET, 'c', FILTER_SANITIZE_URL);
 
+$currentbook = acl::currentBookChoice($dbh, $current_privileges);
+// TODO Fix this permanently in a better way
+if ( !empty($bookID) && $bookID != $currentbook ) {
+    header("Location: edituser.php?choosebook=1");
+    exit;
+} 
+
 if ( empty($bookID) ) {
-    $bookID = 'wu1';
+    $bookID = $currentbook;
 }
 
 if ( empty($chapter) ) {

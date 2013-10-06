@@ -194,10 +194,14 @@ input[disabled] + label {
 }
 .explanation {
     float: right;
-    width: 40%;
+    width: 38%;
     margin-top: 1em;
     font-size: 95%;
-    padding-right: 20px;
+    padding: 0 18px;
+}
+.explanation + p,
+.explanation + p + p {
+     width: 50%;
 }
 /* ------------------------------- *\
    $media

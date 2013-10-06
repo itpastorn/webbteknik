@@ -24,15 +24,16 @@
 session_start();
 require_once '../includes/loadfiles.php';
 
-user::setSessionData();
-
-user::requires(user::TEXTBOOK);
-
 // Database settings and connection
 $dbx = config::get('dbx');
 // init
 $dbh = keryxDB2_cx::get($dbx);
 
+user::setSessionData();
+user::requires(user::TEXTBOOK);
+
+// Chose book to work with
+$currentbook = acl::currentBookChoice($dbh);
 
 // Type of resource
 $r_types =  array(
@@ -63,7 +64,7 @@ switch ( $c_type ) {
 	case "links":
         include "data/links.php";
         // TODO: Filter accotding to book from GET-param
-        $resources      = data_links::loadAll($dbh, false, array('bookID' => 'wu1'));
+        $resources      = data_links::loadAll($dbh, false, array('bookID' => $_SESSION['currentbook']));
         $resource_table = data_links::makeTable($resources);
         break;
 	case "videos":

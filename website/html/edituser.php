@@ -14,15 +14,43 @@
 session_start();
 require_once '../includes/loadfiles.php';
 
-user::requires(user::LOGGEDIN);
-
 // Database settings and connection
 $dbx = config::get('dbx');
 // init
 $dbh = keryxDB2_cx::get($dbx);
 
-// Current privileges
-$current_privileges = acl::getList($_SESSION['user'], $dbh);
+user::setSessionData();
+user::requires(user::LOGGEDIN);
+
+$current_privileges = array(); // Set by reference on next line
+$currentbook = acl::currentBookChoice($dbh, $current_privileges);
+
+// Higlight form if user has not chosen what book to work with
+$choosebook = '';
+if ( filter_has_var(INPUT_GET, 'choosebook') ) {
+    $choosebook = ' class="yellowfade"';
+}
+
+require "data/books.php";
+// All textbooks in the DB
+$allbooks = data_books::loadAll($dbh);
+
+// The books the user already has access to
+$userbooks = array_intersect_key($allbooks, array_flip($current_privileges));
+
+// The books the user may want access to
+$missingbooks = array_diff_key($allbooks, array_flip($current_privileges));
+
+// What books have privilege questions?
+$stmt = $dbh->query(<<<SQL
+      SELECT DISTINCT pq.bookID, bk.booktitle FROM privilege_questions AS pq
+      NATURAL JOIN books AS bk
+      ORDER BY bk.courseID DESC
+SQL
+);
+$questionbooks = $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
+$missingbooks  = array_intersect_key($missingbooks, $questionbooks);
+
 
 $userdata = $_SESSION['userdata'];
 $tosagree = true;
@@ -74,6 +102,24 @@ if ( isset($_POST['firstname']) ) {
     }
 }
 
+$bookchoice = ''; // Enable highlight when choice has been made as visual feedback
+if ( filter_has_var(INPUT_POST, 'bookchoice') ) {
+    $bookchoice = filter_input(
+        INPUT_POST, 'bookchoice', FILTER_UNSAFE_RAW, FILTER_FLAG_STRIP_LOW|FILTER_FLAG_STRIP_HIGH
+    );
+    if ( !array_key_exists($bookchoice, $userbooks) ) {
+        trigger_error("Manipulation attempt - user has not got the rights to that book", E_USER_ERROR);
+    }
+    $sql  = "UPDATE users SET currentbook = :bookchoice WHERE email = :email";
+    $stmt = $dbh->prepare($sql);
+    $stmt->bindParam(":bookchoice", $bookchoice);
+    $stmt->bindParam(":email", $_SESSION['user']);
+    $stmt->execute();
+    if ( $stmt->rowCount() ) {
+        $_SESSION['currentbook'] = $currentbook = $bookchoice;
+    }
+}
+
 // Quic and dirty test to see if name is in DB
 $db_name_set = false;
 if ( $userdata->firstname ) {
@@ -82,18 +128,6 @@ if ( $userdata->firstname ) {
 // HTML safe - move to class
 $first_name = $userdata->firstname;
 $last_name  = $userdata->lastname;
-
-// What books have privilege questions?
-$stmt = $dbh->query(<<<SQL
-      SELECT DISTINCT pq.bookID, bk.booktitle FROM privilege_questions AS pq
-      NATURAL JOIN books AS bk
-      ORDER BY bk.courseID DESC
-SQL
-);
-$books = $stmt->fetchAll();
-
-$hasalready['wu1'] = "";
-$hasalready['ws1'] = "";
 
 // Preparing for mod_rewrite, set base-element
 // TODO: Make this generic!
@@ -111,8 +145,68 @@ if ( "//" == $baseref ) {
 </head>
 <body>
   <h1>webbteknik.nu &ndash; Redigera din användare</h1>
-  <?php require "../includes/snippets/mainmenu.php"; ?>
 <?php
+require "../includes/snippets/mainmenu.php";
+
+echo <<<BOOKCHOICE
+  <form action="edituser.php" method="post">
+    <fieldset{$choosebook}>
+      <legend>Välj bok att jobba med</legend>
+      <div class="explanation">
+        Här väljer du vilken bok som du vill jobba med, vars videos, uppgifter, länkar, etc. kommer att visas.
+      </div>
+
+BOOKCHOICE;
+if ( count($userbooks) > 1 ):
+    foreach ( $userbooks as $bk ) :
+        $checked = "";
+        if ( $bk->id === $currentbook ) {
+            $checked = "checked";
+        }
+        // Visual feedback when making a new choice
+        $update_feedback = '';
+        if ( $bk->id === $bookchoice ) {
+             $update_feedback = ' class="greenfade"';
+        }
+        echo <<<TEXT
+      <p{$update_feedback}>
+        <input type="radio" name="bookchoice" value="{$bk->id}" id="bc_{$bk->id}" required $checked />
+        <label for="bc_{$bk->id}">{$bk->name}</lable>.
+      </p>
+
+TEXT;
+  endforeach;
+  echo <<<BOOKCHOICE
+      <p>
+        <input type="submit" value="Välj bok" />
+      </p>
+
+BOOKCHOICE;
+elseif ( count($userbooks) == 1 ):
+  $bk = current($userbooks);
+  echo <<<BOOKCHOICE
+      <p>
+        Du kan för närvarande bara jobba med boken <i>{$bk->name}</i>.
+        Vill du ha tillgång till en annan bok så <a href="./edituser/#privileges">ansök om privilegier nedan</a>.
+      </p>
+
+BOOKCHOICE;
+else:
+  echo <<<BOOKCHOICE
+      <p>
+        Du kan för närvarande inte jobba med någon bok. Ansök om privilegier nedan.
+      </p>
+
+BOOKCHOICE;
+endif;
+
+echo <<<BOOKCHOICE
+    </fieldset>
+  </form>
+
+BOOKCHOICE;
+
+
 // Only show terms of service in not agreed upon
 if ( !$tosagree ) :
     echo <<<TOS
@@ -173,9 +267,9 @@ else:
         <input type="text" id="lastname" name="lastname"
                value="{$last_name}" required />
       </p>
-	  <p>
-	    Kommer snart: Kontonamn på Github och JSBin (frivilliga uppgifter).
-	  </p>
+      <!--p>
+        Kommer snart: Kontonamn på Github och JSBin (frivilliga uppgifter).
+      </p-->
       <p>
         <span class="labeldummysincecssalignmentisnearimpossible"></span>
         <input type="submit" value="Skicka" />
@@ -240,27 +334,28 @@ TEACHERYOU;
         </p>
 
 QUESTION;
-           foreach ( $books as $bk ) :
-               if ( in_array($bk['bookID'], $current_privileges) ) {
-               	   echo <<<TEXT
-        <p>
-          Du har tillgång till <i>{$bk['booktitle']}</i>.
-        </p>
+
+           foreach ( $userbooks as $bk ) :
+               echo <<<TEXT
+                 <p>
+                   Du har tillgång till <i>{$bk->name}</i>.
+                 </p>
 
 TEXT;
-               } else {
-                   echo <<<INPUT
-        <p>
-          <input type="checkbox" name="bookID" value="{$bk['bookID']}" id="textbook_{$bk['bookID']}" autocomplete="off" />
-          <label for="textbook_{$bk['bookID']}">{$bk['booktitle']}</label>
-        </p>
+           endforeach;
+
+           foreach ( $missingbooks as $bk ) :
+               echo <<<INPUT
+                 <p>
+                   <input type="checkbox" name="bookID" value="{$bk->id}" id="textbook_{$bk->id}" autocomplete="off" />
+                   <label for="textbook_{$bk->id}">{$bk->name}</label>
+                 </p>
 
 INPUT;
-               }
           endforeach;
 ?>
         <p>
-          Lärarbehörighet (inkluderar båda böckerna): Mejla gunther at keryx punkt se.</strong>
+          Lärarbehörighet (inkluderar alla böcker): Mejla gunther at keryx punkt se.</strong>
         </p>
         <input type="hidden" name="origlevel" id="origlevel" value="<?php echo $userdata->privileges; ?>" />
       </div>

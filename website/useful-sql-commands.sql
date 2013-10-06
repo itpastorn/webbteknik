@@ -453,8 +453,6 @@ INSERT INTO `webbtek_webbtek`.`privilege_questions` (`pqID`, `question`, `answer
 VALUES (null, 'I första stycket i avsnitt 1 i Läroboken Webbserverprogrammering 1 med PHP, vad är det första markerade ordet?', 'körmiljö', '7', 'ws1', '0'),
        (null, 'I första stycket i avsnitt 1.2 i Läroboken Webbserverprogrammering 1 med PHP, vad är det första markerade ordet?', 'XAMPP', '7', 'ws1', '0');
 
--- Not put to server below
-
 CREATE TABLE IF NOT EXISTS `access_control` (
   `aclID` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `email` varchar(150) COLLATE utf8_swedish_ci NOT NULL,
@@ -471,6 +469,15 @@ ALTER TABLE `access_control`
 
 ALTER TABLE `belonging_groups` CHANGE `tgID` `bgID` INT( 11 ) NOT NULL AUTO_INCREMENT;
 
+ALTER TABLE `users` ADD `currentbook` VARCHAR( 5 ) CHARACTER SET utf8 COLLATE utf8_swedish_ci NULL
+COMMENT 'What book user is currently working with',
+ADD INDEX ( `currentbook` );
+
+-- Not put to server below
+
+ALTER TABLE `webbtek_webbtek`.`booksections` ADD UNIQUE `nodupsorted` ( `bookID` , `sortorder` );
+
+INSERT INTO `webbtek_webbtek`.`books` (`bookID`, `booktitle`, `author`, `authormail`, `isbn`, `type`, `bookurl`, `courseID`) VALUES ('git', 'Versionshantering med Git och GitHub', 'Lars Gunther', 'gunther@keryx.se', NULL, 'none', '', NULL);
 
 -- Test SQL
 
