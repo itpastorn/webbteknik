@@ -473,11 +473,12 @@ ALTER TABLE `users` ADD `currentbook` VARCHAR( 5 ) CHARACTER SET utf8 COLLATE ut
 COMMENT 'What book user is currently working with',
 ADD INDEX ( `currentbook` );
 
--- Not put to server below
-
 ALTER TABLE `webbtek_webbtek`.`booksections` ADD UNIQUE `nodupsorted` ( `bookID` , `sortorder` );
 
 INSERT INTO `webbtek_webbtek`.`books` (`bookID`, `booktitle`, `author`, `authormail`, `isbn`, `type`, `bookurl`, `courseID`) VALUES ('git', 'Versionshantering med Git och GitHub', 'Lars Gunther', 'gunther@keryx.se', NULL, 'none', '', NULL);
+
+-- Not put to server below
+
 
 -- Test SQL
 
