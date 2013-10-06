@@ -20,9 +20,13 @@ if ( isset($_SESSION['userdata']) ) {
 	} else {
 	    $lastname = $_SESSION['userdata']->lastname;
 	}
+    $book_status = '';
+    if ( isset($_SESSION['currentbook']) ) {
+        $book_status = '<br />Bok:' . $_SESSION['currentbook'];
+    }
     $userlink = <<<USERDATA
       <a href="#" title="Redigera användaruppgifter/logga ut" class="{$userlink_class} noclick">
-        {$firstname} {$lastname} ({$_SESSION['userdata']->email})
+        {$firstname} {$lastname} ({$_SESSION['userdata']->email}){$book_status}
       </a>
       <ul class="usermenu">
         <li><a href="edituser/">Redigera användaruppgifter</a></li>

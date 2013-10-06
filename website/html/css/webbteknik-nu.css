@@ -508,7 +508,7 @@ a[href*="wikipedia.org"]:after {
     position: absolute;
     top: 2px;
     right: 2px;
-    width: 185px;
+    min-width: 185px;
     margin: 0;
     text-align: right;
     font-size: x-small;
