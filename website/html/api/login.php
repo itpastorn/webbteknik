@@ -99,12 +99,14 @@ $response->expires
 
 if ( $response->status === "okay" ) {
 
-    session_regenerate_id();
+    session_regenerate_id(true);
 
     $dbh  = keryxDB2_cx::get();
     // TODO - this is not DRY
+    // Improv - banned users not banned
+    // TODO - check status (block inactive users)
     $stmt = $dbh->prepare(
-        'SELECT email, firstname, lastname, privileges, user_since FROM users WHERE email = :email'
+        'SELECT email, firstname, lastname, privileges, user_since, currentbook FROM users WHERE email = :email'
     );
     $stmt->bindParam(':email', $response->email);
     $stmt->execute();
@@ -118,8 +120,12 @@ if ( $response->status === "okay" ) {
         $userdata->lastname   = null;
         $userdata->privileges = 1;
     }
-    $_SESSION['user']     = $response->email;
-    $_SESSION['userdata'] = $userdata;
+    $_SESSION['user']        = $response->email;
+    $_SESSION['userdata']    = $userdata;
+
+    // What book is user working with?
+    $_SESSION['currentbook'] = $userdata->currentbook;
+    
     $FIREPHP->log($_SESSION);
     echo json_encode($_SESSION['userdata']); // Send to receiving script
     exit;

@@ -19,14 +19,17 @@ session_start();
 
 require_once '../includes/loadfiles.php';
 
-user::setSessionData();
-
-user::requires(user::TEXTBOOK);
-
 // Database settings and connection
 $dbx = config::get('dbx');
 // init
 $dbh = keryxDB2_cx::get($dbx);
+
+user::setSessionData();
+
+user::requires(user::TEXTBOOK);
+
+// Chose book to work with
+$currentbook = acl::currentBookChoice($dbh);
 
 // Name of video to show
 $video = null;
@@ -44,6 +47,7 @@ if ( empty($_GET['vidnum']) && empty($_GET['video']) ) {
         INNER JOIN userprogress AS up
         ON (jl.joblistID = up.joblistID)
         WHERE jl.what_to_do = 'video'
+             AND jl.bookID = :bookID
              AND jl.joblistID NOT IN
               (
                 SELECT injl.joblistID
@@ -103,14 +107,17 @@ SELECT jl.where_to_do_it, up.* FROM joblist AS jl
 */
     $stmt = $dbh->prepare($sql);
     $stmt->bindParam(':email', $_SESSION['user']);
+    $stmt->bindParam(':bookID', $currentbook);
     $stmt->execute();
     $video = $stmt->fetchColumn();
+    $FIREPHP->log("Next unseen video: {$video}");
 }
 
 if ( !$video && isset($_GET['video'])) {
     $video  = filter_input(INPUT_GET, 'video', FILTER_SANITIZE_URL);
 }
 
+$curvid = null;
 if ( $video ) {
     // TODO filter, but prepared statements should catch any SQL-injection attempt
     $sql = <<<SQL
@@ -352,8 +359,10 @@ if ( 'webbteknik.nu' == $_SERVER['SERVER_NAME']) {
       <button id="skipvid" disabled>Markera videon <br /> som <b>sedd</b></button>
       <button id="unskipvid" disabled>Markera videon <br /> som <b>osedd</b></button>
       <button id="nextunseen" disabled"><b>Första osedda</b> video</button>
+    <?php if ( isset($curvid['videoname']) ): ?>
       <button class="prevnextvideo" disabled data-bookID="<?php echo $curvid['bookID']; ?>" data-vidnum="<?php echo $curvid['next']; ?>"><b>Nästa</b> video</button>
       <button class="prevnextvideo" disabled data-bookID="<?php echo $curvid['bookID']; ?>" data-vidnum="<?php echo $curvid['prev']; ?>"><b>Föregående</b> video</button>
+    <?php endif; ?>
     </div>
   </div>
   <p class="unobtrusive">

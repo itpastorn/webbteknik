@@ -70,15 +70,21 @@ fort detta åtgärdats. Tyvärr ligger felet utom min kontroll.
 Lars Gunther
 MSG;
     	}
-    	
+        $returnvalue = false;
         if ( isset($_SESSION['userdata']->email) ) {
-            return true;
-        }
-        if ( isset($_SESSION['userdata']) && is_string($_SESSION['userdata']) ) {
+            $returnvalue = true;
+        } elseif ( isset($_SESSION['userdata']) && is_string($_SESSION['userdata']) ) {
             $_SESSION['userdata'] = json_decode($_SESSION['userdata']);
-            return true;
+            $returnvalue = true;
+        } else {
+            // User has not logged in at all
+            return false;
         }
-        return false;
+        if ( empty($_SESSION['bookoptions']) ) {
+            $_SESSION['bookoptions'] = acl::getList($_SESSION['userdata']->email, $GLOBALS['dbh']); //Ugly
+        }
+        
+        return $returnvalue;
     }
     
     /**
@@ -114,7 +120,7 @@ MSG;
      * @param int $userlevel The user's actual level, leave empty for currently logged in user
      */
     public static function validate($req_level, $userlevel = null) {
-    	// global $FIREPHP;
+
         if ( empty($userlevel) && isset($_SESSION['userdata']->privileges) ) {
             $userlevel = $_SESSION['userdata']->privileges;
         }

@@ -66,6 +66,14 @@ SQL;
      */
     public static function getList($email, PDO $dbh)
     {
+        // Admins and teachers have full access
+        // TODO populate via DB
+        if ( user::validate(user::TEACHER ) ) {
+            $GLOBALS['FIREPHP']->log("Full access to books");
+            $GLOBALS['FIREPHP']->log("(Line " . (__LINE__ - 1) . " in " . __CLASS__. ")");
+            return array("wu1", "ws1");
+        }
+        
         // Check via ACL-table
         $sql = <<<SQL
             SELECT bookID FROM access_control
@@ -136,6 +144,45 @@ SQL;
             return false;
         }
         return true;
+    }
+    
+    /**
+     * What book user is working with
+     * 
+     * If user has not made a choice this function will make only possible choice
+     * or redirect to page were the choice can be made
+     * 
+     * @param PDO $dbh
+     * @param array $current_privileges By reference- List of possible books to access.
+     * @return string Currently made choice
+     */
+    public static function currentBookChoice(PDO $dbh, &$current_privileges = array())
+    {
+        if ( empty($_SESSION['user']) ) {
+            throw new Exception(__CLASS__ . '::' . __METHOD__ . ' called but $_SESSION["user"] is not set.');
+            return false;
+        }
+        // Possible choices. Also returned by reference
+        $current_privileges = self::getList($_SESSION['user'], $dbh);
+
+        if ( !empty($_SESSION['currentbook']) ) {
+            // Choice has been made
+            return $_SESSION['currentbook'];
+        }
+
+        $possible_choices   = count($current_privileges);
+        if ( 1 == $possible_choices ) {
+            $_SESSION['currentbook'] = $current_privileges[0];
+            $sql  = 'UPDATE users SET currentbook = :currentbook WHERE email = :email';
+            $stmt = $dbh->prepare($sql);
+            $stmt->bindParam(':currentbook', $_SESSION['currentbook']);
+            $stmt->bindParam(':email', $_SESSION['user']);
+            $stmt->execute();
+            return $_SESSION['currentbook'];
+        }
+        // Multiple choices or no choice possible
+        header("Location: edituser/?choosebook=1");
+        exit;
     }
 
 }
