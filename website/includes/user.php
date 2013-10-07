@@ -101,12 +101,7 @@ MSG;
             return true;
         }
         // Access violation
-        if ( "wt.book" == $_SERVER['SERVER_NAME']) {
-            $pathextra = "/website/html/";
-        } else {
-            $pathextra = "/";
-        }
-        header("Location: {$pathextra}sign-in.php?nopriv=1&ref=" . urlencode($_SERVER['REQUEST_URI']));
+        header("Location: {$GLOBALS['PATHEXTRA']}sign-in.php?nopriv=1&ref=" . urlencode($_SERVER['REQUEST_URI']));
         exit;
         
     }

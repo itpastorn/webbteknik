@@ -23,12 +23,15 @@ user::setSessionData();
 user::requires(user::LOGGEDIN);
 
 $current_privileges = array(); // Set by reference on next line
-$currentbook = acl::currentBookChoice($dbh, $current_privileges);
+// No redirect since user already is on the page to chose a book => 3d param = false
+$currentbook = acl::currentBookChoice($dbh, $current_privileges, false);
 
 // Higlight form if user has not chosen what book to work with
 $choosebook = '';
+$chooseinfo = '';
 if ( filter_has_var(INPUT_GET, 'choosebook') ) {
     $choosebook = ' class="yellowfade"';
+    $chooseinfo = '<p><strong>Du måste välja vilken bok du vill jobba med innan du går vidare.</strong></p>';
 }
 
 require "data/books.php";
@@ -114,13 +117,19 @@ if ( filter_has_var(INPUT_POST, 'bookchoice') ) {
     $stmt = $dbh->prepare($sql);
     $stmt->bindParam(":bookchoice", $bookchoice);
     $stmt->bindParam(":email", $_SESSION['user']);
-    $stmt->execute();
-    if ( $stmt->rowCount() ) {
+    $is_ok = $stmt->execute();
+    if ( $is_ok ) {
         $_SESSION['currentbook'] = $currentbook = $bookchoice;
+        $GLOBALS['FIREPHP']->log('Currentbook set to: ' . $_SESSION['currentbook']);
+        $chooseinfo = '<p class="greenfade">Bokval gjort. Navigera vidare i menyn.</p>';
+    } else {
+        $GLOBALS['FIREPHP']->log($is_ok . ' Currentbook could not be set. Tried "' . $bookchoice . '" for ' . $_SESSION['user']);
+        $chooseinfo = '<p class="error yellowfade">Uppdatering misslyckades. Kontakta admin.</p>';
+        $bookchoice = 'FAIL';
     }
 }
 
-// Quic and dirty test to see if name is in DB
+// Quick and dirty test to see if name is in DB
 $db_name_set = false;
 if ( $userdata->firstname ) {
     $db_name_set = true;
@@ -149,9 +158,10 @@ if ( "//" == $baseref ) {
 require "../includes/snippets/mainmenu.php";
 
 echo <<<BOOKCHOICE
-  <form action="edituser.php" method="post">
+  <form action="edituser/" method="post">
     <fieldset{$choosebook}>
       <legend>Välj bok att jobba med</legend>
+      $chooseinfo
       <div class="explanation">
         Här väljer du vilken bok som du vill jobba med, vars videos, uppgifter, länkar, etc. kommer att visas.
       </div>
@@ -210,7 +220,7 @@ BOOKCHOICE;
 // Only show terms of service in not agreed upon
 if ( !$tosagree ) :
     echo <<<TOS
-  <form action="edituser.php" method="post" class="nonajax">
+  <form action="edituser/" method="post" class="nonajax">
     <fieldset>
       <legend>Skapa användare</legend>
       <p>
@@ -250,7 +260,7 @@ else:
     // show all other forms if TOS-agreement has been made
     echo <<<BASEFACTS
  
-  <form action="edituser.php" method="post">
+  <form action="edituser/" method="post">
     <fieldset>
       <legend>Basfakta</legend>
       <p>
@@ -282,7 +292,7 @@ BASEFACTS;
 
         echo <<<EDITUSERFORMSTART
         
-  <form action="edituser.php#privileges" method="post" id="privileges">
+  <form action="edituser/#privileges" method="post" id="privileges">
     <fieldset>
       <legend>Önskade privilegier</legend>
 

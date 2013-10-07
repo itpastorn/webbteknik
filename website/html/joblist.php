@@ -36,11 +36,6 @@ $bookID  = filter_input(INPUT_GET, 'book', FILTER_SANITIZE_URL);
 $chapter = filter_input(INPUT_GET, 'c', FILTER_SANITIZE_URL);
 
 $currentbook = acl::currentBookChoice($dbh, $current_privileges);
-// TODO Fix this permanently in a better way
-if ( !empty($bookID) && $bookID != $currentbook ) {
-    header("Location: edituser.php?choosebook=1");
-    exit;
-} 
 
 if ( empty($bookID) ) {
     $bookID = $currentbook;

@@ -477,6 +477,11 @@ ALTER TABLE `webbtek_webbtek`.`booksections` ADD UNIQUE `nodupsorted` ( `bookID`
 
 INSERT INTO `webbtek_webbtek`.`books` (`bookID`, `booktitle`, `author`, `authormail`, `isbn`, `type`, `bookurl`, `courseID`) VALUES ('git', 'Versionshantering med Git och GitHub', 'Lars Gunther', 'gunther@keryx.se', NULL, 'none', '', NULL);
 
+ALTER TABLE `users` ADD FOREIGN KEY ( `currentbook` ) REFERENCES `webbtek_webbtek`.`books` (
+`bookID`
+) ON DELETE RESTRICT ON UPDATE CASCADE ;
+
+
 -- Not put to server below
 
 

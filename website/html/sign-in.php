@@ -28,7 +28,7 @@ if ( user::validate(user::LOGGEDIN) ) {
         $note  = "<h2>Du har inte behörighet att gå till sidan</h2>\n";
         $note .= "<p>Det kan bero på att du inte har registrerat bokinköp " .
         		 "eller anslutit dig till en undervisningsgrupp.\n";
-        $note .= "Det gör du genom att <a href=\"edituser.php\">redigera dina användardata</a>.</p>\n";
+        $note .= "Det gör du genom att <a href=\"edituser/\">redigera dina användardata</a>.</p>\n";
     }
     $signinheader = "Byt användare";
 } else {

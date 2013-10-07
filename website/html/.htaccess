@@ -1,10 +1,12 @@
 # php_value session.save_path /home/gunther/arkiv/workspace/webbteknik/website/sessiondata
-php_value session.save_path /webbteknik.nu/sessiondata
+# php_value session.save_path /webbteknik.nu/sessiondata
 
 AddDefaultCharset utf-8
 Options +FollowSymlinks -MultiViews
 
 RewriteEngine On
+# LogLevel warn rewrite:trace8
+
 RewriteCond %{HTTP_HOST} ^www\.webbteknik\.nu$ [NC]
 RewriteRule ^(.*)$ http://webbteknik.nu/$1 [R=301,L]
 
@@ -23,8 +25,11 @@ RewriteRule userpage/(.*)/vidnum/(.*)/$    userpage.php?book=$1&vidnum=$2 [NC,L]
 RewriteRule userpage/video/([^/]+)$        userpage/video/$1/             [R=301,NC,L]
 RewriteRule userpage/video/(.*)/$          userpage.php?video=$1          [NC,L]
 
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
 RewriteRule resources$          resources/             [R=301,NC,L]
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
 RewriteRule resources/([^/]+)$  resources/$1/          [R=301,NC,L]
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
 RewriteRule resources/(.*)/$    resources.php?what=$1  [NC,L]
 
 RewriteRule flashcards$             resources/flashcards/   [R=301,NC,L]
@@ -43,7 +48,9 @@ RewriteRule joblist/(.+)/([0-9]+)/$     joblist.php?book=$1&c=$2   [NC,L]
 RewriteRule assignments$     assignments/     [R=301,NC,L]
 RewriteRule assignments/$    assignments.php  [NC,L]
 
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
 RewriteRule edituser$     edituser/     [R=301,NC,L]
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
 RewriteRule edituser/$    edituser.php  [NC,L]
 
 RewriteRule teacherpage$     teacherpage/     [R=301,NC,L]

@@ -21,7 +21,7 @@ if ( isset($_SESSION['userdata']) ) {
 	    $lastname = $_SESSION['userdata']->lastname;
 	}
     $book_status  = '';
-    $extra_height = '';
+    $extra_margin = '';
     if ( isset($_SESSION['currentbook']) ) {
         $book_status  = '<br />Bok: ' . $_SESSION['currentbook'];
         $extra_margin = 'extramargin';

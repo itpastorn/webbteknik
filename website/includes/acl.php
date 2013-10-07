@@ -152,12 +152,15 @@ SQL;
      * If user has not made a choice this function will make only possible choice
      * or redirect to page were the choice can be made
      * 
-     * @param PDO $dbh
+     * @param PDO   $dbh
      * @param array $current_privileges By reference- List of possible books to access.
+     * @param bool  $redirect Set to false to prevent redirect 
      * @return string Currently made choice
      */
-    public static function currentBookChoice(PDO $dbh, &$current_privileges = array())
+    public static function currentBookChoice(PDO $dbh, &$current_privileges = array(), $redirect = true)
     {
+        $logbook = isset($_SESSION['currentbook']) ? $_SESSION['currentbook'] : 'No current book';
+        $GLOBALS['FIREPHP']->log('Currentbook is: ' . $logbook);
         if ( empty($_SESSION['user']) ) {
             throw new Exception(__CLASS__ . '::' . __METHOD__ . ' called but $_SESSION["user"] is not set.');
             return false;
@@ -180,9 +183,13 @@ SQL;
             $stmt->execute();
             return $_SESSION['currentbook'];
         }
+
         // Multiple choices or no choice possible
-        header("Location: edituser/?choosebook=1");
-        exit;
+        // Only do this redirect once and only if user can chose a book
+        if ( $redirect && $possible_choices > 1 && ! filter_has_var(INPUT_GET, 'choosebook') ) {
+            header("Location: {$GLOBALS['PATHEXTRA']}edituser/?choosebook=1");
+            exit;
+        }
     }
 
 }

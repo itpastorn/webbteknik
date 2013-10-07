@@ -21,6 +21,13 @@ set_include_path(
     PATH_SEPARATOR . $BELOWROOT . DIRECTORY_SEPARATOR . 'keryxIncludes.ep'
 );
 
+// Base direcory for redirects
+if ( "wt.book" == $_SERVER['SERVER_NAME']) {
+    $PATHEXTRA = "/website/html/";
+} else {
+    $PATHEXTRA = "/";
+}
+
 /**
  * Fire PHP
  */
