@@ -87,6 +87,19 @@ LI;
         $message .= "</ol>\n";
         return $message;
     }
+    /**
+     * Denna funktion loggar felen via FirePHP
+     *
+     * @return bool Success
+     */
+    public static function messagesFirePHP()
+    {
+        foreach ( self::$errorStack as $error ) {
+            $type = self::$errorNames[$error[0]];
+            $GLOBALS['FIREPHP']->log("{$type} : {$error[3]} in file {$error[2]}. Message: {$error[1]}");
+        }
+        return true;
+    }
 
      /**
       * Hjälpfunktion för att filtrera ut felkonstanter

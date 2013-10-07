@@ -30,6 +30,8 @@ if ( "wt.book" == $_SERVER['SERVER_NAME']) {
 
 /**
  * Fire PHP
+ * 
+ * Must come before handleErrors
  */
 require_once('FirePHPCore/FirePHP.class.php');
 $FIREPHP = FirePHP::getInstance(true);
@@ -40,6 +42,8 @@ $FIREPHP = FirePHP::getInstance(true);
  * Error management
  */
 require 'handleErrors.php';
+
+set_error_handler('handleErrors::handler');
 
 /**
  * Configuration

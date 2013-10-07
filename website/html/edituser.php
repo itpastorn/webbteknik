@@ -14,8 +14,6 @@
 session_start();
 require_once '../includes/loadfiles.php';
 
-set_error_handler('handleErrors::handler');
-
 // Database settings and connection
 $dbx = config::get('dbx');
 // init
@@ -385,8 +383,3 @@ endif; // show all other forms
   <script src="script/edituser.js"></script>
 </body>
 </html>
-<!--
-<?php
-echo handleErrors::messagesAsHTML();
-?>
--->

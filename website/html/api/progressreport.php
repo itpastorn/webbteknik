@@ -16,6 +16,11 @@
 session_start();
 require_once '../../includes/loadfiles.php';
 
+// Database settings and connection
+$dbx = config::get('dbx');
+// init
+$dbh = keryxDB2_cx::get($dbx);
+
 user::setSessionData();
 
 user::requires(user::TEXTBOOK);
@@ -26,11 +31,6 @@ if ( empty($_POST['status']) || empty($_POST['jobid']) ) {
 
 // Filter input
 $jobid = (int)$_POST['jobid'];
-
-// Database settings and connection
-$dbx = config::get('dbx');
-// init
-$dbh = keryxDB2_cx::get($dbx);
 
 if ( $_POST['status'] == "reset" ) {
     $sql = <<<SQL

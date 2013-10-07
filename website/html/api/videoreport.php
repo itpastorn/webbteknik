@@ -12,14 +12,14 @@
 session_start();
 require_once '../../includes/loadfiles.php';
 
-user::setSessionData();
-
-user::requires(user::TEXTBOOK);
-
 // Database settings and connection
 $dbx = config::get('dbx');
 // init
 $dbh = keryxDB2_cx::get($dbx);
+
+user::setSessionData();
+
+user::requires(user::TEXTBOOK);
 
 // Reset - if present, must be name of video
 // TODO Change to use joblistID

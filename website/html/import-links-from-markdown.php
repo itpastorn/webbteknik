@@ -23,14 +23,14 @@
 session_start();
 require_once '../includes/loadfiles.php';
 
-user::setSessionData();
-
-user::requires(user::TEXTBOOK);
-
 // Database settings and connection
 $dbx = config::get('dbx');
 // init
 $dbh = keryxDB2_cx::get($dbx);
+
+user::setSessionData();
+
+user::requires(user::TEXTBOOK);
 
 $bookID  = 'wu1';
 $chapter = 8;

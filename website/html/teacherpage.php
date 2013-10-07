@@ -47,14 +47,14 @@ require "data/courses.php";
  */
 require "data/schools.php";
 
-user::setSessionData();
-
-user::requires(user::TEACHER);
-
 // Database settings and connection
 $dbx = config::get('dbx');
 // init
 $dbh = keryxDB2_cx::get($dbx);
+
+user::setSessionData();
+
+user::requires(user::TEACHER);
 
 // TODO A dispatch class that loads appropriate modules
 
