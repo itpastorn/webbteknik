@@ -20,15 +20,15 @@ require '../../includes/loadfiles.php';
  */
 require 'data/groups.php';
 
-user::setSessionData();
-
-user::requires(user::LOGGEDIN);
-
-
 // Database settings and connection
 $dbx = config::get('dbx');
 // init
 $dbh = keryxDB2_cx::get($dbx);
+
+user::setSessionData();
+
+user::requires(user::LOGGEDIN);
+
 
 if ( !filter_has_var(INPUT_POST, 'group_id') ) {
     // TODO header bad request

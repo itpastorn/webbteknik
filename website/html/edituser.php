@@ -14,6 +14,8 @@
 session_start();
 require_once '../includes/loadfiles.php';
 
+set_error_handler('handleErrors::handler');
+
 // Database settings and connection
 $dbx = config::get('dbx');
 // init
@@ -376,9 +378,15 @@ INPUT;
       endif; // admin or teacher
     endif; // db_name_set
 endif; // show all other forms
+
 ?>
 
-  <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+  <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
   <script src="script/edituser.js"></script>
 </body>
 </html>
+<!--
+<?php
+echo handleErrors::messagesAsHTML();
+?>
+-->

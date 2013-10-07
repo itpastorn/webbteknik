@@ -58,16 +58,16 @@ class user
     	if ( empty($_SESSION) && false) {
     		header("Status: 500 Server error");
     	    echo <<<MSG
-<!DOCTYPE html>
-<title>SERVER ERROR</title>
-<h1>SERVER ERROR</h1>
-<p><big><b>
-Webbplatsen ligger för närvarande nere.
-Serverfel gör att sessionsdata inte lagras på servern.
-Jag kommunicerar med webbhotellet och kommer meddela alla så
-fort detta åtgärdats. Tyvärr ligger felet utom min kontroll.
-<br><br>
-Lars Gunther
+                <!DOCTYPE html>
+                <title>SERVER ERROR</title>
+                <h1>SERVER ERROR</h1>
+                <p><big><b>
+                Webbplatsen ligger för närvarande nere.
+                Serverfel gör att sessionsdata inte lagras på servern.
+                Jag kommunicerar med webbhotellet och kommer meddela alla så
+                fort detta åtgärdats. Tyvärr ligger felet utom min kontroll.
+                <br><br>
+                Lars Gunther
 MSG;
     	}
         $returnvalue = false;
@@ -82,6 +82,7 @@ MSG;
         }
         if ( empty($_SESSION['bookoptions']) ) {
             $_SESSION['bookoptions'] = acl::getList($_SESSION['userdata']->email, $GLOBALS['dbh']); //Ugly
+            trigger_error(gettype($GLOBALS['dbh']), E_USER_WARNING);
         }
         
         return $returnvalue;

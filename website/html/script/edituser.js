@@ -52,6 +52,7 @@
             data: { group_id: gid },
             success: function (answer, status, xhr) {
                 var feedback = $("label[for='my_group_id'] > strong");
+                console.log(answer);
                 answer = JSON.parse(answer);
                 switch (answer.result) {
                 case "joined":
@@ -68,6 +69,7 @@
                 }
             },
             error: function (answer, status, xhr) {
+                console.log(answer);
                 var feedback = $("label[for='my_group_id'] > strong");
                 feedback.html("Fel uppstod i kommunikationen med servern. Kontakta admin.").addClass("errormsg");
             }

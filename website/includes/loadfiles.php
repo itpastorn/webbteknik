@@ -37,6 +37,11 @@ $FIREPHP = FirePHP::getInstance(true);
 
 
 /**
+ * Error management
+ */
+require 'handleErrors.php';
+
+/**
  * Configuration
  */
 require 'config.php';

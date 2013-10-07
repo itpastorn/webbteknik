@@ -10,16 +10,15 @@
  */
 
 /**
- * acl
+ * Access control class
  *
- * Name and description of courses offered at the national level or by the institute
- * 
- * @todo interface and/or abstract class for all data types
  */
 class acl
 {
     /**
      * Check ACL
+     * 
+     * Unused and unfinished
      * 
      * @param string $email
      * @param string $bookID
