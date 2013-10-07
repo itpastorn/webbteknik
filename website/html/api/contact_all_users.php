@@ -8,73 +8,66 @@ exit("Sluta spamma");
 session_start();
 require_once '../../includes/loadfiles.php';
 
-user::setSessionData();
-
-user::requires(user::ADMIN);
-
 // Database settings and connection
 $dbx = config::get('dbx');
 // init
 $dbh = keryxDB2_cx::get($dbx);
 
+user::setSessionData();
+
+user::requires(user::ADMIN);
+
 header("Content-type: text/plain; charset=utf-8");
 
-$subject = "DVD-skivans innehåll klart";
+$subject = "Uppdateringar (bakom kulisserna) gjorda i helgen på webbteknik.nu";
 
 echo "Påbörjar utskick\n"; 
 
 $text = <<<TXT
 
-Hej nya och gamla lärare på webbteknik.nu
+Hej alla lärare på webbteknik.nu
 
-Välkomna till ett nytt läsår. Lite snabb information om vad som hänt sedan sist.
+1. Arbetsboken Webbserverprogrammering 1 är klar. Beställ på Thelin om ni vill ha den.
+   (Lärarhandledningen kommer inte vara klar för tryck på minst 3 veckor. Precis
+   som till Webbutvecklig 1 kommer den innehålla en hel del mer än bara facit.)
 
-JUST NU LIGGER SERVERN SOM HAR ALLA VIDEOS NERE! Jag har kontaktat webbhotellet
-och deras tjänster är utsatta för en DDOS-attack. Förhoppningsvis är det löst
-inom några timmar. (Resten av systemet ligger på ett annat webbhotell.)
-
-
-1. För den som eventuellt missat det så har jag skrivit klart läroboken
-   Webbserverprogrammering 1. Läs om den på http://keryx.se/blogg-72
-
-2. Än så länge finns det inga videos till den nya boken. Elever som är nya
-   i systemet kan behöva en förklaring att de inte ska titta på de befintliga
-   filmerna.
-
-   Så här ser min planering ut:
+2. I helgen har ett stort antal uppdateringar gjorts på webbplatsen som förbereder
+   marken för att rulla ut filmerna till Webbserverprogrammering. Alla som är behöriga
+   att komma åt båda böckerna behöver göra ett val vilken bok de ska jobba med. Om
+   allt funkar som det ska så skickas man automatiskt till sin användarsida om detta
+   val inte gjorts. Valet är inte permanent, utan frågan är vilken bok man ska jobba
+   med för stunden.
    
-   * Göra ett antal tekniska uppdateringar på webblatsen som behövs för att
-     kunna hantera två olika kurser.
-
-   * Skriva klart nya övningsboken (ca en vecka + några dagar för tryckeriet
-     om inget dyker upp).
-
-   * Göra några videos om PHP. Kom gärna med önskemål på vilka moment som behöver
-     kompletteras på detta vis utöver vad som står i boken.
+   Som smakprov är några filmer från den "andra" boken också tillgängliga och syns
+   på sidan "Videos".
    
-   * Skriva klart Lärarhandledningen. Återigen tar jag gärna emot tips på
-     vad som kan ingå. Responsen på lärarhandledningen till Webbutveckling 1
-     har varit god, men jag tar gärna emot konkreta förbättringsförslag.
+   Lärare har automatiskt behörighet till båda böckerna.
+   
+   Om man har skaffat konto som elev genom att svara på en kontrollfråga så gäller
+   behörigheten den bok som frågan ställdes ur. Detta innebär att några elever kanske
+   inte kommer åt rätt bok, de behöver då göra om proceduren.
+   
+   Om man fått konto genom att gå med i en grupp så kanske gruppen skapades för fel
+   kurs. Hör av er till mig i så fall. Just nu är det bara en enda skola (Säffle)
+   som har en grupp registrerad för Webbserverprogrammering.
 
-3.  Webbplatsen har inte fått den kärlek jag utlovat under året. Flyttar
-    (pluralis), nytt jobb och andra saker har kommit emellan. Här kommer några
-    råd under tiden:
-    
-    * Skapa nya grupper för det nya läsåret. De ni använde förra året
-      kommer att avaktiveras.
-      
-      HAR NI REDAN GIVIT ELEVERNA EN KOD TILL EN BEFINTLIG GAMMAL GRUPP
-      SÅ FORTSÄTT ANVÄNDA DEN. Jag kommer fixa det på annat sätt. 
+3. Om ni stöter på problem så berätta så detaljerat som möjligt om vad det är.
+   Säg vilken webbläsare det gäller (om någon enskild) och gärna vad som syns i
+   konsollen. Ibland får jag en felrapport och svarar att jag inte kan rekonstruera
+   problemet och ber om fler detaljer bara för att mötas av tystnad. Då är det
+   svårt att veta om problemet löst sig eller inte.
 
-    * Jag har två gamla elever som driver en webbfirma idag. De ska förbättra den
-      grafiska designen åt mig, så att jag kan koncentrera mig på innehållet.
-
-4. Vill du att ditt lärakonto ska vara vilande under året så mejla mig på
-   gunther@keryx.se. (Liksom för alla andra sorters frågor.)
+4. Ni som har Lärarhandledningen för Webbutveckling 1 för gärna höra av er med
+   konkret respons. Kom ihåg att den boken fick ni för en engångskostnad, så alla
+   förbättringar i nästa upplaga får ni gratis!
 
 
 Lars Gunther
 
+P.S. För alla som tycker illa om PHP. Kolla in 
+https://github.com/itpastorn/webbteknik/blob/master/website/includes/acl.php
+
+Försök göra getList (rad 66ff) i ett annat språk och se hur bökigt det blir...
 
 TXT;
 
