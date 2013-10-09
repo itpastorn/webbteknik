@@ -66,7 +66,7 @@ if ( 0 == $i ) {
     $list    = '';
 } else {
 	if (  empty($row['booktitle']) ) {
-	    $btitle = "";
+	    $btitle = '';
 	} else {
 	    $btitle = " för boken {$row['booktitle']}";
 	}

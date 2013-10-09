@@ -17,9 +17,9 @@ require_once '../includes/loadfiles.php';
 
 // user::setSessionData();
 
-$note    = "";      // Message why page is shown
+$note    = '';      // Message why page is shown
 $ref     = "false"; // Where to be redirected if sign in is ok
-$curuser = "";      // Information about possible logged in user (users may switch login)
+$curuser = '';      // Information about possible logged in user (users may switch login)
 
 if ( user::validate(user::LOGGEDIN) ) {
     $curuser  = '<p class="important greenfade"><strong>' . htmlspecialchars($_SESSION['user']) . "</strong> är inloggad</p>";

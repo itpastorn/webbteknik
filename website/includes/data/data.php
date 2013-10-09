@@ -21,7 +21,7 @@ interface data
 	 * 
 	 * Manually check for this, since there are no "abstract constants"
 	 */
-	// abstract const SELECT_SQL = "";
+	// abstract const SELECT_SQL = '';
 	
     /**
      * Loads an instance from DB
@@ -90,7 +90,7 @@ interface data
  */
 function makeSelectElement($list, $pre_selected='', $fullinfo=false, $extra=array())
 {
-    $select_elem = "";
+    $select_elem = '';
     foreach ( $list as $item ) {
         if ( $item->getId() == $pre_selected ) {
             $selected = ' selected';
@@ -130,7 +130,7 @@ HTML;
 function makeCheckboxes($list, $name, $extra=false)
 {
     $i          = 0;
-    $checkboxes = "";
+    $checkboxes = '';
     foreach ( $list as $item ) {
         // Prepare values
         $id        = htmlspecialchars($item->getId());
@@ -166,7 +166,7 @@ HTML;
  */
 function makeListItems($list, $name=null, $extra=false)
 {
-    $list_items = "";
+    $list_items = '';
     foreach ( $list as $item ) {
         // Prepare values
         $list_item = htmlspecialchars($item->getName());

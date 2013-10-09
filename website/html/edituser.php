@@ -169,7 +169,7 @@ echo <<<BOOKCHOICE
 BOOKCHOICE;
 if ( count($userbooks) > 1 ):
     foreach ( $userbooks as $bk ) :
-        $checked = "";
+        $checked = '';
         if ( $bk->id === $currentbook ) {
             $checked = "checked";
         }

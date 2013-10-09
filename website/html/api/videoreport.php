@@ -67,7 +67,7 @@ if ( isset($reportdata->firstStop) ) {
     $progressdata->stops     = $reportdata->stops;
     $progressdata = json_encode($progressdata);
 } else {
-    $progressdata = "";
+    $progressdata = '';
 }
 
 // First view = create row

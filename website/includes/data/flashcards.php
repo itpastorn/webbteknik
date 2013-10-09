@@ -111,7 +111,7 @@ SQL;
             if ( !empty($item->bs_title) ) {
                 $bsection = "{$item->bs_title} ({$item->bs_section})";
             } else {
-                $bsection = "";
+                $bsection = '';
             }
             
             if ( $item->bookID != $cur_book ) {

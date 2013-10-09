@@ -199,7 +199,7 @@ TAG;
             if ( !empty($item->bs_title) ) {
                 $bsection = htmlspecialchars("{$item->bs_title} ({$item->bs_section})");
             } else {
-                $bsection = "";
+                $bsection = '';
             }
             
             if ( $item->bookID != $cur_book ) {

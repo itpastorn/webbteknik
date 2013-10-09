@@ -245,7 +245,7 @@ LINKHTML;
     }
 } else {
     $curvid       = array('title' => 'Video ej funnen');
-    $progressdata = "";
+    $progressdata = '';
     // TODO NOT FOUND header
     // TODO List of suggestions
 }

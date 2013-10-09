@@ -146,7 +146,7 @@ $FIREPHP->log($new_group);
 // TODO Edit group
 
 // TODO Workplaces (This is done - keeping todo as label)
-$new_workplace_save_msg = "";
+$new_workplace_save_msg = '';
 if ( filter_has_var(INPUT_POST, 'new_workplace_added') ) {
 
     $working_at = trim(filter_input(INPUT_POST, 's_school_id', FILTER_SANITIZE_STRIPPED, FILTER_FLAG_STRIP_LOW));
@@ -195,7 +195,7 @@ HTML;
     }
 }
 
-$new_school_save_msg = "";
+$new_school_save_msg = '';
 if ( filter_has_var(INPUT_POST, 'new_school_school_added') ) {
     // TODO Add support for UPDTATING by setting id as a hidden form field
     $new_school = array(
