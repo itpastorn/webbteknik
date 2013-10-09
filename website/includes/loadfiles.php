@@ -43,7 +43,7 @@ $FIREPHP = FirePHP::getInstance(true);
  */
 require 'handleErrors.php';
 
-set_error_handler('handleErrors::handler');
+// set_error_handler('handleErrors::handler');
 
 /**
  * Configuration

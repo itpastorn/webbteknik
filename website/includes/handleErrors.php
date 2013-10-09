@@ -4,6 +4,8 @@
  *
  * Felen samlas i en array i stället för att visas direkt.
  * Arrayen kan skrivas ut som HTML.
+ * 
+ * @todo Integrate with logging and activate
  *
  * @author Lars Gunther
  * @version 0.01
