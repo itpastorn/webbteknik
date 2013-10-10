@@ -678,7 +678,10 @@ hr.todo {
     padding: 3px 5px;
 }
 .jobreport th:first-child {
-    min-width: 25em;
+    width: 390px;
+}
+.verifyjobs.jobreport th:first-child {
+    width: auto;
 }
 .finished {
     opacity: 0.5;
