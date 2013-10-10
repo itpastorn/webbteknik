@@ -119,10 +119,6 @@ if ( "//" == $baseref ) {
     På den här sidan så får du ett <em>förslag</em> på hur du kan lägga upp ditt jobb.
     Du kan rapportera hur långt du kommit, och få uppgifter godkända av din lärare.
   </p>
-  <p>
-    <em>Preliminär info: Här kommer alla uppgifter och resurser att listas, så att elever kan checka av vad de gjort
-    och lärare få en rapport. Videotittande rapporteras av sig självt när man tittar.</em>
-  </p>
   <div class="secnav">
     <h2>Välj kapitel</h2>
     <ul>
@@ -220,10 +216,10 @@ if ( "//" == $baseref ) {
             echo "<td>Ej granskad";
         } elseif ( 'finished' == $curjob['status'] || 'skipped' == $curjob['status']) {
             echo '<td class="approved">OK. ';
-            echo substr($curjob['approved'], 0, -3);
+            echo '<span title="' . substr($curjob['approved'], 0, -3) . '">[T]</span>';
         } else {
             echo '<td class="failed">Gör om. ';
-            echo substr($curjob['approved'], 0, -3);
+            echo '<span title="' . substr($curjob['approved'], 0, -3) . '">[T]</span>';
         }
         echo "</td>\n";
     }

@@ -1,4 +1,4 @@
--- User total progress
+    -- User total progress
 SELECT count(*) AS count, up.status, jl.bookID FROM userprogress AS up
 INNER JOIN joblist AS jl USING (joblistID)
 WHERE up.email = 'gunther@keryx.se'
