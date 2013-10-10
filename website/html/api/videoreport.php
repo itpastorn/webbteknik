@@ -89,32 +89,44 @@ if ( empty($reportdata->status) ) {
 }
 
 if ( !$curdata ) {
-    $sql = <<<SQL
+    $sql1 = <<<SQL
         INSERT INTO userprogress (email, joblistID, progressdata, percentage_complete, status, lastupdate)
         VALUES (:email, :joblistID, :progressdata, :percentage_complete, :status, NOW())
 SQL;
 } else {
-    $sql = <<<SQL
+    $sql1 = <<<SQL
         UPDATE userprogress
         SET progressdata = :progressdata, percentage_complete = :percentage_complete,
-            status = :status, lastupdate =NOW()
+            status = :status, lastupdate = NOW()
+        WHERE email = :email AND joblistID = :joblistID
+SQL;
+    // To be used when a student skips or finises a video
+    // This reset is necessary if teacher has previously failed student
+    $sql2 = <<<SQL
+        UPDATE userprogress
+        SET approved = NULL
         WHERE email = :email AND joblistID = :joblistID
 SQL;
 }
 try {
-    $stmt = $dbh->prepare($sql);
-    $stmt->bindParam(':email', $_SESSION['user']);
-    $stmt->bindParam(':joblistID', $reportdata->joblistID);
+    $stmt = $dbh->prepare($sql1);
     $stmt->bindParam(':progressdata', $progressdata); // JSON-encoded
     $stmt->bindParam(':percentage_complete', $reportdata->percentage_complete);
     $stmt->bindParam(':status', $reportdata->status);
+    $stmt->bindParam(':email', $_SESSION['user']);
+    $stmt->bindParam(':joblistID', $reportdata->joblistID);
     $stmt->execute();
+    if ( 'begun' != $reportdata->status ) {
+        $stmt = $dbh->prepare($sql2);
+        $stmt->bindParam(':email', $_SESSION['user']);
+        $stmt->bindParam(':joblistID', $reportdata->joblistID);
+        $stmt->execute();
+    }
 }
 catch (PDOException $e) {
     header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
     echo "Progressdata could not be loaded into database";
-    var_dump($e);
-    // TODO FirePHP for debug
+    $FIREPHP->log($e);
     exit;
 }
 echo "Progressdata saved ({$reportdata->percentage_complete} % seen - jobnum: {$reportdata->joblistID})";

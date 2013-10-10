@@ -56,11 +56,40 @@ user::setSessionData();
 
 user::requires(user::TEACHER);
 
-
+// Used by all templates
+// --------------------------------------------------------------------
+// Preparing for mod_rewrite, set base-element
+// TODO: Make this generic!
+$baseref = dirname(htmlspecialchars($_SERVER['SCRIPT_NAME'])) . "/";
+if ( "//" == $baseref ) {
+    $baseref = "/";
+}
+// --------------------------------------------------------------------
 
 // TODO A dispatch class that loads appropriate modules
 
-// TODO Show groups
+if ( filter_has_var(INPUT_GET, 'module') ) {
+    $module = filter_input(INPUT_GET, 'module', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
+//    include 'modules/modules.php';
+    switch ( $module ) {
+    case 'verify':
+//        include 'modules/verify.php';
+//        $tdata = modules::run('verify');
+        include '../includes/templates/t_verify.php';
+        exit;
+        break;
+    case 'progress':
+        exit('Progress module selected - not implemented yet');
+        break;
+    case 'members':
+        exit('Members module selected - not implemented yet');
+        break;
+    default:
+        // 404
+        exit('Bad module selected');
+    }
+}
+
 
 // Variables for group add/modify form
 $g_group_id           = ''; // For update - not yet implemented
@@ -196,6 +225,7 @@ HTML;
 }
 
 $new_school_save_msg = '';
+$new_school          = data_schools::fake();
 if ( filter_has_var(INPUT_POST, 'new_school_school_added') ) {
     // TODO Add support for UPDTATING by setting id as a hidden form field
     $new_school = array(
@@ -235,8 +265,6 @@ HTML;
         $new_school_save_msg = "<p class=\"errormsg\">Det gick inte att spara skolan i databasen. Felorsak:\n";
         $new_school_save_msg .= "Kunde inte skapa ett felfritt skolobjekt. Vänligen kontakta administratören.</p>\n";
     }
-} else {
-    $new_school = data_schools::fake();
 }
 
 // TODO Tomorrow, make it possible to edit school information, if:
@@ -270,25 +298,20 @@ $g_schools  = makeSelectElement($workplaces, "", true, array('id' => 'null', 'na
 $wp_list    = makeListItems($workplaces, "current_workplaces");
 
 
-// TODO Historical groups
+// TODO Historical groups (archiving)
 
 $sql = data_groups::SELECT_SQL . <<<SQL
     INNER JOIN teaching_groups AS tg ON (groups.groupID = tg.groupID)
     WHERE tg.email = :email
 SQL;
-$params = array(':email' => $_SESSION['user']);
+$params     = array(':email' => $_SESSION['user']);
 $cur_groups = data_groups::loadALL($dbh, $sql, $params);
 
 
-// TODO Add another teacher option
 
-// Preparing for mod_rewrite, set base-element
-// TODO: Make this generic!
-$baseref = dirname(htmlspecialchars($_SERVER['SCRIPT_NAME'])) . "/";
-if ( "//" == $baseref ) {
-    $baseref = "/";
-}
+// TODO Add another teacher option = see groups of colleagues on same school
+
 // This page name
-$pageref = 'teacherpage.php';
+$pageref = 'teacherpage/';
 
 require 'templates/teacherpage.php';

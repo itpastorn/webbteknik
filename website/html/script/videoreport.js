@@ -278,6 +278,7 @@
                 // No need to enable skip button any more
                 $('#skipvid').attr("disabled", "disabled");
             }
+            console.log("video_duration: " + video_duration);
             if ( video_duration ) {
                 reportobj.percentage_complete = Math.floor(100 * reportobj.viewTotal / video_duration);
             } else {
@@ -298,6 +299,8 @@
         }
         // Reportobj should be sent if manually skipped even if time is not calculated
         if ( !reportobj ) {
+        	// TODO URGENT check what these hardcoded values are. Mega-QUE...?
+        	console.log("FIXME! Manual reportobj created!")
             reportobj = {"joblistID":8,"viewTotal":69.267005,"stops":[{"start":0,"end":69.267005}],"status":"skipped","firstStop":69.267005,"percentage_complete":9}
         }
         reportdata = JSON.stringify(reportobj);

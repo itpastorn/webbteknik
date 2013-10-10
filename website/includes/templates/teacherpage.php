@@ -31,6 +31,10 @@ SECNAV;
 foreach ($cur_groups as $cgroup ):
     echo <<<CGROUP
   <h3>{$cgroup->getName()} ({$cgroup->getId()}) med {$cgroup->numStudents} anslutna elever</h3>
+  
+  <p>
+    <a href="teacherpage/verify/{$cgroup->getId()}/">Uppgifter att granska: {$cgroup->numUnapprovedJobs($dbh)}</a>.
+  </p>
   <p>
     <strong>Vad som kommer:</strong> Statistik om gruppen som helhet. Min/max/medel i antal gjorda uppgifter.
   </p>

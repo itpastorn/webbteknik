@@ -56,6 +56,10 @@ RewriteRule edituser/$    edituser.php  [NC,L]
 RewriteRule teacherpage$     teacherpage/     [R=301,NC,L]
 RewriteRule teacherpage/$    teacherpage.php  [NC,L]
 
+RewriteRule teacherpage/([a-z]+)$              teacherpage/$1/                      [R=301,NC,L]
+RewriteRule teacherpage/([a-z]+)/$             teacherpage.php?module=$1            [NC,L]
+RewriteRule teacherpage/([a-z]+)/([a-z0-9]+)$     teacherpage/$1/$2/                   [R=301,NC,L]
+RewriteRule teacherpage/([a-z]+)/([a-z0-9]+)/$    teacherpage.php?module=$1&groupid=$2 [NC,L]
 
 # Notes
 # HTTP_HOST

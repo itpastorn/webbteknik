@@ -14,7 +14,9 @@
       <!-- toggle explanations on -->
     </ul>
   </footer>
-  <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+<?php
+  require "jquery.php";
+?>
   <!--script src="https://login.persona.org/include.js"></script--> 
   <!--script src="script/sign-in.js"></script-->
   <script src="script/common.js"></script>

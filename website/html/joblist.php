@@ -152,7 +152,7 @@ if ( "//" == $baseref ) {
      * URGENT TODO FIXME
      */
     $stmt2 = $dbh->prepare(
-        "SELECT percentage_complete, status FROM userprogress WHERE email = :email AND joblistID = :joblistID"
+        "SELECT percentage_complete, status, approved FROM userprogress WHERE email = :email AND joblistID = :joblistID"
     );
     $stmt2->bindParam(':email', $_SESSION['user']);
     $stmt2->bindParam(':joblistID', $jlid);
@@ -163,9 +163,11 @@ if ( "//" == $baseref ) {
         if ( $temp ) {
             $curjob['percentage_complete'] = $temp['percentage_complete'];
             $curjob['status']              = $temp['status'];
+            $curjob['approved']            = $temp['approved'];
         } else {
             $curjob['percentage_complete'] = false;
             $curjob['status']              = false;
+            $curjob['approved']            = false;
         }
         if ( empty($curjob['status']) ) {
             $curjob['status'] = "0";
@@ -214,7 +216,15 @@ if ( "//" == $baseref ) {
             }
         }
         echo "</td>\n";
-        echo "<td>Sätts av lärare";
+        if ( empty($curjob['approved']) ) {
+            echo "<td>Ej granskad";
+        } elseif ( 'finished' == $curjob['status'] || 'skipped' == $curjob['status']) {
+            echo '<td class="approved">OK. ';
+            echo substr($curjob['approved'], 0, -3);
+        } else {
+            echo '<td class="failed">Gör om. ';
+            echo substr($curjob['approved'], 0, -3);
+        }
         echo "</td>\n";
     }
     echo "</tr>\n";

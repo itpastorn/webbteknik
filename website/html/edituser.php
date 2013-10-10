@@ -377,9 +377,9 @@ INPUT;
     endif; // db_name_set
 endif; // show all other forms
 
+require "../includes/snippets/jquery.php";
 ?>
 
-  <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
   <script src="script/edituser.js"></script>
 </body>
 </html>

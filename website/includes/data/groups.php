@@ -71,7 +71,11 @@ class data_groups extends items implements data
      * The total number of students that belong to the group (their email)
      */
     protected $numStudents = 0;
-
+    
+    /**
+     * What textbook is associated with this group
+     */
+    protected $textbook = null;
     
 
     protected static $filterSanitizeRules = array(
@@ -135,6 +139,11 @@ class data_groups extends items implements data
             'flags'   => FILTER_FLAG_SCHEME_REQUIRED
         )
     );
+    
+    /**
+     * Database connection for non-static methods
+     */
+    protected $dbh = null;
     
     
     /**
@@ -530,6 +539,63 @@ SQL;
         $stmt->bindParam(":groupID", $this->id);
         $stmt->execute();
         return $stmt->rowCount();
+    }
+    
+    public static function getFilterValidateRule($property)
+    {
+        if ( array_key_exists($property, self::$filterValidateRules) ) {
+            return self::$filterValidateRules[$property];
+        }
+        return false;
+    }
+    
+    /**
+     *  Set and return the textbook associated with this group
+     * 
+     * @param PDO $dbh
+     * @return string
+     */
+    public function getTextbook(PDO $dbh)
+    {
+        $sql = <<<SQL
+            SELECT books.bookID FROM `groups` 
+            INNER JOIN books USING(courseID)
+            WHERE type = 'textbook'
+              AND groups.groupID = :groupid
+SQL;
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam(':groupid', $this->id);
+        $stmt->execute();
+        $this->textbook = $stmt->fetchColumn();
+        return $this->textbook;
+    }
+    
+    /**
+     * Total count of number of jobs students need teacher to approve
+     * 
+     * @param PDO $dbh
+     */
+    public function numUnapprovedJobs($dbh)
+    {
+        $bookid = $this->getTextbook($dbh);
+        $sql = <<<SQL
+            SELECT count(*) as sum
+            FROM joblist AS jl
+            INNER JOIN userprogress AS up USING (joblistID)
+            INNER JOIN belonging_groups AS bg ON ( bg.email = up.email)
+            INNER JOIN teaching_groups AS tg ON ( tg.groupID = bg.groupID)
+            INNER JOIN users ON (bg.email = users.email)
+            WHERE bg.groupID = :groupid
+              AND jl.bookID = :bookid
+              AND up.approved IS NULL
+              AND ( up.status = 'finished' OR up.status = 'skipped' )
+            ORDER BY bg.groupID, users.email, jl.bookID, jl.chapter ASC, jl.joborder ASC
+SQL;
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam(':groupid', $this->id);
+        $stmt->bindParam(':bookid', $bookid);
+        $stmt->execute();
+        return $stmt->fetchColumn();
     }
            
     // TODO Remove user from group

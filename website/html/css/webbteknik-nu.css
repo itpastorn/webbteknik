@@ -713,6 +713,13 @@ hr.todo {
 .finished > td > .curstate {
     outline: 3px solid hsl(142, 100%, 34%);
 }
+.approved {
+    color: darkgreen;
+}
+.failed {
+    color: red;
+    font-weight: bolder;
+}
 /* ------------------------------- *\
    $files
 \* ------------------------------- */

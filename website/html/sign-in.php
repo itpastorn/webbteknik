@@ -109,7 +109,9 @@ echo $curuser;
       <th>Stöd</th>
     </tr>
   </table>
-  <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+<?php
+require "../includes/snippets/jquery.php";
+?>
   <script src="https://login.persona.org/include.js" type="text/javascript"></script> 
   <script src="script/featuredetect.js"></script>
   <script>
