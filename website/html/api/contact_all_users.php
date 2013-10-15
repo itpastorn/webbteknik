@@ -43,7 +43,7 @@ Lars Gunther
 TXT;
 
 $only_me   = "SELECT * FROM users WHERE email = 'gunther@keryx.se'";
-$all_users = "SELECT * FROM users ORDER BY user_since ASC";
+$all_users = "SELECT * FROM users WHERE privileges > 1 ORDER BY user_since ASC";
 $teachers  = "SELECT * FROM users WHERE privileges > 30 ORDER BY user_since ASC";
 
 
