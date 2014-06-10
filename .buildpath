@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buildpath>
+	<buildpathentry kind="src" path="future-stuff/inriktningsval"/>
+	<buildpathentry kind="src" path="thelin-ws-1"/>
+	<buildpathentry kind="src" path="webbutveckling-1/kodexempel"/>
+	<buildpathentry kind="src" path="webbutveckling-1/thelin-1"/>
+	<buildpathentry kind="src" path="website/html"/>
+	<buildpathentry kind="src" path="website/includes"/>
+	<buildpathentry kind="src" path="website/keryxIncludes.ep"/>
+	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
+</buildpath>
