@@ -1,0 +1,296 @@
+@charset "UTF-8";
+/* http://colorschemedesigner.com/#3321Tw0w0w0w0 */
+/*
+====================================================
+Global rules
+====================================================
+*/
+body {
+    margin: auto;
+    background-color: navajowhite;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 860px;
+    font-family: "Helvetica Neue", "Liberation Sans", Calibri, Arial, sans-serif;
+    font-size: 100%;
+}
+
+body > * {
+    outline: 2px solid red !important;
+}
+
+section, header, footer {
+    outline: none; /* reset */
+}
+p {
+    -moz-hyphen: auto;
+}
+header {
+    flex: 1 1 100%;
+    text-align: center;
+    padding: 20px 0 0;
+}
+.hwrap {
+    display: flex;
+}
+.hwrap > a {
+    flex: 1 1 25%; /* Same as nav */
+}
+h1 {
+    flex: 3 1 70%; /* Same as main */
+    margin-left: 20px;
+    font-family: 'Merienda One', cursive;
+}
+h1:first-letter {
+    color: #00af64;
+}
+/*
+=============================================================
+Rules for positioning - block, images, captions, etc.
+=============================================================
+*/
+.block {
+    overflow: auto;
+    margin-bottom: 20px;
+}
+.blockslider {
+    /* overflow: auto; */
+    height: 300px;
+    margin-bottom: 20px;
+}
+.double {
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+.alignright {
+    float: right;
+    padding: 0;
+    margin: 0 0 10px 10px;
+}
+.alignleft {
+    float: left;
+    padding: 0;
+    margin: 0 10px 15px 0;
+}
+.aligncenter{
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    padding: 10px 0;
+}
+.clear {
+    clear:both;
+}
+/*
+====================================================
+Start page rules
+====================================================
+*/
+/* Original 261 x 220 */
+.startpage .logo {
+    width: 235px;
+    height: 198px;
+}
+.startpage h1 {
+    font-size: 500%;
+    vertical-align: 53%;
+}
+p.tagline  {
+    font-size: 120%;
+    padding: 0.5em;
+    border-top: 3px double #00af64;
+    border-bottom: 3px double #00af64;
+    margin: 3em 0;
+    clear: both;
+}
+.startpage > section {
+    display: inline-block;
+    width: 20%;
+    margin-right: 6%;
+    vertical-align: top;
+}
+.startpage > section:last-of-type {
+    margin-right: 0;
+}
+.startpage > section p {
+     padding: 1ch;
+}
+footer {
+    flex: 1 1 100%;
+    margin-top: 3em;
+    text-align: center;
+    color: #999;
+}
+/*
+====================================================
+Main site navigation
+====================================================
+*/
+.menu > h2,
+.menu > li  {
+    margin: 0 0 1em;
+    padding: 2em 0;
+    background-color: #F5F5F5; /* very light grey */ 
+    box-shadow: inset 0 0 20px #007241;
+    border-radius: 50%;
+    font: large 'Merienda One', cursive;
+    text-align: center;
+}
+.subpage > nav > ul {
+    margin: 0; /* local reset */
+    padding: 0;
+}
+.menu li {
+    display: block;
+    list-style-type: none;
+}
+.menu a {
+    display: block;
+}
+.menu a:link,
+.menu a:visited  {
+    text-decoration: none;
+    color: #000;
+}
+.menu a:focus,
+.menu a:hover {
+    text-decoration: underline;
+    color: #A62F00;
+}
+.menu a:active {
+    text-decoration: underline;
+    color: #FF4900;
+}
+/*
+==================================================================================
+Subpages
+==================================================================================
+*/
+.subpage .logo {
+    width: 146px;
+    height: 123px;
+}
+.subpage h1 {
+    font-size: 260%;
+}
+.subpage > header h1 > span {
+    color: #a62f00;
+    display: inline-block; /* Move down intact when line is too short */
+}
+hr {
+    padding: 0.5em; /* To make sub-pages have similar look as p.tag-line */
+    border-style: double;
+    border-width: 3px;
+    border-color: #00af64 transparent;
+    margin: 2em 0;
+}
+.subpage > nav {
+    flex: 1 1 25%; /* Same as .hwrap > a */
+}
+main {
+    flex: 3 1 70%; /* Compare .hwrap > h1 */
+    margin-left: 20px;
+}
+/* The page "om-oss" */
+main > article {
+    display: flex;
+    /*justify-content: space-between;*/
+    padding-bottom: 1em; /* last p element contributes 1em */
+    margin-bottom: 2em;
+    border-bottom: 3px double #00af64;
+}
+main > article:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+.block > figure {
+    flex: 0 0 128px;
+    margin: 0;
+}
+.infotext {
+    flex: 1 1 40%%;
+    padding-left: 20px;
+}
+.infotext > p:first-of-type {
+    margin-top: 0;
+}
+main figure > img {
+    width : 128px;
+    height : 128px;
+}
+.bildcaption {
+    font: italic bolder 110% monospace;
+    font-family: inherit; /* Restore after shorthand*/
+    text-align: center;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 1em;   /* Same as p to the right */
+}
+.subpage > footer {
+    margin-top: 0;
+    padding: 1.5em;
+    border-top: 3px double #00af64;
+}
+@media all and (max-width: 830px) {
+    .subpage header a {
+        width: 172px;
+    }
+    .subpage .logo {
+        width: 110px;
+        height: 93px;
+    }
+    .subpage h1 {
+        font-size: 195%;
+        vertical-align: 40px;
+        }
+    .menu > h2,
+    .menu > li  {
+        margin: 0 0 0.5em;
+        padding: 1em 0;
+    }
+}
+@media all and (max-width: 530px) {
+    hr  {
+        display: none;
+    }
+    header {
+        border-bottom-style: double;
+        border-width: 3px;
+        border-color: #00af64;
+        margin-bottom: 0.5em;
+    }
+    .subpage > nav {
+        flex: 0 0 100%;
+    }
+    .menu > h2,
+    .menu > li  {
+        margin: 0 0 0.5em;
+        padding: 0;
+        box-shadow: inset 0 0 20px #007241;
+        border-radius: 2% / 50%;
+        font: large 'Merienda One', cursive;
+        text-align: center;
+    }
+    main {
+        flex: 0 0 100%;
+        margin-left: 0;
+    }
+    .infotext{
+        padding-left: 10px;
+    }
+}
+@media all and (max-width: 350px) {
+    main > article {
+        display: block;
+    }
+    main figure > img {
+        display: block;
+        margin: auto;
+    }
+    .infotext{
+        padding-left: 0;
+    }
+}
+
+
