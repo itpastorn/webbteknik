@@ -14,8 +14,7 @@
     width: 400px;
     height: 100px;
     border-radius: 20px;
-    background-image: -moz-linear-gradient(0% 50% 0deg,red, green, blue 100%);
-    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(red), to(green), color-stop(1,blue))
+    background-image: linear-gradient(90deg, red, green, blue);
 }
   </style>
 </head>

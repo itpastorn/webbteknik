@@ -82,10 +82,7 @@ Error/warning        hsl(10, 100%, 47%)
 \* ------------------------------- */
 html {
     background-color: rgb(0, 175,65);
-    background-image: -webkit-linear-gradient(top      , hsl(142, 100%, 34%), hsl(142, 100%, 80%));
-    background-image:    -moz-linear-gradient(top      , hsl(142, 100%, 34%), hsl(142, 100%, 80%));
-    background-image:      -o-linear-gradient(top      , hsl(142, 100%, 34%), hsl(142, 100%, 80%));
-    background-image:         linear-gradient(to bottom, hsl(142, 100%, 34%), hsl(142, 100%, 80%));
+    background-image: linear-gradient(to bottom, hsl(142, 100%, 34%), hsl(142, 100%, 80%));
     min-height: 100%; /* Needed for gradients to appear */
 }
 body {
@@ -134,10 +131,7 @@ a:active {
 }
 
 :target {
-    -webkit-animation: 3s yellowfade;
-       -moz-animation: 3s yellowfade;
-         -o-animation: 3s yellowfade;
-            animation: 3s yellowfade;
+    animation: 3s yellowfade;
 }
 
 strong > strong {
@@ -238,42 +232,12 @@ iframe {
     display: none;
 }
 .yellowfade {
-    -webkit-animation: 3s yellowfade;
-       -moz-animation: 3s yellowfade;
-         -o-animation: 3s yellowfade;
-            animation: 3s yellowfade;
+    animation: 3s yellowfade;
 }
 .greenfade {
-    -webkit-animation: 5s greenfade;
-       -moz-animation: 5s greenfade;
-         -o-animation: 5s greenfade;
-            animation: 5s greenfade;
+    animation: 5s greenfade;
 }
 
-@-webkit-keyframes yellowfade {
-    from {
-        background-color: hsl(58, 100%, 47%);
-    }
-    to {
-        background-color: transparent;
-    }
-}
-@-moz-keyframes yellowfade {
-    from {
-        background-color: hsl(58, 100%, 47%);
-    }
-    to {
-        background-color: transparent;
-    }
-}
-@-o-keyframes yellowfade {
-    from {
-        background-color: hsl(58, 100%, 47%);
-    }
-    to {
-        background-color: transparent;
-    }
-}
 @keyframes yellowfade {
     from {
         background-color: hsl(58, 100%, 47%);
@@ -283,48 +247,6 @@ iframe {
     }
 }
 
-@-webkit-keyframes greenfade {
-    from {
-        background-color: hsl(142, 100%, 50%);
-    }
-    20% {
-        background-color: transparent;
-    }
-    40% {
-        background-color: hsl(142, 100%, 50%);
-    }
-    to {
-        background-color: transparent;
-    }
-}
-@-moz-keyframes greenfade {
-    from {
-        background-color: hsl(142, 100%, 50%);
-    }
-    20% {
-        background-color: transparent;
-    }
-    40% {
-        background-color: hsl(142, 100%, 50%);
-    }
-    to {
-        background-color: transparent;
-    }
-}
-@-o-keyframes greenfade {
-    from {
-        background-color: hsl(142, 100%, 50%);
-    }
-    20% {
-        background-color: transparent;
-    }
-    40% {
-        background-color: hsl(142, 100%, 50%);
-    }
-    to {
-        background-color: transparent;
-    }
-}
 @keyframes greenfade {
     from {
         background-color: hsl(142, 100%, 50%);
@@ -340,30 +262,6 @@ iframe {
     }
 }
 
-@-webkit-keyframes redfade {
-    from {
-        background-color: hsl(10, 100%, 47%);
-    }
-    to {
-        background-color: transparent;
-    }
-}
-@-moz-keyframes redfade {
-    from {
-        background-color: hsl(10, 100%, 47%);
-    }
-    to {
-        background-color: transparent;
-    }
-}
-@-o-keyframes redfade {
-    from {
-        background-color: hsl(10, 100%, 47%);
-    }
-    to {
-        background-color: transparent;
-    }
-}
 @keyframes redfade {
     from {
         background-color: hsl(10, 100%, 47%);
@@ -440,10 +338,7 @@ a[href*="wikipedia.org"]:after {
 .errormsg {
     color: hsl(10, 100%, 47%);
     font-style: italic;
-    -webkit-animation: 2s redfade;
-       -moz-animation: 2s redfade;
-         -o-animation: 2s redfade;
-            animation: 2s redfade;
+    animation: 2s redfade;
 }
 .error {
     outline: 1px solid hsl(10, 100%, 47%);
@@ -799,10 +694,7 @@ hr.todo {
 }
 .wrong {
     outline: 2px solid hsl(359, 60%, 47%);
-    -webkit-animation: 2s redfade;
-       -moz-animation: 2s redfade;
-         -o-animation: 2s redfade;
-            animation: 2s redfade;
+    animation: 2s redfade;
     /* TODO add ARIA */
 }
 .wrong::after {
@@ -878,6 +770,6 @@ CSS Code style tips: http://csswizardry.com/2012/04/my-html-css-coding-style/
 /* ----------------------------------------------------------------------------------
 
 Den förste som hittar detta meddelande per stad och skickar sin snigelpostadress till gunther at keryx punkt se
-kommer få en tjuga med posten!
+kommer få 50 kronor med posten!
 
 ------------------------------------------------------------------------------------ */
