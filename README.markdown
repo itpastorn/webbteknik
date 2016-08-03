@@ -9,6 +9,8 @@ Esp. here I develope the site Läxhjälpen, and webbteknik.nu
 Klona inte detta projekt om du vill ha arbetsmaterialet till mina böcker.
 
 För boken Webbserverprogrammering 1 bör du klona
-projektet (webbserverprogrammering-1)[https://github.com/itpastorn/webbserverprogrammering-1]
+projektet [webbserverprogrammering-1](https://github.com/itpastorn/webbserverprogrammering-1)
 
+## Uppdatering 2016 ##
 
+Nya upplagor av böcker kommer. De och alla tillhörande delar får var och en sina egna projekt på GitHub. Detta stora projekt är därför inte längre aktivt.
